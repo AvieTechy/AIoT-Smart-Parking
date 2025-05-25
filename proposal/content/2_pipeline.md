@@ -2,48 +2,59 @@
 
 ## Mô hình hệ thống
 
-Hệ thống bãi đỗ xe thông minh ứng dụng nhận diện khuôn mặt được chia làm 3 khu vực chính:
+Hệ thống bãi đỗ xe thông minh sử dụng nhận diện **khuôn mặt kết hợp biển số xe**, với các thiết bị phần cứng như sau:
 
 1. **Cổng vào:**
-- Camera AI: quét và nhận diện khuôn mặt người điều khiển xe.
-- Màn hình hiển thị: thông báo vị trí chỗ đỗ xe đã được gán.
-- Barrier tự động: mở khi xác minh khuôn mặt thành công.
-- ESP32 / Raspberry Pi: xử lý tín hiệu từ camera, gửi dữ liệu đến server và điều khiển barrier.
+- **ESP32-CAM_1**: quét và nhận diện **biển số xe**.
+- **ESP32-CAM_2**: quét và nhận diện **khuôn mặt tài xế**.
+- **Màn hình OLED**: hiển thị số lượng ô đỗ xe còn trống hoặc báo lỗi.
+- **Servo motor**: điều khiển barrier tự động mở nếu xác thực thành công.
+- **Buzzer**: phát âm báo xác nhận **thành công hoặc lỗi**.
 
-2. **Khu đỗ xe:**
-- Cảm biến hiện diện (IR / siêu âm): phát hiện xe đã đỗ vào slot.
-- LED chỉ dẫn: sáng lên ở slot được cấp để hỗ trợ người lái điều hướng.
-- Các thiết bị kết nối về server trung tâm để cập nhật trạng thái slot.
+2. **Khu vực đỗ xe:**
+- Các ô giữ xe được xếp thành các hàng.
 
 3. **Cổng ra:**
-- Camera AI: quét khuôn mặt lần nữa để xác thực người rời bãi.
-- Barrier tự động: mở nếu khuôn mặt trùng khớp với faceID đã gán slot trước đó.
-- Sau khi xe rời khỏi slot, hệ thống cập nhật trạng thái trả slot thành trống.
-
-![Mô hình tham khảo cho hệ thống](images/smart-parking.png){ width=100% .center }
+- **ESP32-CAM_3**: quét lại **biển số xe**.
+- **ESP32-CAM_4**: quét lại **khuôn mặt tài xế**.
+- **Màn hình OLED**: hiển thị số lượng ô đỗ xe còn trống hoặc báo lỗi.
+- **Servo motor**: điều khiển barrier tự động mở nếu xác thực thành công.
+- **Buzzer**: phát âm báo xác nhận **thành công hoặc lỗi**.
 
 ## Luồng hoạt động chính của hệ thống
 
-1. **Xe đến cổng vào:**
-    - Camera quét khuôn mặt người điều khiển.
-    - Hệ thống AI xử lý ảnh → tạo `face_vector` (mã đặc trưng khuôn mặt).
-    - Lưu tạm thời `face_vector` vào bộ nhớ đệm hoặc cơ sở dữ liệu tạm.
+### Entry flow (luồng hoạt động ở cổng vào)
+- ESP32-CAM_1 quét **biển số xe**.
+- ESP32-CAM_2 quét **khuôn mặt tài xế**.
+- Hệ thống xử lý và kiểm tra:
+  - Nếu **cả hai đều nhận diện thành công**:
+    - Map dữ liệu: `face_id` ↔ `license_plate`.
+    - Lưu vào cơ sở dữ liệu tạm thời.
+    - Servo mở barrier cho xe vào.
+    - Buzzer phát âm báo thành công.
+    - Màn hình OLED hiển thị số ô trống hiện tại.
+  - Nếu **không nhận diện được**:
+    - Hiển thị thông báo lỗi trên màn hình OLED.
+    - Buzzer phát cảnh báo nhẹ.
+    - Chờ người dùng điều chỉnh vị trí xe để quét lại.
+\pagebreak
 
-2. **Tìm và gán ô đỗ xe trống:**
-    - Kiểm tra cảm biến tại các ô → tìm ô trống (ví dụ: B3).
-    - Gán `face_vector → slot_id (B3)`.
-    - Màn hình LCD hiển thị: **“Chỗ đậu: B3”**.
-    - Hệ thống mở barrier → cho xe đi vào.
-    - Đèn LED tại ô B3 bật sáng để hướng dẫn.
+![Flowchart cho entry flow](images/entry-flow.png){ width=75% .center }
 
-3. **Trong quá trình đỗ xe:**
-     - Cảm biến xác nhận có xe trong ô → cập nhật trạng thái ô là “ĐÃ ĐỖ”.
+### Exit flow (luồng hoạt động ở cổng ra):
+- ESP32-CAM_3 quét **biển số xe**.
+- ESP32-CAM_4 quét **khuôn mặt tài xế**.
+- Hệ thống kiểm tra:
+  - Biển số và khuôn mặt có được nhận diện không?
+  - Có khớp với dữ liệu đã lưu khi vào không?
+  - Nếu **có khớp**:
+    - Mở barrier cho xe ra.
+    - Buzzer phát âm báo thành công.
+    - Xóa dữ liệu mapping khỏi hệ thống.
+    - Cập nhật số lượng ô trống trên màn hình OLED ở cổng vào.
+  - Nếu **không khớp**:
+    - Barrier không mở.
+    - Buzzer phát âm báo nguy hiểm để cảnh báo vi phạm.
+    - Màn hình OLED hiển thị thông tin lỗi.
 
-4. **Xe rời bãi (cổng ra):**
-    - Camera tại cổng ra quét lại khuôn mặt.
-    - Hệ thống AI so sánh ảnh với danh sách `face_vector` đã lưu.
-    - Nếu khớp:
-        - Tìm ra ô đã gán (VD: B3).
-        - Cập nhật B3 là “TRỐNG”.
-        - Xóa `face_vector` khỏi bộ nhớ.
-        - Mở barrier cho xe ra khỏi bãi.
+![Flowchart cho exit flow](images/exit-flow.png){ width=75% .center }
