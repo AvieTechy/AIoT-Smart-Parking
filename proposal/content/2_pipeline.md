@@ -1,25 +1,30 @@
-# Mô hình mô phỏng và luồng hoạt động
+# Mô hình hệ thống và luồng hoạt động
 
 ## Mô hình hệ thống
 
 Hệ thống bãi đỗ xe thông minh sử dụng nhận diện **khuôn mặt kết hợp biển số xe**, với các thiết bị phần cứng như sau:
 
-1. **Cổng vào:**
-- **ESP32-CAM_1**: quét và nhận diện **biển số xe**.
-- **ESP32-CAM_2**: quét và nhận diện **khuôn mặt tài xế**.
-- **Màn hình OLED**: hiển thị số lượng ô đỗ xe còn trống hoặc báo lỗi.
-- **Servo motor**: điều khiển barrier tự động mở nếu xác thực thành công.
-- **Buzzer**: phát âm báo xác nhận **thành công hoặc lỗi**.
+### Đề xuất bố trí thiết bị
 
-2. **Khu vực đỗ xe:**
-- Các ô giữ xe được xếp thành các hàng.
+- **Cổng vào:**  
+    - **ESP32-CAM_1** (quét biển số): đặt thấp (0.5–1m), hướng vào xe.
+    - **ESP32-CAM_2** (nhận diện khuôn mặt): đặt cao hơn (~1.2–1.5m), hướng về cửa sổ tài xế.
+    - **Màn hình OLED_1:** hiển thị thông tin cho tài xế.
+    - **Buzzer_1:** phát tín hiệu âm thanh khi cần.
+    - **Barrier + Servo motor:** điều khiển thanh chắn ra vào.
 
-3. **Cổng ra:**
-- **ESP32-CAM_3**: quét lại **biển số xe**.
-- **ESP32-CAM_4**: quét lại **khuôn mặt tài xế**.
-- **Màn hình OLED**: hiển thị số lượng ô đỗ xe còn trống hoặc báo lỗi.
-- **Servo motor**: điều khiển barrier tự động mở nếu xác thực thành công.
-- **Buzzer**: phát âm báo xác nhận **thành công hoặc lỗi**.
+- **Khu vực đỗ xe:**  
+    - Các ô đỗ được kẻ đường ngăn cách rõ ràng, sắp xếp trật tự. Có thể gắn cảm biến nhận diện ô trống (hướng phát triển thêm).
+
+- **Cổng ra:**  
+    - **ESP32-CAM_3** (quét biển số): đặt thấp (0.5–1m), hướng vào xe.
+    - **ESP32-CAM_4** (nhận diện khuôn mặt): đặt cao hơn (~1.2–1.5m), hướng về cửa sổ tài xế.
+    - **Màn hình OLED_2:** hiển thị thông tin cho tài xế.
+    - **Buzzer_2:** phát tín hiệu âm thanh khi cần.
+    - **Barrier + Servo motor:** điều khiển thanh chắn ra vào.
+
+### Sơ đồ bố trí thiết bị
+![Sơ đồ đề xuất bố trí thiết bị](images/parking.png){ width=100% .center }
 
 ## Luồng hoạt động chính của hệ thống
 
@@ -37,11 +42,10 @@ Hệ thống bãi đỗ xe thông minh sử dụng nhận diện **khuôn mặt 
     - Hiển thị thông báo lỗi trên màn hình OLED.
     - Buzzer phát cảnh báo nhẹ.
     - Chờ người dùng điều chỉnh vị trí xe để quét lại.
-\pagebreak
 
-![Flowchart cho entry flow](images/entry-flow.png){ width=75% .center }
+![Flowchart cho entry flow](images/entry-flow.png){ width=90% .center }
 
-### Exit flow (luồng hoạt động ở cổng ra):
+### Exit flow (luồng hoạt động ở cổng ra)
 - ESP32-CAM_3 quét **biển số xe**.
 - ESP32-CAM_4 quét **khuôn mặt tài xế**.
 - Hệ thống kiểm tra:
@@ -57,4 +61,4 @@ Hệ thống bãi đỗ xe thông minh sử dụng nhận diện **khuôn mặt 
     - Buzzer phát âm báo nguy hiểm để cảnh báo vi phạm.
     - Màn hình OLED hiển thị thông tin lỗi.
 
-![Flowchart cho exit flow](images/exit-flow.png){ width=75% .center }
+![Flowchart cho exit flow](images/exit-flow.png){ width=90% .center }
