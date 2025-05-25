@@ -33,7 +33,7 @@ Hệ thống bãi đỗ xe thông minh sử dụng nhận diện **khuôn mặt 
 - ESP32-CAM_2 quét **khuôn mặt tài xế**.
 - Hệ thống xử lý và kiểm tra:
   - Nếu **cả hai đều nhận diện thành công**:
-    - Map dữ liệu: `face_id` ↔ `license_plate`.
+    - Map dữ liệu: `face_id` - `license_plate`.
     - Lưu vào cơ sở dữ liệu tạm thời.
     - Servo mở barrier cho xe vào.
     - Buzzer phát âm báo thành công.
