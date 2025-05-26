@@ -4,83 +4,154 @@
 
 ### Hệ thống phần cứng
 
-- **Camera ESP32-CAM (AI Thinker ESP32-CAM)**
+1. **Camera ESP32-CAM (AI Thinker ESP32-CAM)**
 
-  - Sử dụng **2 module ESP32-CAM** cho mỗi cổng (vào và ra):
-    - Một module quét và nhận diện khuôn mặt tài xế
-    - Một module quét và nhận diện biển số xe
-    
-  - Mỗi ESP32-CAM hoạt động độc lập, được nạp sẵn chương trình với khả năng:
-    - Nhận diện sự xuất hiện của xe
-    - Tự động chụp ảnh
-    - Thực hiện nhận diện khuôn mặt hoặc biển số trực tiếp trên thiết bị
-    - Gửi kết quả nhận diện và ảnh lên server thông qua kết nối Wi-Fi
+![ESP32-CAM](images/ESP32-CAM.jpg){ height=300px }
 
-- **ESP32 trung tâm (ESP32 DevKit V1)**
+ESP32-CAM là một module phát triển nhỏ gọn của hãng **AI. Thinker**, tích hợp sẵn: **Wi-Fi, Bluetooth, camera OV2640, khe cắm thẻ microSD, GPIO** đa năng.
 
-  - Là bộ điều khiển chính của toàn hệ thống, sử dụng chip ESP32-WROOM-32, tích hợp lõi xử lý kép 32-bit, hỗ trợ kết nối Wi-Fi và Bluetooth, và hoạt động ở mức điện áp logic 3.3V.
-  - Board có sẵn chip USB-to-Serial CP2102 cho phép nạp code trực tiếp qua cổng USB-C mà không cần phần cứng nạp ngoài.
+Module này được thiết kế chuyên dụng cho các ứng dụng thị giác máy tính, IoT, nhận diện khuôn mặt, giám sát an ninh, …
 
-    - **Giao tiếp với các ESP32-CAM** qua Wi-Fi (MQTT/HTTP)
-    - Nhận kết quả nhận diện (khuôn mặt hoặc biển số) từ các ESP32-CAM đã xử lý xong
-    - Điều khiển các thiết bị ngoại vi:
-      - Mở/đóng barrier qua servo motor
-      - Hiển thị trạng thái lên màn hình OLED
-      - Phát âm báo thành công hoặc lỗi qua buzzer
-    
-  - Board này có đủ chân GPIO để kết nối đồng thời servo, buzzer, OLED
+ESP32-CAM là lựa chọn phổ biến nhờ giá rẻ, tính năng mạnh, và khả năng chạy AI trực tiếp trên thiết bị.
 
-- **Màn hình OLED**
+| **Thành phần** | **Thông tin chi tiết** | **Ghi chú** |
+| --- | --- | --- |
+| **Vi xử lý chính** | ESP32-WROOM-32 | Xử lý  chương trình nạp vào |
+| **Tốc độ xung nhịp** | Lên tới 240 MHz | Xử lý được **240 triệu lệnh mỗi giây** |
+| **RAM** | 520 KB SRAM nội | Lưu dữ liệu tạm thời khi chương trình đang chạy, tự động mất khi tắt nguồn |
+| **Flash** | 4 MB (SPI flash) | Lưu trữ chương trình được nạp vào chip, không mất khi tắt nguồn |
+| **Camera** | OV2640, độ phân giải tối đa 1600x1200 (UXGA), hỗ trợ nhiều chế độ JPEG | Có LED flash trắng tích hợp (nối chân GPIO nếu dùng), không tự động lấy nét, hình bị mờ nếu đặt sai khoảng cách. |
+| **GPIO** | ~9 chân GPIO khả dụng | Các chân đa năng trên chip, cho phép nhận tín hiệu vào và gửi tín hiệu ra |
+| **Nguồn hoạt động** | 3.3V  | Khi dùng nguồn 5V, cấp nguồn vào chân VCC/5V, bo mạch ESP32-CAM có sẵn mạch ổn áp AMS1117, chuyển 5V thành 3.3V cấp cho chip |
+| **Dòng tiêu thụ** | 160–250mA khi hoạt động | Nên dùng nguồn ổn định từ MB102 hoặc pin sạc 5V - 1A trở lên |
+| **Cổng USB** | Không có  | Cần dùng **USB to UART** để nạp code |
+| **Kích thước** | 27 x 40.5 x 4.5 mm |  |
 
-  - Là màn hình đơn sắc kích thước 0.96 inch, giao tiếp bằng chuẩn **I2C (SDA, SCL)** với ESP32 trung tâm (thường là GPIO21 và GPIO22).
-  - Có chức năng hiển thị:
-    - Khi xe vào: Hiển thị số chỗ còn trống, hoặc báo "đã hết chỗ" nếu không còn slot đỗ
-    - Khi xe ra: Hiển thị lời chào hoặc hiển thị lỗi nếu quá trình nhận diện không hợp lệ
+Hệ thống sử dụng **2 module ESP32-CAM** cho mỗi cổng (vào và ra):
 
-- **Servo motor MG90S**
+- Một module quét và nhận diện khuôn mặt tài xế
+- Một module quét và nhận diện biển số xe
 
-  - Loại servo có mô-men mạnh hơn SG90, sử dụng điện áp 5V.
-  - Được điều khiển bằng tín hiệu PWM từ ESP32 trung tâm
-  - Nối VCC và GND vào breadboard (nguồn từ MB102) để tránh sụt áp hoặc reset mạch.
-  - Dùng để mở hoặc đóng barrier khi xác thực thành công.
+Mỗi ESP32-CAM hoạt động độc lập, được nạp sẵn chương trình, luôn bật camera và model nhận diện, có khả năng:
 
-- **Buzzer**
+- Nhận diện sự xuất hiện của xe
+- Tự động chụp ảnh
+- Thực hiện nhận diện khuôn mặt hoặc biển số trực tiếp trên thiết bị
+- Gửi kết quả nhận diện kèm timestamp về ESP32 trung tâm qua giao thức như **HTTP POST** hoặc **MQTT**
 
-  - Sử dụng 2 buzzer loại Active 5V, mỗi chiếc được điều khiển bởi ESP32 trung tâm thông qua chân GPIO.
-  - **Active buzzer** là loại có sẵn mạch dao động bên trong, chỉ cần cấp tín hiệu HIGH/LOW là phát tiếng (dễ dùng hơn loại passive).
-  - ESP32 điều khiển 2 buzzer để:
+ESP32 trung tâm và 2 ESP32-CAM sẽ kết nối cùng một mạng wifi nội bộ, ESP32 trung tâm sẽ chạy server nhẹ để lắng nghe và mỗi ESP32-CAM đóng vai trò client.
 
-    - **Báo hiệu thành công** khi xe được nhận diện và barrier mở
-    - **Báo lỗi hoặc cảnh báo** khi khuôn mặt/biển số không hợp lệ
+**Cấp nguồn**: 
+- ESP32-CAM khi bật camera và Wi-Fi có thể tiêu thụ **160–300mA,** vì cậy cần tránh cấp nguồn chung cho cả 3 module. Ta sẽ sử dụng **sạc dự phòng** để cấp nguồn riêng cho ESP32-CAM. Ưu tiên sử dụng loại sạc dự phòng có 2 cổng USB-A, mỗi ESP32-CAM sẽ được cấp nguồn từ 1 cổng, cụ thể:
 
-- **MB102 Breadboard Power Supply Module**
+    - Dây đỏ (VCC): nối từ cổng USB-A của sạc dự phòng đến chân VCC/5V của ESP32-CAM
+    - Dây đen (GND): nối từ cổng USB-A của  sạc dự phòng đến chân GND của ESP32-CAM
+    - Chân GND khác của ESP32-CAM sẽ nối dây đến GND rail của breadboard
 
-  - Dùng để **cấp nguồn 5V ổn định cho toàn bộ hệ thống** từ laptop (USB).
-  - Hỗ trợ cấp nguồn thông qua cổng USB-A hoặc microUSB 
-  - Có thể chọn mức điện áp đầu ra là 5V hoặc 3.3V tùy theo loại thiết bị sử dụng, thông qua jumper chọn mức điện áp và công tắc bật/tắt nguồn tích hợp.
+**Nạp code**:
 
-- **Breadboard**
+![Đế nạp ESP32-CAM](images/Programming_Adapter.jpg){ height=300px }
 
-  - Là bảng mạch kết nối không cần hàn, được sử dụng để phân phối nguồn điện từ MB102 đến các thiết bị như ESP32, servo, buzzer và màn hình OLED.
-  - Cho phép kết nối linh kiện một cách linh hoạt thông qua dây jumper, giúp xây dựng và tổ chức hệ thống điện tử một cách gọn gàng, dễ bảo trì và dễ mở rộng.
+- Vì ESP32-CAM không có cổng USB, nên ta cần thiết bị trung gian để nạp code là **Đế Nạp ESP32-CAM**, sau khi nạp ESP32-CAM sẽ chạy độc lập và không mất code khi tắt nguồn. Đây là module chuyển đổi tín hiệu USB và UART, cho phép kết nối giữa máy tính và các thiết bị không có cổng USB trực tiếp như ESP32-CAM.
 
-- **Dây jumper (male-male, male-female, female-female)**
+- Ngoài ra, khi cắm cáp USB từ sạc dự phòng vào đế, ESP32-CAM sẽ được cấp nguồn điện, không cần dây USB-to-dupont.
 
-  - Dây jumper được sử dụng để kết nối các thành phần trong mạch với nhau mà không cần hàn, đặc biệt phù hợp cho hệ thống kết nối qua breadboard.
-  - Các loại jumper dây phổ biến bao gồm:
+Lưu ý khi vừa nạp code, ESP32-CAM đang ở chế độ bootloader, cần ấn nút *reset* để chip khởi động lại chế độ chạy bình thường.
 
-    - Male-male: dùng để nối giữa các hàng chân trên breadboard
-    - Male-female: dùng để nối board mạch với thiết bị có đầu cắm đực như module, cảm biến
-    - Female-female: dùng khi kết nối giữa hai thiết bị có chân cắm là male.
+Đối với mô hình AI, sau khi train, ta sẽ chuyển sang định dạng nhẹ và export model ra dạng `.c` hoặc `.h` rồi include vào code.
 
-- **FTDI FT232RL**
+2. **ESP32 trung tâm (ESP32 DevKit V1)**
 
-  - Là module chuyển đổi tín hiệu USB và UART, cho phép kết nối giữa máy tính và các thiết bị không có cổng USB trực tiếp như ESP32-CAM.
-  - Được sử dụng để nạp chương trình cho ESP32-CAM vì ESP32-CAM không có cổng USB trực tiếp. Mỗi ESP32-CAM chỉ cần nạp code 1 lần duy nhất, sau đó có thể hoạt động độc lập bằng Wi-Fi.
-  - Kết nối với máy tính qua USB, sau đó nối 4 chân TX, RX, GND, 5V đến ESP32-CAM.
-  - Khi nạp code cần nối chân IO0 của ESP32-CAM xuống GND để vào chế độ lập trình.
-  - Ngoài nạp code, module này cũng giúp giao tiếp Serial (debug) khi cần thiết.
+![ESP32 DevKit V1](images/ESP32.jpg){ height=300px }
 
+ESP32 trung tâm là **bộ điều khiển chính** của toàn hệ thống,  xử lý và điều phối giữa các thiết bị. Board sử dụng **chip ESP32-WROOM-32**, có thể xử lý nhiều tác vụ song song.
+
+| **Thành phần** | **Thông tin chi tiết** | **Ghi chú** |
+| --- | --- | --- |
+| **Chip chính** | ESP32-WROOM-32  |  |
+| **RAM** | 520 KB |  |
+| **Flash** | 4MB SPI Flash |  |
+| **Tốc độ xử lý** | Lên đến 240MHz |  |
+| **Điện áp logic** | 3.3V  | Thiết bị gửi tín hiệu 5V vào ESP32 GPIO có thể gây cháy GPIO, cần sử dụng mạch chia áp |
+| **USB-to-Serial** | Tích hợp sẵn CP2102  | Có thể **nạp code trực tiếp qua cổng USB-C / microUSB** |
+| **GPIO khả dụng** | ~25 chân, đủ dùng cho nhiều ngoại vi đồng thời |  |
+| **Wi-Fi / Bluetooth** | Tích hợp sẵn, dùng được ở chế độ Station và Access Point | Với ESP32 và 2 ESP32-CAM, ta sẽ dùng chế độ Station, nghĩa là cùng kết nối wifi có sẵn |
+
+3. **Breadboard**
+
+Là bảng mạch kết nối không cần hàn, được sử dụng để phân phối nguồn điện và kết nối các thiết bị với nhau.
+
+Cho phép kết nối linh kiện một cách linh hoạt thông qua dây jumper, giúp xây dựng và tổ chức hệ thống điện tử một cách gọn gàng, dễ bảo trì và dễ mở rộng.
+
+**Cấp nguồn**:
+
+![MB102](images/MB102_Power_Supply.jpg){ height=200px }
+
+  - MB102 là một **module cấp nguồn chuyên dùng cho breadboard,** có thể cấp điện áp ổn định 3.3V hoặc 5V, phân phối điện áp này dọc theo các rail VCC/GND trên breadboard, chỉ cần kết nối với laptop hoặc sạc dự phòng.
+
+  - Để kết hợp với breadboard, ta gắn MB102 lên đầu breadboard để cấp điện trực tiếp cho 2 rail, chọn mức điện áp (trong hệ thống này ta chọn 5V) và gạt công tắc ON để bật nguồn.
+
+**Kết nối các thiết bị**
+
+  - Dây jumper là loại dây cắm sẵn đầu, chuyên dùng để kết nối các thành phần trong mạch điện tử mà không cần hàn, đặc biệt là trong hệ thống kết nối qua breadboard.
+
+![JUMPER.jpg](images/JUMPER.jpg){ height=240px }
+
+| **Loại dây** | **Đầu cắm** | **Ứng dụng** |
+| --- | --- | --- |
+| **Male-Male** | Đầu cắm kim 2 bên | Dùng để cắm từ chân này sang chân khác **trên breadboard** hoặc từ **breadboard đến board mạch** (ESP32, MB102…) |
+| **Male-Female** | Một đầu kim, một đầu lỗ | Dùng để nối **module/cảm biến (có chân đực)** với **breadboard hoặc board mạch** |
+| **Female-Female** | Hai đầu lỗ | Dùng để **nối giữa 2 thiết bị đều có chân đực**, ví dụ **ESP32-CAM và FTDI**, hoặc giữa **module logic với module khác** |
+
+
+4. **Màn hình OLED**
+
+Là màn hình đơn sắc kích thước 0.96 inch, giao tiếp bằng chuẩn **I2C (SDA, SCL)** với ESP32 trung tâm (thường là GPIO21 và GPIO22). Trong hệ thống này ta sử dụng màn hình OLED với IC điều khiển SSD1306, điện áp hoạt động 5V (có tương thích 3.3V).
+
+Có chức năng hiển thị:
+
+- Khi xe vào: Hiển thị số chỗ còn trống, hoặc báo "đã hết chỗ" nếu không còn slot đỗ
+- Khi xe ra: Hiển thị lời chào hoặc hiển thị lỗi nếu quá trình nhận diện không hợp lệ
+
+| **Chân OLED** | **Kết nối đến** | **Ghi chú** |
+| --- | --- | --- |
+| **VCC** | VCC của breadboard | Cấp điện 5V từ MB102 / breadboard |
+| **GND** | GND của breadboard | Mass |
+| **SCL** | GPIO22 của ESP32 | Tạo xung đồng bộ, do ESP32 điều khiển, cho OLED biết khi nào nhận 1 bit |
+| **SDA** | GPIO21 của ESP32 | Truyền dữ liệu đọc và ghi |
+
+5. **Buzzer**
+
+Sử dụng **2 buzzer loại passive 5V**, mỗi chiếc được điều khiển bởi ESP32 trung tâm thông qua chân GPIO.
+
+**Passive buzzer** là loại không có mạch dao động tích hợp bên trong, vì vậy **có thể phát được nhiều loại âm thanh khác nhau**. ESP32 sẽ tạo ra các tín hiệu tần số khác nhau (qua lệnh `tone()`), giúp buzzer phát ra các âm báo tùy biến:
+
+- **Âm báo thành công**
+- **Âm báo lỗi**
+
+Giúp người dùng **phân biệt ngữ cảnh thông qua loại âm phát ra**.
+
+Buzzer passive hoạt động ổn định ở **điện áp 5V**, được cấp nguồn từ breadboard thông qua module MB102, và điều khiển bằng tín hiệu logic 3.3V từ ESP32 mà không cần mạch khuếch đại.
+
+| **Chân buzzer** | **Kết nối đến** | **Ghi chú** |
+| --- | --- | --- |
+| **Chân dương (+)** | 5V từ breadboard (MB102) | Cấp nguồn hoạt động; không nên lấy từ ESP32 |
+| **Chân âm (–)** | GPIO bất kỳ của ESP32 | Dùng để phát âm bằng tín hiệu `tone()` |
+| **GND chung** | GND breadboard | GND của buzzer và ESP32 **phải nối chung** |
+
+6. **Servo motor MG90S**
+
+**MG90S** là một loại **servo mini** với **moment xoắn**, có cấu trúc **bánh răng kim loại**, bền hơn và chịu lực tốt hơn, phù hợp để điều khiển cơ cấu vật lý như **thanh chắn**.
+
+Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **250–400mA khi tải nặng**, do đó cần cấp nguồn ổn định **từ MB102** qua breadboard để tránh sụt áp hoặc làm **ESP32 reset** đột ngột.
+
+**ESP32 trung tâm điều khiển servo qua tín hiệu PWM** từ một chân GPIO bất kỳ (thường dùng GPIO13 hoặc GPIO14). Tín hiệu PWM xác định góc quay của servo (trong khoảng 0°–180°).
+
+| Chân servo | Kết nối đến | Ghi chú |
+| --- | --- | --- |
+| **VCC (đỏ)** | 5V từ MB102 qua rail breadboard | Cấp nguồn chính |
+| **GND (nâu)** | GND chung trên breadboard | Cực âm |
+| **Signal (vàng)** | GPIO13 (hoặc bất kỳ) trên ESP32 | Điều khiển PWM |
 
 ### Ứng dụng AI phân tích hình ảnh **(chỉnh sửa thêm)**
 
@@ -105,10 +176,10 @@ Sử dụng Django làm framework backend, xử lý các logic nghiệp vụ nh�
 ### Kết nối và nền tảng lưu trữ **(chưa quyết định)**
 
 - **MQTT (Message Queuing Telemetry Transport):**
-Giao thức truyền thông nhẹ, tối ưu cho các thiết bị IoT với băng thông hạn chế. MQTT hỗ trợ kết nối ổn định, truyền dữ liệu theo dạng publish-subscribe, rất phù hợp để truyền trạng thái cảm biến, điều khiển thiết bị trong hệ thống bãi đỗ xe thông minh.
 
-- **MongoDB:**
-Cơ sở dữ liệu NoSQL dạng tài liệu, linh hoạt trong việc lưu trữ dữ liệu phi cấu trúc như log hệ thống, dữ liệu người dùng, thông tin xe, hình ảnh. Được sử dụng phổ biến trong các hệ thống backend nhờ khả năng mở rộng và thao tác linh hoạt với dữ liệu JSON.
+
+- **Firebase:**
+
 
 ## Thiết bị
 
@@ -118,8 +189,9 @@ Cơ sở dữ liệu NoSQL dạng tài liệu, linh hoạt trong việc lưu tr�
 | 2   | **ESP32 DevKit V1 (CP2102, Type-C)**         | 2               | 97,000         | ![](images/ESP32.jpg){ height=120px }                  | [Xem tại đây](https://shopee.vn/-P0006-ESP32-Devkit-V1-Bo-M%E1%BA%A1ch-Ph%C3%A1t-Tri%E1%BB%83n-%C4%90a-N%C4%83ng-Cho-D%E1%BB%B1-%C3%81n-IoT-Gi%C3%A1-T%E1%BB%91t-Nh%E1%BA%A5t-i.135851482.26959755297) |
 | 3   | **Màn hình OLED 0.96 inch**                  | 2               | 55,000         | ![](images/OLED.jpg){ height=120px }                   | [Xem tại đây](https://shopee.vn/M%C3%A0n-h%C3%ACnh-hi%E1%BB%83n-th%E1%BB%8B-128x64-Oled-0.96-Inch-giao-Ti%E1%BA%BFp-I2C-chuy%C3%AAn-d%E1%BB%A5ng-SSD1315-SSD1306-i.16504852.12103032615) |
 | 4   | **Servo motor MG90S**                        | 2               | 37,000         | ![](images/SERVO.jpg){ height=120px }                  | [Xem tại đây](https://shopee.vn/%C4%90%E1%BB%99ng-C%C6%A1-Servo-MG90S-i.243949145.19090357136) |
-| 5   | **Buzzer 5V**                                | 2               | 3,000          | ![](images/BUZZER.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/-C%C3%B3-s%E1%BA%B5n-R%E1%BA%BB-v%C3%B4-%C4%91%E1%BB%8Bch-Module-buzzer-5V-thegioimodule-i.951399259.25120210346) |
-| 6   | **Mô đun nguồn MB102**                       | 2               | 17,000         | ![](images/MB102_Power_Supply.jpg){ height=120px }     | [Xem tại đây](https://shopee.vn/M%C3%B4-%C4%91un-ngu%E1%BB%93n-%C4%91i%E1%BB%87n-m%E1%BA%A1ch-c%E1%BA%AFm-d%C3%A2y-MB102-hai-chi%E1%BB%81u-3.3V-5V-i.325406709.11021689837) |
-| 7   | **Breadboard MB-102 830 lỗ**                 | 2               | 17,000         | ![](images/BREADBOARD.jpg){ height=120px }             | [Xem tại đây](https://shopee.vn/Breadboard-MB-102-830-L%E1%BB%97-165x55x10mm-(Board-test-c%E1%BA%AFm-linh-ki%E1%BB%87n-bo-test-b%E1%BA%A3ng-m%E1%BA%A1ch-th%E1%BB%AD-nghi%E1%BB%87m-)-i.301053603.21250257237) |
-| 8   | **Dây jumper (male-male, male-female, female-female)**                      | 40 sợi/loại   | 66,000         | ![](images/JUMPER.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/-40-s%E1%BB%A3i-d%C3%A2y-c%E1%BA%AFm-testboard-bread-board-jumper-dupont-wire-10-20-30-40-cm-i.494330825.9381418486) |
-| 9   | **FTDI FT232RL (USB - UART)**                | 1               | 37,000         | ![](images/USB_TO_UART.jpg){ height=120px }            | [Xem tại đây](https://shopee.vn/M%E1%BA%A1ch-Chuy%E1%BB%83n-USB-UART-TTL-FT232-FT232RL-i.301053603.21350504517) |
+| 5   | **Buzzer**                                | 2               | 5,000          | ![](images/BUZZER.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/C%C3%B2i-chip-Buzzer-3V-5V-12V-i.213519943.6221950588) |
+| 6   | **Module nguồn MB102**                       | 2               | 17,000         | ![](images/MB102_Power_Supply.jpg){ height=120px }     | [Xem tại đây](https://shopee.vn/M%C3%B4-%C4%91un-ngu%E1%BB%93n-%C4%91i%E1%BB%87n-m%E1%BA%A1ch-c%E1%BA%AFm-d%C3%A2y-MB102-hai-chi%E1%BB%81u-3.3V-5V-i.325406709.11021689837) |
+| 7   | **Breadboard**                 | 2               | 17,000         | ![](images/BREADBOARD.jpg){ height=120px }             | [Xem tại đây](https://shopee.vn/Breadboard-MB-102-830-L%E1%BB%97-165x55x10mm-(Board-test-c%E1%BA%AFm-linh-ki%E1%BB%87n-bo-test-b%E1%BA%A3ng-m%E1%BA%A1ch-th%E1%BB%AD-nghi%E1%BB%87m-)-i.301053603.21250257237) |
+| 8   | **Dây jumper**                      | 40 sợi/loại   | 66,000         | ![](images/JUMPER.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/-40-s%E1%BB%A3i-d%C3%A2y-c%E1%BA%AFm-testboard-bread-board-jumper-dupont-wire-10-20-30-40-cm-i.494330825.9381418486) |
+| 9   | **Đế Nạp ESP32-CAM**                      | 4   | 30,000         | ![](images/Programming_Adapter.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/%C4%90%E1%BA%BF-n%E1%BA%A1p-ch%C6%B0%C6%A1ng-tr%C3%ACnh-ESP32-CAM-micro-USB-i.60387211.29470543694?sp_atk=950b9eda-e15a-4461-839d-33d2b3e608a0&xptdk=950b9eda-e15a-4461-839d-33d2b3e608a0) |
+| 10   | **Pin Sạc Dự Phòng**                | 4               | 245,000         | ![](images/POWER_BANK.jpg){ height=120px }            | [Xem tại đây](https://shopee.vn/Pin-s%E1%BA%A1c-d%E1%BB%B1-ph%C3%B2ng-Xiaomi-Redmi-10000mAh-2-C%E1%BB%95ng-Ra-Usb-C%C3%B3-S%E1%BA%A1c-Nhanh-B%E1%BA%A3o-H%C3%A0nh-12-th%C3%A1ng-i.842331315.22925969209?sp_atk=02100eb5-1921-4b1d-885d-f5d7d7981542&xptdk=02100eb5-1921-4b1d-885d-f5d7d7981542) |
