@@ -41,12 +41,11 @@ Mỗi ESP32-CAM hoạt động độc lập, được nạp sẵn chương trìn
 
 ESP32 trung tâm và 2 ESP32-CAM sẽ kết nối cùng một mạng wifi nội bộ, ESP32 trung tâm sẽ chạy server nhẹ để lắng nghe và mỗi ESP32-CAM đóng vai trò client.
 
-**Cấp nguồn**: 
-- ESP32-CAM khi bật camera và Wi-Fi có thể tiêu thụ **160–300mA,** vì cậy cần tránh cấp nguồn chung cho cả 3 module. Ta sẽ sử dụng **sạc dự phòng** để cấp nguồn riêng cho ESP32-CAM. Ưu tiên sử dụng loại sạc dự phòng có 2 cổng USB-A, mỗi ESP32-CAM sẽ được cấp nguồn từ 1 cổng, cụ thể:
+**Cấp nguồn**: ESP32-CAM khi bật camera và Wi-Fi có thể tiêu thụ **160–300mA,** vì cậy cần tránh cấp nguồn chung cho cả 3 module. Ta sẽ sử dụng **sạc dự phòng** để cấp nguồn riêng cho ESP32-CAM. Ưu tiên sử dụng loại sạc dự phòng có 2 cổng USB-A, mỗi ESP32-CAM sẽ được cấp nguồn từ 1 cổng, cụ thể:
 
-    - Dây đỏ (VCC): nối từ cổng USB-A của sạc dự phòng đến chân VCC/5V của ESP32-CAM
-    - Dây đen (GND): nối từ cổng USB-A của  sạc dự phòng đến chân GND của ESP32-CAM
-    - Chân GND khác của ESP32-CAM sẽ nối dây đến GND rail của breadboard
+- Dây đỏ (VCC): nối từ cổng USB-A của sạc dự phòng đến chân VCC/5V của ESP32-CAM
+- Dây đen (GND): nối từ cổng USB-A của  sạc dự phòng đến chân GND của ESP32-CAM
+- Chân GND khác của ESP32-CAM sẽ nối dây đến GND rail của breadboard
 
 **Nạp code**:
 
@@ -60,7 +59,7 @@ Lưu ý khi vừa nạp code, ESP32-CAM đang ở chế độ bootloader, cần 
 
 Đối với mô hình AI, sau khi train, ta sẽ chuyển sang định dạng nhẹ và export model ra dạng `.c` hoặc `.h` rồi include vào code.
 
-2. **ESP32 trung tâm (ESP32 DevKit V1)**
+1. **ESP32 trung tâm (ESP32 DevKit V1)**
 
 ![ESP32 DevKit V1](images/ESP32.jpg){ height=300px }
 
