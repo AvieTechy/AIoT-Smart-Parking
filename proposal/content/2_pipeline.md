@@ -46,6 +46,8 @@ Hệ thống được thiết kế theo kiến trúc phân tầng gồm ba thàn
 
 Tổng thể, hệ thống hoạt động theo nguyên tắc nhận diện kết hợp (biển số và khuôn mặt) nhằm đảm bảo độ chính xác và an toàn cao trong việc kiểm soát ra vào tại các khu vực như bãi xe, cổng tòa nhà, v.v.
 
+\pagebreak
+
 ![Sơ đồ kiến trúc hệ thống](images/architecture.png){ width=90% .center }
 
 ## Luồng hoạt động chính của hệ thống
