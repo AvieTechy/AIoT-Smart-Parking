@@ -15,7 +15,7 @@ Module này được thiết kế chuyên dụng cho các ứng dụng thị gi�
 ESP32-CAM là lựa chọn phổ biến nhờ giá rẻ, tính năng mạnh, và khả năng chạy AI trực tiếp trên thiết bị.
 
 | **Thành phần** | **Thông tin chi tiết** | **Ghi chú** |
-| --- | --- | --- |
+| --- | --- | ------ |
 | **Vi xử lý chính** | ESP32-WROOM-32 | Xử lý  chương trình nạp vào |
 | **Tốc độ xung nhịp** | Lên tới 240 MHz | Xử lý được **240 triệu lệnh mỗi giây** |
 | **RAM** | 520 KB SRAM nội | Lưu dữ liệu tạm thời khi chương trình đang chạy, tự động mất khi tắt nguồn |
@@ -27,7 +27,7 @@ ESP32-CAM là lựa chọn phổ biến nhờ giá rẻ, tính năng mạnh, và
 | **Cổng USB** | Không có  | Cần dùng **USB to UART** để nạp code |
 | **Kích thước** | 27 x 40.5 x 4.5 mm |  |
 
-Hệ thống sử dụng **2 module ESP32-CAM** cho mỗi cổng (vào và ra):
+Hệ thống sử dụng **2 module ESP32-CAM** cho mỗi cổng vào và ra:
 
 - Một module quét và nhận diện khuôn mặt tài xế
 - Một module quét và nhận diện biển số xe
@@ -37,15 +37,11 @@ Mỗi ESP32-CAM hoạt động độc lập, được nạp sẵn chương trìn
 - Nhận diện sự xuất hiện của xe
 - Tự động chụp ảnh
 - Thực hiện nhận diện khuôn mặt hoặc biển số trực tiếp trên thiết bị
-- Gửi kết quả nhận diện kèm timestamp về ESP32 trung tâm qua giao thức như **HTTP POST** hoặc **MQTT**
+- Truyền tải thông tin:
+  - Gửi hình chụp khuôn mặt và biển số xe tới **Cloudinary** qua giao thức **HTTP POST**.
+  - Nhận `url` hình ảnh từ **Cloudinary**, gửi gói tin gồm `url` vừa nhận được và kết quả nhận diện vừa xử lý về ESP32 trung tâm qua giao thức **MQTT**.
 
-ESP32 trung tâm và 4 ESP32-CAM sẽ kết nối cùng một mạng wifi nội bộ, ESP32 trung tâm sẽ chạy server nhẹ để lắng nghe và mỗi ESP32-CAM đóng vai trò client.
-
-**Cấp nguồn**: ESP32-CAM khi bật camera và Wi-Fi có thể tiêu thụ **160–300mA,** vì cậy cần tránh cấp nguồn chung cho cả 5 module. Ta sẽ sử dụng **sạc dự phòng** để cấp nguồn riêng cho ESP32-CAM. Ưu tiên sử dụng loại sạc dự phòng có 2 cổng USB-A, mỗi ESP32-CAM sẽ được cấp nguồn từ 1 cổng, cụ thể:
-
-- Dây đỏ (VCC): nối từ cổng USB-A của sạc dự phòng đến chân VCC/5V của ESP32-CAM
-- Dây đen (GND): nối từ cổng USB-A của sạc dự phòng đến chân GND của ESP32-CAM
-- Chân GND khác của ESP32-CAM sẽ nối dây đến GND rail của breadboard
+ESP32 trung tâm sẽ kết nối chung mạng Wi-Fi với 4 ESP32-CAM, đóng vai trò nhận thông tin từ các module này. Sau khi nhận được kết quả nhận diện thông qua Wi-Fi, ESP32 trung tâm xử lý và điều khiển các thiết bị output liên quan như màn hình OLED, còi báo buzzer và servo.
 
 **Nạp code**:
 
@@ -66,7 +62,7 @@ Lưu ý khi vừa nạp code, ESP32-CAM đang ở chế độ bootloader, cần 
 ESP32 trung tâm là **bộ điều khiển chính** của toàn hệ thống, xử lý và điều phối giữa các thiết bị. Board sử dụng **chip ESP32-WROOM-32**, có thể xử lý nhiều tác vụ song song.
 
 | **Thành phần** | **Thông tin chi tiết** | **Ghi chú** |
-| --- | --- | --- |
+| --- | --- | ------ |
 | **Chip chính** | ESP32-WROOM-32  |  |
 | **RAM** | 520 KB |  |
 | **Flash** | 4MB SPI Flash |  |
@@ -82,18 +78,10 @@ Là bảng mạch kết nối không cần hàn, được sử dụng để phâ
 
 Cho phép kết nối linh kiện một cách linh hoạt thông qua dây jumper, giúp xây dựng và tổ chức hệ thống điện tử một cách gọn gàng, dễ bảo trì và dễ mở rộng.
 
-**Cấp nguồn**:
-
-  - Trong hệ thống này, breadboard sẽ được cấp nguồn trực tiếp từ adapter 5V – 3A thông qua cáp chia nguồn. 
-
-  - Mỗi đầu ra được gắn jack DC cái chuyển sang dây jumper:
-    - Dây đỏ (VCC) được nối vào rail 5V của breadboard
-    - Dây đen (GND) được nối vào rail GND
-
-  - Dây jumper là loại dây cắm sẵn đầu, chuyên dùng để kết nối các thành phần trong mạch điện tử mà không cần hàn, đặc biệt là trong hệ thống kết nối qua breadboard.
+Trong hệ thống này, breadboard sẽ được cấp nguồn trực tiếp từ adapter 5V – 3A thông qua cáp chia nguồn, sử dụng dây jumper để kết nối các thành phần trong mạch breadboard.
 
 | **Loại dây** | **Đầu cắm** | **Ứng dụng** |
-| --- | --- | --- |
+| --- | --- | ------ |
 | **Male-Male** | Đầu cắm kim 2 bên | Dùng để cắm từ chân này sang chân khác **trên breadboard** hoặc từ **breadboard đến board mạch** (ESP32, MB102…) |
 | **Male-Female** | Một đầu kim, một đầu lỗ | Dùng để nối **module/cảm biến (có chân đực)** với **breadboard hoặc board mạch** |
 | **Female-Female** | Hai đầu lỗ | Dùng để **nối giữa 2 thiết bị đều có chân đực**, ví dụ **ESP32-CAM và FTDI**, hoặc giữa **module logic với module khác** |
@@ -105,15 +93,8 @@ Là màn hình đơn sắc kích thước 0.96 inch, giao tiếp bằng chuẩn 
 
 Có chức năng hiển thị:
 
-- Khi xe vào: Hiển thị số chỗ còn trống, hoặc báo "đã hết chỗ" nếu không còn slot đỗ
-- Khi xe ra: Hiển thị lời chào hoặc hiển thị lỗi nếu quá trình nhận diện không hợp lệ
-
-| **Chân OLED** | **Kết nối đến** | **Ghi chú** |
-| --- | --- | --- |
-| **VCC** | VCC của breadboard | Cấp điện 5V từ MB102 / breadboard |
-| **GND** | GND của breadboard | Mass |
-| **SCL** | GPIO22 của ESP32 | Tạo xung đồng bộ, do ESP32 điều khiển, cho OLED biết khi nào nhận 1 bit |
-| **SDA** | GPIO21 của ESP32 | Truyền dữ liệu đọc và ghi |
+- Khi xe vào: Hiển thị số chỗ còn trống, hoặc báo "đã hết chỗ" nếu không còn slot đỗ.
+- Khi xe ra: Hiển thị lời chào hoặc hiển thị lỗi nếu quá trình nhận diện không hợp lệ.
 
 5. **Buzzer**
 
@@ -128,12 +109,6 @@ Giúp người dùng **phân biệt ngữ cảnh thông qua loại âm phát ra*
 
 Buzzer passive hoạt động ổn định ở **điện áp 5V**, được cấp nguồn từ breadboard thông qua module MB102, và điều khiển bằng tín hiệu logic 3.3V từ ESP32 mà không cần mạch khuếch đại.
 
-| **Chân buzzer** | **Kết nối đến** | **Ghi chú** |
-| --- | --- | --- |
-| **Chân dương (+)** | 5V từ breadboard (MB102) | Cấp nguồn hoạt động; không nên lấy từ ESP32 |
-| **Chân âm (–)** | GPIO bất kỳ của ESP32 | Dùng để phát âm bằng tín hiệu `tone()` |
-| **GND chung** | GND breadboard | GND của buzzer và ESP32 **phải nối chung** |
-
 6. **Servo motor MG90S**
 
 **MG90S** là một loại **servo mini** với **moment xoắn**, có cấu trúc **bánh răng kim loại**, bền hơn và chịu lực tốt hơn, phù hợp để điều khiển cơ cấu vật lý như **thanh chắn**.
@@ -141,12 +116,6 @@ Buzzer passive hoạt động ổn định ở **điện áp 5V**, được cấ
 Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **250–400mA khi tải nặng**, do đó cần cấp nguồn ổn định **từ MB102** qua breadboard để tránh sụt áp hoặc làm **ESP32 reset** đột ngột.
 
 **ESP32 trung tâm điều khiển servo qua tín hiệu PWM** từ một chân GPIO bất kỳ (thường dùng GPIO13 hoặc GPIO14). Tín hiệu PWM xác định góc quay của servo (trong khoảng 0°–180°).
-
-| Chân servo | Kết nối đến | Ghi chú |
-| --- | --- | --- |
-| **VCC (đỏ)** | 5V từ MB102 qua rail breadboard | Cấp nguồn chính |
-| **GND (nâu)** | GND chung trên breadboard | Cực âm |
-| **Signal (vàng)** | GPIO13 (hoặc bất kỳ) trên ESP32 | Điều khiển PWM |
 
 ### Ứng dụng AI phân tích hình ảnh
 
@@ -160,7 +129,7 @@ Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **250–
     - **Phát hiện biển số xe**: Sử dụng mô hình **YOLOv8** để phát hiện vùng chứa biển số xe trong ảnh.
     - **Nhận dạng ký tự biển số**: Cắt vùng biển số từ ảnh dựa trên kết quả phát hiện, áp dụng thuật toán nhận dạng ký tự **Tesseract OCR** để trích xuất chuỗi ký tự.
 
-### Giao diện người dùng và quản trị **(chưa quyết định)**
+### Giao diện người dùng và quản trị
 
 - **Frontend:**
 Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dựng giao diện thân thiện, dễ sử dụng cho tài xế và quản trị viên.
@@ -168,12 +137,10 @@ Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dự
 - **Backend:**
 Sử dụng Django làm framework backend, xử lý các logic nghiệp vụ như xác thực người dùng, quản lý dữ liệu xe và vị trí bãi đỗ, cung cấp API cho frontend và thiết bị IoT kết nối.
  
-### Kết nối và nền tảng lưu trữ **(chưa quyết định)**
+### Nền tảng lưu trữ
 
-- **MQTT (Message Queuing Telemetry Transport):**
-
-
-- **Firebase:**
+- **Firebase:** Dùng để lưu kết quả nhận diện, đường dẫn ảnh và thời gian. Phù hợp lưu dữ liệu dạng JSON để theo dõi, thống kê, hiển thị realtime.
+- **Cloudinary**: Dùng để lưu trữ ảnh chụp từ ESP32-CAM (khuôn mặt, biển số). Sau khi upload, Cloudinary trả về link ảnh, được lưu kèm trong Firebase để truy xuất và hiển thị sau này.
 
 
 ## Thiết bị
@@ -191,3 +158,4 @@ Sử dụng Django làm framework backend, xử lý các logic nghiệp vụ nh�
 | 9   | **Breadboard**                 | 1               | 17,000         | ![](images/BREADBOARD.jpg){ height=120px }             | [Xem tại đây](https://shopee.vn/Breadboard-MB-102-830-L%E1%BB%97-165x55x10mm-(Board-test-c%E1%BA%AFm-linh-ki%E1%BB%87n-bo-test-b%E1%BA%A3ng-m%E1%BA%A1ch-th%E1%BB%AD-nghi%E1%BB%87m-)-i.301053603.21250257237) |
 | 10   | **Dây jumper**                      | 40 sợi/loại   | 66,000         | ![](images/JUMPER.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/-40-s%E1%BB%A3i-d%C3%A2y-c%E1%BA%AFm-testboard-bread-board-jumper-dupont-wire-10-20-30-40-cm-i.494330825.9381418486) |
 | 11   | **Đế Nạp ESP32-CAM**                      | 1   | 30,000         | ![](images/Programming_Adapter.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/%C4%90%E1%BA%BF-n%E1%BA%A1p-ch%C6%B0%C6%A1ng-tr%C3%ACnh-ESP32-CAM-micro-USB-i.60387211.29470543694?sp_atk=950b9eda-e15a-4461-839d-33d2b3e608a0&xptdk=950b9eda-e15a-4461-839d-33d2b3e608a0) |
+| 12   | **Module chuyển mạch I2C**                      | 1   | 33,000         | ![](images/MODULE_I2C.jpg){ height=120px }                 | [Xem tại đây](https://shopee.vn/Module-chuy%E1%BB%83n-m%E1%BA%A1ch-I2C-8-k%C3%AAnh-CJMCU-TCA9548A-PCA9548-TH189-i.310609561.7863135098?sp_atk=6af2ff87-5f07-460d-a670-5d4fae742dcf&xptdk=6af2ff87-5f07-460d-a670-5d4fae742dcf) |
