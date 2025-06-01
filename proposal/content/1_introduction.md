@@ -35,11 +35,20 @@ Hệ thống này không chỉ giúp **rút ngắn thời gian xử lý**, **gi�
 - Dữ liệu được lưu trữ và truy xuất thông qua nền tảng cloud.
 
 ### Giới hạn hệ thống
+Hệ thống nhận diện khuôn mặt và biển số xe có các giới hạn như:
 
-- Môi trường lắp đặt (ánh sáng yếu, thời tiết xấu) ảnh hưởng đến độ chính xác nhận diện.
-- Hệ thống cần camera có độ phân giải tối thiểu và lắp đặt đúng góc.
-- Tài nguyên xử lý (RAM, bộ nhớ, mạng) cần đảm bảo để hệ thống hoạt động thời gian thực.
-- Độ trễ thấp là yêu cầu bắt buộc để đảm bảo trải nghiệm người dùng.
+- **Điều kiện môi trường:** Độ chính xác giảm trong điều kiện ánh sáng yếu (ban đêm, bóng râm) hoặc thời tiết bất lợi (mưa, sương mù), ảnh hưởng đến khả năng trích xuất đặc trưng.
+- **Chất lượng và vị trí camera:** Yêu cầu camera độ phân giải đủ và lắp đặt đúng góc nhìn để tránh nhận diện sai hoặc bỏ sót.
+- **Tài nguyên phần cứng:** Cần đủ RAM, dung lượng lưu trữ và tốc độ mạng để đảm bảo hiệu suất thời gian thực.
+- **Độ trễ:** Yêu cầu độ trễ xử lý thấp để đảm bảo tính tức thời trong kiểm soát ra vào.
+
+### Phạm vi triển khai
+
+Hệ thống được thiết kế hướng đến việc triển khai tại các công ty, doanh nghiệp, nhà máy hoặc khu công nghiệp – nơi có nhu cầu kiểm soát người và phương tiện ra vào một cách tự động, chính xác và không cần can thiệp thủ công.
+
+Cụ thể, hệ thống có thể được tích hợp vào cổng kiểm soát an ninh, trạm gác hoặc khu vực đỗ xe nội bộ. Mô hình hoạt động phù hợp với các đơn vị có sẵn hạ tầng mạng cục bộ ổn định và có khả năng đầu tư cơ bản vào thiết bị nhận diện như ESP32-CAM, camera, cảm biến và màn hình hiển thị.
+
+Hiện tại, hệ thống chưa tích hợp chức năng thu phí. Tuy nhiên, đây là một khả năng có thể mở rộng trong tương lai nếu hệ thống được ứng dụng tại các bãi giữ xe công cộng hoặc khu vực dịch vụ có yêu cầu thanh toán tự động.
 
 ## Đóng góp chính của đề tài
 

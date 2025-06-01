@@ -46,3 +46,18 @@ make clean
 ```
 
 File pdf sẽ được tạo ra ở thư mục `release`.
+
+---
+
+coding style: camelCases
+
+- OOP
+- Class → methods: ClassName
+- function → functionName
+- variables → varName
+- Module → moduleName
+- input → folder → assets
+- output → folder data → faces, boards
+- preprocessing
+    - crop ảnh
+    - khử noise
