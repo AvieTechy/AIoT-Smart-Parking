@@ -7,8 +7,8 @@
 | Cao Uyển Nhi | Trưởng nhóm, quản lý tiến độ | Phụ trách AI – Nhận diện biển số/khuôn mặt|
 | | | Tổng hợp báo cáo, điều phối nhóm, hỗ trợ kỹ thuật|
 | | | Thu thập dữ liệu, huấn luyện mô hình, triển khai xử lý ảnh |
-| Trần Thị Cát Tường | Phụ trách IoT – Cảm biến và cloud | Kết nối cảm biến, lập trình ESP32, gửi dữ liệu lên Firebase/ThingsBoard |
-| Võ Lê Việt Tú | Thiết kế phần cứng – Mạch, cảm biến | Lắp ráp hệ thống, bố trí camera và sensor thực tế |
+| Võ Lê Việt Tú | Phụ trách IoT – Cảm biến và cloud | Kết nối cảm biến, lập trình ESP32, gửi dữ liệu lên Firebase/ThingsBoard |
+| Trần Thị Cát Tường | Thiết kế phần cứng – Mạch, cảm biến | Lắp ráp hệ thống, bố trí camera và sensor thực tế |
 | Lưu Thanh Thuý | Giao diện & báo cáo | Thiết kế dashboard, lập trình hiển thị và làm tài liệu |
 
 ## Timeline
