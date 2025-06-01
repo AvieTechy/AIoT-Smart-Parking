@@ -2,29 +2,51 @@
 
 ## Mô hình hệ thống
 
-Hệ thống bãi đỗ xe thông minh sử dụng nhận diện **khuôn mặt kết hợp biển số xe**, với các thiết bị phần cứng như sau:
+Hệ thống được thiết kế theo kiến trúc phân tầng gồm ba thành phần chính: tầng thiết bị đầu vào (ESP32-CAM), tầng xử lý trung tâm (AI model và backend Django), và tầng điều khiển - phản hồi (thiết bị IoT và Dashboard).
 
-### Đề xuất bố trí thiết bị
+### Thiết bị đầu vào (Input Layer)
 
-- **Cổng vào:**  
-    - **ESP32-CAM_1** (quét biển số): đặt thấp (0.5–1m), hướng vào xe.
-    - **ESP32-CAM_2** (nhận diện khuôn mặt): đặt cao hơn (~1.2–1.5m), hướng về cửa sổ tài xế.
-    - **Màn hình OLED_1:** hiển thị thông tin cho tài xế.
-    - **Buzzer_1:** phát tín hiệu âm thanh khi cần.
-    - **Barrier + Servo motor:** điều khiển thanh chắn ra vào.
+- Hệ thống sử dụng các camera ESP32-CAM được lắp đặt tại cổng vào và cổng ra:
+    - ESP32-CAM_1 và ESP32-CAM_3 dùng để quét **biển số xe**.
+    - ESP32-CAM_2 và ESP32-CAM_4 dùng để quét **khuôn mặt tài xế**.
+- Dữ liệu hình ảnh thu được từ các camera này sẽ được gửi đến mô hình AI để nhận dạng.
 
-- **Khu vực đỗ xe:**  
-    - Các ô đỗ được kẻ đường ngăn cách rõ ràng, sắp xếp trật tự. Có thể gắn cảm biến nhận diện ô trống (hướng phát triển thêm).
+### Tầng xử lý trung tâm (Processing Layer)
 
-- **Cổng ra:**  
-    - **ESP32-CAM_3** (quét biển số): đặt thấp (0.5–1m), hướng vào xe.
-    - **ESP32-CAM_4** (nhận diện khuôn mặt): đặt cao hơn (~1.2–1.5m), hướng về cửa sổ tài xế.
-    - **Màn hình OLED_2:** hiển thị thông tin cho tài xế.
-    - **Buzzer_2:** phát tín hiệu âm thanh khi cần.
-    - **Barrier + Servo motor:** điều khiển thanh chắn ra vào.
+- **AI Model (local hoặc cloud)**:
 
-### Sơ đồ bố trí thiết bị
-![Sơ đồ đề xuất bố trí thiết bị](images/parking.png){ width=100% .center }
+    - Nhận hình ảnh đầu vào từ ESP32-CAM.
+    - Thực hiện xử lý nhận dạng khuôn mặt và biển số xe.
+    - Trả về kết quả nhận diện (ID khuôn mặt, chuỗi biển số).
+- **Backend Django**:
+
+    - Nhận kết quả từ mô hình AI.
+    - Kiểm tra tính hợp lệ và đối chiếu với dữ liệu đã lưu (đối với trường hợp xe ra).
+    - Gửi lệnh điều khiển thiết bị (servo, buzzer, OLED).
+    - Giao tiếp với Dashboard thông qua API để hiển thị thông tin trạng thái, nhật ký hệ thống.
+    - Lưu dữ liệu tạm thời hoặc đồng bộ dữ liệu với hệ thống lưu trữ (Firebase/ThingsBoard).
+
+### Thiết bị điều khiển - phản hồi (Output Layer)
+
+- **Servo (Barrier):** Tự động mở/đóng barrier cho xe ra vào sau khi xác thực.
+- **OLED Display:** Hiển thị thông tin thời gian thực như số ô trống còn lại, lỗi nhận diện, cảnh báo...
+- **Buzzer:** Phát âm báo tùy vào trạng thái: thành công, cảnh báo nhẹ, hoặc vi phạm.
+- **Dashboard (giao diện web cho Admin):**
+
+    - Hiển thị trạng thái thiết bị và số liệu thời gian thực.
+    - Cho phép admin xem nhật ký vào/ra, giám sát trạng thái các camera và thiết bị IoT.
+    - Tương tác trực tiếp với Backend qua các API.
+
+### Nền tảng lưu trữ và giám sát
+
+- **Firebase hoặc ThingsBoard**:
+
+    - Lưu trữ dữ liệu nhật ký hệ thống (log), trạng thái thiết bị, và thông tin người dùng.
+    - Hỗ trợ hiển thị biểu đồ, số liệu và cảnh báo qua giao diện quản lý.
+
+Tổng thể, hệ thống hoạt động theo nguyên tắc nhận diện kết hợp (biển số và khuôn mặt) nhằm đảm bảo độ chính xác và an toàn cao trong việc kiểm soát ra vào tại các khu vực như bãi xe, cổng tòa nhà, v.v.
+
+![Sơ đồ kiến trúc hệ thống](images/architecture.png){ width=90% .center }
 
 ## Luồng hoạt động chính của hệ thống
 
