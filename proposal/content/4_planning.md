@@ -27,15 +27,17 @@
 
 | **Tên thiết bị** | **Số lượng** | **Đơn giá** | **Thành tiền** |
 |----------------------|:------:|:---------:|:---------:|
-| AI Thinker ESP32-CAM | 4               | 165,000        | 660,000        |
-| ESP32 DevKit V1 (CP2102, Type-C)         | 2               | 97,000         | 194,000        |
-| Màn hình OLED 0.96 inch                  | 2               | 55,000         | 110,000        |
-| Servo motor MG90S                        | 2               | 37,000         | 74,000         |
-| Buzzer                                | 2               | 5,000          | 10,000         |
-| Module nguồn MB102                       | 2               | 17,000         | 34,000         |
-| Breadboard                 | 2               | 17,000         | 34,000         |
-| Dây jumper                      | 40 sợi   | 66,000         | 66,000      |
-| Đế Nạp ESP32-CAM                      | 4   | 30,000         | 120,000        |
-| Pin Sạc Dự Phòng                | 4               | 245,000         | 980,000        |
-|Vật tư lắp đặt, khung mô hình| - | - |200,000 |
-| **Tổng chi phí** | | | **2,482,000** |
+| **AI Thinker ESP32-CAM**                     | 4               | 165,000        | 660,000 |
+| **ESP32 DevKit V1 (CP2102, Type-C)**         | 1               | 97,000         | 97,000 |
+| **Màn hình OLED 0.96 inch**                  | 2               | 55,000         | 110,000 |
+| **Servo motor MG90S**                        | 2               | 37,000         | 74,000 |
+| **Buzzer**                                | 2               | 5,000          | 10,000 |
+| **Adapter 5V - 3A**                       | 1               | 52,000         | 52,000 |
+| **Bộ chia nguồn DC male**                       | 1               | 26,000         | 26,000 |
+| **Jack DC cái có dây 5.5x2.1mm**                       | 5               | 3,000         | 15,000 |
+| **Breadboard**                 | 1               | 17,000         | 17,000 |
+| **Dây jumper**                      | 40 sợi/loại   | 66,000         | 66,000 |
+| **Đế Nạp ESP32-CAM**                      | 1   | 30,000         | 30,000 |
+| **Module chuyển mạch I2C**                      | 1   | 33,000         | 33,000 |
+| **Chi phí lắp đặt, khung mô hình** | - | 200,000 | 200,000 |
+| **Tổng chi phí** | | | **1,390,000** |
