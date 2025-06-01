@@ -1,13 +1,13 @@
 # Kiến trúc phần mềm
 
-Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm các thành phần chính: thiết bị đầu vào, tầng xử lý trung tâm, và tầng điều khiển - phản hồi.
+Hệ thống được thiết kế bao gồm các thành phần chính: thiết bị đầu vào, phần xử lý trung tâm, và thiết bị điều khiển - phản hồi.
 
-## Thiết bị đầu vào (Input Layer)
+## Thiết bị đầu vào (Input)
 
 - Người dùng tương tác trực tiếp với hệ thống thông qua camera.
 - Camera OV2640 tích hợp trên ESP32-CAM: Ghi nhận hình ảnh đầu vào (biển số và khuôn mặt).
 
-## Tầng xử lý trung tâm (Processing Layer)
+## Xử lý trung tâm (Processing)
 
 - **AI Model tích hợp tại ESP32-CAM**:
   - **Nhận diện khuôn mặt**
@@ -32,7 +32,7 @@ Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm
   - Điều phối hoạt động của hệ thống.
   - Lưu trữ/truy xuất dữ liệu trạng thái và nhật ký hệ thống lên **Firebase**.
 
-## Thiết bị điều khiển - phản hồi (Output Layer)
+## Thiết bị điều khiển - phản hồi (Output)
 
 - **Thiết bị IoT** gồm:
   - **Servo (Barrier):** mở/đóng rào chắn tự động.
@@ -53,5 +53,7 @@ Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm
 
 - **Cloudinary**:
   - Dùng để lưu trữ ảnh chụp từ ESP32-CAM gửi đến và truy xuất nhanh bằng URL.
+
+\pagebreak
 
 ![Sơ đồ kiến trúc hệ thống](images/aiot_system.png){ width=100% .center }
