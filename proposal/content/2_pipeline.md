@@ -1,31 +1,35 @@
 # Kiến trúc phần mềm
 
-Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm các thành phần chính: thiết bị đầu vào (người dùng và camera ESP32-CAM), tầng xử lý trung tâm (AI model, ESP32 và Django backend), và tầng điều khiển - phản hồi (thiết bị IoT, Dashboard và lưu trữ).
+Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm các thành phần chính: thiết bị đầu vào, tầng xử lý trung tâm, và tầng điều khiển - phản hồi.
 
 ## Thiết bị đầu vào (Input Layer)
 
-- Người dùng (User) tương tác trực tiếp với hệ thống thông qua camera.
-- **ESP32-CAM**:
-  - Ghi nhận hình ảnh đầu vào (biển số hoặc khuôn mặt).
-  - Gửi hình ảnh tới **mô hình AI** để xử lý nhận diện.
+- Người dùng tương tác trực tiếp với hệ thống thông qua camera.
+- Camera OV2640 tích hợp trên ESP32-CAM: Ghi nhận hình ảnh đầu vào (biển số và khuôn mặt).
 
 ## Tầng xử lý trung tâm (Processing Layer)
 
-- **AI Model (cục bộ hoặc cloud)**:
-  - Tiếp nhận hình ảnh từ ESP32-CAM.
-  - Thực hiện nhận diện khuôn mặt hoặc biển số xe.
-  - Gửi kết quả (hoặc đường dẫn ảnh nếu có dùng Cloudinary) về cho backend.
-  - Có thể tải ảnh lên **Cloudinary**, nhận lại URL ảnh phục vụ lưu trữ/hiển thị.
+- **AI Model tích hợp tại ESP32-CAM**:
+  - **Nhận diện khuôn mặt**
+    - **Phát hiện khuôn mặt**: Sử dụng mô hình **YOLOv6** để phát hiện vùng chứa khuôn mặt (bounding box) trong ảnh. Mô hình có tốc độ nhanh, độ chính xác cao, phù hợp xử lý ảnh thời gian thực.
 
-- **ESP32 (vi điều khiển trung gian)**:
-  - Nhận kết quả xử lý từ backend Django.
+    - **Nhận diện khuôn mặt**: Dựa trên các vector đặc trưng được tạo bởi mô hình **FaceNet**, so sánh với database để xác định danh tính.
+
+  - **Nhận diện biển số xe**
+    - **Phát hiện biển số xe**: Sử dụng mô hình **YOLOv8** để phát hiện vùng chứa biển số xe trong ảnh.
+    - **Nhận dạng ký tự biển số**: Cắt vùng biển số từ ảnh dựa trên kết quả phát hiện, áp dụng thuật toán nhận dạng ký tự **Tesseract OCR** để trích xuất chuỗi ký tự.
+  
+  - ESP32-CAM gửi hình ảnh chụp được lên **Cloudinary**, nhận lại URL ảnh, gửi gói tin gồm URL ảnh và kết quả xử lý về cho ESP32 trung tâm.
+
+- **ESP32 (vi điều khiển trung tâm)**:
+  - Nhận gói tin từ ESP32-CAM.
+  - Phản hồi dữ liệu về Firebase.
   - Truyền dữ liệu đến các thiết bị IoT điều khiển.
-  - Phản hồi dữ liệu cảm biến và trạng thái thiết bị về cho backend.
 
 - **Backend Django**:
   - Giao tiếp với Dashboard qua API.
-  - Nhận dữ liệu nhận diện từ AI model.
-  - Điều phối hoạt động của hệ thống (mở barrier, phát âm báo, hiển thị OLED...).
+  - Nhận dữ liệu nhận diện từ Firebase.
+  - Điều phối hoạt động của hệ thống.
   - Lưu trữ/truy xuất dữ liệu trạng thái và nhật ký hệ thống lên **Firebase**.
 
 ## Thiết bị điều khiển - phản hồi (Output Layer)
@@ -36,6 +40,7 @@ Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm
   - **Buzzer:** cảnh báo âm thanh cho các trạng thái khác nhau.
 
 - **Dashboard (giao diện quản trị cho Admin):**
+  - Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dựng giao diện thân thiện, dễ sử dụng. 
   - Giao tiếp với backend qua API.
   - Hiển thị dữ liệu thời gian thực và lịch sử ra vào.
   - Cho phép admin giám sát toàn bộ hệ thống và các thiết bị.
@@ -47,10 +52,6 @@ Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm
   - Hỗ trợ đồng bộ dữ liệu và hiển thị dashboard.
 
 - **Cloudinary**:
-  - Dùng để lưu trữ ảnh chụp từ ESP32-CAM nếu cần gửi đi và truy xuất nhanh bằng URL.
-
-Hệ thống vận hành dựa trên luồng dữ liệu: **User → ESP32-CAM → AI Model → Django Backend → ESP32 → IoT Device**, kết hợp với giao diện **Dashboard** cho quản trị và các nền tảng lưu trữ giúp theo dõi, điều khiển và phân tích hoạt động một cách hiệu quả và an toàn.
-
-\pagebreak
+  - Dùng để lưu trữ ảnh chụp từ ESP32-CAM gửi đến và truy xuất nhanh bằng URL.
 
 ![Sơ đồ kiến trúc hệ thống](images/aiot_system.png){ width=100% .center }

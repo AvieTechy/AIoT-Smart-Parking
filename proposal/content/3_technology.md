@@ -1,10 +1,8 @@
-# Công nghệ
+# Hệ thống phần cứng
 
-## Công nghệ sử dụng
+## Chi tiết thiết bị
 
-### Hệ thống phần cứng
-
-1. **Camera ESP32-CAM (AI Thinker ESP32-CAM)**
+### ESP32-CAM (AI Thinker ESP32-CAM)
 
 ![ESP32-CAM](images/ESP32-CAM.jpg){ height=300px }
 
@@ -49,13 +47,11 @@ ESP32 trung tâm sẽ kết nối chung mạng Wi-Fi với 4 ESP32-CAM, đóng v
 
 - Vì ESP32-CAM không có cổng USB, nên ta cần thiết bị trung gian để nạp code là **Đế Nạp ESP32-CAM**, sau khi nạp ESP32-CAM sẽ chạy độc lập và không mất code khi tắt nguồn. Đây là module chuyển đổi tín hiệu USB và UART, cho phép kết nối giữa máy tính và các thiết bị không có cổng USB trực tiếp như ESP32-CAM.
 
-- Ngoài ra, khi cắm cáp USB từ sạc dự phòng vào đế, ESP32-CAM sẽ được cấp nguồn điện, không cần dây USB-to-dupont.
-
 Lưu ý khi vừa nạp code, ESP32-CAM đang ở chế độ bootloader, cần ấn nút *reset* để chip khởi động lại chế độ chạy bình thường.
 
 Đối với mô hình AI, sau khi train, ta sẽ chuyển sang định dạng nhẹ và export model ra dạng `.c` hoặc `.h` rồi include vào code.
 
-2. **ESP32 trung tâm (ESP32 DevKit V1)**
+### ESP32 trung tâm (ESP32 DevKit V1)
 
 ![ESP32 DevKit V1](images/ESP32.jpg){ height=300px }
 
@@ -72,7 +68,7 @@ ESP32 trung tâm là **bộ điều khiển chính** của toàn hệ thống, x
 | **GPIO khả dụng** | ~25 chân, đủ dùng cho nhiều ngoại vi đồng thời |  |
 | **Wi-Fi / Bluetooth** | Tích hợp sẵn, dùng được ở chế độ Station và Access Point | Với ESP32 và 4 ESP32-CAM, ta sẽ dùng chế độ Station, nghĩa là cùng kết nối wifi có sẵn |
 
-3. **Breadboard**
+### Breadboard
 
 Là bảng mạch kết nối không cần hàn, được sử dụng để phân phối nguồn điện và kết nối các thiết bị với nhau.
 
@@ -87,7 +83,7 @@ Trong hệ thống này, breadboard sẽ được cấp nguồn trực tiếp t�
 | **Female-Female** | Hai đầu lỗ | Dùng để **nối giữa 2 thiết bị đều có chân đực**, ví dụ **ESP32-CAM và FTDI**, hoặc giữa **module logic với module khác** |
 
 
-4. **Màn hình OLED**
+### Màn hình OLED
 
 Là màn hình đơn sắc kích thước 0.96 inch, giao tiếp bằng chuẩn **I2C (SDA, SCL)** với ESP32 trung tâm (thường là GPIO21 và GPIO22). Trong hệ thống này ta sử dụng màn hình OLED với IC điều khiển SSD1306, điện áp hoạt động 5V (có tương thích 3.3V).
 
@@ -96,7 +92,7 @@ Có chức năng hiển thị:
 - Khi xe vào: Hiển thị số chỗ còn trống, hoặc báo "đã hết chỗ" nếu không còn slot đỗ.
 - Khi xe ra: Hiển thị lời chào hoặc hiển thị lỗi nếu quá trình nhận diện không hợp lệ.
 
-5. **Buzzer**
+### Buzzer
 
 Sử dụng **2 buzzer loại passive 5V**, mỗi chiếc được điều khiển bởi ESP32 trung tâm thông qua chân GPIO.
 
@@ -109,7 +105,7 @@ Giúp người dùng **phân biệt ngữ cảnh thông qua loại âm phát ra*
 
 Buzzer passive hoạt động ổn định ở **điện áp 5V**, được cấp nguồn từ breadboard thông qua module MB102, và điều khiển bằng tín hiệu logic 3.3V từ ESP32 mà không cần mạch khuếch đại.
 
-6. **Servo motor MG90S**
+### Servo motor MG90S
 
 **MG90S** là một loại **servo mini** với **moment xoắn**, có cấu trúc **bánh răng kim loại**, bền hơn và chịu lực tốt hơn, phù hợp để điều khiển cơ cấu vật lý như **thanh chắn**.
 
@@ -117,33 +113,7 @@ Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **250–
 
 **ESP32 trung tâm điều khiển servo qua tín hiệu PWM** từ một chân GPIO bất kỳ (thường dùng GPIO13 hoặc GPIO14). Tín hiệu PWM xác định góc quay của servo (trong khoảng 0°–180°).
 
-### Ứng dụng AI phân tích hình ảnh
-
-- **Nhận diện khuôn mặt**
-    - **Phát hiện khuôn mặt**: Sử dụng mô hình **YOLOv6** để phát hiện vùng chứa khuôn mặt (bounding box) trong ảnh. Mô hình có tốc độ nhanh, độ chính xác cao, phù hợp xử lý ảnh thời gian thực.
-
-    - **Nhận diện khuôn mặt**: Dựa trên các vector đặc trưng được tạo bởi mô hình **FaceNet**, so sánh với database để xác định danh tính.
-
-
-- **Nhận diện biển số xe**
-    - **Phát hiện biển số xe**: Sử dụng mô hình **YOLOv8** để phát hiện vùng chứa biển số xe trong ảnh.
-    - **Nhận dạng ký tự biển số**: Cắt vùng biển số từ ảnh dựa trên kết quả phát hiện, áp dụng thuật toán nhận dạng ký tự **Tesseract OCR** để trích xuất chuỗi ký tự.
-
-### Giao diện người dùng và quản trị
-
-- **Frontend:**
-Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dựng giao diện thân thiện, dễ sử dụng cho tài xế và quản trị viên.
-
-- **Backend:**
-Sử dụng Django làm framework backend, xử lý các logic nghiệp vụ như xác thực người dùng, quản lý dữ liệu xe và vị trí bãi đỗ, cung cấp API cho frontend và thiết bị IoT kết nối.
- 
-### Nền tảng lưu trữ
-
-- **Firebase:** Dùng để lưu kết quả nhận diện, đường dẫn ảnh và thời gian. Phù hợp lưu dữ liệu dạng JSON để theo dõi, thống kê, hiển thị realtime.
-- **Cloudinary**: Dùng để lưu trữ ảnh chụp từ ESP32-CAM (khuôn mặt, biển số). Sau khi upload, Cloudinary trả về link ảnh, được lưu kèm trong Firebase để truy xuất và hiển thị sau này.
-
-
-## Thiết bị
+## Tổng hợp 
 
 | STT | Tên thiết bị                                 | Số lượng        | Giá/cái | Hình ảnh                               | Nguồn liên kết                                                                                                                                   |
 |--------------|--------------------------------------------------------------------|---------------------------------|--------------------------------------|--------------------------------------------------------|-------------------------------------------------------------|
