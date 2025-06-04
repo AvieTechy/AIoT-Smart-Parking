@@ -57,3 +57,36 @@ Hệ thống được thiết kế bao gồm các thành phần chính: thiết 
 \pagebreak
 
 ![Sơ đồ kiến trúc hệ thống](images/aiot_system.png){ width=100% .center }
+
+## Luồng hoạt động chính của hệ thống
+
+### Entry flow (luồng hoạt động ở cổng vào)
+- ESP32-CAM_1 quét **biển số xe**.
+- ESP32-CAM_2 quét **khuôn mặt tài xế**.
+- Hệ thống xử lý và kiểm tra:
+  - Nếu **cả hai đều nhận diện thành công**:
+    - Map dữ liệu: `face_id` - `license_plate`.
+    - Lưu vào cơ sở dữ liệu tạm thời.
+    - Servo mở barrier cho xe vào.
+    - Buzzer phát âm báo thành công.
+    - Màn hình OLED hiển thị số ô trống hiện tại.
+  - Nếu **không nhận diện được**:
+    - Hiển thị thông báo lỗi trên màn hình OLED.
+    - Buzzer phát cảnh báo nhẹ.
+    - Chờ người dùng điều chỉnh vị trí xe để quét lại.
+
+### Exit flow (luồng hoạt động ở cổng ra)
+- ESP32-CAM_3 quét **biển số xe**.
+- ESP32-CAM_4 quét **khuôn mặt tài xế**.
+- Hệ thống kiểm tra:
+  - Biển số và khuôn mặt có được nhận diện không?
+  - Có khớp với dữ liệu đã lưu khi vào không?
+  - Nếu **có khớp**:
+    - Mở barrier cho xe ra.
+    - Buzzer phát âm báo thành công.
+    - Xóa dữ liệu mapping khỏi hệ thống.
+    - Cập nhật số lượng ô trống trên màn hình OLED ở cổng vào.
+  - Nếu **không khớp**:
+    - Barrier không mở.
+    - Buzzer phát âm báo nguy hiểm để cảnh báo vi phạm.
+    - Màn hình OLED hiển thị thông tin lỗi.
