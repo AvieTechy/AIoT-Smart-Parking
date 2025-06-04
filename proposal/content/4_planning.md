@@ -9,7 +9,7 @@
 | | | Thu thập dữ liệu, huấn luyện mô hình, triển khai xử lý ảnh |
 | Võ Lê Việt Tú | Phụ trách IoT – Cảm biến và cloud | Kết nối cảm biến, lập trình ESP32, gửi dữ liệu lên Firebase/ThingsBoard |
 | Trần Thị Cát Tường | Thiết kế phần cứng – Mạch, cảm biến | Lắp ráp hệ thống, bố trí camera và sensor thực tế |
-| Lưu Thanh Thuý | Giao diện & báo cáo | Thiết kế dashboard, lập trình hiển thị và làm tài liệu |
+| Lưu Thanh Thuý | Phần mềm quản lý & báo cáo | Thiết kế dashboard, lập trình hiển thị và làm tài liệu |
 
 ## Timeline
 
@@ -22,6 +22,8 @@
 | 9–10 | Tích hợp toàn hệ thống: AI + IoT + giao diện |
 | 11 | Chạy thử, hiệu chỉnh, test toàn bộ quy trình thực tế |
 | 12 | Viết báo cáo, chuẩn bị slide thuyết trình, hoàn thiện demo |
+
+Cụ thể, xem timeline dạng [Gantt Chart](https://docs.google.com/spreadsheets/d/1FWV0xb-8idRwTd4VWHoW-UJOVkOGjidVqAgJGw7YVfk/edit?gid=1115838130#gid=1115838130) tại đây
 
 ## Chi phí thực hiện (chi phí thiết bị, chi phí làm)
 
