@@ -1,6 +1,6 @@
 # Giới thiệu
 
-## Bối cảnh và Tính cấp thiết
+## Bối cảnh 
 
 Trong bối cảnh đô thị hóa diễn ra mạnh mẽ, việc quản lý hiệu quả các bãi đỗ xe tại các khu vực tập trung đông người như chung cư, trường học, và tòa nhà văn phòng ngày càng trở nên cấp thiết. Hiện nay, nhiều bãi đỗ xe đã ứng dụng công nghệ thẻ từ (RFID) và phần mềm quản lý cơ bản, tuy nhiên, các giải pháp này thường gặp phải những hạn chế đáng kể:
 
