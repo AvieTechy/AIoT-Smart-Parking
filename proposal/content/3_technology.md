@@ -1,3 +1,5 @@
+\pagebreak
+
 # Hệ thống phần cứng
 
 ## Chi tiết thiết bị
