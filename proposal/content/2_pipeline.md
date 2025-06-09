@@ -2,6 +2,9 @@
 
 Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm các thành phần chính: tầng thiết bị đầu vào, tầng xử lý trung tâm, và tầng điều khiển - phản hồi.
 
+
+![Sơ đồ kiến trúc hệ thống](images/aiot_system.png){ width=100% .center }
+
 ## Thiết bị đầu vào (Input Layer)
 
 - Người dùng tương tác trực tiếp với hệ thống thông qua camera.
@@ -15,49 +18,45 @@ Tầng này chịu trách nhiệm xử lý dữ liệu từ thiết bị đầu 
 
 Hệ thống sử dụng các mô hình AI chuyên biệt cho từng tác vụ, được tóm tắt trong bảng sau:
 
-| Tác vụ AI                      | Tên mô hình sử dụng                 | Mục đích                                                              | Thiết bị triển khai |
-| :----------------------------- | :----------------------------------- | :--------------------------------------------------------------------- | :------------------ |
-| Phát hiện mặt người (có/không) | Ultralight-FD / Haar Cascade / TFLite model | Kiểm tra có người trong ảnh để kích hoạt chụp ảnh khuôn mặt & biển số | ESP32-CAM           |
-| Phát hiện khuôn mặt            | YOLOv6 hoặc YOLOv8                   | Xác định vị trí khuôn mặt trong ảnh (bounding box)                     | Server (Django backend) |
-| Nhận diện (so khớp) khuôn mặt   | FaceNet                              | Trích vector đặc trưng và so sánh với database người dùng               | Server (Django backend) |
-| Phát hiện biển số xe           | YOLOv8                               | Xác định vùng chứa biển số trong ảnh                                   | Server (Django backend) |
-| Nhận dạng ký tự biển số (OCR)  | Tesseract OCR                        | Trích xuất chuỗi ký tự từ vùng ảnh biển số                             | Server (Django backend) |
+| Tác vụ AI                               | Mô hình / API sử dụng                               | Mục đích                                                                 | Thiết bị triển khai                     |
+| :-------------------------------------- | :-------------------------------------------------- | :---------------------------------------------------------------------- | :-------------------------------------- |
+| Phát hiện khuôn mặt (có/không + bounding box) | face_detection – mô hình nhúng do ESP-WHO cung cấp | Xác định có khuôn mặt trong ảnh và trả về bounding box để chụp ảnh       | ESP32-CAM (chạy trực tiếp trên thiết bị) |
+| Nhận diện khuôn mặt (face matching)      | MobileFaceNet                                       | Trích xuất vector đặc trưng và so khớp với cơ sở dữ liệu người dùng      | Server (Django backend)                 |
+| Nhận dạng ký tự biển số (OCR)           | Plate Recognizer API (REST API)                     | Gửi ảnh biển số lên server API và nhận lại chuỗi ký tự đã nhận dạng | Server (Django backend)                 |
 
-**Chi tiết các mô hình:**
+Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị nhúng và backend, để thực hiện hai nhiệm vụ chính: nhận diện khuôn mặt và nhận dạng biển số xe. Cụ thể:
 
+-   **Phát hiện khuôn mặt:**
+    Mô hình `face_detection` từ thư viện ESP-WHO được chạy trực tiếp trên ESP32-CAM. Mô hình này có khả năng phát hiện nhanh khuôn mặt và trả về bounding box, giúp thiết bị xác định thời điểm chụp và gửi ảnh về server.
 -   **Nhận diện khuôn mặt:**
-    -   **Phát hiện khuôn mặt:** Mô hình **YOLOv6** (hoặc YOLOv8) được sử dụng để xác định vùng chứa khuôn mặt (bounding box) trong ảnh. Ưu điểm của mô hình này là tốc độ nhanh và độ chính xác cao, phù hợp cho việc xử lý ảnh trong thời gian thực.
-    -   **Nhận diện (so khớp) khuôn mặt:** Sau khi phát hiện, mô hình **FaceNet** được dùng để trích xuất vector đặc trưng từ khuôn mặt. Vector này sau đó được so sánh với cơ sở dữ liệu người dùng đã đăng ký để xác định danh tính.
+    Server sử dụng mô hình MobileFaceNet để trích xuất vector đặc trưng từ ảnh khuôn mặt và so sánh với cơ sở dữ liệu người dùng đã đăng ký.
+-   **Nhận dạng biển số xe:**
+    Hệ thống sử dụng Plate Recognizer API để nhận diện chuỗi ký tự từ ảnh biển số xe. Ảnh được gửi từ server lên API và trả về kết quả nhận dạng dưới dạng văn bản.
 
--   **Nhận diện biển số xe:**
-    -   **Phát hiện biển số xe:** Mô hình **YOLOv8** được triển khai để khoanh vùng vị trí của biển số xe trong ảnh.
-    -   **Nhận dạng ký tự biển số (OCR):** Vùng ảnh chứa biển số xe sau khi được cắt ra sẽ được xử lý bởi **Tesseract OCR** để trích xuất chuỗi ký tự trên biển số.
+### Luồng xử lý dữ liệu và các thành phần chính
 
-### Luồng xử lý dữ liệu và các thành phần khác
-
-1.  **ESP32-CAM (Thiết bị ghi nhận):**
-    -   Chụp ảnh đầu vào.
-    -   Thực hiện tác vụ phát hiện có người trong ảnh (sử dụng Ultralight-FD/Haar Cascade/TFLite model).
-    -   Nếu phát hiện có người, ESP32-CAM gửi hình ảnh đã chụp lên **Cloudinary**.
-    -   Nhận lại URL của ảnh từ Cloudinary.
-    -   Gửi gói tin chứa URL ảnh này đến ESP32 trung tâm.
-
-2.  **Server (Django Backend):**
-    -   Nhận yêu cầu xử lý ảnh (thông qua URL từ Cloudinary) từ ESP32 trung tâm hoặc trực tiếp từ các luồng khác.
-    -   Thực hiện các tác vụ AI nặng:
-        -   Phát hiện khuôn mặt (YOLOv6/YOLOv8).
-        -   Nhận diện khuôn mặt (FaceNet).
-        -   Phát hiện biển số xe (YOLOv8).
-        -   Nhận dạng ký tự biển số (Tesseract OCR).
-    -   Gửi kết quả nhận diện (danh tính, biển số xe) về cho ESP32 trung tâm và lưu trữ vào **Firebase**.
-    -   Cung cấp API cho Dashboard quản trị để theo dõi và quản lý hệ thống.
-    -   Lưu trữ/truy xuất dữ liệu trạng thái và nhật ký hệ thống lên **Firebase**.
-
-3.  **ESP32 (Vi điều khiển trung tâm):**
-    -   Nhận gói tin (URL ảnh) từ ESP32-CAM.
-    -   Yêu cầu Server xử lý ảnh và nhận kết quả nhận diện.
-    -   Gửi kết quả xử lý (ví dụ: thông tin người dùng, trạng thái hợp lệ/không hợp lệ) lên **Firebase**.
-    -   Truyền tín hiệu điều khiển đến các thiết bị IoT ở tầng Output (ví dụ: mở barrier, hiển thị thông tin lên OLED).
+1.  **ESP32-CAM (Thiết bị ghi nhận hình ảnh):**
+    *   Chụp ảnh từ camera tích hợp.
+    *   Chạy mô hình `face_detection` (ESP-WHO) để kiểm tra có khuôn mặt hay không.
+    *   Nếu có mặt người, ảnh sẽ được gửi lên Cloudinary, sau đó nhận lại URL ảnh.
+    *   Gửi gói dữ liệu chứa URL ảnh và metadata (thời gian, loại ảnh, thiết bị…) lên Firebase.
+2.  **Server Backend (FastAPI):**
+    *   Theo dõi hoặc được kích hoạt từ sự kiện mới trên Firebase.
+    *   Đọc URL ảnh từ Firebase và tiến hành xử lý:
+        *   **MobileFaceNet:** trích xuất embedding và xác định danh tính người dùng.
+        *   **Plate Recognizer API:** nhận diện chuỗi ký tự biển số xe từ ảnh.
+    *   Ghi kết quả trả về vào Firebase: gồm thông tin người dùng, biển số xe, trạng thái xác minh (hợp lệ/không hợp lệ), thời gian xử lý, v.v.
+3.  **ESP32 (Thiết bị điều phối trung tâm):**
+    *   Theo dõi kết quả từ Firebase.
+    *   Khi có kết quả tương ứng với ảnh mình đã gửi, ESP32:
+        *   Truy xuất kết quả nhận diện.
+        *   Điều khiển thiết bị đầu ra (mở barrier, hiển thị OLED, còi, v.v.).
+        *   Ghi lại trạng thái hoạt động (đã xử lý xong) nếu cần.
+4.  **Dashboard quản trị (ReactJS):**
+    *   Lấy dữ liệu trực tiếp từ Firebase để hiển thị:
+        *   Danh sách người vào/ra
+        *   Ảnh chụp, biển số, thời gian
+        *   Lịch sử, trạng thái, báo cáo thống kê
 
 ## Thiết bị điều khiển - phản hồi (Output Layer)
 
@@ -80,7 +79,5 @@ Hệ thống sử dụng các mô hình AI chuyên biệt cho từng tác vụ, 
 
 - **Cloudinary**:
   - Dùng để lưu trữ ảnh chụp từ ESP32-CAM gửi đến và truy xuất nhanh bằng URL.
-
-![Sơ đồ kiến trúc hệ thống](images/aiot_system.png){ width=100% .center }
 
 \pagebreak

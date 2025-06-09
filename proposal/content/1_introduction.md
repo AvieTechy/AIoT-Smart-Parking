@@ -1,6 +1,6 @@
 # Giới thiệu
 
-## Bối cảnh 
+## Bối cảnh
 
 Trong bối cảnh đô thị hóa diễn ra mạnh mẽ, việc quản lý hiệu quả các bãi đỗ xe tại các khu vực tập trung đông người như chung cư, trường học, và tòa nhà văn phòng ngày càng trở nên cấp thiết. Hiện nay, nhiều bãi đỗ xe đã ứng dụng công nghệ thẻ từ (RFID) và phần mềm quản lý cơ bản, tuy nhiên, các giải pháp này thường gặp phải những hạn chế đáng kể:
 
@@ -18,14 +18,14 @@ Những hạn chế này không chỉ làm giảm hiệu quả quản lý mà c�
 
 Để đạt được mục đích đã đề ra, hệ thống tập trung vào ba nhóm mục tiêu chính. Mỗi mục tiêu được cụ thể hóa bằng các tiêu chí định lượng nhằm đảm bảo khả năng kiểm chứng trong quá trình phát triển và đánh giá hệ thống.
 
-### Nhận diện phương tiện tự động
+### Nhận diện tự động
 
-Xây dựng chức năng nhận diện biển số xe hoạt động ổn định trong điều kiện thực tế.
+Xây dựng chức năng nhận diện gương mặt, biển số xe hoạt động ổn định trong điều kiện thực tế.
 
 **Các tiêu chí đánh giá:**
 
-- Tỷ lệ nhận diện chính xác biển số xe đạt trên 90% trong điều kiện ánh sáng ban ngày.
-- Tỷ lệ nhận diện chính xác biển số xe đạt trên 70% trong điều kiện ánh sáng yếu (ví dụ: buổi tối có đèn chiếu sáng của bãi xe).
+- Tỷ lệ nhận diện chính xác gương mặt và biển số xe đạt trên 80% trong điều kiện ánh sáng ban ngày.
+- Tỷ lệ nhận diện chính xác đạt trên 70% trong điều kiện ánh sáng yếu (ví dụ: buổi tối có đèn chiếu sáng của bãi xe).
 - Hệ thống được kiểm thử trên một tập dữ liệu 6 lượt xe vào/ra khác nhau.
 
 ### Đảm bảo hiệu suất và tính thời gian thực
