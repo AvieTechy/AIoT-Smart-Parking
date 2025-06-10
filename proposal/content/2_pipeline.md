@@ -63,7 +63,6 @@ Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị n
 - **Thiết bị IoT** gồm:
   - **Servo (Barrier):** mở/đóng rào chắn tự động.
   - **OLED Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
-  - **Buzzer:** cảnh báo âm thanh cho các trạng thái khác nhau.
 
 - **Dashboard (giao diện quản trị cho Admin):**
   - Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dựng giao diện thân thiện, dễ sử dụng.
