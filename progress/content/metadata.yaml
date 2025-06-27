@@ -1,36 +1,36 @@
 ---
-# Document Information
-document_name: "SEMINAR DOCUMENT"
-title: "PROGRESS REPORT"
-author: "Seminar Group"
-date: "June 16, 2025"
+# Thông tin tài liệu
+document_name: "TÀI LIỆU ĐỒ ÁN"
+title: "BÁO CÁO TIẾN ĐỘ"
+author: "Nhóm 07"
+date: "16 tháng 6, 2025"
 
-# Team Members
+# Thành viên nhóm
 team_members:
   - name: "Cao Uyển Nhi"
     id: "22127310"
     email: "cunhi22@clc.fitus.edu.vn"
-    role: "Team Lead"
+    role: "Trưởng nhóm"
   - name: "Lưu Thanh Thuý"
     id: "22127410"
     email: "ltthuy22@clc.fitus.edu.vn"
-    role: "Technical Lead"
+    role: "Trưởng nhóm kỹ thuật"
   - name: "Võ Lê Việt Tú"
     id: "22127435"
     email: "vlvtu22@clc.fitus.edu.vn"
-    role: "QA Lead"
+    role: "Trưởng nhóm QA"
   - name: "Trần Thị Cát Tường"
     id: "22127444"
     email: "ttctuong22@clc.fitus.edu.vn"
-    role: "Documentation"
+    role: "Tài liệu"
 
-# Supervisors
+# Người hướng dẫn
 supervisors:
-  - "Teacher: Đỗ Thị Thanh Hà"
-  - "Teacher: Võ Hoài Việt"
+  - "Giáo viên: Đỗ Thị Thanh Hà"
+  - "Giáo viên: Võ Hoài Việt"
 
-# Document Settings
-lang: en-US
+# Cài đặt tài liệu
+lang: vi
 fontsize: 11pt
 linestretch: 1.5
 papersize: a4
@@ -38,15 +38,15 @@ documentclass: report
 classoption:
   - twoside
 
-# Additional Metadata
+# Metadata bổ sung
 keywords:
-  - seminar
-  - planning
-  - technical
-  - group project
-  - collaboration
-subject: "Technical Documentation"
-description: "This document outlines the planning process for a technical seminar."
-classification: "Internal"
-distribution: "Team Members, Supervisors"
+  - hội thảo
+  - kế hoạch
+  - kỹ thuật
+  - dự án nhóm
+  - cộng tác
+subject: "Tài liệu kỹ thuật"
+description: "Tài liệu này trình bày quá trình lập kế hoạch cho một hội thảo kỹ thuật."
+classification: "Nội bộ"
+distribution: "Thành viên nhóm, Người hướng dẫn"
 ---

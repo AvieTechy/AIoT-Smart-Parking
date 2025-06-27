@@ -126,9 +126,9 @@ $endif$
 \begin{center}
 
 % Institution
-{\Large\textsc{Vietnam National University - Ho Chi Minh City}}\\[0.2cm]
-{\Large\textsc{University of Science}}\\[0.2cm]
-{\Large\textsc{Faculty of Information Technology}}\\[1cm]
+{\Large\textsc{Đại học Quốc gia TP.HCM}}\\[0.2cm]
+{\Large\textsc{Trường Đại học Khoa học Tự nhiên}}\\[0.2cm]
+{\Large\textsc{Khoa Công nghệ Thông tin}}\\[1cm]
 
 % Logo
 \includegraphics[width=5.5cm]{./title/logo.png}\\[0cm]
@@ -147,14 +147,14 @@ $if(title)${\huge\bfseries\color{accent} $title$}\\[0.3cm]$endif$
 $if(team_members)$
 \begin{minipage}{\textwidth}
 \begin{center}
-\large\textbf{Team Members}\\[0.3cm]
+\large\textbf{Thành viên}\\[0.3cm]
 
 \setlength{\arrayrulewidth}{0.8pt}
 \setlength{\doublerulesep}{2pt}
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{@{}p{4.5cm}@{}p{3cm}@{}p{5cm}@{}}
 \toprule
-\multicolumn{1}{c}{\textbf{Name}} & \multicolumn{1}{c}{\textbf{ID}} & \multicolumn{1}{c}{\textbf{Email}} \\
+\multicolumn{1}{c}{\textbf{Họ Tên}} & \multicolumn{1}{c}{\textbf{ID}} & \multicolumn{1}{c}{\textbf{Email}} \\
 \midrule
 $for(team_members)$
 \multicolumn{1}{c}{$team_members.name$} & \multicolumn{1}{c}{$team_members.id$} & \multicolumn{1}{c}{$team_members.email$} \\
@@ -169,12 +169,12 @@ $endif$
 $if(supervisors)$
 \begin{minipage}{\textwidth}
 \begin{center}
-\large\textbf{Supervisors}\\[0.3cm]
+\large\textbf{Giáo viên hướng dẫn}\\[0.3cm]
 
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{@{}c@{}}
 \toprule
-\multicolumn{1}{c}{\textbf{Name}} \\
+\multicolumn{1}{c}{\textbf{Họ Tên}} \\
 \midrule
 $for(supervisors)$
 \multicolumn{1}{c}{$supervisors$} \\
