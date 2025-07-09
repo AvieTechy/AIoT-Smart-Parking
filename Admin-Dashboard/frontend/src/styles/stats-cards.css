@@ -1,0 +1,66 @@
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.15s ease-in-out;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+}
+
+.stats-card-content {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stats-icon {
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.current-vehicles .stats-icon {
+  background: #3b82f6;
+}
+
+.total-entries .stats-icon {
+  background: #10b981;
+}
+
+.total-exits .stats-icon {
+  background: #f59e0b;
+}
+
+.occupancy-rate .stats-icon {
+  background: #8b5cf6;
+}
+
+.stats-info h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.stats-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+@media (max-width: 768px) {
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+}
