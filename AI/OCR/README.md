@@ -4,12 +4,12 @@
 
 ## Tính năng
 
-- ✅ Upload ảnh qua giao diện web đơn giản
-- ✅ Nhận diện biển số xe tự động
-- ✅ Hiển thị kết quả với độ tin cậy
-- ✅ Giao diện đẹp và responsive
-- ✅ Hỗ trợ drag & drop
-- ✅ Xử lý lỗi toàn diện
+- Upload ảnh qua giao diện web đơn giản
+- Nhận diện biển số xe tự động
+- Hiển thị kết quả với độ tin cậy
+- Giao diện đẹp và responsive
+- Hỗ trợ drag & drop
+- Xử lý lỗi toàn diện
 
 ## Cài đặt
 
