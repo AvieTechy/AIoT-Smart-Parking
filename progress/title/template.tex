@@ -1,0 +1,210 @@
+% Minimalist Technical Cover Page Template for Pandoc
+% Compatible with Pandoc's LaTeX engine
+
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+% Font settings
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$endif$
+
+% Use unicode characters
+\usepackage{ifxetex,ifluatex}
+\usepackage{fontspec}
+
+% Math packages for symbols (including checkboxes)
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Graphics and colors
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\definecolor{accent}{RGB}{70, 130, 180}  % Light blue color (Steel Blue)
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{lightblue}{RGB}{173, 216, 230}  % Light blue for table headers
+
+% Image handling - explicitly add all possible paths for better image resolution
+\graphicspath{{./}{./content/}{./content/images/}{./images/}{../images/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
+
+% Better figure handling for Markdown images
+\usepackage{float}
+\usepackage{caption}
+\floatplacement{figure}{H} % Keep figures where they appear in the text
+
+% Add adjustbox for better image handling
+\usepackage{adjustbox}
+
+% Adjust how Pandoc converts Markdown images to LaTeX
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% Define pandocbounded command that Pandoc uses for images
+\newcommand{\pandocbounded}[1]{#1}
+
+% Ensure captions are styled properly
+\captionsetup{
+  format=plain,
+  labelformat=default,
+  labelsep=period,
+  justification=centering
+}
+
+% Tables and layout
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage[margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{calc}
+
+% Set table spacing
+\renewcommand{\arraystretch}{1.4}
+\newcommand{\rounded}[1]{\textbf{\textcolor{white}{#1}}}
+
+% Custom title formatting
+\newcommand{\customtitle}[1]{\begin{center}\Large\bfseries\color{accent}#1\end{center}}
+\newcommand{\customauthor}[1]{\begin{center}\large #1\end{center}}
+\newcommand{\customdate}[1]{\begin{center}\large #1\end{center}}
+
+% Better table handling
+\usepackage{float}
+\floatstyle{ruled}
+\restylefloat{table}
+
+% Fix for longtable
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small\renewcommand{\arraystretch}{1.2}}
+
+% Prevent vertical stretching of content
+\raggedbottom
+
+% Better page breaking
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Better control for pagebreak
+\usepackage{needspace}
+\newcommand{\betterbreak}{\needspace{5\baselineskip}\pagebreak}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{$if(title)$$title$$endif$}
+\lhead{$if(document_name)$$document_name$$endif$}
+\cfoot{\thepage}
+
+% Set up hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=$if(colorlinks)$true$else$false$endif$,
+    linkcolor=$if(linkcolor)$$linkcolor$$else$accent$endif$,
+    filecolor=$if(filecolor)$$filecolor$$else$accent$endif$,
+    urlcolor=$if(urlcolor)$$urlcolor$$else$accent$endif$,
+    citecolor=$if(citecolor)$$citecolor$$else$accent$endif$,
+    pdftitle={$if(title)$$title$$endif$},
+    pdfauthor={$if(author)$$author$$endif$},
+    pdfsubject={$if(subject)$$subject$$endif$},
+    pdfkeywords={$if(keywords)$$keywords$$endif$}
+}
+
+% Define Pandoc's tightlist command
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+\begin{center}
+
+% Institution
+{\Large\textsc{Đại học Quốc gia TP.HCM}}\\[0.2cm]
+{\Large\textsc{Trường Đại học Khoa học Tự nhiên}}\\[0.2cm]
+{\Large\textsc{Khoa Công nghệ Thông tin}}\\[1cm]
+
+% Logo
+\includegraphics[width=5.5cm]{./title/logo.png}\\[0cm]
+
+% Document Name (if provided)
+$if(document_name)$
+{\Large\bfseries $document_name$}\\[0.7cm]
+$endif$
+
+% Title
+\rule{\linewidth}{0.5mm}\\[0.6cm]
+$if(title)${\huge\bfseries\color{accent} $title$}\\[0.3cm]$endif$
+\rule{\linewidth}{0.5mm}\\[0.6cm]
+
+% Team members
+$if(team_members)$
+\begin{minipage}{\textwidth}
+\begin{center}
+\large\textbf{Thành viên}\\[0.3cm]
+
+\setlength{\arrayrulewidth}{0.8pt}
+\setlength{\doublerulesep}{2pt}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{@{}p{4.5cm}@{}p{3cm}@{}p{5cm}@{}}
+\toprule
+\multicolumn{1}{c}{\textbf{Họ Tên}} & \multicolumn{1}{c}{\textbf{ID}} & \multicolumn{1}{c}{\textbf{Email}} \\
+\midrule
+$for(team_members)$
+\multicolumn{1}{c}{$team_members.name$} & \multicolumn{1}{c}{$team_members.id$} & \multicolumn{1}{c}{$team_members.email$} \\
+$endfor$
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}\\[0.8cm]
+$endif$
+
+% Supervisors
+$if(supervisors)$
+\begin{minipage}{\textwidth}
+\begin{center}
+\large\textbf{Giáo viên hướng dẫn}\\[0.3cm]
+
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{@{}c@{}}
+\toprule
+\multicolumn{1}{c}{\textbf{Họ Tên}} \\
+\midrule
+$for(supervisors)$
+\multicolumn{1}{c}{$supervisors$} \\
+$endfor$
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}\\[0.8cm]
+$endif$
+
+% Date
+$if(date)${\large $date$}$endif$
+
+\end{center}
+\end{titlepage}
+
+% Table of contents
+$if(toc)$
+{
+$if(colorlinks)$
+\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$accent$endif$}
+$endif$
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+
+% Rest of the document
+$if(body)$
+$body$
+$endif$
+
+\end{document}
