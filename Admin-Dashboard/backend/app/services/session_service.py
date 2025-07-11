@@ -406,4 +406,4 @@ class PlateDetectionService:
         letters = ''.join(random.choices(string.ascii_uppercase, k=2))
         numbers = ''.join(random.choices(string.digits, k=4))
         # return f"{letters}-{numbers}"  # Random format
-        return "VI-7106"
+        return "QX-7018"

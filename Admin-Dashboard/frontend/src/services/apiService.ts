@@ -1,5 +1,8 @@
 const API_BASE_URL = 'http://localhost:8000';
 
+// Import types
+import type { GroupedSession } from '../types/types';
+
 // Session types matching backend models
 export interface Session {
   plateUrl: string;
@@ -204,6 +207,67 @@ class ApiService {
       faceUrl: session.faceUrl,
       gate: session.gate
     };
+  }
+
+  // Group sessions by faceId and plateNumber
+  async getGroupedSessions(): Promise<GroupedSession[]> {
+    try {
+      const [inSessions, outSessions] = await Promise.all([
+        this.getInSessions(),
+        this.getOutSessions()
+      ]);
+
+      const allSessions = [...inSessions, ...outSessions];
+      const grouped = new Map<string, GroupedSession>();
+
+      allSessions.forEach(sessionResponse => {
+        const { session_id, session } = sessionResponse;
+        const faceId = session.faceIndex;
+        const plateNumber = session.plateNumber || 'Detecting...';
+        const key = `${faceId}-${plateNumber}`;
+
+        if (!grouped.has(key)) {
+          grouped.set(key, {
+            faceId,
+            licensePlate: plateNumber,
+            entryTime: null,
+            exitTime: null,
+            status: 'active',
+            faceUrl: session.faceUrl,
+            plateUrl: session.plateUrl
+          });
+        }
+
+        const groupedSession = grouped.get(key)!;
+
+        if (session.gate === 'In') {
+          groupedSession.entryTime = new Date(session.timestamp);
+          groupedSession.entrySessionId = session_id;
+          groupedSession.entryGate = session.gate;
+          // Store entry session images
+          groupedSession.faceUrl = session.faceUrl;
+          groupedSession.plateUrl = session.plateUrl;
+        } else if (session.gate === 'Out') {
+          groupedSession.exitTime = new Date(session.timestamp);
+          groupedSession.exitSessionId = session_id;
+          groupedSession.exitGate = session.gate;
+          groupedSession.status = 'completed';
+          // Store exit session images
+          groupedSession.exitFaceUrl = session.faceUrl;
+          groupedSession.exitPlateUrl = session.plateUrl;
+        }
+      });
+
+      // Convert to array and sort by entry time (newest first)
+      return Array.from(grouped.values()).sort((a, b) => {
+        const timeA = a.entryTime || new Date(0);
+        const timeB = b.entryTime || new Date(0);
+        return timeB.getTime() - timeA.getTime();
+      });
+    } catch (error) {
+      console.error('Error grouping sessions:', error);
+      return [];
+    }
   }
 
   // Real-time polling for new sessions

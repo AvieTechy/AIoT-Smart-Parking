@@ -6,13 +6,14 @@ import VehicleHistory from './VehicleHistory'
 import Statistics from './Statistics'
 import SearchFilters from './SearchFilters'
 import apiService from '../services/apiService'
-import type { Vehicle, DashboardStats, SessionResponse } from '../types/types'
+import type { Vehicle, GroupedSession, DashboardStats } from '../types/types'
 import '../styles/dashboard.css'
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth()
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
-  const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([])
+  const [groupedSessions, setGroupedSessions] = useState<GroupedSession[]>([])
+  const [filteredSessions, setFilteredSessions] = useState<GroupedSession[]>([])
   const [stats, setStats] = useState<DashboardStats>({
     currentVehicles: 0,
     totalEntries: 0,
@@ -31,20 +32,24 @@ const Dashboard: React.FC = () => {
         setLoading(true)
         setError(null)
 
-        // Get sessions and convert to vehicle format
+        // Get sessions and group them
         const [inSessions, outSessions, dashboardStats] = await Promise.all([
           apiService.getInSessions(),
           apiService.getOutSessions(),
           apiService.getDashboardStats()
         ])
 
-        // Convert sessions to vehicles for compatibility
-        const inVehicles = inSessions.map(session => apiService.sessionToVehicle(session))
-        const outVehicles = outSessions.map(session => apiService.sessionToVehicle(session))
+        // Get grouped sessions
+        const grouped = await apiService.getGroupedSessions()
+        
+        // Also keep vehicles for backward compatibility with statistics
+        const inVehicles = inSessions.map((session: any) => apiService.sessionToVehicle(session))
+        const outVehicles = outSessions.map((session: any) => apiService.sessionToVehicle(session))
         const allVehicles = [...inVehicles, ...outVehicles]
 
+        setGroupedSessions(grouped)
+        setFilteredSessions(grouped)
         setVehicles(allVehicles)
-        setFilteredVehicles(allVehicles)
         setStats(dashboardStats)
 
       } catch (err) {
@@ -52,8 +57,9 @@ const Dashboard: React.FC = () => {
         setError('Failed to load dashboard data. Please try again.')
         
         // Fallback to empty data
+        setGroupedSessions([])
+        setFilteredSessions([])
         setVehicles([])
-        setFilteredVehicles([])
         setStats({
           currentVehicles: 0,
           totalEntries: 0,
@@ -91,30 +97,29 @@ const Dashboard: React.FC = () => {
     dateTo?: Date
   }) => {
     try {
-      let filtered = vehicles
+      let filtered = groupedSessions
 
       if (searchParams.licensePlate) {
-        // Search by plate number using API
-        const sessionsWithPlate = await apiService.searchSessionsByPlate(searchParams.licensePlate)
-        const vehiclesWithPlate = sessionsWithPlate.map(session => apiService.sessionToVehicle(session))
-        filtered = vehiclesWithPlate
-      } else {
-        filtered = vehicles
+        filtered = filtered.filter(session => 
+          session.licensePlate.toLowerCase().includes(searchParams.licensePlate!.toLowerCase())
+        )
       }
 
       if (searchParams.dateFrom) {
-        filtered = filtered.filter(v => 
-          v.entryTime >= searchParams.dateFrom!
-        )
+        filtered = filtered.filter(session => {
+          const sessionDate = session.entryTime || session.exitTime
+          return sessionDate && sessionDate >= searchParams.dateFrom!
+        })
       }
 
       if (searchParams.dateTo) {
-        filtered = filtered.filter(v => 
-          v.entryTime <= searchParams.dateTo!
-        )
+        filtered = filtered.filter(session => {
+          const sessionDate = session.entryTime || session.exitTime
+          return sessionDate && sessionDate <= searchParams.dateTo!
+        })
       }
 
-      setFilteredVehicles(filtered)
+      setFilteredSessions(filtered)
     } catch (err) {
       console.error('Search error:', err)
       setError('Failed to search. Please try again.')
@@ -122,7 +127,7 @@ const Dashboard: React.FC = () => {
   }
 
   const clearFilters = () => {
-    setFilteredVehicles(vehicles)
+    setFilteredSessions(groupedSessions)
   }
 
   return (
@@ -170,7 +175,7 @@ const Dashboard: React.FC = () => {
                   {activeTab === 'history' && (
                     <>
                       <SearchFilters onSearch={handleSearch} onClear={clearFilters} />
-                      <VehicleHistory vehicles={filteredVehicles} />
+                      <VehicleHistory sessions={filteredSessions} />
                     </>
                   )}
                   

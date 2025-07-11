@@ -1,19 +1,19 @@
 import React from 'react'
 import { format } from 'date-fns'
 import { Car, Clock, CheckCircle, AlertCircle } from 'lucide-react'
-import type { Vehicle } from '../types/types'
+import type { GroupedSession } from '../types/types'
 import '../styles/vehicle-history.css'
 
 interface VehicleHistoryProps {
-  vehicles: Vehicle[]
+  sessions: GroupedSession[]
 }
 
-const VehicleHistory: React.FC<VehicleHistoryProps> = ({ vehicles }) => {
-  if (vehicles.length === 0) {
+const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions }) => {
+  if (sessions.length === 0) {
     return (
       <div className="no-data">
         <Car size={48} />
-        <p>No vehicles found matching your criteria.</p>
+        <p>No sessions found matching your criteria.</p>
       </div>
     )
   }
@@ -21,38 +21,33 @@ const VehicleHistory: React.FC<VehicleHistoryProps> = ({ vehicles }) => {
   return (
     <div className="vehicle-history">
       <div className="history-header">
-        <h3>Session History (Entry/Exit)</h3>
-        <span className="record-count">{vehicles.length} records</span>
+        <h3>Parking Sessions</h3>
+        <span className="record-count">{sessions.length} sessions</span>
       </div>
       
       <div className="history-table-container">
         <table className="history-table">
           <thead>
             <tr>
-              <th>Session ID</th>
-              <th>License Plate</th>
               <th>Face ID</th>
-              <th>Gate</th>
-              <th>Timestamp</th>
+              <th>License Plate</th>
+              <th>Entry Time</th>
+              <th>Exit Time</th>
               <th>Status</th>
-              <th>Images</th>
+              <th>Entry Images</th>
+              <th>Exit Images</th>
             </tr>
           </thead>
           <tbody>
-            {vehicles.map((vehicle) => {
+            {sessions.map((session, index) => {
+              const isActive = session.status === 'active'
               return (
-                <tr key={vehicle.id}>
-                  <td>{vehicle.id.slice(0, 8)}...</td>
-                  <td className="license-plate">
-                    {vehicle.licensePlate !== 'Detecting...' ? vehicle.licensePlate : (
-                      <span className="detecting">Detecting...</span>
-                    )}
-                  </td>
+                <tr key={`${session.faceId}-${index}`}>
                   <td>
                     <div className="face-id">
-                      {vehicle.faceUrl ? (
+                      {session.faceUrl ? (
                         <img 
-                          src={vehicle.faceUrl} 
+                          src={session.faceUrl} 
                           alt="Face"
                           className="face-thumbnail"
                           onError={(e) => {
@@ -63,41 +58,84 @@ const VehicleHistory: React.FC<VehicleHistoryProps> = ({ vehicles }) => {
                       ) : (
                         <div className="no-image">No Image</div>
                       )}
-                      <span>{vehicle.faceId}</span>
+                      <span>{session.faceId}</span>
                     </div>
                   </td>
-                  <td>
-                    <span className={`gate-badge ${vehicle.gate?.toLowerCase()}`}>
-                      {vehicle.gate || 'Unknown'}
-                    </span>
+                  <td className="license-plate">
+                    {session.licensePlate !== 'N/A' ? session.licensePlate : (
+                      <span className="detecting">Detecting...</span>
+                    )}
                   </td>
                   <td>
-                    <div className="time-info">
-                      <Clock size={14} />
-                      <span>{format(vehicle.entryTime, 'HH:mm:ss dd/MM/yyyy')}</span>
-                    </div>
+                    {session.entryTime ? (
+                      <div className="time-info">
+                        <Clock size={14} />
+                        <span>{format(session.entryTime, 'HH:mm:ss dd/MM/yyyy')}</span>
+                      </div>
+                    ) : (
+                      <span className="no-time">-</span>
+                    )}
                   </td>
                   <td>
-                    <div className={`status-badge ${vehicle.status}`}>
-                      {vehicle.status === 'parked' ? (
+                    {session.exitTime ? (
+                      <div className="time-info">
+                        <Clock size={14} />
+                        <span>{format(session.exitTime, 'HH:mm:ss dd/MM/yyyy')}</span>
+                      </div>
+                    ) : (
+                      <span className="no-time">-</span>
+                    )}
+                  </td>
+                  <td>
+                    <div className={`status-badge ${isActive ? 'active' : 'completed'}`}>
+                      {isActive ? (
                         <AlertCircle size={14} />
                       ) : (
                         <CheckCircle size={14} />
                       )}
-                      <span>{vehicle.status === 'parked' ? 'Active' : 'Completed'}</span>
+                      <span>{isActive ? 'Parked' : 'Completed'}</span>
                     </div>
                   </td>
                   <td>
                     <div className="image-links">
-                      {vehicle.plateUrl && (
-                        <a href={vehicle.plateUrl} target="_blank" rel="noopener noreferrer" className="image-link">
+                      {session.faceUrl && (
+                        <a href={session.faceUrl} target="_blank" rel="noopener noreferrer" className="image-link">
+                          👤 Face
+                        </a>
+                      )}
+                      {session.plateUrl && (
+                        <a href={session.plateUrl} target="_blank" rel="noopener noreferrer" className="image-link">
                           📋 Plate
                         </a>
                       )}
-                      {vehicle.faceUrl && (
-                        <a href={vehicle.faceUrl} target="_blank" rel="noopener noreferrer" className="image-link">
+                      {!session.faceUrl && !session.plateUrl && (
+                        <span className="no-images">No images</span>
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="image-links">
+                      {session.exitFaceUrl && (
+                        <a href={session.exitFaceUrl} target="_blank" rel="noopener noreferrer" className="image-link">
                           👤 Face
                         </a>
+                      )}
+                      {session.exitPlateUrl && (
+                        <a href={session.exitPlateUrl} target="_blank" rel="noopener noreferrer" className="image-link">
+                          📋 Plate
+                        </a>
+                      )}
+                      {session.exitTime && session.exitSessionId && !(session.exitFaceUrl || session.exitPlateUrl) && (
+                        <div className="placeholder-images">
+                          <span className="image-link placeholder">👤 Face (Available)</span>
+                          <span className="image-link placeholder">📋 Plate (Available)</span>
+                        </div>
+                      )}
+                      {!session.exitTime && (
+                        <span className="no-images">Not exited</span>
+                      )}
+                      {session.exitTime && !session.exitSessionId && !(session.exitFaceUrl || session.exitPlateUrl) && (
+                        <span className="no-images">No images</span>
                       )}
                     </div>
                   </td>

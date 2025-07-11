@@ -76,3 +76,22 @@ export interface SearchFilters {
   gate?: 'In' | 'Out'
   status?: 'parked' | 'exited'
 }
+
+// Grouped session interface
+export interface GroupedSession {
+  faceId: string
+  licensePlate: string
+  entryTime: Date | null
+  exitTime: Date | null
+  status: 'active' | 'completed'
+  entrySessionId?: string
+  exitSessionId?: string
+  // Entry session images
+  faceUrl?: string
+  plateUrl?: string
+  // Exit session images
+  exitFaceUrl?: string
+  exitPlateUrl?: string
+  entryGate?: string
+  exitGate?: string
+}
