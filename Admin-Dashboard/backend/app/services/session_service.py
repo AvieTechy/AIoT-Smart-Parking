@@ -6,7 +6,7 @@ from app.db.firestore import get_collection, get_document, get_db
 from app.models.session_model import (
     Session, SessionResponse, SessionCreateRequest, SessionUpdateRequest,
     IsNewSession, MatchingVerify, SessionMap, PlateMap, ParkingSlot,
-    PlateDetectionRequest, FaceMatchingRequest
+    PlateDetectionRequest, FaceMatchingRequest, SessionForOutRequest
 )
 
 class SessionService:
@@ -18,16 +18,10 @@ class SessionService:
         session_id = str(uuid.uuid4())
         
         # For In sessions, automatically detect license plate number
-        # For Out sessions, plate_number should be provided in the request
+        # TODO: Replace with actual AI plate detection service
         plate_number = None
-        if session_data.gate == "In":
-            # TODO: Replace with actual AI plate detection service
-            plate_detection_service = PlateDetectionService()
-            plate_number = plate_detection_service._mock_plate_detection(session_data.plate_url)
-        elif session_data.gate == "Out":
-            # For Out sessions, plate_number should be provided via a separate field
-            # This requires updating SessionCreateRequest model to include plate_number for Out sessions
-            plate_number = getattr(session_data, 'plate_number', None)
+        plate_detection_service = PlateDetectionService()
+        plate_number = plate_detection_service._mock_plate_detection(session_data.plate_url)
         
         session = Session(
             plateUrl=session_data.plate_url,
@@ -36,7 +30,7 @@ class SessionService:
             timestamp=datetime.now().isoformat(),
             isOut=False,
             faceIndex=session_data.face_index,
-            plateNumber=plate_number
+            plateNumber=plate_number  # Detected for In sessions, provided for Out sessions
         )
         
         # Convert to dict for Firestore
@@ -64,6 +58,39 @@ class SessionService:
             print(f"New vehicle entry. Current vehicles in parking: {current_count}")
         elif session_data.gate == "Out":
             print(f"Vehicle exit processed. Current vehicles in parking: {current_count}")
+        
+        return session_id
+    
+    def create_out_session(self, session_data: SessionForOutRequest) -> str:
+        """Create exit session with entry session data"""
+        session_id = str(uuid.uuid4())
+        
+        session = Session(
+            plateUrl=session_data.plate_url,
+            faceUrl=session_data.face_url,
+            gate="Out",
+            timestamp=datetime.now().isoformat(),
+            isOut=False,
+            faceIndex=session_data.face_index,  # From In session
+            plateNumber=session_data.plate_number  # From In session
+        )
+        
+        # Convert to dict for Firestore
+        session_dict = session.model_dump(by_alias=True)
+        
+        # Save to Firestore
+        doc_ref = get_document(self.collection_name, session_id)
+        doc_ref.set(session_dict)
+        
+        # Auto-checkout corresponding In session if exists
+        self._auto_checkout_matching_in_session(session_data.face_index, session_data.plate_number)
+        
+        # Log current vehicle count after checkout
+        current_count = self.get_current_vehicles_count()
+        print(f"Current vehicles in parking: {current_count}")
+        
+        # Update IsNewSession status
+        self._update_new_session_status(session_id)
         
         return session_id
     

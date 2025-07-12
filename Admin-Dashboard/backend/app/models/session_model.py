@@ -60,7 +60,6 @@ class SessionCreateRequest(BaseModel):
     face_url: str = Field(..., alias="faceUrl")
     gate: str = Field(..., description="In or Out")
     face_index: str = Field(..., alias="faceIndex")
-    plate_number: Optional[str] = Field(None, alias="plateNumber", description="Required for Out sessions, detected for In sessions")
 
     class Config:
         populate_by_name = True
@@ -83,6 +82,12 @@ class SessionUpdateRequest(BaseModel):
 
     class Config:
         populate_by_name = True
+
+class SessionForOutRequest(BaseModel):
+    plate_url: str = Field(..., alias="plateUrl")
+    face_url: str = Field(..., alias="faceUrl")
+    face_index: str = Field(..., description="Face index from In session", alias="faceIndex")
+    plate_number: str = Field(..., description="Plate number from In session", alias="plateNumber")
 
 class FaceMatchingRequest(BaseModel):
     exit_session_id: str
