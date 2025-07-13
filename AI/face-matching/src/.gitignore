@@ -1,0 +1,52 @@
+# Environment and Security
+.env
+.env.local
+.env.production
+firebase-key.json
+firebase-adminsdk-*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# AI Models
+models/*.pth
+models/*.pkl
+models/*.h5
+models/weights/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+temp/
+tmp/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+docker/Dockerfile.old*
+docker/docker-compose.old*
+
+# Documentation
+docs/build/
