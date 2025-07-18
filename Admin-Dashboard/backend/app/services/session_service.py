@@ -5,8 +5,7 @@ from google.cloud.firestore import DocumentSnapshot, CollectionReference
 from app.db.firestore import get_collection, get_document, get_db
 from app.models.session_model import (
     Session, SessionResponse, SessionCreateRequest, SessionUpdateRequest,
-    IsNewSession, MatchingVerify, SessionMap, PlateMap, ParkingSlot,
-    PlateDetectionRequest, FaceMatchingRequest, SessionForOutRequest
+    MatchingVerify, SessionMap, PlateMap, ParkingSlot
 )
 
 class SessionService:
@@ -17,12 +16,7 @@ class SessionService:
         """Create new session and return session ID"""
         session_id = str(uuid.uuid4())
         
-        # For In sessions, automatically detect license plate number
-        # TODO: Replace with actual AI plate detection service
-        plate_number = None
-        plate_detection_service = PlateDetectionService()
-        plate_number = plate_detection_service._mock_plate_detection(session_data.plate_url)
-        
+        # Create session with provided data (plate_number is now required)
         session = Session(
             plateUrl=session_data.plate_url,
             faceUrl=session_data.face_url,
@@ -30,7 +24,7 @@ class SessionService:
             timestamp=datetime.now().isoformat(),
             isOut=False,
             faceIndex=session_data.face_index,
-            plateNumber=plate_number  # Detected for In sessions, provided for Out sessions
+            plateNumber=session_data.plate_number  # Now provided in request
         )
         
         # Convert to dict for Firestore
@@ -40,17 +34,13 @@ class SessionService:
         doc_ref = get_document(self.collection_name, session_id)
         doc_ref.set(session_dict)
         
-        # If In session and has plate number, create plate mapping
-        if session_data.gate == "In" and plate_number:
-            plate_map_service = PlateMapService()
-            plate_map_service.create_plate_map(plate_number, session_id)
+        # Create plate mapping for lookup
+        plate_map_service = PlateMapService()
+        plate_map_service.create_plate_map(session_data.plate_number, session_id)
         
         # If Out session, auto-checkout corresponding In session
-        if session_data.gate == "Out" and session_data.face_index and plate_number:
-            self._auto_checkout_matching_in_session(session_data.face_index, plate_number)
-        
-        # Update IsNewSession status
-        self._update_new_session_status(session_id)
+        if session_data.gate == "Out" and session_data.face_index and session_data.plate_number:
+            self._auto_checkout_matching_in_session(session_data.face_index, session_data.plate_number)
         
         # Log current vehicle count
         current_count = self.get_current_vehicles_count()
@@ -58,39 +48,6 @@ class SessionService:
             print(f"New vehicle entry. Current vehicles in parking: {current_count}")
         elif session_data.gate == "Out":
             print(f"Vehicle exit processed. Current vehicles in parking: {current_count}")
-        
-        return session_id
-    
-    def create_out_session(self, session_data: SessionForOutRequest) -> str:
-        """Create exit session with entry session data"""
-        session_id = str(uuid.uuid4())
-        
-        session = Session(
-            plateUrl=session_data.plate_url,
-            faceUrl=session_data.face_url,
-            gate="Out",
-            timestamp=datetime.now().isoformat(),
-            isOut=False,
-            faceIndex=session_data.face_index,  # From In session
-            plateNumber=session_data.plate_number  # From In session
-        )
-        
-        # Convert to dict for Firestore
-        session_dict = session.model_dump(by_alias=True)
-        
-        # Save to Firestore
-        doc_ref = get_document(self.collection_name, session_id)
-        doc_ref.set(session_dict)
-        
-        # Auto-checkout corresponding In session if exists
-        self._auto_checkout_matching_in_session(session_data.face_index, session_data.plate_number)
-        
-        # Log current vehicle count after checkout
-        current_count = self.get_current_vehicles_count()
-        print(f"Current vehicles in parking: {current_count}")
-        
-        # Update IsNewSession status
-        self._update_new_session_status(session_id)
         
         return session_id
     
@@ -119,43 +76,11 @@ class SessionService:
         
         return sessions
     
-    def update_session_out_status(self, session_id: str) -> bool:
-        """Update session checkout status"""
-        doc_ref = get_document(self.collection_name, session_id)
-        doc_ref.update({"isOut": True})
-        return True
-    
     def update_plate_number(self, session_id: str, plate_number: str) -> bool:
         """Update plate number for session"""
         doc_ref = get_document(self.collection_name, session_id)
         doc_ref.update({"plateNumber": plate_number})
         return True
-    
-    def _update_new_session_status(self, session_id: str):
-        """Update new session status"""
-        status_doc = get_document("IsNewSession", "statusDoc")
-        status_doc.set({
-            "status": True,
-            "sessionID": session_id
-        })
-    
-    def get_new_session_status(self) -> Optional[IsNewSession]:
-        """Get new session status"""
-        status_doc = get_document("IsNewSession", "statusDoc")
-        doc = status_doc.get()
-        
-        if doc.exists:
-            data = doc.to_dict()
-            return IsNewSession(**data)
-        return None
-    
-    def clear_new_session_status(self):
-        """Clear new session status"""
-        status_doc = get_document("IsNewSession", "statusDoc")
-        status_doc.set({
-            "status": False,
-            "sessionID": ""
-        })
     
     def _auto_checkout_matching_in_session(self, face_index: str, plate_number: str):
         """Auto-checkout In sessions with matching face_index and plate_number"""
@@ -202,17 +127,6 @@ class SessionService:
             print(f"Error counting current vehicles: {e}")
             return 0
 
-    def process_out_session(self, session_data: SessionCreateRequest) -> str:
-        """Process Out session with auto-checkout logic"""
-        # Create Out session
-        session_id = self.create_session(session_data)
-        
-        # If has face_index and plate_number, check and auto-checkout
-        if session_data.face_index and hasattr(session_data, 'plate_number'):
-            self._auto_checkout_matching_in_session(session_data.face_index, session_data.plate_number)
-        
-        return session_id
-    
     def check_and_update_matching_sessions(self, face_index: str, plate_number: str) -> Dict[str, Any]:
         """Check and update sessions matching with face_index and plate_number"""
         try:
@@ -371,39 +285,3 @@ class MatchingVerifyService:
         doc_ref.set(matching_verify.model_dump(by_alias=True))
         
         return result_id
-
-
-class PlateDetectionService:
-    """Service for license plate detection and processing"""
-    
-    def __init__(self):
-        self.session_service = SessionService()
-        self.plate_map_service = PlateMapService()
-    
-    def detect_and_update_plate(self, session_id: str, plate_url: str) -> str:
-        """Detect plate number from URL and update session"""
-        # TODO: Replace with actual AI plate detection model
-        # This would call your plate detection AI service
-        plate_number = self._mock_plate_detection(plate_url)
-        
-        # Update session with detected plate number
-        self.session_service.update_plate_number(session_id, plate_number)
-        
-        # Create plate mapping for lookup
-        self.plate_map_service.create_plate_map(plate_number, session_id)
-        
-        return plate_number
-    
-    def _mock_plate_detection(self, plate_url: str) -> str:
-        """Mock plate detection - replace with actual AI model"""
-        # TODO: Implement actual plate detection AI logic here
-        # This is a placeholder that should be replaced with:
-        # 1. Load AI model (YOLO, OCR, etc.)
-        # 2. Process image from plate_url
-        # 3. Extract and return plate number
-        import random
-        import string
-        letters = ''.join(random.choices(string.ascii_uppercase, k=2))
-        numbers = ''.join(random.choices(string.digits, k=4))
-        # return f"{letters}-{numbers}"  # Random format
-        return "QX-7018"

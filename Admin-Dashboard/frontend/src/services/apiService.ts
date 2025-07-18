@@ -2,6 +2,7 @@ const API_BASE_URL = 'http://localhost:8000';
 
 // Import types
 import type { GroupedSession } from '../types/types';
+import cacheService from './cacheService';
 
 // Session types matching backend models
 export interface Session {
@@ -35,6 +36,7 @@ export interface SessionMap {
 }
 
 export interface ParkingSlot {
+  slot_id: string;
   location_code: string;
   is_occupied: boolean;
   updated_at: string;
@@ -61,8 +63,14 @@ class ApiService {
     this.baseURL = API_BASE_URL;
   }
 
-  // Session API methods
+  // Session API methods with caching
   async getSessions(gate?: 'In' | 'Out', limit: number = 100): Promise<SessionResponse[]> {
+    const cacheKey = cacheService.createKey('sessions', { gate, limit });
+    const cached = cacheService.get(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
     const params = new URLSearchParams();
     if (gate) params.append('gate', gate);
     params.append('limit', limit.toString());
@@ -71,7 +79,10 @@ class ApiService {
     if (!response.ok) {
       throw new Error('Failed to fetch sessions');
     }
-    return response.json();
+    
+    const data = await response.json();
+    cacheService.set(cacheKey, data, 15); // Cache for 15 seconds
+    return data;
   }
 
   async getSession(sessionId: string): Promise<SessionResponse> {
@@ -90,19 +101,71 @@ class ApiService {
     return this.getSessions('Out', limit);
   }
 
-  // Parking slot API methods
-  async getParkingSlots(): Promise<ParkingSlotResponse[]> {
+  // Parking slot API methods with caching
+  async getParkingSlots(): Promise<ParkingSlot[]> {
+    const cacheKey = 'parking_slots';
+    const cached = cacheService.get(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
     const response = await fetch(`${this.baseURL}/api/parking/slots`);
     if (!response.ok) {
       throw new Error('Failed to fetch parking slots');
     }
-    return response.json();
+    
+    const data = await response.json();
+    cacheService.set(cacheKey, data, 20); // Cache for 20 seconds
+    return data;
   }
 
-  async getAvailableSlots(): Promise<ParkingSlotResponse[]> {
+  async getParkingStats(): Promise<any> {
+    const cacheKey = 'parking_stats';
+    const cached = cacheService.get(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
+    const response = await fetch(`${this.baseURL}/api/parking/stats`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch parking stats');
+    }
+    
+    const data = await response.json();
+    cacheService.set(cacheKey, data, 10); // Cache for 10 seconds
+    return data;
+  }
+
+  async getAvailableSlots(): Promise<ParkingSlot[]> {
+    const cacheKey = 'available_slots';
+    const cached = cacheService.get(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
     const response = await fetch(`${this.baseURL}/api/parking/slots/available`);
     if (!response.ok) {
       throw new Error('Failed to fetch available slots');
+    }
+    
+    const data = await response.json();
+    cacheService.set(cacheKey, data, 15); // Cache for 15 seconds
+    return data;
+  }
+
+  async updateSlotOccupancy(slotId: string, isOccupied: boolean): Promise<any> {
+    const response = await fetch(`${this.baseURL}/api/parking/slots/${slotId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        is_occupied: isOccupied
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to update slot occupancy');
     }
     return response.json();
   }

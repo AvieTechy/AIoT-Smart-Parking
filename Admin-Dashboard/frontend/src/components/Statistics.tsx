@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { Calendar, TrendingUp } from 'lucide-react'
 import { format, startOfHour, startOfDay, startOfWeek, startOfMonth, startOfYear } from 'date-fns'
-import type { Vehicle, StatsPeriod } from '../types/types'
+import type { Vehicle } from '../types/types'
 import '../styles/statistics.css'
 
 interface StatisticsProps {
@@ -16,40 +16,75 @@ const Statistics: React.FC<StatisticsProps> = ({ vehicles }) => {
     const groupedData = new Map<string, { entries: number; exits: number }>()
 
     vehicles.forEach(vehicle => {
-      let key: string
-      let periodStart: Date
+      // Count entry
+      if (vehicle.entryTime) {
+        let key: string
+        let periodStart: Date
 
-      switch (selectedPeriod) {
-        case 'hour':
-          periodStart = startOfHour(vehicle.entryTime)
-          key = format(periodStart, 'HH:mm dd/MM')
-          break
-        case 'day':
-          periodStart = startOfDay(vehicle.entryTime)
-          key = format(periodStart, 'dd/MM/yyyy')
-          break
-        case 'week':
-          periodStart = startOfWeek(vehicle.entryTime)
-          key = format(periodStart, 'dd/MM/yyyy')
-          break
-        case 'month':
-          periodStart = startOfMonth(vehicle.entryTime)
-          key = format(periodStart, 'MM/yyyy')
-          break
-        case 'year':
-          periodStart = startOfYear(vehicle.entryTime)
-          key = format(periodStart, 'yyyy')
-          break
+        switch (selectedPeriod) {
+          case 'hour':
+            periodStart = startOfHour(vehicle.entryTime)
+            key = format(periodStart, 'HH:mm dd/MM')
+            break
+          case 'day':
+            periodStart = startOfDay(vehicle.entryTime)
+            key = format(periodStart, 'dd/MM/yyyy')
+            break
+          case 'week':
+            periodStart = startOfWeek(vehicle.entryTime)
+            key = format(periodStart, 'dd/MM/yyyy')
+            break
+          case 'month':
+            periodStart = startOfMonth(vehicle.entryTime)
+            key = format(periodStart, 'MM/yyyy')
+            break
+          case 'year':
+            periodStart = startOfYear(vehicle.entryTime)
+            key = format(periodStart, 'yyyy')
+            break
+        }
+
+        if (!groupedData.has(key)) {
+          groupedData.set(key, { entries: 0, exits: 0 })
+        }
+
+        const data = groupedData.get(key)!
+        data.entries += 1
       }
 
-      if (!groupedData.has(key)) {
-        groupedData.set(key, { entries: 0, exits: 0 })
-      }
-
-      const data = groupedData.get(key)!
-      data.entries += 1
-
+      // Count exit if exists
       if (vehicle.exitTime) {
+        let key: string
+        let periodStart: Date
+
+        switch (selectedPeriod) {
+          case 'hour':
+            periodStart = startOfHour(vehicle.exitTime)
+            key = format(periodStart, 'HH:mm dd/MM')
+            break
+          case 'day':
+            periodStart = startOfDay(vehicle.exitTime)
+            key = format(periodStart, 'dd/MM/yyyy')
+            break
+          case 'week':
+            periodStart = startOfWeek(vehicle.exitTime)
+            key = format(periodStart, 'dd/MM/yyyy')
+            break
+          case 'month':
+            periodStart = startOfMonth(vehicle.exitTime)
+            key = format(periodStart, 'MM/yyyy')
+            break
+          case 'year':
+            periodStart = startOfYear(vehicle.exitTime)
+            key = format(periodStart, 'yyyy')
+            break
+        }
+
+        if (!groupedData.has(key)) {
+          groupedData.set(key, { entries: 0, exits: 0 })
+        }
+
+        const data = groupedData.get(key)!
         data.exits += 1
       }
     })

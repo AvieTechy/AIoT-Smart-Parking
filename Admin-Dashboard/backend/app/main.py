@@ -4,7 +4,6 @@ from fastapi.responses import JSONResponse
 import os
 from app.api.session_router import router as session_router
 from app.api.parking_router import router as parking_router
-from app.api.processing_router import router as processing_router
 from app.db.firestore import firestore_db
 
 # Create FastAPI app
@@ -26,7 +25,6 @@ app.add_middleware(
 # Include routers
 app.include_router(session_router)
 app.include_router(parking_router)
-app.include_router(processing_router)
 
 @app.get("/")
 async def root():

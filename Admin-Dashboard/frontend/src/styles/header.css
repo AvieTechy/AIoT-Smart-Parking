@@ -3,11 +3,12 @@
   background: white;
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header-content {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -17,7 +18,12 @@
 .header-left h2 {
   color: #1e293b;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #1e293b, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .header-right {
@@ -26,26 +32,21 @@
   gap: 1rem;
 }
 
-.user-info {
+.header-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #64748b;
-  font-weight: 500;
+  gap: 0.75rem;
 }
 
-.logout-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.15s ease-in-out;
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 1rem;
+  }
+  
+  .header-left h2 {
+    font-size: 1.25rem;
+  }
 }
 
 .logout-button:hover {

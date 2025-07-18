@@ -1,79 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import StatsCards from './StatsCards'
 import VehicleHistory from './VehicleHistory'
 import SearchFilters from './SearchFilters'
 import apiService from '../services/apiService'
-import type { GroupedSession, DashboardStats } from '../types/types'
+import type { GroupedSession } from '../types/types'
 import '../styles/dashboard.css'
 
-const Dashboard: React.FC = () => {
+const VehicleHistoryPage: React.FC = () => {
   const [groupedSessions, setGroupedSessions] = useState<GroupedSession[]>([])
   const [filteredSessions, setFilteredSessions] = useState<GroupedSession[]>([])
-  const [stats, setStats] = useState<DashboardStats>({
-    currentVehicles: 0,
-    totalEntries: 0,
-    totalExits: 0,
-    occupancyRate: 0
-  })
-
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Load real data from API
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true)
         setError(null)
 
-        // Get sessions and dashboard stats
-        const [dashboardStats] = await Promise.all([
-          apiService.getDashboardStats()
-        ])
-
-        // Get grouped sessions
         const grouped = await apiService.getGroupedSessions()
-
         setGroupedSessions(grouped)
         setFilteredSessions(grouped)
-        setStats(dashboardStats)
 
       } catch (err) {
-        console.error('Error loading dashboard data:', err)
-        setError('Failed to load dashboard data. Please try again.')
-        
-        // Fallback to empty data
+        console.error('Error loading vehicle history:', err)
+        setError('Failed to load vehicle history. Please try again.')
         setGroupedSessions([])
         setFilteredSessions([])
-        setStats({
-          currentVehicles: 0,
-          totalEntries: 0,
-          totalExits: 0,
-          occupancyRate: 0
-        })
       } finally {
         setLoading(false)
       }
     }
 
     loadData()
-
-    // Set up polling for real-time updates
-    const pollInterval = setInterval(async () => {
-      try {
-        const newSessionStatus = await apiService.getNewSessionStatus()
-        if (newSessionStatus?.status) {
-          // Reload data when new sessions are detected
-          loadData()
-        }
-      } catch (err) {
-        console.error('Polling error:', err)
-      }
-    }, 10000) // Poll every 10 seconds
-
-    return () => {
-      clearInterval(pollInterval)
-    }
   }, [])
 
   const handleSearch = async (searchParams: {
@@ -115,37 +73,42 @@ const Dashboard: React.FC = () => {
     setFilteredSessions(groupedSessions)
   }
 
-  return (
-    <div className="dashboard">
-      <div className="dashboard-content">
-        <h1>Smart Parking Dashboard</h1>
-        
-        {loading && (
+  if (loading) {
+    return (
+      <div className="dashboard">
+        <div className="dashboard-content">
+          <h1>Vehicle History</h1>
           <div className="loading-state">
-            <p>Loading dashboard data...</p>
+            <p>Loading vehicle history...</p>
           </div>
-        )}
-        
-        {error && (
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="dashboard">
+        <div className="dashboard-content">
+          <h1>Vehicle History</h1>
           <div className="error-state">
             <p style={{ color: 'red' }}>{error}</p>
             <button onClick={() => window.location.reload()}>Retry</button>
           </div>
-        )}
-        
-        {!loading && !error && (
-          <>
-            <StatsCards stats={stats} />
-            
-            <div className="dashboard-main">
-              <SearchFilters onSearch={handleSearch} onClear={clearFilters} />
-              <VehicleHistory sessions={filteredSessions} />
-            </div>
-          </>
-        )}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="dashboard">
+      <div className="dashboard-content">
+        <h1>Vehicle History</h1>
+        <SearchFilters onSearch={handleSearch} onClear={clearFilters} />
+        <VehicleHistory sessions={filteredSessions} />
       </div>
     </div>
   )
 }
 
-export default Dashboard
+export default VehicleHistoryPage

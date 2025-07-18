@@ -14,7 +14,7 @@ class Session(BaseModel):
     gate: str = Field(..., description="In hoặc Out")
     is_out: bool = Field(default=False, description="false khi mới tạo", alias="isOut")
     face_index: str = Field(..., description="Face index", alias="faceIndex")
-    plate_number: Optional[str] = Field(None, description="Plate number (null initially)", alias="plateNumber")
+    plate_number: str = Field(..., description="Plate number - now required", alias="plateNumber")
 
     class Config:
         populate_by_name = True
@@ -60,6 +60,7 @@ class SessionCreateRequest(BaseModel):
     face_url: str = Field(..., alias="faceUrl")
     gate: str = Field(..., description="In or Out")
     face_index: str = Field(..., alias="faceIndex")
+    plate_number: str = Field(..., description="Plate number - now required", alias="plateNumber")
 
     class Config:
         populate_by_name = True
@@ -72,10 +73,6 @@ class SessionResponse(BaseModel):
 class ParkingSlotResponse(BaseModel):
     slot_id: str
     slot: ParkingSlot
-
-class PlateDetectionRequest(BaseModel):
-    session_id: str
-    plate_url: str
 
 class SessionUpdateRequest(BaseModel):
     plate_number: Optional[str] = Field(None, alias="plateNumber")
