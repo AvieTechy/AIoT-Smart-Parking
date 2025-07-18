@@ -2,11 +2,13 @@
 #include <ArduinoJson.h>
 #include <FirebaseHandler.h>
 #include "LcdHandler.h"
+#include <ServoHandler.h>
 #include <secrets.h>
 
 WiFiServer server(1234);
 FirebaseHandler firebase;
 LcdHandler lcd;
+ServoHandler servoMotor;
 
 String faceUrl = "";
 String plateUrl = "";
@@ -17,6 +19,7 @@ void setup()
 {
   Serial.begin(115200);
   lcd.begin();
+  servoMotor.begin(26);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -109,6 +112,9 @@ void loop()
             sessionText.concat(String(sessionID));
             lcd.printWrapped(sessionText);
             delay(1000);
+            servoMotor.open(); // Mở cổng
+            delay(3000);  
+            servoMotor.close(); // Đóng cổng sau 2 giây
           }
           else
           {
@@ -160,7 +166,17 @@ void loop()
           String matchText = "Match: ";
           matchText.concat(result ? "Yes" : "No");
           lcd.printLine(matchText, 0);
-          delay(3000);
+          if (result)
+          {
+            servoMotor.open(); 
+            delay(3000);
+            servoMotor.close(); 
+          }
+          else
+          {
+            lcd.printLine("Please try again", 1);
+            delay(3000);
+          }
         }
         else
         {
