@@ -11,17 +11,19 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+// Copyright 2015-2016 Espressif Systems (Shanghai) PTE LTD
+// ...
 #include "esp_http_server.h"
 #include "esp_timer.h"
 #include "esp_camera.h"
 #include "img_converters.h"
 #include "camera_index.h"
 #include "Arduino.h"
-#include <ESPAsyncWebServer.h> // Đảm bảo có thư viện này
-
+#include <algorithm>
 #include "fb_gfx.h"
 #include "fd_forward.h"
 #include "fr_forward.h"
+// ... rest of the file ...
 
 #define ENROLL_CONFIRM_TIMES 5
 #define FACE_ID_SAVE_NUMBER 7
@@ -595,24 +597,24 @@ static esp_err_t receive_detected_handler(httpd_req_t *req) {
     int ret, remaining = req->content_len;
 
     if (remaining >= sizeof(buf)) {
-        httpd_resp_send_err(req, HTTPD_400_BAD_REQUEST, "Payload quá lớn");
+        httpd_resp_set_status(req, "400 Bad Request");
+        httpd_resp_send(req, "Payload quá lớn", strlen("Payload quá lớn"));
         return ESP_FAIL;
     }
 
-    // Đọc payload
-    ret = httpd_req_recv(req, buf, min(remaining, sizeof(buf)));
+    ret = httpd_req_recv(req, buf, std::min((size_t)remaining, sizeof(buf)));
     if (ret <= 0) {
         if (ret == HTTPD_SOCK_ERR_TIMEOUT) {
-            httpd_resp_send_408(req);
+            httpd_resp_set_status(req, "408 Request Timeout");
+            httpd_resp_send(req, NULL, 0);
         }
         return ESP_FAIL;
     }
-    buf[ret] = '\0'; // Kết thúc chuỗi
+    buf[ret] = '\0';
 
     Serial.println("Nhận được payload: " + String(buf));
     if (strstr(buf, "\"detected\":true")) {
         Serial.println("Phát hiện khuôn mặt!");
-        // Thêm logic, ví dụ bật LED
         // digitalWrite(LED_PIN, HIGH);
     } else {
         Serial.println("Không phát hiện khuôn mặt.");

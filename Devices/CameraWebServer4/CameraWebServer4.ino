@@ -1,10 +1,9 @@
 #include "esp_camera.h"
 #include <WiFi.h>
-#include "app_httpd.cpp" // Bao gồm file app_httpd.cpp đã sửa
 
 // Thông tin Wi-Fi
-const char* ssid = "Cfleur";
-const char* password = "coffee.fleur";
+const char* ssid = "HCMUS-Phonghoc";
+const char* password = "khtn@phonghoc";
 
 // Cấu hình chân camera (AI-Thinker ESP32-CAM)
 #define CAMERA_MODEL_AI_THINKER
