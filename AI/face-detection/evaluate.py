@@ -139,7 +139,7 @@ def plot_confusion_matrix(tp, fp, fn, tn, labels=["Positive", "Negative"]):
 
     # Save confusion matrix as image
     fig.savefig("confusion_matrix.png")
-    
+
 
 # === MAIN EXECUTION ===
 if __name__ == "__main__":
