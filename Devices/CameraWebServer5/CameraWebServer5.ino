@@ -1,13 +1,22 @@
 #include "esp_camera.h"
 #include <WiFi.h>
 
-// Thông tin Wi-Fi
-const char* ssid = "HCMUS-Phonghoc";
-const char* password = "khtn@phonghoc";
+//
+// WARNING!!! Make sure that you have either selected ESP32 Wrover Module,
+//            or another board which has PSRAM enabled
+//
 
-// Cấu hình chân camera (AI-Thinker ESP32-CAM)
+// Select camera model
+//#define CAMERA_MODEL_WROVER_KIT
+//#define CAMERA_MODEL_ESP_EYE
+//#define CAMERA_MODEL_M5STACK_PSRAM
+//#define CAMERA_MODEL_M5STACK_WIDE
 #define CAMERA_MODEL_AI_THINKER
+
 #include "camera_pins.h"
+
+const char* ssid = "CHUYEN CUA DAT";
+const char* password = "Chuyencuadat";
 
 void startCameraServer();
 
@@ -37,7 +46,7 @@ void setup() {
   config.pin_reset = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG;
-
+  //init with high specs to pre-allocate larger buffers
   if(psramFound()){
     config.frame_size = FRAMESIZE_UXGA;
     config.jpeg_quality = 10;
@@ -48,40 +57,50 @@ void setup() {
     config.fb_count = 1;
   }
 
-  // Khởi tạo camera
+#if defined(CAMERA_MODEL_ESP_EYE)
+  pinMode(13, INPUT_PULLUP);
+  pinMode(14, INPUT_PULLUP);
+#endif
+
+  // camera init
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
-    Serial.printf("Khởi tạo camera thất bại, mã lỗi 0x%x", err);
+    Serial.printf("Camera init failed with error 0x%x", err);
     return;
   }
 
   sensor_t * s = esp_camera_sensor_get();
+  //initial sensors are flipped vertically and colors are a bit saturated
   if (s->id.PID == OV3660_PID) {
-    s->set_vflip(s, 1);
-    s->set_brightness(s, 1);
-    s->set_saturation(s, -2);
+    s->set_vflip(s, 1);//flip it back
+    s->set_brightness(s, 1);//up the blightness just a bit
+    s->set_saturation(s, -2);//lower the saturation
   }
+  //drop down frame size for higher initial frame rate
   s->set_framesize(s, FRAMESIZE_QVGA);
 
-  // Kết nối Wi-Fi
+#if defined(CAMERA_MODEL_M5STACK_WIDE)
+  s->set_vflip(s, 1);
+  s->set_hmirror(s, 1);
+#endif
+
   WiFi.begin(ssid, password);
+
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
   Serial.println("");
-  Serial.println("Đã kết nối Wi-Fi");
-  Serial.print("IP của ESP32-CAM nhận: ");
-  Serial.println(WiFi.localIP());
+  Serial.println("WiFi connected");
 
-  // Khởi động server camera
   startCameraServer();
 
-  Serial.print("Camera sẵn sàng! Truy cập tại: http://");
+  Serial.print("Camera Ready! Use 'http://");
   Serial.print(WiFi.localIP());
-  Serial.println("/stream");
+  Serial.println("' to connect");
 }
 
 void loop() {
+  // put your main code here, to run repeatedly:
   delay(10000);
 }

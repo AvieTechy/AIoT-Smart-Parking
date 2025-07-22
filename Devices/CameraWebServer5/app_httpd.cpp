@@ -454,7 +454,7 @@ static esp_err_t stream_handler(httpd_req_t *req) {
       Serial.printf("[DEBUG] detected: %s\n", detected ? "true" : "false");
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String serverUrl = "http://192.168.110.58/receive_detected";
+        String serverUrl = "http://192.168.110.97/receive_detected";
         Serial.printf("[DEBUG] http.begin(%s)\n", serverUrl.c_str());
         http.begin(serverUrl);
         http.addHeader("Content-Type", "application/json");
@@ -471,7 +471,6 @@ static esp_err_t stream_handler(httpd_req_t *req) {
         if (httpResponseCode > 0) {
           Serial.printf("[DEBUG] Gửi HTTP POST thành công, mã phản hồi: %d\n", httpResponseCode);
           Serial.printf("[DEBUG] Phản hồi: %s\n", http.getString().c_str());
-
           
           Serial.println("[ESP32-CAM] Đang chụp ảnh...");
           String imageUrl;
@@ -486,6 +485,8 @@ static esp_err_t stream_handler(httpd_req_t *req) {
             1              // core (1 để tách khỏi core 0 đang chạy httpd)
           );
           delay(3000);
+
+          
         } else {
           Serial.printf("[DEBUG] Gửi HTTP POST thất bại, lỗi: %s\n", http.errorToString(httpResponseCode).c_str());
         }
@@ -724,6 +725,7 @@ static esp_err_t receive_detected_handler(httpd_req_t *req) {
       1              // core (1 để tách khỏi core 0 đang chạy httpd)
     );
 
+    httpd_resp_send(req, "OK", 2);
     return ESP_OK;
 }
 
