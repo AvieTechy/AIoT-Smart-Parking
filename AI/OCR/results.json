@@ -1,0 +1,6803 @@
+[
+  {
+    "filename": "CarLongPlate113_jpg.rf.b7aeea8b142c7063298bd4e2dde7cc18.jpg",
+    "result": {
+      "filename": "CarLongPlate113_jpg.rf.b7aeea8b142c7063298bd4e2dde7cc18.jpg",
+      "timestamp": "2025-07-24 07:07:01.018214",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 203,
+            "ymin": 105,
+            "xmax": 336,
+            "ymax": 149
+          },
+          "plate": "48a02866",
+          "region": {
+            "code": "vn",
+            "score": 0.872
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "48a02866"
+            },
+            {
+              "score": 0.881,
+              "plate": "48a02b66"
+            },
+            {
+              "score": 0.881,
+              "plate": "48ao2866"
+            },
+            {
+              "score": 0.881,
+              "plate": "4ba02866"
+            },
+            {
+              "score": 0.762,
+              "plate": "48ao2b66"
+            },
+            {
+              "score": 0.762,
+              "plate": "4ba02b66"
+            },
+            {
+              "score": 0.762,
+              "plate": "4bao2866"
+            },
+            {
+              "score": 0.643,
+              "plate": "4bao2b66"
+            }
+          ],
+          "dscore": 0.901,
+          "vehicle": {
+            "score": 0.459,
+            "type": "SUV",
+            "box": {
+              "xmin": 8,
+              "ymin": 0,
+              "xmax": 486,
+              "ymax": 188
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 3,
+        "max_calls": 2500
+      },
+      "processing_time": 4089.731
+    }
+  },
+  {
+    "filename": "CarLongPlate115_jpg.rf.209cd6d2686832a3d731907562a9607f.jpg",
+    "result": {
+      "filename": "CarLongPlate115_jpg.rf.209cd6d2686832a3d731907562a9607f.jpg",
+      "timestamp": "2025-07-24 07:07:05.146920",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 334,
+            "ymin": 298,
+            "xmax": 467,
+            "ymax": 335
+          },
+          "plate": "50ld04411",
+          "region": {
+            "code": "vn",
+            "score": 0.789
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "50ld04411"
+            },
+            {
+              "score": 0.894,
+              "plate": "5old04411"
+            },
+            {
+              "score": 0.893,
+              "plate": "50ld0441i"
+            },
+            {
+              "score": 0.893,
+              "plate": "50ld044i1"
+            },
+            {
+              "score": 0.893,
+              "plate": "50ldo4411"
+            },
+            {
+              "score": 0.788,
+              "plate": "50ld044ii"
+            },
+            {
+              "score": 0.788,
+              "plate": "50ldo44i1"
+            },
+            {
+              "score": 0.788,
+              "plate": "5old0441i"
+            },
+            {
+              "score": 0.788,
+              "plate": "5old044i1"
+            },
+            {
+              "score": 0.788,
+              "plate": "5oldo4411"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.819,
+            "type": "Sedan",
+            "box": {
+              "xmin": 130,
+              "ymin": 0,
+              "xmax": 624,
+              "ymax": 362
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 4,
+        "max_calls": 2500
+      },
+      "processing_time": 4192.887
+    }
+  },
+  {
+    "filename": "CarLongPlate130_jpg.rf.e58b8c9b2795a35aa2b1d79a31d307c5.jpg",
+    "result": {
+      "filename": "CarLongPlate130_jpg.rf.e58b8c9b2795a35aa2b1d79a31d307c5.jpg",
+      "timestamp": "2025-07-24 07:07:09.357627",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 344,
+            "ymin": 260,
+            "xmax": 462,
+            "ymax": 291
+          },
+          "plate": "51a77529",
+          "region": {
+            "code": "vn",
+            "score": 0.896
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51a77529"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ia77529"
+            }
+          ],
+          "dscore": 0.916,
+          "vehicle": {
+            "score": 0.833,
+            "type": "Sedan",
+            "box": {
+              "xmin": 159,
+              "ymin": 1,
+              "xmax": 580,
+              "ymax": 340
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 5,
+        "max_calls": 2500
+      },
+      "processing_time": 4045.176
+    }
+  },
+  {
+    "filename": "CarLongPlate139_jpg.rf.d1443248858a980263ebf497446a5bbb.jpg",
+    "result": {
+      "filename": "CarLongPlate139_jpg.rf.d1443248858a980263ebf497446a5bbb.jpg",
+      "timestamp": "2025-07-24 07:07:13.420645",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 352,
+            "ymin": 306,
+            "xmax": 454,
+            "ymax": 329
+          },
+          "plate": "51g21670",
+          "region": {
+            "code": "vn",
+            "score": 0.771
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "51g21670"
+            },
+            {
+              "score": 0.88,
+              "plate": "51g2167o"
+            },
+            {
+              "score": 0.88,
+              "plate": "51g2i670"
+            },
+            {
+              "score": 0.88,
+              "plate": "5ig21670"
+            },
+            {
+              "score": 0.761,
+              "plate": "51g2i67o"
+            },
+            {
+              "score": 0.761,
+              "plate": "5ig2167o"
+            },
+            {
+              "score": 0.761,
+              "plate": "5ig2i670"
+            },
+            {
+              "score": 0.643,
+              "plate": "5ig2i67o"
+            }
+          ],
+          "dscore": 0.911,
+          "vehicle": {
+            "score": 0.609,
+            "type": "Sedan",
+            "box": {
+              "xmin": 220,
+              "ymin": 0,
+              "xmax": 578,
+              "ymax": 357
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 6,
+        "max_calls": 2500
+      },
+      "processing_time": 3135.618
+    }
+  },
+  {
+    "filename": "CarLongPlate145_jpg.rf.a36ea9387950c1b15473c81aea00b44d.jpg",
+    "result": {
+      "filename": "CarLongPlate145_jpg.rf.a36ea9387950c1b15473c81aea00b44d.jpg",
+      "timestamp": "2025-07-24 07:07:16.573986",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 397,
+            "ymin": 348,
+            "xmax": 503,
+            "ymax": 378
+          },
+          "plate": "51g39466",
+          "region": {
+            "code": "vn",
+            "score": 0.633
+          },
+          "score": 0.972,
+          "candidates": [
+            {
+              "score": 0.972,
+              "plate": "51g39466"
+            },
+            {
+              "score": 0.899,
+              "plate": "51c39466"
+            },
+            {
+              "score": 0.854,
+              "plate": "5ig39466"
+            },
+            {
+              "score": 0.78,
+              "plate": "5ic39466"
+            }
+          ],
+          "dscore": 0.914,
+          "vehicle": {
+            "score": 0.788,
+            "type": "Sedan",
+            "box": {
+              "xmin": 236,
+              "ymin": 3,
+              "xmax": 618,
+              "ymax": 399
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 7,
+        "max_calls": 2500
+      },
+      "processing_time": 3008.917
+    }
+  },
+  {
+    "filename": "CarLongPlate14_jpg.rf.521f42ebfb74364ce68f883dfb8e7aa4.jpg",
+    "result": {
+      "filename": "CarLongPlate14_jpg.rf.521f42ebfb74364ce68f883dfb8e7aa4.jpg",
+      "timestamp": "2025-07-24 07:07:19.600530",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 403,
+            "ymin": 295,
+            "xmax": 497,
+            "ymax": 320
+          },
+          "plate": "60a35981",
+          "region": {
+            "code": "vn",
+            "score": 0.818
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "60a35981"
+            },
+            {
+              "score": 0.881,
+              "plate": "6oa35981"
+            },
+            {
+              "score": 0.88,
+              "plate": "60a3598i"
+            },
+            {
+              "score": 0.88,
+              "plate": "60a359b1"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa3598i"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa359b1"
+            },
+            {
+              "score": 0.761,
+              "plate": "60a359bi"
+            },
+            {
+              "score": 0.643,
+              "plate": "6oa359bi"
+            }
+          ],
+          "dscore": 0.892,
+          "vehicle": {
+            "score": 0.869,
+            "type": "Sedan",
+            "box": {
+              "xmin": 260,
+              "ymin": 3,
+              "xmax": 604,
+              "ymax": 354
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 8,
+        "max_calls": 2500
+      },
+      "processing_time": 3009.772
+    }
+  },
+  {
+    "filename": "CarLongPlate160_jpg.rf.26903e5af24940535c59752cb126b27b.jpg",
+    "result": {
+      "filename": "CarLongPlate160_jpg.rf.26903e5af24940535c59752cb126b27b.jpg",
+      "timestamp": "2025-07-24 07:07:22.627979",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 204,
+            "ymin": 201,
+            "xmax": 341,
+            "ymax": 240
+          },
+          "plate": "60a20880",
+          "region": {
+            "code": "vn",
+            "score": 0.828
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "60a20880"
+            },
+            {
+              "score": 0.881,
+              "plate": "60a2088o"
+            },
+            {
+              "score": 0.881,
+              "plate": "60a208b0"
+            },
+            {
+              "score": 0.881,
+              "plate": "60a20b80"
+            },
+            {
+              "score": 0.881,
+              "plate": "60a2o880"
+            },
+            {
+              "score": 0.881,
+              "plate": "6oa20880"
+            },
+            {
+              "score": 0.762,
+              "plate": "60a208bo"
+            },
+            {
+              "score": 0.762,
+              "plate": "60a20b8o"
+            },
+            {
+              "score": 0.762,
+              "plate": "60a20bb0"
+            },
+            {
+              "score": 0.762,
+              "plate": "60a2o88o"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.627,
+            "type": "Sedan",
+            "box": {
+              "xmin": 9,
+              "ymin": 0,
+              "xmax": 490,
+              "ymax": 268
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 9,
+        "max_calls": 2500
+      },
+      "processing_time": 3023.007
+    }
+  },
+  {
+    "filename": "CarLongPlate161_jpg.rf.568ad3fe6aeef9c3a5e56171522f8789.jpg",
+    "result": {
+      "filename": "CarLongPlate161_jpg.rf.568ad3fe6aeef9c3a5e56171522f8789.jpg",
+      "timestamp": "2025-07-24 07:07:25.668108",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 363,
+            "ymin": 357,
+            "xmax": 465,
+            "ymax": 381
+          },
+          "plate": "60a20880",
+          "region": {
+            "code": "vn",
+            "score": 0.446
+          },
+          "score": 0.997,
+          "candidates": [
+            {
+              "score": 0.997,
+              "plate": "60a20880"
+            },
+            {
+              "score": 0.881,
+              "plate": "6oa20880"
+            },
+            {
+              "score": 0.878,
+              "plate": "60a2088o"
+            },
+            {
+              "score": 0.878,
+              "plate": "60a208b0"
+            },
+            {
+              "score": 0.878,
+              "plate": "60a20b80"
+            },
+            {
+              "score": 0.878,
+              "plate": "60a2o880"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa2088o"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa208b0"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa20b80"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa2o880"
+            }
+          ],
+          "dscore": 0.906,
+          "vehicle": {
+            "score": 0.783,
+            "type": "Sedan",
+            "box": {
+              "xmin": 217,
+              "ymin": 1,
+              "xmax": 578,
+              "ymax": 398
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 10,
+        "max_calls": 2500
+      },
+      "processing_time": 3032.476
+    }
+  },
+  {
+    "filename": "CarLongPlate209_jpg.rf.70b7ae4eb23a00cf5880a64deda100c7.jpg",
+    "result": {
+      "filename": "CarLongPlate209_jpg.rf.70b7ae4eb23a00cf5880a64deda100c7.jpg",
+      "timestamp": "2025-07-24 07:07:28.718314",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 139,
+            "ymin": 97,
+            "xmax": 273,
+            "ymax": 135
+          },
+          "plate": "51g01177",
+          "region": {
+            "code": "vn",
+            "score": 0.878
+          },
+          "score": 0.986,
+          "candidates": [
+            {
+              "score": 0.986,
+              "plate": "51g01177"
+            },
+            {
+              "score": 0.888,
+              "plate": "51c01177"
+            },
+            {
+              "score": 0.867,
+              "plate": "51g01i77"
+            },
+            {
+              "score": 0.867,
+              "plate": "51g0i177"
+            },
+            {
+              "score": 0.867,
+              "plate": "51go1177"
+            },
+            {
+              "score": 0.867,
+              "plate": "5ig01177"
+            },
+            {
+              "score": 0.769,
+              "plate": "51c01i77"
+            },
+            {
+              "score": 0.769,
+              "plate": "51c0i177"
+            },
+            {
+              "score": 0.769,
+              "plate": "51co1177"
+            },
+            {
+              "score": 0.769,
+              "plate": "5ic01177"
+            }
+          ],
+          "dscore": 0.92,
+          "vehicle": {
+            "score": 0.502,
+            "type": "Sedan",
+            "box": {
+              "xmin": 5,
+              "ymin": 2,
+              "xmax": 437,
+              "ymax": 154
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 11,
+        "max_calls": 2500
+      },
+      "processing_time": 3309.594
+    }
+  },
+  {
+    "filename": "CarLongPlate20_jpg.rf.9218573c6249c89f9d361c4925026be0.jpg",
+    "result": {
+      "filename": "CarLongPlate20_jpg.rf.9218573c6249c89f9d361c4925026be0.jpg",
+      "timestamp": "2025-07-24 07:07:32.046906",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 322,
+            "ymin": 311,
+            "xmax": 421,
+            "ymax": 332
+          },
+          "plate": "51f32488",
+          "region": {
+            "code": "vn",
+            "score": 0.906
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f32488"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f3248b"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f324b8"
+            },
+            {
+              "score": 0.88,
+              "plate": "5if32488"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f324bb"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if3248b"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if324b8"
+            },
+            {
+              "score": 0.643,
+              "plate": "5if324bb"
+            }
+          ],
+          "dscore": 0.9,
+          "vehicle": {
+            "score": 0.619,
+            "type": "Sedan",
+            "box": {
+              "xmin": 214,
+              "ymin": 1,
+              "xmax": 533,
+              "ymax": 368
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 12,
+        "max_calls": 2500
+      },
+      "processing_time": 3253.598
+    }
+  },
+  {
+    "filename": "CarLongPlate229_jpg.rf.049b25ed3b1be43ec51264fb0f172254.jpg",
+    "result": {
+      "filename": "CarLongPlate229_jpg.rf.049b25ed3b1be43ec51264fb0f172254.jpg",
+      "timestamp": "2025-07-24 07:07:35.318661",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 286,
+            "ymin": 166,
+            "xmax": 426,
+            "ymax": 213
+          },
+          "plate": "51a77529",
+          "region": {
+            "code": "vn",
+            "score": 0.861
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51a77529"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ia77529"
+            }
+          ],
+          "dscore": 0.926,
+          "vehicle": {
+            "score": 0.897,
+            "type": "Sedan",
+            "box": {
+              "xmin": 90,
+              "ymin": 2,
+              "xmax": 568,
+              "ymax": 261
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 13,
+        "max_calls": 2500
+      },
+      "processing_time": 3193.713
+    }
+  },
+  {
+    "filename": "CarLongPlate231_jpg.rf.6fdfc3a25a6b47084c890490a2f0b536.jpg",
+    "result": {
+      "filename": "CarLongPlate231_jpg.rf.6fdfc3a25a6b47084c890490a2f0b536.jpg",
+      "timestamp": "2025-07-24 07:07:38.531174",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 183,
+            "ymin": 52,
+            "xmax": 306,
+            "ymax": 88
+          },
+          "plate": "62a05772",
+          "region": {
+            "code": "vn",
+            "score": 0.927
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "62a05772"
+            },
+            {
+              "score": 0.881,
+              "plate": "62ao5772"
+            }
+          ],
+          "dscore": 0.923,
+          "vehicle": {
+            "score": 0.773,
+            "type": "Sedan",
+            "box": {
+              "xmin": 4,
+              "ymin": 0,
+              "xmax": 461,
+              "ymax": 124
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 14,
+        "max_calls": 2500
+      },
+      "processing_time": 4356.798
+    }
+  },
+  {
+    "filename": "CarLongPlate238_jpg.rf.5162293c5d4047f6ddc178a00ca1c6a7.jpg",
+    "result": {
+      "filename": "CarLongPlate238_jpg.rf.5162293c5d4047f6ddc178a00ca1c6a7.jpg",
+      "timestamp": "2025-07-24 07:07:42.907725",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 359,
+            "ymin": 286,
+            "xmax": 467,
+            "ymax": 313
+          },
+          "plate": "51f22029",
+          "region": {
+            "code": "vn",
+            "score": 0.91
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f22029"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f22o29"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if22029"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if22o29"
+            }
+          ],
+          "dscore": 0.901,
+          "vehicle": {
+            "score": 0.53,
+            "type": "Sedan",
+            "box": {
+              "xmin": 212,
+              "ymin": 0,
+              "xmax": 594,
+              "ymax": 363
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 15,
+        "max_calls": 2500
+      },
+      "processing_time": 3046.967
+    }
+  },
+  {
+    "filename": "CarLongPlate23_jpg.rf.c9e59c6bb640db907484c860f40eb9dc.jpg",
+    "result": {
+      "filename": "CarLongPlate23_jpg.rf.c9e59c6bb640db907484c860f40eb9dc.jpg",
+      "timestamp": "2025-07-24 07:07:45.973884",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 171,
+            "ymin": 177,
+            "xmax": 316,
+            "ymax": 220
+          },
+          "plate": "51g47281",
+          "region": {
+            "code": "vn",
+            "score": 0.723
+          },
+          "score": 0.971,
+          "candidates": [
+            {
+              "score": 0.971,
+              "plate": "51g47281"
+            },
+            {
+              "score": 0.903,
+              "plate": "51c47281"
+            },
+            {
+              "score": 0.852,
+              "plate": "51g4728i"
+            },
+            {
+              "score": 0.852,
+              "plate": "51g472b1"
+            },
+            {
+              "score": 0.852,
+              "plate": "5ig47281"
+            },
+            {
+              "score": 0.785,
+              "plate": "51c4728i"
+            },
+            {
+              "score": 0.785,
+              "plate": "51c472b1"
+            },
+            {
+              "score": 0.785,
+              "plate": "5ic47281"
+            },
+            {
+              "score": 0.733,
+              "plate": "51g472bi"
+            },
+            {
+              "score": 0.733,
+              "plate": "5ig4728i"
+            }
+          ],
+          "dscore": 0.927,
+          "vehicle": {
+            "score": 0.595,
+            "type": "SUV",
+            "box": {
+              "xmin": 0,
+              "ymin": 2,
+              "xmax": 473,
+              "ymax": 271
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 16,
+        "max_calls": 2500
+      },
+      "processing_time": 3044.036
+    }
+  },
+  {
+    "filename": "CarLongPlate240_jpg.rf.aa97305db6b0948b857655a917060193.jpg",
+    "result": {
+      "filename": "CarLongPlate240_jpg.rf.aa97305db6b0948b857655a917060193.jpg",
+      "timestamp": "2025-07-24 07:07:49.035057",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 316,
+            "ymin": 198,
+            "xmax": 431,
+            "ymax": 230
+          },
+          "plate": "51a05227",
+          "region": {
+            "code": "vn",
+            "score": 0.947
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "51a05227"
+            },
+            {
+              "score": 0.881,
+              "plate": "51ao5227"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ia05227"
+            },
+            {
+              "score": 0.762,
+              "plate": "5iao5227"
+            }
+          ],
+          "dscore": 0.913,
+          "vehicle": {
+            "score": 0.513,
+            "type": "Sedan",
+            "box": {
+              "xmin": 182,
+              "ymin": 1,
+              "xmax": 543,
+              "ymax": 279
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 17,
+        "max_calls": 2500
+      },
+      "processing_time": 4185.372
+    }
+  },
+  {
+    "filename": "CarLongPlate260_jpg.rf.a159ae75442e7381b9a0611f9b71a286.jpg",
+    "result": {
+      "filename": "CarLongPlate260_jpg.rf.a159ae75442e7381b9a0611f9b71a286.jpg",
+      "timestamp": "2025-07-24 07:07:53.237954",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 301,
+            "ymin": 270,
+            "xmax": 422,
+            "ymax": 297
+          },
+          "plate": "51f63034",
+          "region": {
+            "code": "vn",
+            "score": 0.924
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f63034"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if63034"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f63o34"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if63o34"
+            }
+          ],
+          "dscore": 0.922,
+          "vehicle": {
+            "score": 0.905,
+            "type": "Sedan",
+            "box": {
+              "xmin": 136,
+              "ymin": 1,
+              "xmax": 549,
+              "ymax": 336
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 18,
+        "max_calls": 2500
+      },
+      "processing_time": 3129.765
+    }
+  },
+  {
+    "filename": "CarLongPlate261_jpg.rf.95029e1e3840fbb1948d95b4e97f9989.jpg",
+    "result": {
+      "filename": "CarLongPlate261_jpg.rf.95029e1e3840fbb1948d95b4e97f9989.jpg",
+      "timestamp": "2025-07-24 07:07:56.400965",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 316,
+            "ymin": 258,
+            "xmax": 441,
+            "ymax": 295
+          },
+          "plate": "51a69172",
+          "region": {
+            "code": "vn",
+            "score": 0.945
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51a69172"
+            },
+            {
+              "score": 0.881,
+              "plate": "51a69i72"
+            },
+            {
+              "score": 0.88,
+              "plate": "5ia69172"
+            },
+            {
+              "score": 0.762,
+              "plate": "5ia69i72"
+            }
+          ],
+          "dscore": 0.933,
+          "vehicle": {
+            "score": 0.885,
+            "type": "Sedan",
+            "box": {
+              "xmin": 145,
+              "ymin": 0,
+              "xmax": 575,
+              "ymax": 331
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 19,
+        "max_calls": 2500
+      },
+      "processing_time": 3238.613
+    }
+  },
+  {
+    "filename": "CarLongPlate272_jpg.rf.9fd664cc5bcc55307125e215cf37de4a.jpg",
+    "result": {
+      "filename": "CarLongPlate272_jpg.rf.9fd664cc5bcc55307125e215cf37de4a.jpg",
+      "timestamp": "2025-07-24 07:07:59.660076",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 357,
+            "ymin": 263,
+            "xmax": 483,
+            "ymax": 305
+          },
+          "plate": "51a89714",
+          "region": {
+            "code": "vn",
+            "score": 0.903
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51a89714"
+            },
+            {
+              "score": 0.881,
+              "plate": "51a897i4"
+            },
+            {
+              "score": 0.881,
+              "plate": "51ab9714"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ia89714"
+            },
+            {
+              "score": 0.762,
+              "plate": "51ab97i4"
+            },
+            {
+              "score": 0.762,
+              "plate": "5ia897i4"
+            },
+            {
+              "score": 0.762,
+              "plate": "5iab9714"
+            },
+            {
+              "score": 0.643,
+              "plate": "5iab97i4"
+            }
+          ],
+          "dscore": 0.932,
+          "vehicle": {
+            "score": 0.693,
+            "type": "Sedan",
+            "box": {
+              "xmin": 163,
+              "ymin": 0,
+              "xmax": 600,
+              "ymax": 349
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 20,
+        "max_calls": 2500
+      },
+      "processing_time": 3340.634
+    }
+  },
+  {
+    "filename": "CarLongPlate279_jpg.rf.8215fc50b92e801628118b832bfcf694.jpg",
+    "result": {
+      "filename": "CarLongPlate279_jpg.rf.8215fc50b92e801628118b832bfcf694.jpg",
+      "timestamp": "2025-07-24 07:08:03.021552",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 237,
+            "ymin": 305,
+            "xmax": 369,
+            "ymax": 345
+          },
+          "plate": "51f86988",
+          "region": {
+            "code": "vn",
+            "score": 0.929
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f86988"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if86988"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f8698b"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f869b8"
+            },
+            {
+              "score": 0.88,
+              "plate": "51fb6988"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f869bb"
+            },
+            {
+              "score": 0.762,
+              "plate": "51fb69b8"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if8698b"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if869b8"
+            },
+            {
+              "score": 0.762,
+              "plate": "5ifb6988"
+            }
+          ],
+          "dscore": 0.935,
+          "vehicle": {
+            "score": 0.788,
+            "type": "Sedan",
+            "box": {
+              "xmin": 40,
+              "ymin": 1,
+              "xmax": 516,
+              "ymax": 378
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 21,
+        "max_calls": 2500
+      },
+      "processing_time": 4410.816
+    }
+  },
+  {
+    "filename": "CarLongPlate280_jpg.rf.07d8952832cb08fe500a016915fbb2fe.jpg",
+    "result": {
+      "filename": "CarLongPlate280_jpg.rf.07d8952832cb08fe500a016915fbb2fe.jpg",
+      "timestamp": "2025-07-24 07:08:07.450294",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 320,
+            "ymin": 227,
+            "xmax": 445,
+            "ymax": 264
+          },
+          "plate": "51g31691",
+          "region": {
+            "code": "vn",
+            "score": 0.715
+          },
+          "score": 0.944,
+          "candidates": [
+            {
+              "score": 0.944,
+              "plate": "51g31691"
+            },
+            {
+              "score": 0.929,
+              "plate": "51c31691"
+            },
+            {
+              "score": 0.825,
+              "plate": "51g3169i"
+            },
+            {
+              "score": 0.825,
+              "plate": "51g3i691"
+            },
+            {
+              "score": 0.825,
+              "plate": "5ig31691"
+            },
+            {
+              "score": 0.81,
+              "plate": "51c3169i"
+            },
+            {
+              "score": 0.81,
+              "plate": "51c3i691"
+            },
+            {
+              "score": 0.81,
+              "plate": "5ic31691"
+            },
+            {
+              "score": 0.707,
+              "plate": "5ig3169i"
+            },
+            {
+              "score": 0.707,
+              "plate": "5ig3i691"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.545,
+            "type": "SUV",
+            "box": {
+              "xmin": 138,
+              "ymin": 1,
+              "xmax": 576,
+              "ymax": 294
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 22,
+        "max_calls": 2500
+      },
+      "processing_time": 3110.359
+    }
+  },
+  {
+    "filename": "CarLongPlate28_jpg.rf.4f24110af5bc34e26a83ceb23d401cb7.jpg",
+    "result": {
+      "filename": "CarLongPlate28_jpg.rf.4f24110af5bc34e26a83ceb23d401cb7.jpg",
+      "timestamp": "2025-07-24 07:08:10.578679",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 409,
+            "ymin": 348,
+            "xmax": 512,
+            "ymax": 377
+          },
+          "plate": "51f59881",
+          "region": {
+            "code": "vn",
+            "score": 0.813
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "51f59881"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f5988i"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f598b1"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f59b81"
+            },
+            {
+              "score": 0.88,
+              "plate": "5if59881"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if5988i"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if598b1"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if59b81"
+            },
+            {
+              "score": 0.761,
+              "plate": "51f598bi"
+            },
+            {
+              "score": 0.761,
+              "plate": "51f59b8i"
+            }
+          ],
+          "dscore": 0.92,
+          "vehicle": {
+            "score": 0.793,
+            "type": "Sedan",
+            "box": {
+              "xmin": 249,
+              "ymin": 4,
+              "xmax": 621,
+              "ymax": 392
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 23,
+        "max_calls": 2500
+      },
+      "processing_time": 3079.46
+    }
+  },
+  {
+    "filename": "CarLongPlate290_jpg.rf.27be9054332dcb5019b8241f7922ebb4.jpg",
+    "result": {
+      "filename": "CarLongPlate290_jpg.rf.27be9054332dcb5019b8241f7922ebb4.jpg",
+      "timestamp": "2025-07-24 07:08:13.675676",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 341,
+            "ymin": 265,
+            "xmax": 463,
+            "ymax": 296
+          },
+          "plate": "51f86988",
+          "region": {
+            "code": "vn",
+            "score": 0.947
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "51f86988"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f8698b"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f869b8"
+            },
+            {
+              "score": 0.88,
+              "plate": "51fb6988"
+            },
+            {
+              "score": 0.88,
+              "plate": "5if86988"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if8698b"
+            },
+            {
+              "score": 0.761,
+              "plate": "51f869bb"
+            },
+            {
+              "score": 0.761,
+              "plate": "51fb698b"
+            },
+            {
+              "score": 0.761,
+              "plate": "51fb69b8"
+            },
+            {
+              "score": 0.761,
+              "plate": "5if869b8"
+            }
+          ],
+          "dscore": 0.93,
+          "vehicle": {
+            "score": 0.691,
+            "type": "Sedan",
+            "box": {
+              "xmin": 153,
+              "ymin": 2,
+              "xmax": 601,
+              "ymax": 330
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 24,
+        "max_calls": 2500
+      },
+      "processing_time": 3050.923
+    }
+  },
+  {
+    "filename": "CarLongPlate296_jpg.rf.204a1d2cd328bfde8ad9a0b4b500c8fc.jpg",
+    "result": {
+      "filename": "CarLongPlate296_jpg.rf.204a1d2cd328bfde8ad9a0b4b500c8fc.jpg",
+      "timestamp": "2025-07-24 07:08:16.744492",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 307,
+            "ymin": 330,
+            "xmax": 446,
+            "ymax": 373
+          },
+          "plate": "51f59011",
+          "region": {
+            "code": "vn",
+            "score": 0.821
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f59011"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if59011"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f5901i"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f590i1"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f59o11"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f59o1i"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f59oi1"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if5901i"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if590i1"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if59o11"
+            }
+          ],
+          "dscore": 0.926,
+          "vehicle": {
+            "score": 0.875,
+            "type": "Sedan",
+            "box": {
+              "xmin": 84,
+              "ymin": 0,
+              "xmax": 599,
+              "ymax": 388
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 25,
+        "max_calls": 2500
+      },
+      "processing_time": 3085.147
+    }
+  },
+  {
+    "filename": "CarLongPlate340_jpg.rf.10a6ae4e134363e5ff1233d3d1ab03d9.jpg",
+    "result": {
+      "filename": "CarLongPlate340_jpg.rf.10a6ae4e134363e5ff1233d3d1ab03d9.jpg",
+      "timestamp": "2025-07-24 07:08:19.848214",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 251,
+            "ymin": 242,
+            "xmax": 371,
+            "ymax": 279
+          },
+          "plate": "51g51292",
+          "region": {
+            "code": "vn",
+            "score": 0.878
+          },
+          "score": 0.937,
+          "candidates": [
+            {
+              "score": 0.937,
+              "plate": "51c51292"
+            },
+            {
+              "score": 0.936,
+              "plate": "51g51292"
+            },
+            {
+              "score": 0.818,
+              "plate": "51c5i292"
+            },
+            {
+              "score": 0.818,
+              "plate": "5ic51292"
+            },
+            {
+              "score": 0.817,
+              "plate": "51g5i292"
+            },
+            {
+              "score": 0.817,
+              "plate": "5ig51292"
+            },
+            {
+              "score": 0.7,
+              "plate": "5ic5i292"
+            },
+            {
+              "score": 0.699,
+              "plate": "5ig5i292"
+            }
+          ],
+          "dscore": 0.93,
+          "vehicle": {
+            "score": 0.845,
+            "type": "Sedan",
+            "box": {
+              "xmin": 92,
+              "ymin": 1,
+              "xmax": 528,
+              "ymax": 298
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 26,
+        "max_calls": 2500
+      },
+      "processing_time": 3147.327
+    }
+  },
+  {
+    "filename": "CarLongPlate345_jpg.rf.fbfd4a6a1cc0d4a7443480c57626104e.jpg",
+    "result": {
+      "filename": "CarLongPlate345_jpg.rf.fbfd4a6a1cc0d4a7443480c57626104e.jpg",
+      "timestamp": "2025-07-24 07:08:23.013364",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 293,
+            "ymin": 285,
+            "xmax": 420,
+            "ymax": 323
+          },
+          "plate": "60a39951",
+          "region": {
+            "code": "vn",
+            "score": 0.871
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "60a39951"
+            },
+            {
+              "score": 0.881,
+              "plate": "6oa39951"
+            },
+            {
+              "score": 0.88,
+              "plate": "60a3995i"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa3995i"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.901,
+            "type": "Sedan",
+            "box": {
+              "xmin": 101,
+              "ymin": 3,
+              "xmax": 554,
+              "ymax": 368
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 27,
+        "max_calls": 2500
+      },
+      "processing_time": 4513.527
+    }
+  },
+  {
+    "filename": "CarLongPlate357_jpg.rf.9582dcd7043b02037a718d4fa25af318.jpg",
+    "result": {
+      "filename": "CarLongPlate357_jpg.rf.9582dcd7043b02037a718d4fa25af318.jpg",
+      "timestamp": "2025-07-24 07:08:27.552233",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 302,
+            "ymin": 255,
+            "xmax": 412,
+            "ymax": 283
+          },
+          "plate": "1g49524",
+          "region": {
+            "code": "vn",
+            "score": 0.217
+          },
+          "score": 0.95,
+          "candidates": [
+            {
+              "score": 0.95,
+              "plate": "1g49524"
+            },
+            {
+              "score": 0.903,
+              "plate": "ig49524"
+            }
+          ],
+          "dscore": 0.889,
+          "vehicle": {
+            "score": 0.693,
+            "type": "Sedan",
+            "box": {
+              "xmin": 111,
+              "ymin": 2,
+              "xmax": 554,
+              "ymax": 325
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 28,
+        "max_calls": 2500
+      },
+      "processing_time": 3307.079
+    }
+  },
+  {
+    "filename": "CarLongPlate367_jpg.rf.0c6b0aba34ac0b1ed534fdaad0f5cf82.jpg",
+    "result": {
+      "filename": "CarLongPlate367_jpg.rf.0c6b0aba34ac0b1ed534fdaad0f5cf82.jpg",
+      "timestamp": "2025-07-24 07:08:30.886189",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 214,
+            "ymin": 173,
+            "xmax": 358,
+            "ymax": 217
+          },
+          "plate": "51f88270",
+          "region": {
+            "code": "vn",
+            "score": 0.845
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f88270"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f8827o"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f8b270"
+            },
+            {
+              "score": 0.881,
+              "plate": "51fb8270"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if88270"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f8b27o"
+            },
+            {
+              "score": 0.762,
+              "plate": "51fb827o"
+            },
+            {
+              "score": 0.762,
+              "plate": "51fbb270"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if8827o"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if8b270"
+            }
+          ],
+          "dscore": 0.931,
+          "vehicle": {
+            "score": 0.707,
+            "type": "Sedan",
+            "box": {
+              "xmin": 17,
+              "ymin": 0,
+              "xmax": 518,
+              "ymax": 257
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 29,
+        "max_calls": 2500
+      },
+      "processing_time": 4182.944
+    }
+  },
+  {
+    "filename": "CarLongPlate372_jpg.rf.412d17ebba9e152d885a7156ccf99d4f.jpg",
+    "result": {
+      "filename": "CarLongPlate372_jpg.rf.412d17ebba9e152d885a7156ccf99d4f.jpg",
+      "timestamp": "2025-07-24 07:08:35.100503",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 232,
+            "ymin": 173,
+            "xmax": 378,
+            "ymax": 218
+          },
+          "plate": "61a22959",
+          "region": {
+            "code": "vn",
+            "score": 0.875
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "61a22959"
+            },
+            {
+              "score": 0.881,
+              "plate": "6ia22959"
+            }
+          ],
+          "dscore": 0.92,
+          "vehicle": {
+            "score": 0.872,
+            "type": "Sedan",
+            "box": {
+              "xmin": 30,
+              "ymin": 1,
+              "xmax": 523,
+              "ymax": 266
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 30,
+        "max_calls": 2500
+      },
+      "processing_time": 3328.379
+    }
+  },
+  {
+    "filename": "CarLongPlate395_jpg.rf.4e094b415568a3b041d212e9d8662415.jpg",
+    "result": {
+      "filename": "CarLongPlate395_jpg.rf.4e094b415568a3b041d212e9d8662415.jpg",
+      "timestamp": "2025-07-24 07:08:38.457495",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 227,
+            "ymin": 91,
+            "xmax": 358,
+            "ymax": 135
+          },
+          "plate": "51f31118",
+          "region": {
+            "code": "vn",
+            "score": 0.926
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f31118"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f3111b"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f311i8"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f31i18"
+            },
+            {
+              "score": 0.881,
+              "plate": "51f3i118"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if31118"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f311ib"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f31i1b"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f31ii8"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f3i11b"
+            }
+          ],
+          "dscore": 0.919,
+          "vehicle": {
+            "score": 0.755,
+            "type": "Sedan",
+            "box": {
+              "xmin": 15,
+              "ymin": 0,
+              "xmax": 492,
+              "ymax": 163
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 31,
+        "max_calls": 2500
+      },
+      "processing_time": 3212.204
+    }
+  },
+  {
+    "filename": "CarLongPlate398_jpg.rf.f30dadc64ae719a215bbc6ad93e124c3.jpg",
+    "result": {
+      "filename": "CarLongPlate398_jpg.rf.f30dadc64ae719a215bbc6ad93e124c3.jpg",
+      "timestamp": "2025-07-24 07:08:41.688972",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 253,
+            "ymin": 166,
+            "xmax": 390,
+            "ymax": 207
+          },
+          "plate": "51a85325",
+          "region": {
+            "code": "vn",
+            "score": 0.973
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51a85325"
+            },
+            {
+              "score": 0.881,
+              "plate": "51ab5325"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ia85325"
+            },
+            {
+              "score": 0.762,
+              "plate": "5iab5325"
+            }
+          ],
+          "dscore": 0.924,
+          "vehicle": {
+            "score": 0.485,
+            "type": "SUV",
+            "box": {
+              "xmin": 51,
+              "ymin": 0,
+              "xmax": 552,
+              "ymax": 245
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 32,
+        "max_calls": 2500
+      },
+      "processing_time": 3211.808
+    }
+  },
+  {
+    "filename": "CarLongPlate41_jpg.rf.6aaa672540cca65f86c830f27254169e.jpg",
+    "result": {
+      "filename": "CarLongPlate41_jpg.rf.6aaa672540cca65f86c830f27254169e.jpg",
+      "timestamp": "2025-07-24 07:08:44.918754",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 350,
+            "ymin": 228,
+            "xmax": 470,
+            "ymax": 263
+          },
+          "plate": "51a05227",
+          "region": {
+            "code": "vn",
+            "score": 0.958
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "51a05227"
+            },
+            {
+              "score": 0.881,
+              "plate": "51ao5227"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ia05227"
+            },
+            {
+              "score": 0.762,
+              "plate": "5iao5227"
+            }
+          ],
+          "dscore": 0.912,
+          "vehicle": {
+            "score": 0.67,
+            "type": "Sedan",
+            "box": {
+              "xmin": 202,
+              "ymin": 1,
+              "xmax": 584,
+              "ymax": 315
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 33,
+        "max_calls": 2500
+      },
+      "processing_time": 3262.237
+    }
+  },
+  {
+    "filename": "CarLongPlate52_jpg.rf.b9cbe0b940a3b63e90a6f3c87aaab861.jpg",
+    "result": {
+      "filename": "CarLongPlate52_jpg.rf.b9cbe0b940a3b63e90a6f3c87aaab861.jpg",
+      "timestamp": "2025-07-24 07:08:48.198073",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 315,
+            "ymin": 182,
+            "xmax": 430,
+            "ymax": 216
+          },
+          "plate": "51f61712",
+          "region": {
+            "code": "vn",
+            "score": 0.95
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f61712"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if61712"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f617i2"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f6i712"
+            },
+            {
+              "score": 0.762,
+              "plate": "51f6i7i2"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if617i2"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if6i712"
+            },
+            {
+              "score": 0.643,
+              "plate": "5if6i7i2"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.496,
+            "type": "SUV",
+            "box": {
+              "xmin": 177,
+              "ymin": 0,
+              "xmax": 543,
+              "ymax": 284
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 34,
+        "max_calls": 2500
+      },
+      "processing_time": 4381.261
+    }
+  },
+  {
+    "filename": "CarLongPlate55_jpg.rf.f2c7b8e5345cddb4c181eda34e453bab.jpg",
+    "result": {
+      "filename": "CarLongPlate55_jpg.rf.f2c7b8e5345cddb4c181eda34e453bab.jpg",
+      "timestamp": "2025-07-24 07:08:52.600193",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 315,
+            "ymin": 242,
+            "xmax": 436,
+            "ymax": 270
+          },
+          "plate": "48a05177",
+          "region": {
+            "code": "vn",
+            "score": 0.881
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "48a05177"
+            },
+            {
+              "score": 0.881,
+              "plate": "48a05i77"
+            },
+            {
+              "score": 0.881,
+              "plate": "48ao5177"
+            },
+            {
+              "score": 0.881,
+              "plate": "4ba05177"
+            },
+            {
+              "score": 0.762,
+              "plate": "48ao5i77"
+            },
+            {
+              "score": 0.762,
+              "plate": "4ba05i77"
+            },
+            {
+              "score": 0.762,
+              "plate": "4bao5177"
+            },
+            {
+              "score": 0.644,
+              "plate": "4bao5i77"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.905,
+            "type": "Sedan",
+            "box": {
+              "xmin": 144,
+              "ymin": 3,
+              "xmax": 566,
+              "ymax": 324
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 35,
+        "max_calls": 2500
+      },
+      "processing_time": 3301.159
+    }
+  },
+  {
+    "filename": "CarLongPlate58_jpg.rf.5fc6c05524002599339c1d1d2a90eee9.jpg",
+    "result": {
+      "filename": "CarLongPlate58_jpg.rf.5fc6c05524002599339c1d1d2a90eee9.jpg",
+      "timestamp": "2025-07-24 07:08:55.921895",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 293,
+            "ymin": 268,
+            "xmax": 399,
+            "ymax": 300
+          },
+          "plate": "f76354",
+          "region": {
+            "code": "es",
+            "score": 0.119
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "f76354"
+            },
+            {
+              "score": 0.872,
+              "plate": "vf76354"
+            }
+          ],
+          "dscore": 0.891,
+          "vehicle": {
+            "score": 0.52,
+            "type": "SUV",
+            "box": {
+              "xmin": 96,
+              "ymin": 0,
+              "xmax": 543,
+              "ymax": 310
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 36,
+        "max_calls": 2500
+      },
+      "processing_time": 3157.851
+    }
+  },
+  {
+    "filename": "CarLongPlate5_jpg.rf.bf8208d84fbfbb3469330cb1802fb9a8.jpg",
+    "result": {
+      "filename": "CarLongPlate5_jpg.rf.bf8208d84fbfbb3469330cb1802fb9a8.jpg",
+      "timestamp": "2025-07-24 07:08:59.099600",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 371,
+            "ymin": 335,
+            "xmax": 476,
+            "ymax": 359
+          },
+          "plate": "51g31691",
+          "region": {
+            "code": "vn",
+            "score": 0.819
+          },
+          "score": 0.995,
+          "candidates": [
+            {
+              "score": 0.995,
+              "plate": "51g31691"
+            },
+            {
+              "score": 0.876,
+              "plate": "51g3169i"
+            },
+            {
+              "score": 0.876,
+              "plate": "51g3i691"
+            },
+            {
+              "score": 0.876,
+              "plate": "5ig31691"
+            },
+            {
+              "score": 0.757,
+              "plate": "51g3i69i"
+            },
+            {
+              "score": 0.757,
+              "plate": "5ig3169i"
+            },
+            {
+              "score": 0.757,
+              "plate": "5ig3i691"
+            },
+            {
+              "score": 0.639,
+              "plate": "5ig3i69i"
+            }
+          ],
+          "dscore": 0.911,
+          "vehicle": {
+            "score": 0.796,
+            "type": "Sedan",
+            "box": {
+              "xmin": 216,
+              "ymin": 1,
+              "xmax": 607,
+              "ymax": 371
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 37,
+        "max_calls": 2500
+      },
+      "processing_time": 3103.424
+    }
+  },
+  {
+    "filename": "CarLongPlate63_jpg.rf.115d2c18876acfe15e2187ac73195101.jpg",
+    "result": {
+      "filename": "CarLongPlate63_jpg.rf.115d2c18876acfe15e2187ac73195101.jpg",
+      "timestamp": "2025-07-24 07:09:02.220798",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 315,
+            "ymin": 234,
+            "xmax": 442,
+            "ymax": 270
+          },
+          "plate": "56s4698",
+          "region": {
+            "code": "vn",
+            "score": 0.583
+          },
+          "score": 0.997,
+          "candidates": [
+            {
+              "score": 0.997,
+              "plate": "56s4698"
+            },
+            {
+              "score": 0.862,
+              "plate": "56s469b"
+            }
+          ],
+          "dscore": 0.93,
+          "vehicle": {
+            "score": 0.633,
+            "type": "Sedan",
+            "box": {
+              "xmin": 145,
+              "ymin": 1,
+              "xmax": 590,
+              "ymax": 315
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 38,
+        "max_calls": 2500
+      },
+      "processing_time": 4199.839
+    }
+  },
+  {
+    "filename": "CarLongPlate74_jpg.rf.db60f9eb830a7a74b1bf957d817d62b9.jpg",
+    "result": {
+      "filename": "CarLongPlate74_jpg.rf.db60f9eb830a7a74b1bf957d817d62b9.jpg",
+      "timestamp": "2025-07-24 07:09:06.438576",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 294,
+            "ymin": 277,
+            "xmax": 427,
+            "ymax": 316
+          },
+          "plate": "61a22959",
+          "region": {
+            "code": "vn",
+            "score": 0.855
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "61a22959"
+            },
+            {
+              "score": 0.881,
+              "plate": "6ia22959"
+            }
+          ],
+          "dscore": 0.927,
+          "vehicle": {
+            "score": 0.944,
+            "type": "Sedan",
+            "box": {
+              "xmin": 125,
+              "ymin": 1,
+              "xmax": 561,
+              "ymax": 358
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 39,
+        "max_calls": 2500
+      },
+      "processing_time": 3153.842
+    }
+  },
+  {
+    "filename": "CarLongPlate7_jpg.rf.ee501be65b8e6b29fe03747e749dca53.jpg",
+    "result": {
+      "filename": "CarLongPlate7_jpg.rf.ee501be65b8e6b29fe03747e749dca53.jpg",
+      "timestamp": "2025-07-24 07:09:09.610740",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 269,
+            "ymin": 174,
+            "xmax": 408,
+            "ymax": 223
+          },
+          "plate": "51g51332",
+          "region": {
+            "code": "vn",
+            "score": 0.809
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "51g51332"
+            },
+            {
+              "score": 0.88,
+              "plate": "5ig51332"
+            },
+            {
+              "score": 0.879,
+              "plate": "51g5i332"
+            },
+            {
+              "score": 0.761,
+              "plate": "5ig5i332"
+            }
+          ],
+          "dscore": 0.939,
+          "vehicle": {
+            "score": 0.625,
+            "type": "Sedan",
+            "box": {
+              "xmin": 61,
+              "ymin": 0,
+              "xmax": 562,
+              "ymax": 244
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 40,
+        "max_calls": 2500
+      },
+      "processing_time": 3171.183
+    }
+  },
+  {
+    "filename": "CarLongPlate88_jpg.rf.69f1acec771e6a3c57a8cc4a26bd42f4.jpg",
+    "result": {
+      "filename": "CarLongPlate88_jpg.rf.69f1acec771e6a3c57a8cc4a26bd42f4.jpg",
+      "timestamp": "2025-07-24 07:09:12.800100",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 302,
+            "ymin": 298,
+            "xmax": 429,
+            "ymax": 331
+          },
+          "plate": "51g51332",
+          "region": {
+            "code": "vn",
+            "score": 0.89
+          },
+          "score": 0.958,
+          "candidates": [
+            {
+              "score": 0.958,
+              "plate": "51g51332"
+            },
+            {
+              "score": 0.915,
+              "plate": "51c51332"
+            },
+            {
+              "score": 0.839,
+              "plate": "51g5i332"
+            },
+            {
+              "score": 0.839,
+              "plate": "5ig51332"
+            },
+            {
+              "score": 0.796,
+              "plate": "51c5i332"
+            },
+            {
+              "score": 0.796,
+              "plate": "5ic51332"
+            },
+            {
+              "score": 0.72,
+              "plate": "5ig5i332"
+            },
+            {
+              "score": 0.677,
+              "plate": "5ic5i332"
+            }
+          ],
+          "dscore": 0.934,
+          "vehicle": {
+            "score": 0.531,
+            "type": "Sedan",
+            "box": {
+              "xmin": 102,
+              "ymin": 1,
+              "xmax": 572,
+              "ymax": 345
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 41,
+        "max_calls": 2500
+      },
+      "processing_time": 3151.536
+    }
+  },
+  {
+    "filename": "CarLongPlate92_jpg.rf.cedd0c295bc7a3073b364491e7698c16.jpg",
+    "result": {
+      "filename": "CarLongPlate92_jpg.rf.cedd0c295bc7a3073b364491e7698c16.jpg",
+      "timestamp": "2025-07-24 07:09:15.969206",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 368,
+            "ymin": 244,
+            "xmax": 493,
+            "ymax": 283
+          },
+          "plate": "51f15585",
+          "region": {
+            "code": "vn",
+            "score": 0.948
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51f15585"
+            },
+            {
+              "score": 0.881,
+              "plate": "5if15585"
+            },
+            {
+              "score": 0.88,
+              "plate": "51f155b5"
+            },
+            {
+              "score": 0.88,
+              "plate": "51fi5585"
+            },
+            {
+              "score": 0.762,
+              "plate": "51fi55b5"
+            },
+            {
+              "score": 0.762,
+              "plate": "5if155b5"
+            },
+            {
+              "score": 0.762,
+              "plate": "5ifi5585"
+            },
+            {
+              "score": 0.643,
+              "plate": "5ifi55b5"
+            }
+          ],
+          "dscore": 0.931,
+          "vehicle": {
+            "score": 0.83,
+            "type": "Sedan",
+            "box": {
+              "xmin": 185,
+              "ymin": 1,
+              "xmax": 615,
+              "ymax": 332
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 42,
+        "max_calls": 2500
+      },
+      "processing_time": 4219.608
+    }
+  },
+  {
+    "filename": "CarLongPlate96_jpg.rf.097a0f52365e69bc41531539caf045ee.jpg",
+    "result": {
+      "filename": "CarLongPlate96_jpg.rf.097a0f52365e69bc41531539caf045ee.jpg",
+      "timestamp": "2025-07-24 07:09:20.206706",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 469,
+            "ymin": 252,
+            "xmax": 586,
+            "ymax": 282
+          },
+          "plate": "60a35981",
+          "region": {
+            "code": "vn",
+            "score": 0.893
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "60a35981"
+            },
+            {
+              "score": 0.881,
+              "plate": "60a359b1"
+            },
+            {
+              "score": 0.881,
+              "plate": "6oa35981"
+            },
+            {
+              "score": 0.88,
+              "plate": "60a3598i"
+            },
+            {
+              "score": 0.762,
+              "plate": "60a359bi"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa3598i"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oa359b1"
+            },
+            {
+              "score": 0.643,
+              "plate": "6oa359bi"
+            }
+          ],
+          "dscore": 0.897,
+          "vehicle": {
+            "score": 0.877,
+            "type": "Sedan",
+            "box": {
+              "xmin": 295,
+              "ymin": 0,
+              "xmax": 638,
+              "ymax": 308
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 43,
+        "max_calls": 2500
+      },
+      "processing_time": 3112.964
+    }
+  },
+  {
+    "filename": "xemay110_jpg.rf.58e68b22d6cf3ea4c7534a8e7d2bfe36.jpg",
+    "result": {
+      "filename": "xemay110_jpg.rf.58e68b22d6cf3ea4c7534a8e7d2bfe36.jpg",
+      "timestamp": "2025-07-24 07:09:23.338150",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 238,
+            "ymin": 175,
+            "xmax": 345,
+            "ymax": 259
+          },
+          "plate": "59v183357",
+          "region": {
+            "code": "vn",
+            "score": 0.893
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59v183357"
+            },
+            {
+              "score": 0.894,
+              "plate": "59v1b3357"
+            },
+            {
+              "score": 0.893,
+              "plate": "59vi83357"
+            },
+            {
+              "score": 0.788,
+              "plate": "59vib3357"
+            }
+          ],
+          "dscore": 0.889,
+          "vehicle": {
+            "score": 0.799,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 122,
+              "ymin": 1,
+              "xmax": 426,
+              "ymax": 397
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 44,
+        "max_calls": 2500
+      },
+      "processing_time": 3104.236
+    }
+  },
+  {
+    "filename": "xemay117_jpg.rf.8f6ec04abdd0cc41631bd19a7df6b6bf.jpg",
+    "result": {
+      "filename": "xemay117_jpg.rf.8f6ec04abdd0cc41631bd19a7df6b6bf.jpg",
+      "timestamp": "2025-07-24 07:09:26.460723",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 288,
+            "ymin": 87,
+            "xmax": 386,
+            "ymax": 170
+          },
+          "plate": "59s236623",
+          "region": {
+            "code": "vn",
+            "score": 0.866
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "59s236623"
+            }
+          ],
+          "dscore": 0.882,
+          "vehicle": {
+            "score": 0.779,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 192,
+              "ymin": 3,
+              "xmax": 476,
+              "ymax": 298
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 45,
+        "max_calls": 2500
+      },
+      "processing_time": 3052.804
+    }
+  },
+  {
+    "filename": "xemay122_jpg.rf.f7db4878076410a0d1461a6724e29247.jpg",
+    "result": {
+      "filename": "xemay122_jpg.rf.f7db4878076410a0d1461a6724e29247.jpg",
+      "timestamp": "2025-07-24 07:09:29.531777",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 184,
+            "ymin": 65,
+            "xmax": 304,
+            "ymax": 174
+          },
+          "plate": "61d100626",
+          "region": {
+            "code": "vn",
+            "score": 0.904
+          },
+          "score": 0.995,
+          "candidates": [
+            {
+              "score": 0.995,
+              "plate": "61d100626"
+            },
+            {
+              "score": 0.894,
+              "plate": "6id100626"
+            },
+            {
+              "score": 0.89,
+              "plate": "61d10o626"
+            },
+            {
+              "score": 0.89,
+              "plate": "61d1o0626"
+            },
+            {
+              "score": 0.89,
+              "plate": "61di00626"
+            },
+            {
+              "score": 0.789,
+              "plate": "6id10o626"
+            },
+            {
+              "score": 0.789,
+              "plate": "6id1o0626"
+            },
+            {
+              "score": 0.789,
+              "plate": "6idi00626"
+            },
+            {
+              "score": 0.784,
+              "plate": "61d1oo626"
+            },
+            {
+              "score": 0.784,
+              "plate": "61di0o626"
+            }
+          ],
+          "dscore": 0.879,
+          "vehicle": {
+            "score": 0.817,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 38,
+              "ymin": 0,
+              "xmax": 387,
+              "ymax": 366
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 46,
+        "max_calls": 2500
+      },
+      "processing_time": 3161.925
+    }
+  },
+  {
+    "filename": "xemay125_jpg.rf.050d300898a328c47806da55f7e284e7.jpg",
+    "result": {
+      "filename": "xemay125_jpg.rf.050d300898a328c47806da55f7e284e7.jpg",
+      "timestamp": "2025-07-24 07:09:32.710053",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 259,
+            "ymin": 109,
+            "xmax": 360,
+            "ymax": 196
+          },
+          "plate": "71s35011",
+          "region": {
+            "code": "vn",
+            "score": 0.544
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "71s35011"
+            },
+            {
+              "score": 0.881,
+              "plate": "71s3501i"
+            },
+            {
+              "score": 0.881,
+              "plate": "71s350i1"
+            },
+            {
+              "score": 0.881,
+              "plate": "71s35o11"
+            },
+            {
+              "score": 0.881,
+              "plate": "7is35011"
+            },
+            {
+              "score": 0.762,
+              "plate": "71s350ii"
+            },
+            {
+              "score": 0.762,
+              "plate": "71s35o1i"
+            },
+            {
+              "score": 0.762,
+              "plate": "71s35oi1"
+            },
+            {
+              "score": 0.762,
+              "plate": "7is3501i"
+            },
+            {
+              "score": 0.762,
+              "plate": "7is350i1"
+            }
+          ],
+          "dscore": 0.884,
+          "vehicle": {
+            "score": 0.86,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 186,
+              "ymin": 4,
+              "xmax": 418,
+              "ymax": 316
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 47,
+        "max_calls": 2500
+      },
+      "processing_time": 3136.189
+    }
+  },
+  {
+    "filename": "xemay136_jpg.rf.1c467e8b9257f406b38294f404c186a4.jpg",
+    "result": {
+      "filename": "xemay136_jpg.rf.1c467e8b9257f406b38294f404c186a4.jpg",
+      "timestamp": "2025-07-24 07:09:35.864129",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 238,
+            "ymin": 175,
+            "xmax": 340,
+            "ymax": 257
+          },
+          "plate": "59h162281",
+          "region": {
+            "code": "vn",
+            "score": 0.885
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59h162281"
+            },
+            {
+              "score": 0.894,
+              "plate": "59h16228i"
+            },
+            {
+              "score": 0.894,
+              "plate": "59h1622b1"
+            },
+            {
+              "score": 0.894,
+              "plate": "59hi62281"
+            },
+            {
+              "score": 0.788,
+              "plate": "59h1622bi"
+            },
+            {
+              "score": 0.788,
+              "plate": "59hi6228i"
+            },
+            {
+              "score": 0.788,
+              "plate": "59hi622b1"
+            },
+            {
+              "score": 0.683,
+              "plate": "59hi622bi"
+            }
+          ],
+          "dscore": 0.892,
+          "vehicle": {
+            "score": 0.703,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 118,
+              "ymin": 0,
+              "xmax": 422,
+              "ymax": 328
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 48,
+        "max_calls": 2500
+      },
+      "processing_time": 3070.517
+    }
+  },
+  {
+    "filename": "xemay146_jpg.rf.5093a7bdfab655f80c310f8e39eb1201.jpg",
+    "result": {
+      "filename": "xemay146_jpg.rf.5093a7bdfab655f80c310f8e39eb1201.jpg",
+      "timestamp": "2025-07-24 07:09:38.951816",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 212,
+            "ymin": 76,
+            "xmax": 311,
+            "ymax": 160
+          },
+          "plate": "59h119374",
+          "region": {
+            "code": "vn",
+            "score": 0.932
+          },
+          "score": 0.959,
+          "candidates": [
+            {
+              "score": 0.959,
+              "plate": "59h119374"
+            },
+            {
+              "score": 0.893,
+              "plate": "59hi19374"
+            },
+            {
+              "score": 0.854,
+              "plate": "59h1i9374"
+            },
+            {
+              "score": 0.788,
+              "plate": "59hii9374"
+            }
+          ],
+          "dscore": 0.881,
+          "vehicle": {
+            "score": 0.767,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 123,
+              "ymin": 2,
+              "xmax": 378,
+              "ymax": 312
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 49,
+        "max_calls": 2500
+      },
+      "processing_time": 3053.962
+    }
+  },
+  {
+    "filename": "xemay150_jpg.rf.fdc517fb39537345bc29289a9796ce5a.jpg",
+    "result": {
+      "filename": "xemay150_jpg.rf.fdc517fb39537345bc29289a9796ce5a.jpg",
+      "timestamp": "2025-07-24 07:09:42.023889",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 203,
+            "ymin": 123,
+            "xmax": 301,
+            "ymax": 211
+          },
+          "plate": "83p167560",
+          "region": {
+            "code": "vn",
+            "score": 0.823
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "83p167560"
+            },
+            {
+              "score": 0.894,
+              "plate": "83p16756o"
+            },
+            {
+              "score": 0.894,
+              "plate": "83pi67560"
+            },
+            {
+              "score": 0.894,
+              "plate": "b3p167560"
+            },
+            {
+              "score": 0.788,
+              "plate": "83pi6756o"
+            },
+            {
+              "score": 0.788,
+              "plate": "b3p16756o"
+            },
+            {
+              "score": 0.788,
+              "plate": "b3pi67560"
+            },
+            {
+              "score": 0.683,
+              "plate": "b3pi6756o"
+            }
+          ],
+          "dscore": 0.884,
+          "vehicle": {
+            "score": 0.64,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 8,
+              "ymin": 0,
+              "xmax": 368,
+              "ymax": 346
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 50,
+        "max_calls": 2500
+      },
+      "processing_time": 3100.828
+    }
+  },
+  {
+    "filename": "xemay159_jpg.rf.d373e2a0a5d159d0eb44b496c675ffbd.jpg",
+    "result": {
+      "filename": "xemay159_jpg.rf.d373e2a0a5d159d0eb44b496c675ffbd.jpg",
+      "timestamp": "2025-07-24 07:09:45.141181",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 231,
+            "ymin": 186,
+            "xmax": 323,
+            "ymax": 260
+          },
+          "plate": "59f129346",
+          "region": {
+            "code": "vn",
+            "score": 0.949
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59f129346"
+            },
+            {
+              "score": 0.894,
+              "plate": "59fi29346"
+            }
+          ],
+          "dscore": 0.905,
+          "vehicle": {
+            "score": 0.707,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 160,
+              "ymin": 0,
+              "xmax": 397,
+              "ymax": 366
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 51,
+        "max_calls": 2500
+      },
+      "processing_time": 3053.168
+    }
+  },
+  {
+    "filename": "xemay165_jpg.rf.6c1b6708ede056d9fd4d8459b1b1530b.jpg",
+    "result": {
+      "filename": "xemay165_jpg.rf.6c1b6708ede056d9fd4d8459b1b1530b.jpg",
+      "timestamp": "2025-07-24 07:09:48.210424",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 214,
+            "ymin": 152,
+            "xmax": 326,
+            "ymax": 246
+          },
+          "plate": "59g133671",
+          "region": {
+            "code": "vn",
+            "score": 0.927
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "59g133671"
+            },
+            {
+              "score": 0.894,
+              "plate": "59g13367i"
+            },
+            {
+              "score": 0.894,
+              "plate": "59gi33671"
+            },
+            {
+              "score": 0.788,
+              "plate": "59gi3367i"
+            }
+          ],
+          "dscore": 0.88,
+          "vehicle": {
+            "score": 0.9,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 7,
+              "ymin": 1,
+              "xmax": 449,
+              "ymax": 391
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 52,
+        "max_calls": 2500
+      },
+      "processing_time": 3075.123
+    }
+  },
+  {
+    "filename": "xemay176_jpg.rf.9e056383c8fa4762ab44d2f147c8be71.jpg",
+    "result": {
+      "filename": "xemay176_jpg.rf.9e056383c8fa4762ab44d2f147c8be71.jpg",
+      "timestamp": "2025-07-24 07:09:51.304891",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 190,
+            "ymin": 114,
+            "xmax": 287,
+            "ymax": 194
+          },
+          "plate": "52z79752",
+          "region": {
+            "code": "vn",
+            "score": 0.713
+          },
+          "score": 0.92,
+          "candidates": [
+            {
+              "score": 0.92,
+              "plate": "52z79752"
+            },
+            {
+              "score": 0.872,
+              "plate": "52779752"
+            }
+          ],
+          "dscore": 0.898,
+          "vehicle": {
+            "score": 0.825,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 124,
+              "ymin": 0,
+              "xmax": 375,
+              "ymax": 285
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 53,
+        "max_calls": 2500
+      },
+      "processing_time": 3190.787
+    }
+  },
+  {
+    "filename": "xemay187_jpg.rf.48dcde58481f133cbb91f9c41ed70a88.jpg",
+    "result": {
+      "filename": "xemay187_jpg.rf.48dcde58481f133cbb91f9c41ed70a88.jpg",
+      "timestamp": "2025-07-24 07:09:54.515780",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 246,
+            "ymin": 160,
+            "xmax": 349,
+            "ymax": 247
+          },
+          "plate": "79t26658",
+          "region": {
+            "code": "vn",
+            "score": 0.792
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "79t26658"
+            },
+            {
+              "score": 0.881,
+              "plate": "79t2665b"
+            }
+          ],
+          "dscore": 0.879,
+          "vehicle": {
+            "score": 0.828,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 123,
+              "ymin": 2,
+              "xmax": 437,
+              "ymax": 372
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 54,
+        "max_calls": 2500
+      },
+      "processing_time": 3134.103
+    }
+  },
+  {
+    "filename": "xemay202_jpg.rf.62d1e33cdc9905c3a3a909d800e786b7.jpg",
+    "result": {
+      "filename": "xemay202_jpg.rf.62d1e33cdc9905c3a3a909d800e786b7.jpg",
+      "timestamp": "2025-07-24 07:09:57.667615",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 234,
+            "ymin": 168,
+            "xmax": 350,
+            "ymax": 266
+          },
+          "plate": "54u57001",
+          "region": {
+            "code": "vn",
+            "score": 0.74
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "54u57001"
+            },
+            {
+              "score": 0.881,
+              "plate": "54u5700i"
+            },
+            {
+              "score": 0.881,
+              "plate": "54u570o1"
+            },
+            {
+              "score": 0.881,
+              "plate": "54u57o01"
+            },
+            {
+              "score": 0.762,
+              "plate": "54u570oi"
+            },
+            {
+              "score": 0.762,
+              "plate": "54u57o0i"
+            },
+            {
+              "score": 0.762,
+              "plate": "54u57oo1"
+            },
+            {
+              "score": 0.643,
+              "plate": "54u57ooi"
+            }
+          ],
+          "dscore": 0.881,
+          "vehicle": {
+            "score": 0.83,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 105,
+              "ymin": 0,
+              "xmax": 440,
+              "ymax": 404
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 55,
+        "max_calls": 2500
+      },
+      "processing_time": 3113.383
+    }
+  },
+  {
+    "filename": "xemay209_jpg.rf.4dd047077347ba4bdb0d24fcce159a79.jpg",
+    "result": {
+      "filename": "xemay209_jpg.rf.4dd047077347ba4bdb0d24fcce159a79.jpg",
+      "timestamp": "2025-07-24 07:10:00.797985",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 298,
+            "ymin": 215,
+            "xmax": 388,
+            "ymax": 287
+          },
+          "plate": "59l227602",
+          "region": {
+            "code": "vn",
+            "score": 0.72
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59l227602"
+            },
+            {
+              "score": 0.894,
+              "plate": "59l2276o2"
+            }
+          ],
+          "dscore": 0.888,
+          "vehicle": {
+            "score": 0.796,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 194,
+              "ymin": 4,
+              "xmax": 454,
+              "ymax": 372
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 56,
+        "max_calls": 2500
+      },
+      "processing_time": 3120.811
+    }
+  },
+  {
+    "filename": "xemay219_jpg.rf.97389c2cfa99258b9da420cceb230ab5.jpg",
+    "result": {
+      "filename": "xemay219_jpg.rf.97389c2cfa99258b9da420cceb230ab5.jpg",
+      "timestamp": "2025-07-24 07:10:03.936624",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 313,
+            "ymin": 151,
+            "xmax": 421,
+            "ymax": 242
+          },
+          "plate": "59m197582",
+          "region": {
+            "code": "vn",
+            "score": 0.93
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59m197582"
+            },
+            {
+              "score": 0.893,
+              "plate": "59m1975b2"
+            },
+            {
+              "score": 0.893,
+              "plate": "59mi97582"
+            },
+            {
+              "score": 0.788,
+              "plate": "59mi975b2"
+            }
+          ],
+          "dscore": 0.878,
+          "vehicle": {
+            "score": 0.78,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 133,
+              "ymin": 0,
+              "xmax": 514,
+              "ymax": 400
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 57,
+        "max_calls": 2500
+      },
+      "processing_time": 3148.396
+    }
+  },
+  {
+    "filename": "xemay22_jpg.rf.ba5724a53d2a89986bbf3bfa0177abed.jpg",
+    "result": {
+      "filename": "xemay22_jpg.rf.ba5724a53d2a89986bbf3bfa0177abed.jpg",
+      "timestamp": "2025-07-24 07:10:07.103061",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 265,
+            "ymin": 185,
+            "xmax": 370,
+            "ymax": 275
+          },
+          "plate": "59f107509",
+          "region": {
+            "code": "vn",
+            "score": 0.908
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59f107509"
+            },
+            {
+              "score": 0.894,
+              "plate": "59f1075o9"
+            },
+            {
+              "score": 0.894,
+              "plate": "59f1o7509"
+            },
+            {
+              "score": 0.894,
+              "plate": "59fi07509"
+            },
+            {
+              "score": 0.788,
+              "plate": "59f1o75o9"
+            },
+            {
+              "score": 0.788,
+              "plate": "59fi075o9"
+            },
+            {
+              "score": 0.788,
+              "plate": "59fio7509"
+            },
+            {
+              "score": 0.683,
+              "plate": "59fio75o9"
+            }
+          ],
+          "dscore": 0.883,
+          "vehicle": {
+            "score": 0.804,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 139,
+              "ymin": 2,
+              "xmax": 430,
+              "ymax": 401
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 58,
+        "max_calls": 2500
+      },
+      "processing_time": 3113.874
+    }
+  },
+  {
+    "filename": "xemay236_jpg.rf.e98a87945fb9a9069c0d821efe5e8983.jpg",
+    "result": {
+      "filename": "xemay236_jpg.rf.e98a87945fb9a9069c0d821efe5e8983.jpg",
+      "timestamp": "2025-07-24 07:10:10.235310",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 233,
+            "ymin": 173,
+            "xmax": 335,
+            "ymax": 258
+          },
+          "plate": "59s174613",
+          "region": {
+            "code": "vn",
+            "score": 0.789
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59s174613"
+            },
+            {
+              "score": 0.893,
+              "plate": "59s1746i3"
+            },
+            {
+              "score": 0.893,
+              "plate": "59si74613"
+            },
+            {
+              "score": 0.788,
+              "plate": "59si746i3"
+            }
+          ],
+          "dscore": 0.886,
+          "vehicle": {
+            "score": 0.82,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 110,
+              "ymin": 0,
+              "xmax": 445,
+              "ymax": 392
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 59,
+        "max_calls": 2500
+      },
+      "processing_time": 3067.976
+    }
+  },
+  {
+    "filename": "xemay25_jpg.rf.50afdab4527066985e74146256455e9b.jpg",
+    "result": {
+      "filename": "xemay25_jpg.rf.50afdab4527066985e74146256455e9b.jpg",
+      "timestamp": "2025-07-24 07:10:13.321403",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 270,
+            "ymin": 163,
+            "xmax": 366,
+            "ymax": 246
+          },
+          "plate": "37m107918",
+          "region": {
+            "code": "vn",
+            "score": 0.918
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "37m107918"
+            },
+            {
+              "score": 0.894,
+              "plate": "37m10791b"
+            },
+            {
+              "score": 0.894,
+              "plate": "37m1079i8"
+            },
+            {
+              "score": 0.894,
+              "plate": "37m1o7918"
+            },
+            {
+              "score": 0.894,
+              "plate": "37mi07918"
+            },
+            {
+              "score": 0.789,
+              "plate": "37m1079ib"
+            },
+            {
+              "score": 0.789,
+              "plate": "37m1o791b"
+            },
+            {
+              "score": 0.789,
+              "plate": "37mi0791b"
+            },
+            {
+              "score": 0.789,
+              "plate": "37mio7918"
+            },
+            {
+              "score": 0.788,
+              "plate": "37m1o79i8"
+            }
+          ],
+          "dscore": 0.862,
+          "vehicle": {
+            "score": 0.835,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 156,
+              "ymin": 0,
+              "xmax": 439,
+              "ymax": 361
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 60,
+        "max_calls": 2500
+      },
+      "processing_time": 3147.432
+    }
+  },
+  {
+    "filename": "xemay272_jpg.rf.d1aa1b977bb27f48fd4790230a95308e.jpg",
+    "result": {
+      "filename": "xemay272_jpg.rf.d1aa1b977bb27f48fd4790230a95308e.jpg",
+      "timestamp": "2025-07-24 07:10:16.487652",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 247,
+            "ymin": 162,
+            "xmax": 350,
+            "ymax": 246
+          },
+          "plate": "59m121704",
+          "region": {
+            "code": "vn",
+            "score": 0.937
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59m121704"
+            },
+            {
+              "score": 0.894,
+              "plate": "59m1217o4"
+            },
+            {
+              "score": 0.894,
+              "plate": "59m12i704"
+            },
+            {
+              "score": 0.894,
+              "plate": "59mi21704"
+            },
+            {
+              "score": 0.788,
+              "plate": "59m12i7o4"
+            },
+            {
+              "score": 0.788,
+              "plate": "59mi217o4"
+            },
+            {
+              "score": 0.788,
+              "plate": "59mi2i704"
+            },
+            {
+              "score": 0.683,
+              "plate": "59mi2i7o4"
+            }
+          ],
+          "dscore": 0.872,
+          "vehicle": {
+            "score": 0.759,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 45,
+              "ymin": 0,
+              "xmax": 441,
+              "ymax": 377
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 61,
+        "max_calls": 2500
+      },
+      "processing_time": 3121.884
+    }
+  },
+  {
+    "filename": "xemay274_jpg.rf.8e25f89fdcea2cd3732d13160cdfe784.jpg",
+    "result": {
+      "filename": "xemay274_jpg.rf.8e25f89fdcea2cd3732d13160cdfe784.jpg",
+      "timestamp": "2025-07-24 07:10:19.628349",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 274,
+            "ymin": 201,
+            "xmax": 387,
+            "ymax": 302
+          },
+          "plate": "59c139780",
+          "region": {
+            "code": "vn",
+            "score": 0.862
+          },
+          "score": 0.969,
+          "candidates": [
+            {
+              "score": 0.969,
+              "plate": "59c139780"
+            },
+            {
+              "score": 0.881,
+              "plate": "59c139480"
+            },
+            {
+              "score": 0.875,
+              "plate": "59c139700"
+            },
+            {
+              "score": 0.874,
+              "plate": "59c1397b0"
+            },
+            {
+              "score": 0.874,
+              "plate": "59c1397o0"
+            },
+            {
+              "score": 0.87,
+              "plate": "59c13978o"
+            },
+            {
+              "score": 0.863,
+              "plate": "59ci39780"
+            },
+            {
+              "score": 0.787,
+              "plate": "59c139400"
+            },
+            {
+              "score": 0.787,
+              "plate": "59c1394b0"
+            },
+            {
+              "score": 0.787,
+              "plate": "59c1394o0"
+            }
+          ],
+          "dscore": 0.902,
+          "vehicle": {
+            "score": 0.793,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 184,
+              "ymin": 0,
+              "xmax": 463,
+              "ymax": 395
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 62,
+        "max_calls": 2500
+      },
+      "processing_time": 3201.871
+    }
+  },
+  {
+    "filename": "xemay295_jpg.rf.cce52bb8031707a3987d91ab1bc6b45d.jpg",
+    "result": {
+      "filename": "xemay295_jpg.rf.cce52bb8031707a3987d91ab1bc6b45d.jpg",
+      "timestamp": "2025-07-24 07:10:22.848328",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 154,
+            "ymin": 112,
+            "xmax": 255,
+            "ymax": 203
+          },
+          "plate": "59e164141",
+          "region": {
+            "code": "vn",
+            "score": 0.878
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59e164141"
+            },
+            {
+              "score": 0.894,
+              "plate": "59e16414i"
+            },
+            {
+              "score": 0.894,
+              "plate": "59e164i41"
+            },
+            {
+              "score": 0.894,
+              "plate": "59ei64141"
+            },
+            {
+              "score": 0.788,
+              "plate": "59e164i4i"
+            },
+            {
+              "score": 0.788,
+              "plate": "59ei6414i"
+            },
+            {
+              "score": 0.788,
+              "plate": "59ei64i41"
+            },
+            {
+              "score": 0.683,
+              "plate": "59ei64i4i"
+            }
+          ],
+          "dscore": 0.867,
+          "vehicle": {
+            "score": 0.899,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 1,
+              "ymin": 0,
+              "xmax": 374,
+              "ymax": 382
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 63,
+        "max_calls": 2500
+      },
+      "processing_time": 3165.22
+    }
+  },
+  {
+    "filename": "xemay302_jpg.rf.05e8992072a52a08f09a8972e6e1b9a3.jpg",
+    "result": {
+      "filename": "xemay302_jpg.rf.05e8992072a52a08f09a8972e6e1b9a3.jpg",
+      "timestamp": "2025-07-24 07:10:26.031847",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 205,
+            "ymin": 146,
+            "xmax": 298,
+            "ymax": 224
+          },
+          "plate": "59h170791",
+          "region": {
+            "code": "vn",
+            "score": 0.86
+          },
+          "score": 0.959,
+          "candidates": [
+            {
+              "score": 0.959,
+              "plate": "59h170791"
+            },
+            {
+              "score": 0.908,
+              "plate": "59m170791"
+            },
+            {
+              "score": 0.853,
+              "plate": "59h17079i"
+            },
+            {
+              "score": 0.853,
+              "plate": "59h17o791"
+            },
+            {
+              "score": 0.853,
+              "plate": "59hi70791"
+            },
+            {
+              "score": 0.802,
+              "plate": "59m17079i"
+            },
+            {
+              "score": 0.802,
+              "plate": "59m17o791"
+            },
+            {
+              "score": 0.802,
+              "plate": "59mi70791"
+            },
+            {
+              "score": 0.748,
+              "plate": "59h17o79i"
+            },
+            {
+              "score": 0.748,
+              "plate": "59hi7079i"
+            }
+          ],
+          "dscore": 0.9,
+          "vehicle": {
+            "score": 0.648,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 11,
+              "ymin": 0,
+              "xmax": 395,
+              "ymax": 341
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 64,
+        "max_calls": 2500
+      },
+      "processing_time": 3182.134
+    }
+  },
+  {
+    "filename": "xemay312_jpg.rf.7582f5f0de21211f5e2fa5e72466bd2a.jpg",
+    "result": {
+      "filename": "xemay312_jpg.rf.7582f5f0de21211f5e2fa5e72466bd2a.jpg",
+      "timestamp": "2025-07-24 07:10:29.230898",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 233,
+            "ymin": 212,
+            "xmax": 344,
+            "ymax": 302
+          },
+          "plate": "59l178582",
+          "region": {
+            "code": "vn",
+            "score": 0.858
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59l178582"
+            },
+            {
+              "score": 0.894,
+              "plate": "59l1785b2"
+            },
+            {
+              "score": 0.894,
+              "plate": "59l17b582"
+            },
+            {
+              "score": 0.894,
+              "plate": "59li78582"
+            },
+            {
+              "score": 0.788,
+              "plate": "59l17b5b2"
+            },
+            {
+              "score": 0.788,
+              "plate": "59li785b2"
+            },
+            {
+              "score": 0.788,
+              "plate": "59li7b582"
+            },
+            {
+              "score": 0.683,
+              "plate": "59li7b5b2"
+            }
+          ],
+          "dscore": 0.898,
+          "vehicle": {
+            "score": 0.794,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 119,
+              "ymin": 0,
+              "xmax": 422,
+              "ymax": 400
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 65,
+        "max_calls": 2500
+      },
+      "processing_time": 3329.586
+    }
+  },
+  {
+    "filename": "xemay317_jpg.rf.351d6e0fa659f72da80d2f6090cb9a4b.jpg",
+    "result": {
+      "filename": "xemay317_jpg.rf.351d6e0fa659f72da80d2f6090cb9a4b.jpg",
+      "timestamp": "2025-07-24 07:10:32.578325",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 194,
+            "ymin": 130,
+            "xmax": 296,
+            "ymax": 219
+          },
+          "plate": "60b736638",
+          "region": {
+            "code": "vn",
+            "score": 0.822
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "60b736638"
+            },
+            {
+              "score": 0.894,
+              "plate": "60b73663b"
+            },
+            {
+              "score": 0.894,
+              "plate": "608736638"
+            },
+            {
+              "score": 0.894,
+              "plate": "6ob736638"
+            },
+            {
+              "score": 0.789,
+              "plate": "6ob73663b"
+            },
+            {
+              "score": 0.788,
+              "plate": "60873663b"
+            },
+            {
+              "score": 0.788,
+              "plate": "6o8736638"
+            },
+            {
+              "score": 0.683,
+              "plate": "6o873663b"
+            }
+          ],
+          "dscore": 0.883,
+          "vehicle": {
+            "score": 0.812,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 92,
+              "ymin": 1,
+              "xmax": 414,
+              "ymax": 383
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 66,
+        "max_calls": 2500
+      },
+      "processing_time": 3324.862
+    }
+  },
+  {
+    "filename": "xemay350_jpg.rf.eadb82bea0ae2fb232cbe115a62642c0.jpg",
+    "result": {
+      "filename": "xemay350_jpg.rf.eadb82bea0ae2fb232cbe115a62642c0.jpg",
+      "timestamp": "2025-07-24 07:10:35.921278",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 269,
+            "ymin": 129,
+            "xmax": 376,
+            "ymax": 221
+          },
+          "plate": "51h25512",
+          "region": {
+            "code": "vn",
+            "score": 0.69
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "51h25512"
+            },
+            {
+              "score": 0.881,
+              "plate": "51h255i2"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ih25512"
+            },
+            {
+              "score": 0.762,
+              "plate": "5ih255i2"
+            }
+          ],
+          "dscore": 0.893,
+          "vehicle": {
+            "score": 0.873,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 155,
+              "ymin": 1,
+              "xmax": 475,
+              "ymax": 393
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 67,
+        "max_calls": 2500
+      },
+      "processing_time": 3311.078
+    }
+  },
+  {
+    "filename": "xemay41_jpg.rf.8d0e91f4b3d8c080d65430b60f25ed91.jpg",
+    "result": {
+      "filename": "xemay41_jpg.rf.8d0e91f4b3d8c080d65430b60f25ed91.jpg",
+      "timestamp": "2025-07-24 07:10:39.251219",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 264,
+            "ymin": 187,
+            "xmax": 371,
+            "ymax": 276
+          },
+          "plate": "65s21319",
+          "region": {
+            "code": "vn",
+            "score": 0.823
+          },
+          "score": 0.972,
+          "candidates": [
+            {
+              "score": 0.972,
+              "plate": "65s21319"
+            },
+            {
+              "score": 0.853,
+              "plate": "65s213i9"
+            },
+            {
+              "score": 0.853,
+              "plate": "65s2i319"
+            },
+            {
+              "score": 0.735,
+              "plate": "65s2i3i9"
+            }
+          ],
+          "dscore": 0.882,
+          "vehicle": {
+            "score": 0.807,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 144,
+              "ymin": 0,
+              "xmax": 449,
+              "ymax": 402
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 68,
+        "max_calls": 2500
+      },
+      "processing_time": 3371.422
+    }
+  },
+  {
+    "filename": "xemay48_jpg.rf.e3ef11537b86b30c7b67293a152f4c93.jpg",
+    "result": {
+      "filename": "xemay48_jpg.rf.e3ef11537b86b30c7b67293a152f4c93.jpg",
+      "timestamp": "2025-07-24 07:10:42.642168",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 254,
+            "ymin": 207,
+            "xmax": 344,
+            "ymax": 270
+          },
+          "plate": "51r56273",
+          "region": {
+            "code": "vn",
+            "score": 0.578
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "51r56273"
+            },
+            {
+              "score": 0.881,
+              "plate": "5ir56273"
+            }
+          ],
+          "dscore": 0.916,
+          "vehicle": {
+            "score": 0.803,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 145,
+              "ymin": 0,
+              "xmax": 417,
+              "ymax": 337
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 69,
+        "max_calls": 2500
+      },
+      "processing_time": 3405.047
+    }
+  },
+  {
+    "filename": "xemay55_jpg.rf.8864704c47238add98eab69733cd6992.jpg",
+    "result": {
+      "filename": "xemay55_jpg.rf.8864704c47238add98eab69733cd6992.jpg",
+      "timestamp": "2025-07-24 07:10:46.064886",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 214,
+            "ymin": 157,
+            "xmax": 297,
+            "ymax": 230
+          },
+          "plate": "62v16814",
+          "region": {
+            "code": "vn",
+            "score": 0.691
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "62v16814"
+            },
+            {
+              "score": 0.881,
+              "plate": "62v168i4"
+            },
+            {
+              "score": 0.881,
+              "plate": "62v16b14"
+            },
+            {
+              "score": 0.881,
+              "plate": "62vi6814"
+            },
+            {
+              "score": 0.762,
+              "plate": "62v16bi4"
+            },
+            {
+              "score": 0.762,
+              "plate": "62vi68i4"
+            },
+            {
+              "score": 0.762,
+              "plate": "62vi6b14"
+            },
+            {
+              "score": 0.644,
+              "plate": "62vi6bi4"
+            }
+          ],
+          "dscore": 0.847,
+          "vehicle": {
+            "score": 0.872,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 144,
+              "ymin": 0,
+              "xmax": 360,
+              "ymax": 350
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 70,
+        "max_calls": 2500
+      },
+      "processing_time": 3209.488
+    }
+  },
+  {
+    "filename": "xemay61_jpg.rf.6387b765910a255045a55e6c51585a76.jpg",
+    "result": {
+      "filename": "xemay61_jpg.rf.6387b765910a255045a55e6c51585a76.jpg",
+      "timestamp": "2025-07-24 07:10:49.291809",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 251,
+            "ymin": 151,
+            "xmax": 339,
+            "ymax": 223
+          },
+          "plate": "59u139619",
+          "region": {
+            "code": "vn",
+            "score": 0.894
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59u139619"
+            },
+            {
+              "score": 0.894,
+              "plate": "59u1396i9"
+            },
+            {
+              "score": 0.893,
+              "plate": "59ui39619"
+            },
+            {
+              "score": 0.788,
+              "plate": "59ui396i9"
+            }
+          ],
+          "dscore": 0.901,
+          "vehicle": {
+            "score": 0.873,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 163,
+              "ymin": 2,
+              "xmax": 419,
+              "ymax": 341
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 71,
+        "max_calls": 2500
+      },
+      "processing_time": 3211.932
+    }
+  },
+  {
+    "filename": "xemay6_jpg.rf.cad7d47bf85c366cc76910dccbeeabc5.jpg",
+    "result": {
+      "filename": "xemay6_jpg.rf.cad7d47bf85c366cc76910dccbeeabc5.jpg",
+      "timestamp": "2025-07-24 07:10:52.524084",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 286,
+            "ymin": 213,
+            "xmax": 380,
+            "ymax": 282
+          },
+          "plate": "52u78693",
+          "region": {
+            "code": "vn",
+            "score": 0.793
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "52u78693"
+            },
+            {
+              "score": 0.881,
+              "plate": "52u7b693"
+            }
+          ],
+          "dscore": 0.907,
+          "vehicle": {
+            "score": 0.817,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 165,
+              "ymin": 0,
+              "xmax": 458,
+              "ymax": 332
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 72,
+        "max_calls": 2500
+      },
+      "processing_time": 3198.344
+    }
+  },
+  {
+    "filename": "xemay92_jpg.rf.191cd1143981955d56c50c88bf2b513e.jpg",
+    "result": {
+      "filename": "xemay92_jpg.rf.191cd1143981955d56c50c88bf2b513e.jpg",
+      "timestamp": "2025-07-24 07:10:55.741519",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 246,
+            "ymin": 144,
+            "xmax": 330,
+            "ymax": 209
+          },
+          "plate": "59l154063",
+          "region": {
+            "code": "vn",
+            "score": 0.873
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "59l154063"
+            },
+            {
+              "score": 0.894,
+              "plate": "59l154o63"
+            },
+            {
+              "score": 0.894,
+              "plate": "59li54063"
+            },
+            {
+              "score": 0.788,
+              "plate": "59li54o63"
+            }
+          ],
+          "dscore": 0.896,
+          "vehicle": {
+            "score": 0.763,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 178,
+              "ymin": 0,
+              "xmax": 378,
+              "ymax": 295
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 73,
+        "max_calls": 2500
+      },
+      "processing_time": 3178.487
+    }
+  },
+  {
+    "filename": "xemayBigPlate0_jpg.rf.efd6a33f756ba02b9d2bd221323dcbdc.jpg",
+    "result": {
+      "filename": "xemayBigPlate0_jpg.rf.efd6a33f756ba02b9d2bd221323dcbdc.jpg",
+      "timestamp": "2025-07-24 07:10:58.939979",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 215,
+            "ymin": 202,
+            "xmax": 378,
+            "ymax": 316
+          },
+          "plate": "65l100780",
+          "region": {
+            "code": "vn",
+            "score": 0.89
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "65l100780"
+            },
+            {
+              "score": 0.894,
+              "plate": "65l10078o"
+            },
+            {
+              "score": 0.894,
+              "plate": "65l1007b0"
+            },
+            {
+              "score": 0.894,
+              "plate": "65l10o780"
+            },
+            {
+              "score": 0.894,
+              "plate": "65l1o0780"
+            },
+            {
+              "score": 0.894,
+              "plate": "65li00780"
+            },
+            {
+              "score": 0.789,
+              "plate": "65l1007bo"
+            },
+            {
+              "score": 0.789,
+              "plate": "65l10o78o"
+            },
+            {
+              "score": 0.789,
+              "plate": "65l10o7b0"
+            },
+            {
+              "score": 0.789,
+              "plate": "65l1o078o"
+            }
+          ],
+          "dscore": 0.927,
+          "vehicle": {
+            "score": 0.782,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 164,
+              "ymin": 1,
+              "xmax": 626,
+              "ymax": 434
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 74,
+        "max_calls": 2500
+      },
+      "processing_time": 5968.987
+    }
+  },
+  {
+    "filename": "xemayBigPlate106_jpg.rf.978e7d969481a418ed8978eba396a169.jpg",
+    "result": {
+      "filename": "xemayBigPlate106_jpg.rf.978e7d969481a418ed8978eba396a169.jpg",
+      "timestamp": "2025-07-24 07:11:04.931978",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 157,
+            "ymin": 265,
+            "xmax": 344,
+            "ymax": 388
+          },
+          "plate": "65b113144",
+          "region": {
+            "code": "vn",
+            "score": 0.842
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "65b113144"
+            },
+            {
+              "score": 0.894,
+              "plate": "65b113i44"
+            },
+            {
+              "score": 0.894,
+              "plate": "65b1i3144"
+            },
+            {
+              "score": 0.894,
+              "plate": "65bi13144"
+            },
+            {
+              "score": 0.894,
+              "plate": "658113144"
+            },
+            {
+              "score": 0.788,
+              "plate": "65b1i3i44"
+            },
+            {
+              "score": 0.788,
+              "plate": "65bi13i44"
+            },
+            {
+              "score": 0.788,
+              "plate": "65bii3144"
+            },
+            {
+              "score": 0.788,
+              "plate": "658113i44"
+            },
+            {
+              "score": 0.788,
+              "plate": "6581i3144"
+            }
+          ],
+          "dscore": 0.927,
+          "vehicle": {
+            "score": 0.89,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 114,
+              "ymin": 1,
+              "xmax": 460,
+              "ymax": 463
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 75,
+        "max_calls": 2500
+      },
+      "processing_time": 6094.816
+    }
+  },
+  {
+    "filename": "xemayBigPlate107_jpg.rf.64f4da94a965e78d20d7e4250c1540cb.jpg",
+    "result": {
+      "filename": "xemayBigPlate107_jpg.rf.64f4da94a965e78d20d7e4250c1540cb.jpg",
+      "timestamp": "2025-07-24 07:11:11.051303",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 218,
+            "ymin": 219,
+            "xmax": 361,
+            "ymax": 325
+          },
+          "plate": "83s30735",
+          "region": {
+            "code": "vn",
+            "score": 0.837
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "83s30735"
+            },
+            {
+              "score": 0.881,
+              "plate": "83s3o735"
+            },
+            {
+              "score": 0.881,
+              "plate": "b3s30735"
+            },
+            {
+              "score": 0.762,
+              "plate": "b3s3o735"
+            }
+          ],
+          "dscore": 0.913,
+          "vehicle": {
+            "score": 0.848,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 180,
+              "ymin": 0,
+              "xmax": 466,
+              "ymax": 466
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 76,
+        "max_calls": 2500
+      },
+      "processing_time": 3646.709
+    }
+  },
+  {
+    "filename": "xemayBigPlate10_jpg.rf.a13467cf4fa545097e587ce6c95aeea3.jpg",
+    "result": {
+      "filename": "xemayBigPlate10_jpg.rf.a13467cf4fa545097e587ce6c95aeea3.jpg",
+      "timestamp": "2025-07-24 07:11:14.722511",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 217,
+            "ymin": 229,
+            "xmax": 368,
+            "ymax": 333
+          },
+          "plate": "67v15283",
+          "region": {
+            "code": "vn",
+            "score": 0.37
+          },
+          "score": 0.996,
+          "candidates": [
+            {
+              "score": 0.996,
+              "plate": "67v15283"
+            },
+            {
+              "score": 0.881,
+              "plate": "67v152b3"
+            },
+            {
+              "score": 0.877,
+              "plate": "67vi5283"
+            },
+            {
+              "score": 0.762,
+              "plate": "67vi52b3"
+            }
+          ],
+          "dscore": 0.917,
+          "vehicle": {
+            "score": 0.851,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 155,
+              "ymin": 2,
+              "xmax": 454,
+              "ymax": 467
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 77,
+        "max_calls": 2500
+      },
+      "processing_time": 3337.948
+    }
+  },
+  {
+    "filename": "xemayBigPlate11_jpg.rf.9c5eaa4b40b22f999b3817f4dcc62440.jpg",
+    "result": {
+      "filename": "xemayBigPlate11_jpg.rf.9c5eaa4b40b22f999b3817f4dcc62440.jpg",
+      "timestamp": "2025-07-24 07:11:18.081368",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 229,
+            "ymin": 221,
+            "xmax": 370,
+            "ymax": 316
+          },
+          "plate": "65x45189",
+          "region": {
+            "code": "vn",
+            "score": 0.818
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "65x45189"
+            },
+            {
+              "score": 0.88,
+              "plate": "65x451b9"
+            },
+            {
+              "score": 0.88,
+              "plate": "65x45i89"
+            },
+            {
+              "score": 0.762,
+              "plate": "65x45ib9"
+            }
+          ],
+          "dscore": 0.916,
+          "vehicle": {
+            "score": 0.811,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 182,
+              "ymin": 0,
+              "xmax": 452,
+              "ymax": 462
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 78,
+        "max_calls": 2500
+      },
+      "processing_time": 3217.007
+    }
+  },
+  {
+    "filename": "xemayBigPlate122_jpg.rf.fed269fe7d11204fe203bd252719b37f.jpg",
+    "result": {
+      "filename": "xemayBigPlate122_jpg.rf.fed269fe7d11204fe203bd252719b37f.jpg",
+      "timestamp": "2025-07-24 07:11:21.319447",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 227,
+            "ymin": 211,
+            "xmax": 387,
+            "ymax": 327
+          },
+          "plate": "95m21126",
+          "region": {
+            "code": "vn",
+            "score": 0.803
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "95m21126"
+            },
+            {
+              "score": 0.881,
+              "plate": "95m21i26"
+            },
+            {
+              "score": 0.881,
+              "plate": "95m2i126"
+            },
+            {
+              "score": 0.762,
+              "plate": "95m2ii26"
+            }
+          ],
+          "dscore": 0.926,
+          "vehicle": {
+            "score": 0.723,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 154,
+              "ymin": 0,
+              "xmax": 470,
+              "ymax": 453
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 79,
+        "max_calls": 2500
+      },
+      "processing_time": 5316.194
+    }
+  },
+  {
+    "filename": "xemayBigPlate12_jpg.rf.7baa2d8353e5f00574a0479d050780ae.jpg",
+    "result": {
+      "filename": "xemayBigPlate12_jpg.rf.7baa2d8353e5f00574a0479d050780ae.jpg",
+      "timestamp": "2025-07-24 07:11:26.657110",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 220,
+            "ymin": 222,
+            "xmax": 364,
+            "ymax": 335
+          },
+          "plate": "65b117209",
+          "region": {
+            "code": "vn",
+            "score": 0.773
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "65b117209"
+            },
+            {
+              "score": 0.894,
+              "plate": "65b1172o9"
+            },
+            {
+              "score": 0.894,
+              "plate": "65b1i7209"
+            },
+            {
+              "score": 0.894,
+              "plate": "65bi17209"
+            },
+            {
+              "score": 0.894,
+              "plate": "658117209"
+            },
+            {
+              "score": 0.789,
+              "plate": "65b1i72o9"
+            },
+            {
+              "score": 0.789,
+              "plate": "65bi172o9"
+            },
+            {
+              "score": 0.789,
+              "plate": "65bii7209"
+            },
+            {
+              "score": 0.789,
+              "plate": "658i17209"
+            },
+            {
+              "score": 0.788,
+              "plate": "6581172o9"
+            }
+          ],
+          "dscore": 0.937,
+          "vehicle": {
+            "score": 0.827,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 184,
+              "ymin": 0,
+              "xmax": 506,
+              "ymax": 469
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 80,
+        "max_calls": 2500
+      },
+      "processing_time": 6492.5
+    }
+  },
+  {
+    "filename": "xemayBigPlate147_jpg.rf.cd53fea449b9803d906b59d6ffb5c8a7.jpg",
+    "result": {
+      "filename": "xemayBigPlate147_jpg.rf.cd53fea449b9803d906b59d6ffb5c8a7.jpg",
+      "timestamp": "2025-07-24 07:11:33.171565",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 183,
+            "ymin": 181,
+            "xmax": 356,
+            "ymax": 305
+          },
+          "plate": "83p154417",
+          "region": {
+            "code": "vn",
+            "score": 0.824
+          },
+          "score": 0.994,
+          "candidates": [
+            {
+              "score": 0.994,
+              "plate": "83p154417"
+            },
+            {
+              "score": 0.893,
+              "plate": "b3p154417"
+            },
+            {
+              "score": 0.888,
+              "plate": "83p1544i7"
+            },
+            {
+              "score": 0.888,
+              "plate": "83pi54417"
+            },
+            {
+              "score": 0.788,
+              "plate": "b3p1544i7"
+            },
+            {
+              "score": 0.788,
+              "plate": "b3pi54417"
+            },
+            {
+              "score": 0.783,
+              "plate": "83pi544i7"
+            },
+            {
+              "score": 0.683,
+              "plate": "b3pi544i7"
+            }
+          ],
+          "dscore": 0.914,
+          "vehicle": {
+            "score": 0.807,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 72,
+              "ymin": 3,
+              "xmax": 449,
+              "ymax": 447
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 81,
+        "max_calls": 2500
+      },
+      "processing_time": 3632.49
+    }
+  },
+  {
+    "filename": "xemayBigPlate150_jpg.rf.d1c65c2b77fba415af6aa7d7b7263db0.jpg",
+    "result": {
+      "filename": "xemayBigPlate150_jpg.rf.d1c65c2b77fba415af6aa7d7b7263db0.jpg",
+      "timestamp": "2025-07-24 07:11:36.830350",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 206,
+            "ymin": 141,
+            "xmax": 384,
+            "ymax": 265
+          },
+          "plate": "69u10561",
+          "region": {
+            "code": "vn",
+            "score": 0.867
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "69u10561"
+            },
+            {
+              "score": 0.881,
+              "plate": "69u1056i"
+            },
+            {
+              "score": 0.881,
+              "plate": "69u1o561"
+            },
+            {
+              "score": 0.881,
+              "plate": "69ui0561"
+            },
+            {
+              "score": 0.762,
+              "plate": "69u1o56i"
+            },
+            {
+              "score": 0.762,
+              "plate": "69ui056i"
+            },
+            {
+              "score": 0.762,
+              "plate": "69uio561"
+            },
+            {
+              "score": 0.643,
+              "plate": "69uio56i"
+            }
+          ],
+          "dscore": 0.931,
+          "vehicle": {
+            "score": 0.774,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 36,
+              "ymin": 1,
+              "xmax": 514,
+              "ymax": 404
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 82,
+        "max_calls": 2500
+      },
+      "processing_time": 3391.125
+    }
+  },
+  {
+    "filename": "xemayBigPlate158_jpg.rf.4b91857f5b53e24ac8d7bc9f67d7c3f8.jpg",
+    "result": {
+      "filename": "xemayBigPlate158_jpg.rf.4b91857f5b53e24ac8d7bc9f67d7c3f8.jpg",
+      "timestamp": "2025-07-24 07:11:40.251778",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 138,
+            "ymin": 110,
+            "xmax": 323,
+            "ymax": 247
+          },
+          "plate": "64t17822",
+          "region": {
+            "code": "vn",
+            "score": 0.554
+          },
+          "score": 0.977,
+          "candidates": [
+            {
+              "score": 0.977,
+              "plate": "64t17822"
+            },
+            {
+              "score": 0.858,
+              "plate": "64t17b22"
+            },
+            {
+              "score": 0.858,
+              "plate": "64ti7822"
+            },
+            {
+              "score": 0.739,
+              "plate": "64ti7b22"
+            }
+          ],
+          "dscore": 0.915,
+          "vehicle": {
+            "score": 0.592,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 2,
+              "ymin": 3,
+              "xmax": 639,
+              "ymax": 430
+            }
+          }
+        },
+        {
+          "box": {
+            "xmin": 584,
+            "ymin": 348,
+            "xmax": 639,
+            "ymax": 434
+          },
+          "plate": "615",
+          "region": {
+            "code": "unknown",
+            "score": 0.01
+          },
+          "score": 0.737,
+          "candidates": [
+            {
+              "score": 0.737,
+              "plate": "615"
+            },
+            {
+              "score": 0.622,
+              "plate": "815"
+            },
+            {
+              "score": 0.604,
+              "plate": "65"
+            },
+            {
+              "score": 0.574,
+              "plate": "6157"
+            },
+            {
+              "score": 0.563,
+              "plate": "b15"
+            },
+            {
+              "score": 0.535,
+              "plate": "6i5"
+            },
+            {
+              "score": 0.489,
+              "plate": "85"
+            },
+            {
+              "score": 0.488,
+              "plate": "8157"
+            },
+            {
+              "score": 0.475,
+              "plate": "657"
+            },
+            {
+              "score": 0.444,
+              "plate": "b157"
+            }
+          ],
+          "dscore": 0.596,
+          "vehicle": {
+            "score": 0.0,
+            "type": "Unknown",
+            "box": {
+              "xmin": 0,
+              "ymin": 0,
+              "xmax": 0,
+              "ymax": 0
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 83,
+        "max_calls": 2500
+      },
+      "processing_time": 6582.662
+    }
+  },
+  {
+    "filename": "xemayBigPlate174_jpg.rf.ae1d39197fd2508becf07f82649088d3.jpg",
+    "result": {
+      "filename": "xemayBigPlate174_jpg.rf.ae1d39197fd2508becf07f82649088d3.jpg",
+      "timestamp": "2025-07-24 07:11:46.858257",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 187,
+            "ymin": 186,
+            "xmax": 391,
+            "ymax": 330
+          },
+          "plate": "67s23990",
+          "region": {
+            "code": "vn",
+            "score": 0.76
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "67s23990"
+            },
+            {
+              "score": 0.88,
+              "plate": "67s2399o"
+            }
+          ],
+          "dscore": 0.895,
+          "vehicle": {
+            "score": 0.678,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 73,
+              "ymin": 0,
+              "xmax": 582,
+              "ymax": 468
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 84,
+        "max_calls": 2500
+      },
+      "processing_time": 3210.708
+    }
+  },
+  {
+    "filename": "xemayBigPlate176_jpg.rf.02a090be1d54d9bd5f3035fb63c3cb98.jpg",
+    "result": {
+      "filename": "xemayBigPlate176_jpg.rf.02a090be1d54d9bd5f3035fb63c3cb98.jpg",
+      "timestamp": "2025-07-24 07:11:50.089186",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 224,
+            "ymin": 85,
+            "xmax": 404,
+            "ymax": 212
+          },
+          "plate": "66m19536",
+          "region": {
+            "code": "vn",
+            "score": 0.691
+          },
+          "score": 0.997,
+          "candidates": [
+            {
+              "score": 0.997,
+              "plate": "66m19536"
+            },
+            {
+              "score": 0.878,
+              "plate": "66mi9536"
+            }
+          ],
+          "dscore": 0.912,
+          "vehicle": {
+            "score": 0.477,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 32,
+              "ymin": 0,
+              "xmax": 635,
+              "ymax": 423
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 85,
+        "max_calls": 2500
+      },
+      "processing_time": 3178.91
+    }
+  },
+  {
+    "filename": "xemayBigPlate184_jpg.rf.a1a1268fea824916841d7626a5f9ae57.jpg",
+    "result": {
+      "filename": "xemayBigPlate184_jpg.rf.a1a1268fea824916841d7626a5f9ae57.jpg",
+      "timestamp": "2025-07-24 07:11:53.289132",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 145,
+            "ymin": 115,
+            "xmax": 465,
+            "ymax": 349
+          },
+          "plate": "60u14632",
+          "region": {
+            "code": "vn",
+            "score": 0.59
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "60u14632"
+            },
+            {
+              "score": 0.881,
+              "plate": "60ui4632"
+            },
+            {
+              "score": 0.881,
+              "plate": "6ou14632"
+            },
+            {
+              "score": 0.762,
+              "plate": "6oui4632"
+            }
+          ],
+          "dscore": 0.864,
+          "vehicle": {
+            "score": 0.209,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 0,
+              "ymin": 0,
+              "xmax": 636,
+              "ymax": 482
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 86,
+        "max_calls": 2500
+      },
+      "processing_time": 3168.713
+    }
+  },
+  {
+    "filename": "xemayBigPlate187_jpg.rf.3d2084ac6d14e7360a0039185a50761e.jpg",
+    "result": {
+      "filename": "xemayBigPlate187_jpg.rf.3d2084ac6d14e7360a0039185a50761e.jpg",
+      "timestamp": "2025-07-24 07:11:56.478585",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 210,
+            "ymin": 152,
+            "xmax": 413,
+            "ymax": 296
+          },
+          "plate": "71h80820",
+          "region": {
+            "code": "vn",
+            "score": 0.615
+          },
+          "score": 0.992,
+          "candidates": [
+            {
+              "score": 0.992,
+              "plate": "71h80820"
+            },
+            {
+              "score": 0.879,
+              "plate": "71h8o820"
+            },
+            {
+              "score": 0.875,
+              "plate": "71h8082o"
+            },
+            {
+              "score": 0.874,
+              "plate": "71h80b20"
+            },
+            {
+              "score": 0.874,
+              "plate": "71hb0820"
+            },
+            {
+              "score": 0.874,
+              "plate": "7ih80820"
+            },
+            {
+              "score": 0.762,
+              "plate": "71h8o82o"
+            },
+            {
+              "score": 0.761,
+              "plate": "71h8ob20"
+            },
+            {
+              "score": 0.761,
+              "plate": "71hbo820"
+            },
+            {
+              "score": 0.761,
+              "plate": "7ih8o820"
+            }
+          ],
+          "dscore": 0.915,
+          "vehicle": {
+            "score": 0.558,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 19,
+              "ymin": 0,
+              "xmax": 624,
+              "ymax": 477
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 87,
+        "max_calls": 2500
+      },
+      "processing_time": 5225.079
+    }
+  },
+  {
+    "filename": "xemayBigPlate19_jpg.rf.cf896e737c9ded6638b1c3a713d963a6.jpg",
+    "result": {
+      "filename": "xemayBigPlate19_jpg.rf.cf896e737c9ded6638b1c3a713d963a6.jpg",
+      "timestamp": "2025-07-24 07:12:01.724454",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 247,
+            "ymin": 218,
+            "xmax": 382,
+            "ymax": 312
+          },
+          "plate": "68v22855",
+          "region": {
+            "code": "vn",
+            "score": 0.602
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "68v22855"
+            },
+            {
+              "score": 0.881,
+              "plate": "68v22b55"
+            },
+            {
+              "score": 0.881,
+              "plate": "6bv22855"
+            },
+            {
+              "score": 0.762,
+              "plate": "6bv22b55"
+            }
+          ],
+          "dscore": 0.926,
+          "vehicle": {
+            "score": 0.751,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 145,
+              "ymin": 0,
+              "xmax": 492,
+              "ymax": 429
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 88,
+        "max_calls": 2500
+      },
+      "processing_time": 3165.394
+    }
+  },
+  {
+    "filename": "xemayBigPlate228_jpg.rf.9df9b828972ad59b0e88bff3d6f0b037.jpg",
+    "result": {
+      "filename": "xemayBigPlate228_jpg.rf.9df9b828972ad59b0e88bff3d6f0b037.jpg",
+      "timestamp": "2025-07-24 07:12:04.909736",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 130,
+            "ymin": 114,
+            "xmax": 471,
+            "ymax": 388
+          },
+          "plate": "65g104942",
+          "region": {
+            "code": "vn",
+            "score": 0.887
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "65g104942"
+            },
+            {
+              "score": 0.894,
+              "plate": "65g1o4942"
+            },
+            {
+              "score": 0.894,
+              "plate": "65gi04942"
+            },
+            {
+              "score": 0.789,
+              "plate": "65gio4942"
+            }
+          ],
+          "dscore": 0.869,
+          "vehicle": {
+            "score": 0.242,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 0,
+              "ymin": 7,
+              "xmax": 540,
+              "ymax": 463
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 89,
+        "max_calls": 2500
+      },
+      "processing_time": 3188.505
+    }
+  },
+  {
+    "filename": "xemayBigPlate241_jpg.rf.c8c808aac132abef08d123106ea558e5.jpg",
+    "result": {
+      "filename": "xemayBigPlate241_jpg.rf.c8c808aac132abef08d123106ea558e5.jpg",
+      "timestamp": "2025-07-24 07:12:08.118404",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 195,
+            "ymin": 217,
+            "xmax": 418,
+            "ymax": 376
+          },
+          "plate": "69f102341",
+          "region": {
+            "code": "vn",
+            "score": 0.863
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "69f102341"
+            },
+            {
+              "score": 0.894,
+              "plate": "69f1o2341"
+            },
+            {
+              "score": 0.893,
+              "plate": "69f10234i"
+            },
+            {
+              "score": 0.893,
+              "plate": "69fi02341"
+            },
+            {
+              "score": 0.788,
+              "plate": "69f1o234i"
+            },
+            {
+              "score": 0.788,
+              "plate": "69fi0234i"
+            },
+            {
+              "score": 0.788,
+              "plate": "69fio2341"
+            },
+            {
+              "score": 0.683,
+              "plate": "69fio234i"
+            }
+          ],
+          "dscore": 0.914,
+          "vehicle": {
+            "score": 0.558,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 21,
+              "ymin": 0,
+              "xmax": 547,
+              "ymax": 511
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 90,
+        "max_calls": 2500
+      },
+      "processing_time": 3138.905
+    }
+  },
+  {
+    "filename": "xemayBigPlate45_jpg.rf.0a94d2311e1726545ce4f06d0324dcd4.jpg",
+    "result": {
+      "filename": "xemayBigPlate45_jpg.rf.0a94d2311e1726545ce4f06d0324dcd4.jpg",
+      "timestamp": "2025-07-24 07:12:11.278066",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 284,
+            "ymin": 266,
+            "xmax": 443,
+            "ymax": 373
+          },
+          "plate": "66n27285",
+          "region": {
+            "code": "vn",
+            "score": 0.779
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "66n27285"
+            },
+            {
+              "score": 0.88,
+              "plate": "66n272b5"
+            }
+          ],
+          "dscore": 0.928,
+          "vehicle": {
+            "score": 0.679,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 16,
+              "ymin": 0,
+              "xmax": 571,
+              "ymax": 475
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 91,
+        "max_calls": 2500
+      },
+      "processing_time": 5180.265
+    }
+  },
+  {
+    "filename": "xemayBigPlate53_jpg.rf.0ef1e64975a4b9e69e51d0bf6eb4a1b2.jpg",
+    "result": {
+      "filename": "xemayBigPlate53_jpg.rf.0ef1e64975a4b9e69e51d0bf6eb4a1b2.jpg",
+      "timestamp": "2025-07-24 07:12:16.479724",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 217,
+            "ymin": 287,
+            "xmax": 360,
+            "ymax": 377
+          },
+          "plate": "69f68587",
+          "region": {
+            "code": "vn",
+            "score": 0.877
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "69f68587"
+            },
+            {
+              "score": 0.88,
+              "plate": "69f685b7"
+            },
+            {
+              "score": 0.88,
+              "plate": "69f6b587"
+            },
+            {
+              "score": 0.762,
+              "plate": "69f6b5b7"
+            }
+          ],
+          "dscore": 0.926,
+          "vehicle": {
+            "score": 0.867,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 173,
+              "ymin": 0,
+              "xmax": 436,
+              "ymax": 463
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 92,
+        "max_calls": 2500
+      },
+      "processing_time": 5249.37
+    }
+  },
+  {
+    "filename": "xemayBigPlate54_jpg.rf.60b716ee4a378884c518072df7196947.jpg",
+    "result": {
+      "filename": "xemayBigPlate54_jpg.rf.60b716ee4a378884c518072df7196947.jpg",
+      "timestamp": "2025-07-24 07:12:21.748322",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 215,
+            "ymin": 218,
+            "xmax": 361,
+            "ymax": 314
+          },
+          "plate": "95p22098",
+          "region": {
+            "code": "vn",
+            "score": 0.868
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "95p22098"
+            },
+            {
+              "score": 0.881,
+              "plate": "95p2209b"
+            },
+            {
+              "score": 0.881,
+              "plate": "95p22o98"
+            },
+            {
+              "score": 0.762,
+              "plate": "95p22o9b"
+            }
+          ],
+          "dscore": 0.913,
+          "vehicle": {
+            "score": 0.87,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 156,
+              "ymin": 0,
+              "xmax": 470,
+              "ymax": 462
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 93,
+        "max_calls": 2500
+      },
+      "processing_time": 3133.367
+    }
+  },
+  {
+    "filename": "xemayBigPlate64_jpg.rf.fd58fce6c04ac5f5462cb777b542633b.jpg",
+    "result": {
+      "filename": "xemayBigPlate64_jpg.rf.fd58fce6c04ac5f5462cb777b542633b.jpg",
+      "timestamp": "2025-07-24 07:12:24.901250",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 225,
+            "ymin": 271,
+            "xmax": 395,
+            "ymax": 389
+          },
+          "plate": "83c103322",
+          "region": {
+            "code": "vn",
+            "score": 0.911
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "83c103322"
+            },
+            {
+              "score": 0.894,
+              "plate": "83c1o3322"
+            },
+            {
+              "score": 0.894,
+              "plate": "83ci03322"
+            },
+            {
+              "score": 0.894,
+              "plate": "b3c103322"
+            },
+            {
+              "score": 0.789,
+              "plate": "83cio3322"
+            },
+            {
+              "score": 0.789,
+              "plate": "b3c1o3322"
+            },
+            {
+              "score": 0.788,
+              "plate": "b3ci03322"
+            },
+            {
+              "score": 0.683,
+              "plate": "b3cio3322"
+            }
+          ],
+          "dscore": 0.929,
+          "vehicle": {
+            "score": 0.837,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 145,
+              "ymin": 0,
+              "xmax": 476,
+              "ymax": 457
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 94,
+        "max_calls": 2500
+      },
+      "processing_time": 3150.695
+    }
+  },
+  {
+    "filename": "xemayBigPlate67_jpg.rf.f9069a4e2c01ddb90593b1e5ad42ec42.jpg",
+    "result": {
+      "filename": "xemayBigPlate67_jpg.rf.f9069a4e2c01ddb90593b1e5ad42ec42.jpg",
+      "timestamp": "2025-07-24 07:12:28.073363",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 136,
+            "ymin": 257,
+            "xmax": 306,
+            "ymax": 374
+          },
+          "plate": "65e103166",
+          "region": {
+            "code": "vn",
+            "score": 0.895
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "65e103166"
+            },
+            {
+              "score": 0.894,
+              "plate": "65e103i66"
+            },
+            {
+              "score": 0.894,
+              "plate": "65e1o3166"
+            },
+            {
+              "score": 0.894,
+              "plate": "65ei03166"
+            },
+            {
+              "score": 0.789,
+              "plate": "65e1o3i66"
+            },
+            {
+              "score": 0.789,
+              "plate": "65ei03i66"
+            },
+            {
+              "score": 0.789,
+              "plate": "65eio3166"
+            },
+            {
+              "score": 0.683,
+              "plate": "65eio3i66"
+            }
+          ],
+          "dscore": 0.927,
+          "vehicle": {
+            "score": 0.825,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 84,
+              "ymin": 0,
+              "xmax": 402,
+              "ymax": 463
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 95,
+        "max_calls": 2500
+      },
+      "processing_time": 5540.807
+    }
+  },
+  {
+    "filename": "xemayBigPlate70_jpg.rf.6fc8a12ea732fd20a94aa9d1f40611b0.jpg",
+    "result": {
+      "filename": "xemayBigPlate70_jpg.rf.6fc8a12ea732fd20a94aa9d1f40611b0.jpg",
+      "timestamp": "2025-07-24 07:12:33.637458",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 123,
+            "ymin": 246,
+            "xmax": 276,
+            "ymax": 338
+          },
+          "plate": "69f68587",
+          "region": {
+            "code": "vn",
+            "score": 0.88
+          },
+          "score": 0.998,
+          "candidates": [
+            {
+              "score": 0.998,
+              "plate": "69f68587"
+            },
+            {
+              "score": 0.88,
+              "plate": "69f685b7"
+            },
+            {
+              "score": 0.88,
+              "plate": "69f6b587"
+            },
+            {
+              "score": 0.762,
+              "plate": "69f6b5b7"
+            }
+          ],
+          "dscore": 0.906,
+          "vehicle": {
+            "score": 0.858,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 71,
+              "ymin": 2,
+              "xmax": 355,
+              "ymax": 457
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 96,
+        "max_calls": 2500
+      },
+      "processing_time": 7575.559
+    }
+  },
+  {
+    "filename": "xemayBigPlate76_jpg.rf.f75feaf50a21158cea54c363771c1a5a.jpg",
+    "result": {
+      "filename": "xemayBigPlate76_jpg.rf.f75feaf50a21158cea54c363771c1a5a.jpg",
+      "timestamp": "2025-07-24 07:12:41.238728",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 209,
+            "ymin": 283,
+            "xmax": 388,
+            "ymax": 410
+          },
+          "plate": "64k89380",
+          "region": {
+            "code": "vn",
+            "score": 0.663
+          },
+          "score": 0.949,
+          "candidates": [
+            {
+              "score": 0.949,
+              "plate": "64k89380"
+            },
+            {
+              "score": 0.831,
+              "plate": "64k8938o"
+            },
+            {
+              "score": 0.831,
+              "plate": "64k893b0"
+            },
+            {
+              "score": 0.831,
+              "plate": "64kb9380"
+            },
+            {
+              "score": 0.712,
+              "plate": "64k893bo"
+            },
+            {
+              "score": 0.712,
+              "plate": "64kb938o"
+            },
+            {
+              "score": 0.712,
+              "plate": "64kb93b0"
+            },
+            {
+              "score": 0.593,
+              "plate": "64kb93bo"
+            }
+          ],
+          "dscore": 0.927,
+          "vehicle": {
+            "score": 0.848,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 168,
+              "ymin": 2,
+              "xmax": 457,
+              "ymax": 470
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 97,
+        "max_calls": 2500
+      },
+      "processing_time": 6208.32
+    }
+  },
+  {
+    "filename": "xemayBigPlate89_jpg.rf.1d5b6bfaba97b07941be486336512a81.jpg",
+    "result": {
+      "filename": "xemayBigPlate89_jpg.rf.1d5b6bfaba97b07941be486336512a81.jpg",
+      "timestamp": "2025-07-24 07:12:47.473179",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 170,
+            "ymin": 231,
+            "xmax": 334,
+            "ymax": 353
+          },
+          "plate": "65b128919",
+          "region": {
+            "code": "vn",
+            "score": 0.851
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "65b128919"
+            },
+            {
+              "score": 0.894,
+              "plate": "65b1289i9"
+            },
+            {
+              "score": 0.894,
+              "plate": "65b12b919"
+            },
+            {
+              "score": 0.894,
+              "plate": "65bi28919"
+            },
+            {
+              "score": 0.894,
+              "plate": "658128919"
+            },
+            {
+              "score": 0.789,
+              "plate": "65b12b9i9"
+            },
+            {
+              "score": 0.789,
+              "plate": "65bi289i9"
+            },
+            {
+              "score": 0.789,
+              "plate": "65bi2b919"
+            },
+            {
+              "score": 0.789,
+              "plate": "6581289i9"
+            },
+            {
+              "score": 0.789,
+              "plate": "65812b919"
+            }
+          ],
+          "dscore": 0.931,
+          "vehicle": {
+            "score": 0.789,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 42,
+              "ymin": 1,
+              "xmax": 462,
+              "ymax": 478
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 98,
+        "max_calls": 2500
+      },
+      "processing_time": 7384.422
+    }
+  },
+  {
+    "filename": "xemayBigPlate94_jpg.rf.657c42d7da606b6968b51b407ffc6742.jpg",
+    "result": {
+      "filename": "xemayBigPlate94_jpg.rf.657c42d7da606b6968b51b407ffc6742.jpg",
+      "timestamp": "2025-07-24 07:12:54.882283",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 197,
+            "ymin": 209,
+            "xmax": 395,
+            "ymax": 348
+          },
+          "plate": "67c103786",
+          "region": {
+            "code": "vn",
+            "score": 0.895
+          },
+          "score": 0.982,
+          "candidates": [
+            {
+              "score": 0.982,
+              "plate": "67c103786"
+            },
+            {
+              "score": 0.876,
+              "plate": "67c1037b6"
+            },
+            {
+              "score": 0.876,
+              "plate": "67c1o3786"
+            },
+            {
+              "score": 0.876,
+              "plate": "67ci03786"
+            },
+            {
+              "score": 0.771,
+              "plate": "67c1o37b6"
+            },
+            {
+              "score": 0.771,
+              "plate": "67ci037b6"
+            },
+            {
+              "score": 0.771,
+              "plate": "67cio3786"
+            },
+            {
+              "score": 0.665,
+              "plate": "67cio37b6"
+            }
+          ],
+          "dscore": 0.916,
+          "vehicle": {
+            "score": 0.752,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 93,
+              "ymin": 1,
+              "xmax": 493,
+              "ymax": 466
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 99,
+        "max_calls": 2500
+      },
+      "processing_time": 3620.67
+    }
+  },
+  {
+    "filename": "xemayBigPlate95_jpg.rf.b2051117d750032b6deabcd2d444ad1e.jpg",
+    "result": {
+      "filename": "xemayBigPlate95_jpg.rf.b2051117d750032b6deabcd2d444ad1e.jpg",
+      "timestamp": "2025-07-24 07:12:58.526833",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 119,
+            "ymin": 213,
+            "xmax": 296,
+            "ymax": 335
+          },
+          "plate": "65u18790",
+          "region": {
+            "code": "vn",
+            "score": 0.714
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "65u18790"
+            },
+            {
+              "score": 0.881,
+              "plate": "65u1879o"
+            },
+            {
+              "score": 0.881,
+              "plate": "65u1b790"
+            },
+            {
+              "score": 0.881,
+              "plate": "65ui8790"
+            },
+            {
+              "score": 0.762,
+              "plate": "65u1b79o"
+            },
+            {
+              "score": 0.762,
+              "plate": "65ui879o"
+            },
+            {
+              "score": 0.762,
+              "plate": "65uib790"
+            },
+            {
+              "score": 0.644,
+              "plate": "65uib79o"
+            }
+          ],
+          "dscore": 0.926,
+          "vehicle": {
+            "score": 0.894,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 31,
+              "ymin": 1,
+              "xmax": 418,
+              "ymax": 475
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 100,
+        "max_calls": 2500
+      },
+      "processing_time": 6203.513
+    }
+  },
+  {
+    "filename": "xemayBigPlate96_jpg.rf.af6dbbd995c7acd30f903f0acc6a752b.jpg",
+    "result": {
+      "filename": "xemayBigPlate96_jpg.rf.af6dbbd995c7acd30f903f0acc6a752b.jpg",
+      "timestamp": "2025-07-24 07:13:04.752264",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 188,
+            "ymin": 232,
+            "xmax": 369,
+            "ymax": 356
+          },
+          "plate": "68t106653",
+          "region": {
+            "code": "vn",
+            "score": 0.907
+          },
+          "score": 1.0,
+          "candidates": [
+            {
+              "score": 1.0,
+              "plate": "68t106653"
+            },
+            {
+              "score": 0.894,
+              "plate": "68t1o6653"
+            },
+            {
+              "score": 0.894,
+              "plate": "68ti06653"
+            },
+            {
+              "score": 0.894,
+              "plate": "6bt106653"
+            },
+            {
+              "score": 0.789,
+              "plate": "68tio6653"
+            },
+            {
+              "score": 0.789,
+              "plate": "6bt1o6653"
+            },
+            {
+              "score": 0.789,
+              "plate": "6bti06653"
+            },
+            {
+              "score": 0.683,
+              "plate": "6btio6653"
+            }
+          ],
+          "dscore": 0.924,
+          "vehicle": {
+            "score": 0.721,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 120,
+              "ymin": 0,
+              "xmax": 491,
+              "ymax": 456
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 101,
+        "max_calls": 2500
+      },
+      "processing_time": 5748.235
+    }
+  },
+  {
+    "filename": "xemayBigPlate97_jpg.rf.cf26fc69b5ff7504f06f3caacf0627a7.jpg",
+    "result": {
+      "filename": "xemayBigPlate97_jpg.rf.cf26fc69b5ff7504f06f3caacf0627a7.jpg",
+      "timestamp": "2025-07-24 07:13:10.521007",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 167,
+            "ymin": 238,
+            "xmax": 370,
+            "ymax": 378
+          },
+          "plate": "94e101304",
+          "region": {
+            "code": "vn",
+            "score": 0.898
+          },
+          "score": 0.992,
+          "candidates": [
+            {
+              "score": 0.992,
+              "plate": "94e101304"
+            },
+            {
+              "score": 0.894,
+              "plate": "94ei01304"
+            },
+            {
+              "score": 0.886,
+              "plate": "94e1013o4"
+            },
+            {
+              "score": 0.886,
+              "plate": "94e10i304"
+            },
+            {
+              "score": 0.886,
+              "plate": "94e1o1304"
+            },
+            {
+              "score": 0.789,
+              "plate": "94ei013o4"
+            },
+            {
+              "score": 0.789,
+              "plate": "94ei0i304"
+            },
+            {
+              "score": 0.789,
+              "plate": "94eio1304"
+            },
+            {
+              "score": 0.781,
+              "plate": "94e10i3o4"
+            },
+            {
+              "score": 0.781,
+              "plate": "94e1o13o4"
+            }
+          ],
+          "dscore": 0.916,
+          "vehicle": {
+            "score": 0.856,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 97,
+              "ymin": 0,
+              "xmax": 468,
+              "ymax": 473
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 102,
+        "max_calls": 2500
+      },
+      "processing_time": 3326.724
+    }
+  },
+  {
+    "filename": "xemayBigPlate98_jpg.rf.62630f4079c6172d849f60a68e83fb8c.jpg",
+    "result": {
+      "filename": "xemayBigPlate98_jpg.rf.62630f4079c6172d849f60a68e83fb8c.jpg",
+      "timestamp": "2025-07-24 07:13:13.868370",
+      "camera_id": null,
+      "results": [
+        {
+          "box": {
+            "xmin": 214,
+            "ymin": 232,
+            "xmax": 364,
+            "ymax": 336
+          },
+          "plate": "65r20956",
+          "region": {
+            "code": "vn",
+            "score": 0.62
+          },
+          "score": 0.999,
+          "candidates": [
+            {
+              "score": 0.999,
+              "plate": "65r20956"
+            },
+            {
+              "score": 0.88,
+              "plate": "65r2o956"
+            }
+          ],
+          "dscore": 0.914,
+          "vehicle": {
+            "score": 0.877,
+            "type": "Motorcycle",
+            "box": {
+              "xmin": 175,
+              "ymin": 0,
+              "xmax": 441,
+              "ymax": 473
+            }
+          }
+        }
+      ],
+      "usage": {
+        "calls": 103,
+        "max_calls": 2500
+      },
+      "processing_time": 3234.111
+    }
+  }
+]
