@@ -43,7 +43,7 @@ void loop()
   {
     String msg = client.readStringUntil('\n');
     msg.trim();
-
+    Serial.println(msg);
     StaticJsonDocument<512> doc;
     DeserializationError error = deserializeJson(doc, msg);
 
@@ -63,8 +63,6 @@ void loop()
         plateUrl = url;
       }
 
-      plateUrl = "hihihi";    // để test vì chỉ đang có 1 esp32-cam. Sau khi merge code, thì xóa dòng này
-
       if (faceUrl != "" && plateUrl != "")
       {
         readyToCreateSession = true;
@@ -72,7 +70,6 @@ void loop()
     }
 
     client.stop();
-    lcd.clear();
   }
   // điều kiện để tạo session mới
   if (readyToCreateSession)
@@ -92,7 +89,7 @@ void loop()
         {
           lcd.clear();
           lcd.printCentered("FULL SLOTS", 0);
-          delay(3000);
+          delay(1000);
         }
         else
         {
@@ -100,18 +97,13 @@ void loop()
           String slotsText = "Slots left: ";
           slotsText.concat(String(available));
           lcd.printCentered(slotsText, 0);
-          delay(3000);
+          delay(500);
 
           String sessionID;
           bool success = firebase.createSessionFromFaceDetection(faceUrl, plateUrl, gate, sessionID);
 
           if (success)
           {
-            lcd.clear();
-            String sessionText = "Session OK: ";
-            sessionText.concat(String(sessionID));
-            lcd.printWrapped(sessionText);
-            delay(1000);
             servoMotor.open(); // Mở cổng
             delay(3000);  
             servoMotor.close(); // Đóng cổng sau 2 giây
