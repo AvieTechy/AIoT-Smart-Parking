@@ -2,8 +2,7 @@
 
 void ServoHandler::begin(int pin) {
     servoPin = pin;
-    servo.setPeriodHertz(50);  
-    servo.attach(servoPin, 500, 2400); 
+    servo.attach(servoPin); 
     close();
 }
 

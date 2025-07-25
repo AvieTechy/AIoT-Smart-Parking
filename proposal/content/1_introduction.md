@@ -34,8 +34,8 @@ Xây dựng chức năng nhận diện gương mặt, biển số xe hoạt đ�
 
 **Các tiêu chí đánh giá:**
 
-- Thời gian xử lý trung bình cho một lượt xe (tính từ lúc xe dừng đúng vị trí đến khi hệ thống xử lý xong) không vượt quá 5 giây.
-- Trạng thái của các vị trí đỗ xe (trống hoặc có xe) được cập nhật lên giao diện quản lý trong vòng tối đa 3 giây kể từ khi có sự thay đổi thực tế từ cảm biến.
+- Thời gian xử lý trung bình cho một lượt xe (tính từ lúc xe dừng đúng vị trí đến khi hệ thống xử lý xong) không vượt quá 15 giây.
+- Trạng thái của các vị trí đỗ xe (trống hoặc có xe) được cập nhật lên giao diện quản lý trong vòng tối đa 5 giây kể từ khi có sự thay đổi thực tế từ cảm biến.
 
 ### Hoàn thiện tính năng quản lý bãi xe quy mô nhỏ
 
