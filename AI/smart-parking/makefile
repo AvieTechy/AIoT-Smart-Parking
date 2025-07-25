@@ -8,7 +8,9 @@ build:
 	docker build -t $(IMAGE_NAME) .
 
 run: build
+	-docker stop $(CONTAINER_NAME) 2>/dev/null || true
+	-docker rm $(CONTAINER_NAME) 2>/dev/null || true
 	docker run --rm -d -p $(PORT):8000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 stop:
-	docker stop $(CONTAINER_NAME)
+	-docker stop $(CONTAINER_NAME) 2>/dev/null || true

@@ -13,6 +13,7 @@ def face_matching_health():
 @router.post("/", response_model=FaceMatchResponse)
 def check_face_matching(request: FaceMatchingRequest):
     try:
+        
         # Gọi đúng tham số cho checking_matching
         result = checking_matching(request.image1_path, request.image2_path)
         return FaceMatchResponse(matched=result["matched"], confidence=result["confidence"])

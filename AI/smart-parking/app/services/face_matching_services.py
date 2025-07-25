@@ -7,9 +7,8 @@ def check_matching(img1_path: str, img2_path: str):
                             model_name="VGG-Face")
 
     if result["verified"]:
-        return {"matched": True, "confidence": 1 - result["distance"]}
+        return True
     else:
-        return {"matched": False, "confidence": 1 - result["distance"]}
-
+        return False
 # Alias cho đúng import trong router
 checking_matching = check_matching
