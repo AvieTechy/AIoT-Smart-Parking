@@ -4,6 +4,7 @@ import json
 import csv
 from glob import glob
 
+
 # === CONFIG ===
 IMAGE_DIR = "./dataset/test/images"
 API_URL = "http://localhost:8080/v1/plate-reader/"

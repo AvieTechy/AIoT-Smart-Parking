@@ -1,66 +1,52 @@
 ---
-# Document Metadata
-title: "HỆ THỐNG BÃI ĐỖ XE THÔNG MINH"
-subtitle: "Đề xuất dự án ứng dụng công nghệ AIoT"
-date: "Ngày 22 tháng 5 năm 2025"
-lang: "vi"
-abstract: |
-  Báo cáo này trình bày đề xuất phát triển hệ thống bãi đỗ xe thông minh
-  ứng dụng công nghệ AIoT, nhằm tự động hóa và tối ưu hóa quy trình quản lý
-  bãi đỗ xe. Giải pháp đề xuất kết hợp các công nghệ nhận diện hình ảnh (biển số xe,
-  khuôn mặt người lái) và hệ thống cảm biến IoT để theo dõi tình trạng chỗ đỗ trong
-  thời gian thực, loại bỏ thao tác thủ công và giảm thiểu sai sót trong quá trình vận hành.
-  Các tính năng chính bao gồm: tự động nhận diện phương tiện ra vào, giám sát trạng thái chỗ đỗ,
-  lưu trữ dữ liệu trên nền tảng cloud và cung cấp giao diện dashboard trực quan cho người quản lý.
-  Hệ thống có thể triển khai linh hoạt tại nhiều môi trường khác nhau như trường học,
-  khu dân cư, bãi xe công cộng, góp phần xây dựng hạ tầng đô thị thông minh và hiện đại.
+# Thông tin tài liệu
+document_name: "TÀI LIỆU ĐỒ ÁN"
+title: "BÁO CÁO ĐẶC TẢ YÊU CẦU"
+author: "Nhóm 07"
+date: "25 tháng 7, 2025"
 
-# Author information
-# author:
-#   - name: "Nguyễn Văn A"
-#     affiliation: "Nhóm 1"
-#     email: "19120001@student.hcmus.edu.vn"
-#   - name: "Trần Thị B"
-#     affiliation: "Nhóm 1"
-#     email: "19120002@student.hcmus.edu.vn"
-#   - name: "Lê Văn C"
-#     affiliation: "Nhóm 1"
-#     email: "19120003@student.hcmus.edu.vn"
+# Thành viên nhóm
+team_members:
+  - name: "Cao Uyển Nhi"
+    id: "22127310"
+    email: "cunhi22@clc.fitus.edu.vn"
+    role: "Trưởng nhóm"
+  - name: "Lưu Thanh Thuý"
+    id: "22127410"
+    email: "ltthuy22@clc.fitus.edu.vn"
+    role: "Trưởng nhóm kỹ thuật"
+  - name: "Võ Lê Việt Tú"
+    id: "22127435"
+    email: "vlvtu22@clc.fitus.edu.vn"
+    role: "Trưởng nhóm QA"
+  - name: "Trần Thị Cát Tường"
+    id: "22127444"
+    email: "ttctuong22@clc.fitus.edu.vn"
+    role: "Tài liệu"
 
-# Team information
-team: "Nhóm 7 - AIoT"
-class: "Ứng dụng AI và IoT - CSC13005"
-department: "Khoa Công nghệ Thông tin"
-university: "Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM"
+# Người hướng dẫn
+supervisors:
+  - "Giáo viên: Đỗ Thị Thanh Hà"
+  - "Giáo viên: Võ Hoài Việt"
 
-# Document formatting
-geometry: "margin=1in"
-fontsize: 12pt
+# Cài đặt tài liệu
+lang: vi
+fontsize: 11pt
 linestretch: 1.5
 papersize: a4
-# toc: true
-toc-depth: 3
-numbersections: true
-reference-section-title: "Tài liệu tham khảo"
-urlcolor: blue
-toccolor: red
-nocite: '@*'
-# Citation and bibliography
-# bibliography: references.bib
-# csl: ieee.csl
-link-citations: true
+documentclass: report
+classoption:
+  - twoside
 
-# Additional parameters for PDF output
-header-includes: |
-  \usepackage{fancyhdr}
-  \pagestyle{fancy}
-  \fancyhead[LE,RO]{\thepage}
-  \fancyhead[RE,LO]{Hệ thống Bãi đỗ xe thông minh}
-  \fancyfoot[CE,CO]{Nhóm 7 - AIoT}
+# Metadata bổ sung
+keywords:
+  - hội thảo
+  - kế hoạch
+  - kỹ thuật
+  - dự án nhóm
+  - cộng tác
+subject: "Tài liệu kỹ thuật"
+description: "Tài liệu này trình bày quá trình lập kế hoạch cho một hội thảo kỹ thuật."
+classification: "Nội bộ"
+distribution: "Thành viên nhóm, Người hướng dẫn"
 ---
-
-\pagebreak
-
-\tableofcontents
-
-\pagebreak

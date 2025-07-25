@@ -1,37 +1,71 @@
-# Makefile for converting Markdown files to PDF and TEX using pandoc
+# Output configuration
+OUTPUT_NAME = report
+OUTPUT_DIR = ./release
+OUTPUT_PDF = $(OUTPUT_DIR)/$(OUTPUT_NAME).pdf
 
-# Directories
-SRC_DIR = ./content
-BUILD_DIR = ./build
-RELEASE_DIR = ./release
+# Pandoc and template configuration
+PANDOC = pandoc
+PDF_ENGINE = xelatex
+TEMPLATE_FILE = ./title/template.tex
 
-# Source files
-MARKDOWN_FILES = $(wildcard $(SRC_DIR)/*.md)
-METADATA_FILE = $(SRC_DIR)/metadata.yaml
+# Find all markdown source files in the content directory
+MD_SOURCES = $(sort $(wildcard ./content/*.md))
 
-# Output files
-PDF_OUTPUT = $(RELEASE_DIR)/proposal.pdf
-TEX_OUTPUT = $(RELEASE_DIR)/proposal.tex
 
-# Make sure that the build is always triggered by marking these targets as phony
-.PHONY: all pdf tex clean
+# Check if there's a metadata files
+METADATA_FILE = $(wildcard ./content/metadata.yaml)
+METADATA_FLAG = $(if $(METADATA_FILE),--metadata-file=$(METADATA_FILE),)
 
-# Default target: build PDF
-all: pdf
+# Pandoc options
+PANDOC_FLAGS = \
+	$(METADATA_FLAG) \
+	--template=$(TEMPLATE_FILE) \
+	--pdf-engine=$(PDF_ENGINE) \
+	--table-of-contents \
+	--toc-depth=3 \
+	--number-sections \
+	--highlight-style=tango \
+	--variable fontsize=11pt \
+	--variable geometry:margin=1in \
+	--variable links-as-notes=true \
+	--variable colorlinks=true \
+	--variable documentclass=report \
+	--extract-media=. \
+	--resource-path=.:./content:./content/images:./images:../images \
+	--from=markdown+implicit_figures+link_attributes+raw_tex \
+	--standalone \
+	--quiet \
+	--variable lang=vi
 
-# Build PDF from Markdown files
-pdf:
-	@mkdir -p $(RELEASE_DIR)
-	@echo "Converting Markdown to PDF..."
-	pandoc $(METADATA_FILE) $(MARKDOWN_FILES) -o $(PDF_OUTPUT) --pdf-engine=xelatex
+# Default target
+all: clean $(OUTPUT_PDF)
 
-# Build TEX from Markdown files
-tex:
-	@mkdir -p $(RELEASE_DIR)
-	@echo "Converting Markdown to TEX..."
-	pandoc $(METADATA_FILE) $(MARKDOWN_FILES) -o $(TEX_OUTPUT)
+# Rule to build the PDF
+$(OUTPUT_PDF): $(MD_SOURCES) $(TEMPLATE_FILE)
+	@mkdir -p $(OUTPUT_DIR)
+	@$(PANDOC) $(MD_SOURCES) $(PANDOC_FLAGS) -o $@ 2>/dev/null
+	@echo "PDF created: $(OUTPUT_PDF)"
 
-# Clean build artifacts
+# Phony target for cleaning up
+.PHONY: clean all
 clean:
-	@echo "Cleaning build artifacts..."
-	rm -f $(PDF_OUTPUT) $(TEX_OUTPUT)
+	@rm -f $(OUTPUT_PDF)
+	@echo "Cleaned up output files"
+
+# Show help
+.PHONY: help
+help:
+	@echo "Makefile for generating reports with Pandoc"
+	@echo ""
+	@echo "Targets:"
+	@echo "  all     - Generate PDF report (default)"
+	@echo "  clean   - Remove generated files"
+	@echo "  help    - Show this help message"
+	@echo ""
+	@echo "Files:"
+	@echo "  MD Sources: $(MD_SOURCES)"
+	@echo "  Template: $(TEMPLATE_FILE)"
+	@echo "  Metadata: $(METADATA_FILE)"
+	@echo "  Output: $(OUTPUT_PDF)"
+	@echo ""
+	@echo "Usage: make [target]"
