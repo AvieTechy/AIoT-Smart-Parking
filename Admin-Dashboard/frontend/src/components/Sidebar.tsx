@@ -62,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
     <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
         <div className="sidebar-title">
-          {!isCollapsed && <span>Smart Parking</span>}
+          {!isCollapsed && <span>VisPark</span>}
         </div>
         <button className="sidebar-toggle" onClick={onToggle}>
           {isCollapsed ? <MdChevronRight size={18} /> : <MdChevronLeft size={18} />}

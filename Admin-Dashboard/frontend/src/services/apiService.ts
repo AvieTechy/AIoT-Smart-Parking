@@ -3,6 +3,7 @@ const API_BASE_URL = 'http://localhost:8000';
 // Import types
 import type { GroupedSession } from '../types/types';
 import cacheService from './cacheService';
+import authService from './authService';
 
 // Session types matching backend models
 export interface Session {
@@ -63,6 +64,11 @@ class ApiService {
     this.baseURL = API_BASE_URL;
   }
 
+  // Helper method for authenticated requests
+  private async authenticatedFetch(url: string, options: RequestInit = {}): Promise<Response> {
+    return authService.authenticatedRequest(url, options);
+  }
+
   // Session API methods with caching
   async getSessions(gate?: 'In' | 'Out', limit: number = 100): Promise<SessionResponse[]> {
     const cacheKey = cacheService.createKey('sessions', { gate, limit });
@@ -75,7 +81,7 @@ class ApiService {
     if (gate) params.append('gate', gate);
     params.append('limit', limit.toString());
 
-    const response = await fetch(`${this.baseURL}/api/sessions?${params}`);
+    const response = await this.authenticatedFetch(`${this.baseURL}/api/sessions?${params}`);
     if (!response.ok) {
       throw new Error('Failed to fetch sessions');
     }
@@ -86,7 +92,7 @@ class ApiService {
   }
 
   async getSession(sessionId: string): Promise<SessionResponse> {
-    const response = await fetch(`${this.baseURL}/api/sessions/${sessionId}`);
+    const response = await this.authenticatedFetch(`${this.baseURL}/api/sessions/${sessionId}`);
     if (!response.ok) {
       throw new Error('Failed to fetch session');
     }
@@ -109,7 +115,7 @@ class ApiService {
       return cached;
     }
 
-    const response = await fetch(`${this.baseURL}/api/parking/slots`);
+    const response = await this.authenticatedFetch(`${this.baseURL}/api/parking/slots`);
     if (!response.ok) {
       throw new Error('Failed to fetch parking slots');
     }

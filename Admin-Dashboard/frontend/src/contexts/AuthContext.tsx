@@ -1,11 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
-
-interface User {
-  id: string
-  username: string
-  email: string
-}
+import authService, { type User } from '../services/authService'
 
 interface AuthContextType {
   user: User | null
@@ -34,29 +29,36 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check if user is already logged in (from localStorage)
-    const savedUser = localStorage.getItem('user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
+    // Check if user is already logged in and verify token
+    const initAuth = async () => {
+      try {
+        const storedUser = authService.getUser()
+        if (storedUser && authService.getToken()) {
+          // Verify token is still valid
+          const verifiedUser = await authService.verifyToken()
+          if (verifiedUser) {
+            setUser(verifiedUser)
+          } else {
+            // Token is invalid, clear auth
+            authService.logout()
+          }
+        }
+      } catch (error) {
+        console.error('Auth initialization error:', error)
+        authService.logout()
+      } finally {
+        setIsLoading(false)
+      }
     }
-    setIsLoading(false)
+
+    initAuth()
   }, [])
 
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
-      // TODO: Replace with actual API call to your backend
-      // For now, using mock authentication
-      if (username === 'admin' && password === 'admin123') {
-        const userData: User = {
-          id: '1',
-          username: 'admin',
-          email: 'admin@parking.com'
-        }
-        setUser(userData)
-        localStorage.setItem('user', JSON.stringify(userData))
-        return true
-      }
-      return false
+      const userData = await authService.login(username, password)
+      setUser(userData)
+      return true
     } catch (error) {
       console.error('Login error:', error)
       return false
@@ -64,8 +66,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   const logout = () => {
+    authService.logout()
     setUser(null)
-    localStorage.removeItem('user')
   }
 
   const value: AuthContextType = {

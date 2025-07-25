@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Sidebar isCollapsed={sidebarCollapsed} onToggle={handleSidebarToggle} />
       
       <div className={`main-content ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
-        <Header />
+        {/* <Header /> */}
         <main className="content-area">
           {children}
         </main>
