@@ -370,10 +370,9 @@ static esp_err_t stream_handler(httpd_req_t *req) {
   // Allow cross-origin requests
   httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
 
-  // Send 'detected' status to the server via HTTP POST
-  static bool last_detected = false;
-  static bool hasCaptured = false; 
 
+  static bool last_detected = false;
+  
   while (true) {
     detected = false;
     face_id = 0;
@@ -449,31 +448,19 @@ static esp_err_t stream_handler(httpd_req_t *req) {
       }
     }
 
-    if (detected && !last_detected) {
-      Serial.printf("[DEBUG] Trạng thái Wi-Fi: %d\n", WiFi.status());
-      Serial.printf("[DEBUG] detected: %s\n", detected ? "true" : "false");
+    // Send 'detected' status to the server via HTTP POST
+    if (detected && !last_detected) {  // Only send when detection status changes from 0 - 1
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String serverUrl = "http://192.168.110.58/receive_detected";
-        Serial.printf("[DEBUG] http.begin(%s)\n", serverUrl.c_str());
+        String serverUrl = "http://172.20.10.10/receive_detected";
         http.begin(serverUrl);
         http.addHeader("Content-Type", "application/json");
-
-        Serial.println("[DEBUG] Đang gửi HTTP POST...");
-        Serial.printf("[DEBUG] CAM A IP: %s\n", WiFi.localIP().toString().c_str());
-        Serial.printf("[DEBUG] Payload: %s\n", String("{\"detected\":" + String(detected ? "true" : "false") + "}").c_str());
 
         String payload = "{\"detected\":" + String(detected ? "true" : "false") + "}";
 
         int httpResponseCode = http.POST(payload);
-        Serial.printf("[DEBUG] http.POST trả về: %d\n", httpResponseCode);
-
         if (httpResponseCode > 0) {
-          Serial.printf("[DEBUG] Gửi HTTP POST thành công, mã phản hồi: %d\n", httpResponseCode);
-          Serial.printf("[DEBUG] Phản hồi: %s\n", http.getString().c_str());
 
-          
-          Serial.println("[ESP32-CAM] Đang chụp ảnh...");
           String imageUrl;
           // run capture
           xTaskCreatePinnedToCore(
@@ -485,7 +472,7 @@ static esp_err_t stream_handler(httpd_req_t *req) {
             NULL,          // task handle
             1              // core (1 để tách khỏi core 0 đang chạy httpd)
           );
-          delay(3000);
+
         } else {
           Serial.printf("[DEBUG] Gửi HTTP POST thất bại, lỗi: %s\n", http.errorToString(httpResponseCode).c_str());
         }
@@ -495,7 +482,6 @@ static esp_err_t stream_handler(httpd_req_t *req) {
         Serial.println("[DEBUG] Wi-Fi không kết nối trong stream_handler");
       }
     }
-
 
     // Send JPEG stream chunks
     if (res == ESP_OK) {
@@ -543,6 +529,8 @@ static esp_err_t stream_handler(httpd_req_t *req) {
     //               (uint32_t)ready_time, (uint32_t)face_time, (uint32_t)recognize_time, (uint32_t)encode_time, (uint32_t)process_time,
     //               (detected) ? "DETECTED " : "", face_id);
   }
+
+  last_detected = detected;
 
   // Reset last_frame on exit
   last_frame = 0;
@@ -708,10 +696,8 @@ static esp_err_t receive_detected_handler(httpd_req_t *req) {
     }
     buf[ret] = '\0';
 
-    Serial.println("Nhận được payload: " + String(buf));
     httpd_resp_send(req, "OK", 2);
 
-    Serial.println("[ESP32-CAM] Đang chụp ảnh...");
     String imageUrl;
     // run capture
     xTaskCreatePinnedToCore(
@@ -797,6 +783,7 @@ void startCameraServer() {
     httpd_register_uri_handler(camera_httpd, &status_uri);
     httpd_register_uri_handler(camera_httpd, &capture_uri);
     httpd_register_uri_handler(camera_httpd, &receive_detected_uri); // Thêm handler mới
+
   }
 
   config.server_port += 1;
@@ -806,6 +793,3 @@ void startCameraServer() {
     httpd_register_uri_handler(stream_httpd, &stream_uri);
   }
 }
-
-
-

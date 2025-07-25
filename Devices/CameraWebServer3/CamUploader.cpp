@@ -132,7 +132,6 @@ bool CamUploader::captureAndUpload(String& imageUrlOut) {
   if (httpCode > 0) {
     Serial.printf("Upload success! HTTP code: %d\n", httpCode);
     String response = https.getString();
-    Serial.println(response);
 
     DynamicJsonDocument doc(512);
     DeserializationError err = deserializeJson(doc, response);
