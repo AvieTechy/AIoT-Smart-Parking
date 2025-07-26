@@ -50,7 +50,7 @@ Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị n
     *   Theo dõi kết quả từ Firebase.
     *   Khi có kết quả tương ứng với ảnh mình đã gửi, ESP32:
         *   Truy xuất kết quả nhận diện.
-        *   Điều khiển thiết bị đầu ra (mở barrier, hiển thị OLED, còi, v.v.).
+        *   Điều khiển thiết bị đầu ra (mở barrier, hiển thị LCD, còi, v.v.).
         *   Ghi lại trạng thái hoạt động (đã xử lý xong) nếu cần.
 4.  **Dashboard quản trị (ReactJS):**
     *   Lấy dữ liệu trực tiếp từ Firebase để hiển thị:
@@ -62,7 +62,7 @@ Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị n
 
 - **Thiết bị IoT** gồm:
   - **Servo (Barrier):** mở/đóng rào chắn tự động.
-  - **OLED Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
+  - **LCD Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
 
 - **Dashboard (giao diện quản trị cho Admin):**
   - Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dựng giao diện thân thiện, dễ sử dụng.
