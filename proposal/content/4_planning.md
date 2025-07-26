@@ -4,13 +4,13 @@
 
 ## Phân công nhân lực
 
-| Thành viên | Vai trò chính | Nhiệm vụ cụ thể |
-| ----- | ------ | --------- |
-| Cao Uyển Nhi | Trưởng nhóm, quản lý tiến độ | Phụ trách AI – Nhận diện biển số/khuôn mặt|
-| | | Thu thập dữ liệu, huấn luyện mô hình, triển khai xử lý ảnh |
-| Võ Lê Việt Tú | Phụ trách IoT – Cảm biến và cloud | Kết nối cảm biến, lập trình ESP32, gửi dữ liệu lên Firebase/ThingsBoard |
-| Trần Thị Cát Tường | Thiết kế phần cứng – Mạch, cảm biến | Lắp ráp hệ thống, bố trí camera và sensor thực tế |
-| Lưu Thanh Thuý | Phần mềm quản lý & báo cáo | Thiết kế dashboard, lập trình hiển thị và làm tài liệu |
+| Thành viên         | Vai trò chính               | Nhiệm vụ cụ thể                                                                 |
+|-----------------------------|-----------------------------|----------------------------------------------------------------------------------|
+| **Cao Uyển Nhi**   | Trưởng nhóm, phụ trách AI   | Quản lý tiến độ, phát triển và tích hợp mô hình AI (OCR, face), đánh giá hiệu năng |
+| **Trần Thị Cát Tường** | Thiết kế phần cứng – ESP32 trung tâm | Phát triển mạch điều khiển, giao tiếp servo và truyền dữ liệu lên cloud         |
+| **Lưu Thanh Thuý** | Phụ trách ESP32-CAM         | Thiết lập, triển khai face detection, giao tiếp giữa các ESP32-CAM với nhau |
+| **Võ Lê Việt Tú**  | Phụ trách backend & dashboard | Xây dựng dashboard web, kết nối backend với phần cứng và lưu trữ dữ liệu       |
+
 
 ## Timeline
 
