@@ -15,11 +15,11 @@
 
 #include "camera_pins.h"
 
-//const char* ssid = "raanf";
-//const char* password = "shinasakura";
+const char* ssid = "raanf";
+const char* password = "shinasakura";
 
-const char* ssid = "Happy Day";
-const char* password = "Long2021";
+// const char* ssid = "Happy Day";
+// const char* password = "Long2021";
 
 void startCameraServer();
 
