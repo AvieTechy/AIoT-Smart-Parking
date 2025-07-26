@@ -449,7 +449,7 @@ static esp_err_t stream_handler(httpd_req_t *req) {
     if (detected && !last_detected) {  // Only send when detection status changes from 0 - 1
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String serverUrl = "http://172.20.10.8/receive_detected";
+        String serverUrl = "http://192.168.1.110/receive_detected";
         http.begin(serverUrl);
         http.addHeader("Content-Type", "application/json");
 
