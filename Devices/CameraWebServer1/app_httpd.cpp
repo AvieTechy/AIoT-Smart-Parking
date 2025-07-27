@@ -71,7 +71,34 @@ static int8_t recognition_enabled = 0;
 static int8_t is_enrolling = 0;
 static face_id_list id_list = { 0 };
 
-void uploadTask(void *parameter) {
+static bool detected = false;
+
+void uploadTaskFace(void *parameter) {
+  String imageUrl;
+  if (uploader.captureAndUpload(imageUrl)) {
+
+    if (client.connect(server_ip, server_port)) {
+      String json = "{";
+      json += "\"cam\":\"" + String(CAMERA_ID) + "\",";
+      json += "\"isFace\":true,";
+      json += "\"url\":\"" + imageUrl + "\"";
+      json += "}";
+
+      client.println(json);
+      client.stop();
+      Serial.println(json);
+      delay(4000);
+    } else {
+      Serial.println("[UploadTask] Không kết nối được với ESP32 trung tâm.");
+    }
+  } else {
+    Serial.println("[UploadTask] Upload thất bại.");
+  }
+
+  vTaskDelete(NULL);  // cleanup task
+}
+
+void uploadTaskPlate(void *parameter) {
   String imageUrl;
   if (uploader.captureAndUpload(imageUrl)) {
 
@@ -85,6 +112,7 @@ void uploadTask(void *parameter) {
       client.println(json);
       client.stop();
       Serial.println(json);
+      delay(4000);
     } else {
       Serial.println("[UploadTask] Không kết nối được với ESP32 trung tâm.");
     }
@@ -266,7 +294,6 @@ static esp_err_t capture_handler(httpd_req_t *req) {
   size_t out_len, out_width, out_height;
   uint8_t *out_buf;
   bool s;
-  bool detected = false;
   int face_id = 0;
   if (!detection_enabled || fb->width > 400) {
     size_t fb_len = 0;
@@ -345,7 +372,6 @@ static esp_err_t stream_handler(httpd_req_t *req) {
   uint8_t *_jpg_buf = NULL;
   char part_buf[64];
   dl_matrix3du_t *image_matrix = NULL;
-  bool detected = false;
   int face_id = 0;
   int64_t fr_start = 0;
   int64_t fr_ready = 0;
@@ -449,7 +475,7 @@ static esp_err_t stream_handler(httpd_req_t *req) {
     if (detected && !last_detected) {  // Only send when detection status changes from 0 - 1
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String serverUrl = "http://192.168.1.110/receive_detected";
+        String serverUrl = "http://192.168.10.198/receive_detected";
         http.begin(serverUrl);
         http.addHeader("Content-Type", "application/json");
 
@@ -461,8 +487,8 @@ static esp_err_t stream_handler(httpd_req_t *req) {
           String imageUrl;
           // run capture
           xTaskCreatePinnedToCore(
-            uploadTask,    // function name
-            "UploadTask",  // task name
+            uploadTaskFace,    // function name
+            "UploadTaskFace",  // task name
             8192,          // stack size
             NULL,          // parameter (you can pass struct if needed)
             1,             // priority
@@ -698,8 +724,8 @@ static esp_err_t receive_detected_handler(httpd_req_t *req) {
     String imageUrl;
     // run capture
     xTaskCreatePinnedToCore(
-      uploadTask,    // function name
-      "UploadTask",  // task name
+      uploadTaskPlate,    // function name
+      "UploadTaskPlate",  // task name
       8192,          // stack size
       NULL,          // parameter (you can pass struct if needed)
       1,             // priority
