@@ -101,91 +101,86 @@ bool CamUploader::initCamera() {
 }
 
 bool CamUploader::captureAndUpload(String& imageUrlOut) {
-  Serial.println("[DEBUG] Bắt đầu captureAndUpload...");
+  Serial.println("========== BẮT ĐẦU QUY TRÌNH UPLOAD ==========");
 
   camera_fb_t* fb = esp_camera_fb_get();
   if (!fb) {
-    Serial.println("[ERROR] Không thể chụp ảnh!");
+    Serial.println("[ERROR] Không thể chụp ảnh.");
     return false;
   }
 
-  Serial.printf("[INFO] Ảnh đã chụp. Kích thước = %d bytes\n", fb->len);
+  Serial.printf("[INFO] Ảnh đã chụp: %d bytes\n", fb->len);
 
-  String boundary = "----WebKitFormBoundaryXyXyXy";
-  String bodyStart =
-    "--" + boundary + "\r\n"
-    "Content-Disposition: form-data; name=\"file\"; filename=\"esp32.jpg\"\r\n"
-    "Content-Type: image/jpeg\r\n\r\n";
+  const char* server = "192.168.1.122";
+  const int port = 8000;
+  const char* path = "/postCloud/upload";
+  String boundary = "----esp32boundary";
+  String contentType = "multipart/form-data; boundary=" + boundary;
 
-  String bodyEnd =
-    "\r\n--" + boundary + "\r\n"
-    "Content-Disposition: form-data; name=\"upload_preset\"\r\n\r\n" +
-    String(uploadPreset) + "\r\n--" + boundary + "--\r\n";
+  String head = "--" + boundary + "\r\n";
+  head += "Content-Disposition: form-data; name=\"file\"; filename=\"esp32.jpg\"\r\n";
+  head += "Content-Type: image/jpeg\r\n\r\n";
 
-  int totalLength = bodyStart.length() + fb->len + bodyEnd.length();
-  Serial.printf("[DEBUG] Tổng kích thước payload: %d bytes\n", totalLength);
+  String tail = "\r\n--" + boundary + "--\r\n";
 
-  WiFiClientSecure client;
-  client.setCACert(cloudinary_root_ca);
-  client.setHandshakeTimeout(10);
-  Serial.println("[DEBUG] WiFiClientSecure đã được cấu hình.");
+  int contentLength = head.length() + fb->len + tail.length();
 
-  HTTPClient https;
-  String host = "api.cloudinary.com";
-  int port = 443;
-  String path = "/v1_1/dc3jq3pit/image/upload";
-
-  Serial.println("[DEBUG] Bắt đầu kết nối HTTPS với Cloudinary...");
-  if (!https.begin(client, host, port, path, true)) {
-    Serial.println("[ERROR] Không thể bắt đầu kết nối HTTPS (SNI fail?)");
+  WiFiClient client;
+  if (!client.connect(server, port)) {
+    Serial.println("[ERROR] Không thể kết nối tới server local.");
     esp_camera_fb_return(fb);
     return false;
   }
 
-  Serial.println("[DEBUG] Đã kết nối HTTPS, thêm headers...");
-  https.addHeader("Content-Type", "multipart/form-data; boundary=" + boundary);
-  https.addHeader("Content-Length", String(totalLength));
+  // Gửi HTTP request header
+  client.print(String("POST ") + path + " HTTP/1.1\r\n");
+  client.print(String("Host: ") + server + "\r\n");
+  client.print("Content-Type: " + contentType + "\r\n");
+  client.print("Content-Length: " + String(contentLength) + "\r\n");
+  client.print("Connection: close\r\n\r\n");
 
-  uint8_t* payload = (uint8_t*)malloc(totalLength);
-  if (!payload) {
-    Serial.println("[ERROR] Không đủ bộ nhớ cho payload.");
-    esp_camera_fb_return(fb);
-    https.end();
-    return false;
+  // Gửi body: phần đầu
+  client.print(head);
+
+  // Gửi ảnh
+  client.write(fb->buf, fb->len);
+
+  // Gửi phần cuối
+  client.print(tail);
+
+  Serial.println("[DEBUG] Đã gửi multipart dữ liệu, chờ phản hồi...");
+
+  // Đọc phản hồi
+  String response;
+  long timeout = millis() + 5000;
+  while (client.connected() && millis() < timeout) {
+    while (client.available()) {
+      char c = client.read();
+      response += c;
+    }
   }
-
-  memcpy(payload, bodyStart.c_str(), bodyStart.length());
-  memcpy(payload + bodyStart.length(), fb->buf, fb->len);
-  memcpy(payload + bodyStart.length() + fb->len, bodyEnd.c_str(), bodyEnd.length());
-
-  Serial.println("[DEBUG] Gửi POST request...");
-  int httpCode = https.POST(payload, totalLength);
-
-  free(payload);
+  client.stop();
   esp_camera_fb_return(fb);
 
-  if (httpCode > 0) {
-    Serial.printf("[INFO] Upload thành công! Mã HTTP: %d\n", httpCode);
-    String response = https.getString();
-    Serial.println("[DEBUG] Phản hồi từ Cloudinary:");
-    Serial.println(response);
-
-    DynamicJsonDocument doc(512);
-    DeserializationError err = deserializeJson(doc, response);
-    if (!err && doc.containsKey("secure_url")) {
-      imageUrlOut = doc["secure_url"].as<String>();
-      Serial.println("[INFO] secure_url đã được trích xuất:");
+  // Phân tích JSON trong body
+  int jsonStart = response.indexOf('{');
+  if (jsonStart >= 0) {
+    String json = response.substring(jsonStart);
+    StaticJsonDocument<512> doc;
+    DeserializationError err = deserializeJson(doc, json);
+    if (!err && doc.containsKey("url")) {
+      imageUrlOut = doc["url"].as<String>();
+      Serial.println("[INFO] Link ảnh:");
       Serial.println(imageUrlOut);
-      https.end();
       return true;
     } else {
-      Serial.print("[ERROR] Lỗi khi parse JSON: ");
-      Serial.println(err.c_str());
+      Serial.println("[WARN] Phản hồi JSON không hợp lệ hoặc thiếu key 'url':");
+      Serial.println(json);
     }
   } else {
-    Serial.printf("[ERROR] Upload thất bại! Lỗi: %s\n", https.errorToString(httpCode).c_str());
+    Serial.println("[ERROR] Không tìm thấy JSON trong phản hồi:");
+    Serial.println(response);
   }
 
-  https.end();
   return false;
 }

@@ -18,11 +18,11 @@
 // const char* ssid = "raanf";
 // const char* password = "shinasakura";
 
-// const char* ssid = "Happy Day";
-// const char* password = "Long2021";
+const char* ssid = "Happy Day";
+const char* password = "Long2021";
 
-const char* ssid = "Faro Cafe 2.4G";
-const char* password = "farohalo";
+// const char* ssid = "Faro Cafe 2.4G";
+// const char* password = "farohalo";
 
 void startCameraServer();
 
