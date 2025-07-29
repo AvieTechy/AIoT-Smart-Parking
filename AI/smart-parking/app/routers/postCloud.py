@@ -11,7 +11,7 @@ cloudinary.config(
 )
 
 router = APIRouter(
-    tags=["Post Cloud"]
+    tags=["PostCloud"]
 )
 
 @router.post("/upload")

@@ -10,12 +10,12 @@ router = APIRouter(
 def face_matching_health():
     return {"status": "ok"}
 
-@router.post("/", response_model=FaceMatchResponse)
+@router.post("/", response_model=bool)
 def check_face_matching(request: FaceMatchingRequest):
     try:
         
         # Gọi đúng tham số cho checking_matching
         result = checking_matching(request.image1_path, request.image2_path)
-        return FaceMatchResponse(matched=result["matched"], confidence=result["confidence"])
+        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

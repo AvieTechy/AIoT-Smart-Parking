@@ -35,7 +35,10 @@
 #define FACE_COLOR_CYAN (FACE_COLOR_BLUE | FACE_COLOR_GREEN)
 #define FACE_COLOR_PURPLE (FACE_COLOR_BLUE | FACE_COLOR_RED)
 
-#define CAMERA_ID 2
+#define CAMERA_ID 1
+
+volatile bool isUploadingFace = false;  // đảm bảo không bị trùng
+volatile bool isUploadingPlate = false;  // đảm bảo không bị trùng
 
 CamUploader uploader;
 WiFiClient client;
@@ -74,8 +77,17 @@ static face_id_list id_list = { 0 };
 static bool detected = false;
 
 void uploadTaskFace(void *parameter) {
+  if (isUploadingFace) {
+    Serial.println("[UploadTask] Đang upload, bỏ qua lần gọi này.");
+    vTaskDelete(NULL);
+    return;
+  }
+
+  isUploadingFace = true;  // Đặt cờ
+
   String imageUrl;
   if (uploader.captureAndUpload(imageUrl)) {
+    Serial.println("[UploadTask] Upload thành công, gửi JSON tới ESP trung tâm...");
 
     if (client.connect(server_ip, server_port)) {
       String json = "{";
@@ -85,22 +97,34 @@ void uploadTaskFace(void *parameter) {
       json += "}";
 
       client.println(json);
-      client.stop();
+      client.stop();  // Đảm bảo đóng kết nối TCP
+      Serial.println("[UploadTask] JSON đã gửi:");
       Serial.println(json);
-      delay(4000);
     } else {
       Serial.println("[UploadTask] Không kết nối được với ESP32 trung tâm.");
     }
+
   } else {
     Serial.println("[UploadTask] Upload thất bại.");
   }
 
-  vTaskDelete(NULL);  // cleanup task
+  isUploadingFace = false;  // Bỏ cờ khi xong
+  vTaskDelete(NULL);  // Dọn task
 }
 
+
 void uploadTaskPlate(void *parameter) {
+  if (isUploadingPlate) {
+    Serial.println("[UploadTask] Đang upload, bỏ qua lần gọi này.");
+    vTaskDelete(NULL);
+    return;
+  }
+
+  isUploadingPlate = true;  // Đặt cờ
+
   String imageUrl;
   if (uploader.captureAndUpload(imageUrl)) {
+    Serial.println("[UploadTask] Upload thành công, gửi JSON tới ESP trung tâm...");
 
     if (client.connect(server_ip, server_port)) {
       String json = "{";
@@ -110,17 +134,19 @@ void uploadTaskPlate(void *parameter) {
       json += "}";
 
       client.println(json);
-      client.stop();
+      client.stop();  // Đảm bảo đóng kết nối TCP
+      Serial.println("[UploadTask] JSON đã gửi:");
       Serial.println(json);
-      delay(4000);
     } else {
       Serial.println("[UploadTask] Không kết nối được với ESP32 trung tâm.");
     }
+
   } else {
     Serial.println("[UploadTask] Upload thất bại.");
   }
 
-  vTaskDelete(NULL);  // cleanup task
+  isUploadingPlate = false;  // Bỏ cờ khi xong
+  vTaskDelete(NULL);  // Dọn task
 }
 
 static ra_filter_t *ra_filter_init(ra_filter_t *filter, size_t sample_size) {
@@ -472,10 +498,10 @@ static esp_err_t stream_handler(httpd_req_t *req) {
     }
 
     // Send 'detected' status to the server via HTTP POST
-    if (detected && !last_detected) {  // Only send when detection status changes from 0 - 1
+    if (detected && !last_detected && !isUploadingFace) {  // Only send when detection status changes from 0 - 1
       if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String serverUrl = "http://192.168.1.132/receive_detected";
+        String serverUrl = "http://172.20.10.7/receive_detected";
         http.begin(serverUrl);
         http.addHeader("Content-Type", "application/json");
 
@@ -721,17 +747,19 @@ static esp_err_t receive_detected_handler(httpd_req_t *req) {
 
     httpd_resp_send(req, "OK", 2);
 
-    String imageUrl;
-    // run capture
-    xTaskCreatePinnedToCore(
-      uploadTaskPlate,    // function name
-      "UploadTaskPlate",  // task name
-      8192,          // stack size
-      NULL,          // parameter (you can pass struct if needed)
-      1,             // priority
-      NULL,          // task handle
-      1              // core (1 để tách khỏi core 0 đang chạy httpd)
-    );
+    if (!isUploadingPlate) {
+      String imageUrl;
+      // run capture
+      xTaskCreatePinnedToCore(
+        uploadTaskPlate,    // function name
+        "UploadTaskPlate",  // task name
+        8192,          // stack size
+        NULL,          // parameter (you can pass struct if needed)
+        1,             // priority
+        NULL,          // task handle
+        1              // core (1 để tách khỏi core 0 đang chạy httpd)
+      );
+    }
 
     return ESP_OK;
 }

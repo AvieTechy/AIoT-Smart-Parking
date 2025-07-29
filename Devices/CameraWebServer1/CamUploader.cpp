@@ -111,7 +111,7 @@ bool CamUploader::captureAndUpload(String& imageUrlOut) {
 
   Serial.printf("[INFO] Ảnh đã chụp: %d bytes\n", fb->len);
 
-  const char* server = "192.168.1.122";
+  const char* server = "172.20.10.9";
   const int port = 8000;
   const char* path = "/postCloud/upload";
   String boundary = "----esp32boundary";
