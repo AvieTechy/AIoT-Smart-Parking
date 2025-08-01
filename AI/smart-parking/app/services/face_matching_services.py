@@ -4,7 +4,7 @@ def check_matching(img1_path: str, img2_path: str):
     # Compare two images
     result = DeepFace.verify(img1_path=img1_path,
                             img2_path=img2_path,
-                            model_name="VGG-Face")
+                            model_name="Facenet")
 
     if result["verified"]:
         return True

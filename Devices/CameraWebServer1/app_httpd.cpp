@@ -100,6 +100,9 @@ void uploadTaskFace(void *parameter) {
       client.stop();  // Đảm bảo đóng kết nối TCP
       Serial.println("[UploadTask] JSON đã gửi:");
       Serial.println(json);
+
+      detection_enabled = 0;
+
     } else {
       Serial.println("[UploadTask] Không kết nối được với ESP32 trung tâm.");
     }
@@ -522,6 +525,8 @@ static esp_err_t stream_handler(httpd_req_t *req) {
             1              // core (1 để tách khỏi core 0 đang chạy httpd)
           );
 
+          detection_enabled = 0;
+
         } else {
           Serial.printf("[DEBUG] Gửi HTTP POST thất bại, lỗi: %s\n", http.errorToString(httpResponseCode).c_str());
         }
@@ -745,20 +750,33 @@ static esp_err_t receive_detected_handler(httpd_req_t *req) {
     }
     buf[ret] = '\0';
 
+    Serial.println("[receive_detected_handler] Payload nhận được:");
+    Serial.println(buf);
+
     httpd_resp_send(req, "OK", 2);
 
-    if (!isUploadingPlate) {
-      String imageUrl;
-      // run capture
-      xTaskCreatePinnedToCore(
-        uploadTaskPlate,    // function name
-        "UploadTaskPlate",  // task name
-        8192,          // stack size
-        NULL,          // parameter (you can pass struct if needed)
-        1,             // priority
-        NULL,          // task handle
-        1              // core (1 để tách khỏi core 0 đang chạy httpd)
-      );
+    StaticJsonDocument<128> doc;
+    DeserializationError error = deserializeJson(doc, buf);
+    if (error) {
+        Serial.print("deserializeJson() failed: ");
+        Serial.println(error.f_str());
+        return ESP_FAIL;
+    }
+
+    if (doc.containsKey("detected")) {
+        Serial.println(">>> Nhận tín hiệu 'detected': thực hiện hành động A");
+        if (!isUploadingPlate) {
+            xTaskCreatePinnedToCore(uploadTaskPlate, "UploadTaskPlate", 8192, NULL, 1, NULL, 1);
+            delay(6000);
+        }
+    }
+    else if (doc.containsKey("captureTrigger")) {
+        Serial.println(">>> Nhận tín hiệu 'captureTrigger': thực hiện hành động B");
+        // Bạn có thể thay đổi hàm hoặc logic ở đây nếu muốn hành động khác
+        delay(2000);
+        detection_enabled = 1;
+    } else {
+        Serial.println(">>> Payload không hợp lệ hoặc không có field phù hợp.");
     }
 
     return ESP_OK;
