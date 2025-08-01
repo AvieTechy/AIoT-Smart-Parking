@@ -1,5 +1,8 @@
 #pragma once
 
+// #define WIFI_SSID "AviePhone"
+// #define WIFI_PASSWORD "ceonhyyy"
+
 #define WIFI_SSID "raanf"
 #define WIFI_PASSWORD "shinasakura"
 
