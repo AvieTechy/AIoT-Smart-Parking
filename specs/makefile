@@ -42,7 +42,7 @@ all: clean $(OUTPUT_PDF)
 # Rule to build the PDF
 $(OUTPUT_PDF): $(MD_SOURCES) $(TEMPLATE_FILE)
 	@mkdir -p $(OUTPUT_DIR)
-	@$(PANDOC) $(MD_SOURCES) $(PANDOC_FLAGS) -o $@ 2>/dev/null
+	@$(PANDOC) $(MD_SOURCES) $(PANDOC_FLAGS) -o $@
 	@echo "PDF created: $(OUTPUT_PDF)"
 
 # Phony target for cleaning up

@@ -35,10 +35,10 @@ Cụ thể, xem timeline dạng Gantt Chart tại [đây](https://docs.google.co
 | AI Thinker ESP32-CAM                     | 2               | 165,000        | 330,000 |
 | ESP32 DevKit V1 (CP2102, Type-C)         | 1               | 154,000         | 154,000 |
 | Màn hình LCD                  | 1               | 81,000         | 81,000 |
-| Servo motor MG90S                        | 1               | 69,000         | 69,000 |
+| Servo motor SG90                        | 1               | 69,000         | 69,000 |
 | Adapter 5V - 3A                       | 1               | 52,000         | 52,000 |
 | Breadboard                 | 1               | 20,000         | 20,000 |
 | Dây jumper                      | 40 sợi/loại   | 66,000         | 66,000 |
 | Đế Nạp ESP32-CAM                      | 1   | 30,000         | 30,000 |
 | Chi phí lắp đặt, khung mô hình | - | 200,000 | 200,000 |
-| **Tổng chi phí** | | | **1,022,000** |
+| **Tổng chi phí** | | | **1,002,000** |
