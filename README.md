@@ -1,32 +1,82 @@
-Cau tru thu muc:
+# Smart Parking System – AIoT-based
 
-1) Specs (chu spes old, specs new - chua table chi ra su khac biet so voi specs 1, ty le % .., danh gia ket qua san pham so voi specs)
+## Giới thiệu
+Smart Parking System là mô hình bãi đỗ xe thông minh ứng dụng AIoT để:
+- Tự động nhận diện biển số xe và khuôn mặt tài xế
+- Quản lý trạng thái chỗ đỗ theo thời gian thực
+- Giảm thao tác thủ công và tối ưu trải nghiệm
 
-2) Slide
+Mô hình hướng tới quy mô nhỏ (5–10 chỗ) và có thể mở rộng triển khai thực tế.
 
-3) Demo (link video - youtube, vimeo...)
+---
 
-4) Bao cao ( Sheet ke hoach va danh gia tien do, bang danh gia chi tiet thanh viet co sap tu tu tu cao den thap)
+## Tính năng chính
+- Nhận diện khuôn mặt (Face Recognition) độ chính xác ≥ 90% (ban ngày)
+- Nhận dạng biển số (License Plate Recognition) qua API
+- Cập nhật trạng thái slot gần thời gian thực
+- Điều khiển barrier tự động (servo) khi hợp lệ
+- Hiển thị thông tin qua LCD 16×2
+- Dashboard (ReactJS) kết nối Firebase:
+    - Lịch sử vào/ra
+    - Ảnh, biển số, timestamp
+    - Thống kê
 
-5) Readme -> thong tin lien he thanh vien trong nhom phong truong hop can gap)
+---
 
-6) Source Code
+## Kiến trúc hệ thống
+3 tầng chính:
 
+1. Input Layer
+     - ESP32-CAM chụp ảnh biển số & khuôn mặt
+     - MTMN (ESP-FACE) phát hiện khuôn mặt on-device
 
-- Đảm bảo các tiêu chuẩn có bản của môn học AI, IoT, Internet
-- Mục đích cụ thể rõ ràng
-- Mục tiêu đảm bảo tiêu chuẩn SMART
-- Không quá 3 mục tiêu
-- Trình bày đúng chuẩn của specs
-- Trình bày chi tiểt rõ ràng không lỗi chính tả
-- Tỷ lệ thay đổi so với specs phiên bản củ là hợp lý hay không?
-- Có bảng so sánh các thay đổi trong specs?"
-"- Đầy đủ các nội dung trong specs
-- Tuần thủ các nguyên tắc về trình bày PPT (font chữ, màu sắc, hình ảnh....)
-- Không lỗi chính tả"
-"- Kế hoạch và quá trình thực hiện có bị trễ hay không?
-- Những thay đổi trong kế hoạch có phù hợp hay không?"
-"- Minh họa đẩy đủ các chức năng trong specs
-- Kết quả minh chứng rõ ràng, đứng với yêu cầu chức năng"
-"- Nhóm đánh giá giải thích lý do và điểm số tương ứng
-- Gợi ý các tiêu chí: chất lượng sản phẩm, độ chính xác, ...."
+2. Processing Layer
+     - ESP32 trung tâm điều phối
+     - API: FaceNet (nhận diện), Plate Recognizer (biển số)
+     - Lưu dữ liệu Firebase
+
+3. Output Layer
+     - Servo SG90 (barrier)
+     - LCD 16×2
+     - Dashboard web
+
+---
+
+## Công nghệ & Linh kiện
+
+Phần cứng:
+- 2× AI Thinker ESP32-CAM (OV2640)
+- 1× ESP32 DevKit V1
+- LCD 16×2 (I2C)
+- Servo SG90
+- Breadboard, dây jumper, nguồn 5V–3A, đế nạp ESP32-CAM
+
+Phần mềm:
+- Firmware: Arduino IDE + ESP-FACE (MTMN)
+- Backend: FastAPI (Python)
+- AI:
+    - Face Detection: MTMN
+    - Face Recognition: FaceNet
+    - Plate OCR: Plate Recognizer API
+- Cloud Storage: Cloudinary
+- Realtime Database: Firebase Realtime Database
+- Frontend: ReactJS
+- Giao tiếp: HTTP REST, MQTT
+
+---
+
+## Kiểm thử & Đánh giá
+- Độ chính xác khuôn mặt: ≥ 90% (ban ngày)
+- Độ chính xác biển số: theo tiêu chuẩn API
+- Thời gian xử lý lượt vào/ra: ≤ 15s
+- Cập nhật trạng thái slot: ≤ 5s
+
+---
+
+## Nhóm phát triển
+| Thành viên        | Vai trò                | Nhiệm vụ                               |
+|-------------------|------------------------|----------------------------------------|
+| Cao Uyển Nhi      | Trưởng nhóm, AI        | Phát triển & tích hợp AI models        |
+| Trần Thị Cát Tường| Phần cứng trung tâm    | Mạch điều khiển, servo, cloud          |
+| Lưu Thanh Thuý    | ESP32-CAM              | Face detection, giao tiếp module       |
+| Võ Lê Việt Tú     | Backend & Dashboard    | Kết nối backend–hardware, UI/UX        |
