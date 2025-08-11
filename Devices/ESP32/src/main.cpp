@@ -11,6 +11,10 @@ FirebaseHandler firebase;
 LcdHandler lcd;
 ServoHandler servoMotor;
 
+
+String route1 = "http://172.20.10.7/receive_detected";
+String route2 = "http://172.20.10.8/receive_detected";
+
 String faceUrl = "";
 String plateUrl = "";
 String gate = ""; // In or Out
@@ -19,8 +23,7 @@ bool readyToCreateSession = false;
 bool stopFlag = false;
 
 unsigned long partialReceivedTime = 0;
-const unsigned long partialTimeout = 6000;
-
+const unsigned long partialTimeout = 8000;
 
 void setup()
 {
@@ -47,7 +50,6 @@ bool extractPlateFromURL(const String &imageUrl, String &outPlate)
 {
   Serial.println(imageUrl);
   HTTPClient http;
-  // http.begin("http://172.20.10.11:8000/ocr/");
   http.begin("http://172.20.10.9:8000/ocr/");
   http.addHeader("Content-Type", "application/json");
 
@@ -65,7 +67,7 @@ bool extractPlateFromURL(const String &imageUrl, String &outPlate)
     Serial.println("[INFO] Server response: ");
     Serial.println(payload);
 
-    StaticJsonDocument<64> responseDoc;
+    StaticJsonDocument<128> responseDoc;
     DeserializationError error = deserializeJson(responseDoc, payload);
 
     if (error)
@@ -76,19 +78,25 @@ bool extractPlateFromURL(const String &imageUrl, String &outPlate)
       return false;
     }
 
-    bool status = responseDoc.as<bool>();
-    if (status)
+    bool status = responseDoc["status"];
+    const char* plate = responseDoc["plate"];
+
+    if (status && plate && strlen(plate) > 0)
     {
-      Serial.println("[SUCCESS] Plate detection successful");
+      outPlate = String(plate);  
+      Serial.print("[SUCCESS] Plate detected: ");
+      Serial.println(outPlate);
       http.end();
       return true;
     }
     else
     {
-      Serial.println("[FAILURE] Plate detection failed");
-      http.end();
-      return false;
+      Serial.println("[FAILURE] Plate detection failed or plate empty.");
     }
+  }
+  else
+  {
+    Serial.printf("[ERROR] HTTP code: %d\n", httpCode);
   }
 
   http.end();
@@ -187,8 +195,8 @@ void loop()
       Serial.println("[WARNING] Bỏ qua message rỗng");
       client.stop();
 
-      sendTriggerToCam("http://172.20.10.7/receive_detected");
-      sendTriggerToCam("http://172.20.10.8/receive_detected");
+      sendTriggerToCam(route1);
+      sendTriggerToCam(route2);
       return;
     }
 
@@ -211,10 +219,16 @@ void loop()
         plateUrl = url;
       }
 
-      if ((faceUrl != "" && plateUrl == "") || (plateUrl != "" && faceUrl == ""))
+      // Ghi nhận thời điểm mỗi khi nhận URL mới
+      if (isFace && faceUrl != "")
       {
         partialReceivedTime = millis();
       }
+      else if (!isFace && plateUrl != "")
+      {
+        partialReceivedTime = millis();
+      }
+
       if (faceUrl != "" && plateUrl != "")
       {
         Serial.println("Processing face and plate URLs...");
@@ -232,8 +246,8 @@ void loop()
           faceUrl = "";
           plateUrl = "";
           gate = "";
-          sendTriggerToCam("http://172.20.10.7/receive_detected");
-          sendTriggerToCam("http://172.20.10.8/receive_detected");
+          sendTriggerToCam(route1);
+          sendTriggerToCam(route2);
           return;
         }
 
@@ -244,8 +258,8 @@ void loop()
     {
       Serial.print("[ERROR - DESER] Lỗi khi parse JSON: ");
       Serial.println(error.c_str());
-      sendTriggerToCam("http://172.20.10.7/receive_detected");
-      sendTriggerToCam("http://172.20.10.8/receive_detected");
+      sendTriggerToCam(route1);
+      sendTriggerToCam(route2);
       delay(1000);
     }
 
@@ -381,13 +395,15 @@ void loop()
       plateUrl = "";
       gate = "";
     }
-    sendTriggerToCam("http://172.20.10.7/receive_detected");
-    sendTriggerToCam("http://172.20.10.8/receive_detected");
+    sendTriggerToCam(route1);
+    sendTriggerToCam(route2);
   }
 
   // Reset nếu chỉ có 1 trong 2 URL và đã quá timeout
-  if (((faceUrl != "" && plateUrl == "") || (plateUrl != "" && faceUrl == "")) &&
+  if (partialReceivedTime > 0 &&
+      ((faceUrl != "" && plateUrl == "") || (plateUrl != "" && faceUrl == "")) &&
       (millis() - partialReceivedTime > partialTimeout))
+
   {
     Serial.println("[WARNING] Timeout waiting for second URL. Resetting...");
 
@@ -399,10 +415,10 @@ void loop()
     lcd.clear();
     lcd.printLine("Timeout", 0);
     lcd.printLine("Resetting...", 1);
-
-    sendTriggerToCam("http://172.20.10.7/receive_detected");
-    sendTriggerToCam("http://172.20.10.8/receive_detected");
+    sendTriggerToCam(route1);
+    sendTriggerToCam(route2);
     delay(2000);
+    lcd.printLine("", 1);
   }
 
   delay(100);

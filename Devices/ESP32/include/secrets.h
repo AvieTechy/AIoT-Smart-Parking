@@ -1,13 +1,10 @@
 #pragma once
 
-// #define WIFI_SSID "AviePhone"
-// #define WIFI_PASSWORD "ceonhyyy"
-
 #define WIFI_SSID "raanf"
 #define WIFI_PASSWORD "shinasakura"
 
-#define API_KEY "AIzaSyDkgaehA4738bDin451JbjtiNgEYSpUCW4"
-#define FIREBASE_PROJECT_ID "parking-system-5633c"
+#define API_KEY "AIzaSyCIMOpyFlZsRKx3-zNQZkL_ke188J1NsfM"
+#define FIREBASE_PROJECT_ID "smart-parking-admin"
 
 #define USER_EMAIL "aiot@gmail.com"
 #define USER_PASSWORD "aiot1234"

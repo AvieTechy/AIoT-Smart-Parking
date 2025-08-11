@@ -22,6 +22,14 @@ void FirebaseHandler::begin()
 
     Firebase.begin(&config, &auth);
     Firebase.reconnectWiFi(true);
+    if (Firebase.ready())
+    {
+        Serial.println("Firebase kết nối thành công!");
+    }
+    else
+    {
+        Serial.println("Firebase kết nối thất bại!");
+    }
 }
 
 // Tạo session mới
@@ -90,28 +98,6 @@ bool FirebaseHandler::updateSessionIsOut(const String &sessionID)
         Serial.println(fbdo.errorReason());
         return false;
     }
-}
-
-// Kiểm tra session mới (tạm thời không dùng)
-bool FirebaseHandler::checkNewSession(String &sessionID)
-{
-    String path = COLLECTION_TRIGGER "/" DOCUMENT_TRIGGER;
-    if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), ""))
-    {
-        FirebaseJson json;
-        json.setJsonData(fbdo.payload());
-
-        FirebaseJsonData statusField, sessionField;
-        json.get(statusField, "fields/status/booleanValue");
-        json.get(sessionField, "fields/sessionID/stringValue");
-
-        if (statusField.success && statusField.boolValue && sessionField.success)
-        {
-            sessionID = sessionField.stringValue;
-            return true;
-        }
-    }
-    return false;
 }
 
 // Tìm session IN theo biển số xe
@@ -254,13 +240,11 @@ bool FirebaseHandler::findInSessionByPlate(const String &plateNumber, String &fo
                     {
                         Serial.println("[ERROR] Không lấy được fields từ docJson");
                     }
-
-                    Serial.println("[DEBUG] Thoát khỏi findInSessionByPlate");
                     return true;
                 }
                 else
                 {
-                    Serial.print("[ERROR] Lỗi khi parse JSON: ");
+                    Serial.print("[ERROR] Lỗi khi parse JSON - hàm find session In: ");
                     Serial.println(docJson.errorPosition());
                 }
             }
@@ -278,102 +262,6 @@ bool FirebaseHandler::findInSessionByPlate(const String &plateNumber, String &fo
         Serial.println(fbdo.payload());
     }
 
-    return false;
-}
-
-// Lấy dữ liệu session (tạm thời không dùng)
-bool FirebaseHandler::getSessionData(const String &sessionID, String &gate, String &timestamp)
-{
-    String path = COLLECTION_SESSION;
-    path.concat("/");
-    path.concat(sessionID);
-    if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), ""))
-    {
-        FirebaseJson json;
-        json.setJsonData(fbdo.payload());
-
-        FirebaseJsonData gateField, timeField;
-        json.get(gateField, "fields/gate/stringValue");
-        json.get(timeField, "fields/timestamp/timestampValue");
-
-        if (gateField.success && timeField.success)
-        {
-            gate = gateField.stringValue;
-            timestamp = timeField.stringValue;
-            return true;
-        }
-    }
-    return false;
-}
-
-// Tạo document xác minh (MatchingVerify)
-// Nếu tạo thành công:
-// createdDocID trả về dạng "MatchingVerify/docID"
-// Hàm trả true
-// Nếu lỗi: trả false
-bool FirebaseHandler::createMatchingDoc(const String &sessionID, String &createdDocID)
-{
-    FirebaseJson doc;
-    doc.set("fields/sessionID/stringValue", sessionID);
-    doc.set("fields/isMatch/booleanValue", false);
-
-    if (Firebase.Firestore.createDocument(&fbdo, FIREBASE_PROJECT_ID, "", COLLECTION_VERIFY, doc.raw()))
-    {
-        FirebaseJson resp;
-        resp.setJsonData(fbdo.payload());
-        FirebaseJsonData docName;
-        if (resp.get(docName, "name") && docName.success)
-        {
-            String fullPath = docName.stringValue;
-            int idx = fullPath.lastIndexOf("/");
-            createdDocID = COLLECTION_VERIFY;
-            createdDocID.concat("/");
-            createdDocID.concat(fullPath.substring(idx + 1));
-            return true;
-        }
-    }
-    return false;
-}
-
-// kiểm tra document vừa tạo ở trên để xem kết quả isMatch đã được cập nhật hay chưa.
-bool FirebaseHandler::waitForMatching(const String &docID, bool &result)
-{
-    unsigned long start = millis();
-    while (millis() - start < FIREBASE_TIMEOUT)
-    {
-        if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", docID.c_str(), ""))
-        {
-            FirebaseJson json;
-            json.setJsonData(fbdo.payload());
-
-            FirebaseJsonData field;
-            if (json.get(field, "fields/isMatch/booleanValue") && field.success)
-            {
-                if (field.boolValue)
-                {
-                    Serial.println("Khuôn mặt trùng khớp, mở cổng");
-                    result = true;
-                    return true;
-                }
-                else
-                {
-                    Serial.println("Chưa xác minh xong...");
-                }
-            }
-            else
-            {
-                Serial.println("Không tìm thấy trường isMatch.");
-            }
-        }
-        else
-        {
-            Serial.println("Không lấy được document.");
-        }
-        delay(1000);
-    }
-
-    Serial.println("Hết thời gian chờ");
-    result = false;
     return false;
 }
 
@@ -420,15 +308,18 @@ bool FirebaseHandler::increaseAvailableSlot()
 {
     String path = "ParkingMeta/slotCounter";
 
-    if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), "")) {
+    if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), ""))
+    {
         FirebaseJson json;
         json.setJsonData(fbdo.payload());
 
         FirebaseJsonData availableField;
-        if (json.get(availableField, "fields/available/integerValue") && availableField.success) {
+        if (json.get(availableField, "fields/available/integerValue") && availableField.success)
+        {
             int currentAvailable = availableField.intValue;
 
-            if (currentAvailable <= 0) {
+            if (currentAvailable <= 0)
+            {
                 Serial.println("[INFO] Không còn chỗ trống.");
                 return false;
             }
@@ -438,18 +329,25 @@ bool FirebaseHandler::increaseAvailableSlot()
             FirebaseJson patchDoc;
             patchDoc.set("fields/available/integerValue", updatedAvailable);
 
-            if (Firebase.Firestore.patchDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), patchDoc.raw(), "available")) {
+            if (Firebase.Firestore.patchDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), patchDoc.raw(), "available"))
+            {
                 Serial.print("[INFO] Đã cập nhật available còn lại: ");
                 Serial.println(updatedAvailable);
                 return true;
-            } else {
+            }
+            else
+            {
                 Serial.print("[ERROR] Lỗi khi cập nhật available: ");
                 Serial.println(fbdo.errorReason());
             }
-        } else {
+        }
+        else
+        {
             Serial.println("[ERROR] Không tìm thấy trường available.");
         }
-    } else {
+    }
+    else
+    {
         Serial.print("[ERROR] Không thể lấy tài liệu slotCounter: ");
         Serial.println(fbdo.errorReason());
     }
@@ -461,15 +359,18 @@ bool FirebaseHandler::decreaseAvailableSlot()
 {
     String path = "ParkingMeta/slotCounter";
 
-    if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), "")) {
+    if (Firebase.Firestore.getDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), ""))
+    {
         FirebaseJson json;
         json.setJsonData(fbdo.payload());
 
         FirebaseJsonData availableField;
-        if (json.get(availableField, "fields/available/integerValue") && availableField.success) {
+        if (json.get(availableField, "fields/available/integerValue") && availableField.success)
+        {
             int currentAvailable = availableField.intValue;
 
-            if (currentAvailable <= 0) {
+            if (currentAvailable <= 0)
+            {
                 Serial.println("[INFO] Không còn chỗ trống.");
                 return false;
             }
@@ -479,18 +380,25 @@ bool FirebaseHandler::decreaseAvailableSlot()
             FirebaseJson patchDoc;
             patchDoc.set("fields/available/integerValue", updatedAvailable);
 
-            if (Firebase.Firestore.patchDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), patchDoc.raw(), "available")) {
+            if (Firebase.Firestore.patchDocument(&fbdo, FIREBASE_PROJECT_ID, "", path.c_str(), patchDoc.raw(), "available"))
+            {
                 Serial.print("[INFO] Đã cập nhật available còn lại: ");
                 Serial.println(updatedAvailable);
                 return true;
-            } else {
+            }
+            else
+            {
                 Serial.print("[ERROR] Lỗi khi cập nhật available: ");
                 Serial.println(fbdo.errorReason());
             }
-        } else {
+        }
+        else
+        {
             Serial.println("[ERROR] Không tìm thấy trường available.");
         }
-    } else {
+    }
+    else
+    {
         Serial.print("[ERROR] Không thể lấy tài liệu slotCounter: ");
         Serial.println(fbdo.errorReason());
     }
