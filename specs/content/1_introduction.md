@@ -12,7 +12,7 @@ Công nghệ AIoT (Artificial Intelligence of Things) với sự kết hợp gi�
 
 ## Mục đích
 
-Đề tài này nhằm mục đích nghiên cứu, thiết kế và xây dựng một mô hình thử nghiệm (prototype) **Hệ thống Bãi đỗ xe Thông minh** ứng dụng công nghệ AIoT. Hệ thống hướng đến việc tự động hóa toàn diện quy trình quản lý phương tiện ra vào, tối ưu hóa việc sử dụng không gian đỗ xe, giảm thiểu sự can thiệp của con người, đồng thời nâng cao trải nghiệm người dùng và hiệu quả vận hành cho đơn vị quản lý.
+Đề tài này nhằm mục đích nghiên cứu, thiết kế và xây dựng một mô hình thử nghiệm (prototype) **Hệ thống Bãi đỗ xe Thông minh** ứng dụng công nghệ AIoT. Hệ thống hướng đến việc tự động hóa toàn diện quy trình quản lý phương tiện ra vào, giảm thiểu sự can thiệp của con người, đồng thời nâng cao trải nghiệm người dùng và hiệu quả vận hành cho đơn vị quản lý.
 
 ## Mục tiêu
 
@@ -21,7 +21,7 @@ Công nghệ AIoT (Artificial Intelligence of Things) với sự kết hợp gi�
 | ID   | Mục tiêu                     | Chỉ số đo                  | Điều kiện đạt           |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `O-01` | Xây dựng chức năng nhận diện gương mặt và biển số xe hoạt động ổn định trong điều kiện ban ngày và ảnh nhòe/không rõ nét | Accuracy $\ge$ 90% (ban ngày); Accuracy $\ge$ 70% (ảnh nhòe)                                            | Test trên $\ge$ 100 lượt xe vào/ra với dữ liệu đa dạng, gồm ảnh rõ và ảnh nhòe |
-| `O-02` | Đảm bảo hệ thống phản hồi nhanh và cập nhật thời gian thực                                                               | Thời gian xử lý 1 lượt $le$ 15 giây; Cập nhật trạng thái slot $\le$ 5 giây                             | Môi trường test chuẩn, kết nối mạng ổn định                                |
+| `O-02` | Đảm bảo hệ thống phản hồi nhanh và cập nhật thời gian thực                                                               | Thời gian xử lý 1 lượt $\le$ 15 giây; Cập nhật trạng thái slot $\le$ 5 giây                             | Môi trường test chuẩn, kết nối mạng ổn định                                |
 | `O-03` | Hoàn thiện đầy đủ tính năng quản lý bãi xe quy mô nhỏ (5–10 vị trí)                                                      | 100% module hoạt động; tự động ghi nhận biển số & thời gian; lưu trữ cloud; dashboard trực quan | Đáp ứng đầy đủ yêu cầu vận hành thử nghiệm                                 |
 
 ## Phát biểu bài toán
@@ -33,10 +33,10 @@ Công nghệ AIoT (Artificial Intelligence of Things) với sự kết hợp gi�
 ### Kết quả đầu ra
 
 - Thông tin nhận diện với độ chính xác $\ge$ 90% (điều kiện ban ngày) và $\ge$ 70% (ảnh nhòe/không rõ nét) cho biển số xe và khuôn mặt tại thời điểm phương tiện vào – ra.
-- Bản ghi chi tiết về thời gian vào – ra của từng phương tiện với thời gian xử lý ≤ 15 giây/lượt.
-- Trạng thái cập nhật liên tục của từng vị trí đỗ (còn trống/đã chiếm chỗ) với thời gian cập nhật ≤ 5 giây.
-- Giao diện dashboard trực quan, dễ sử dụng cho người quản lý và thông tin cho người dùng với uptime ≥ 99%.
-- Cơ sở dữ liệu được lưu trữ an toàn và có khả năng truy xuất hiệu quả trên nền tảng cloud với tỷ lệ thành công ≥ 95%.
+- Bản ghi chi tiết về thời gian vào – ra của từng phương tiện với thời gian xử lý $\le$ 15 giây/lượt.
+- Trạng thái cập nhật liên tục của từng vị trí đỗ (còn trống/đã chiếm chỗ) với thời gian cập nhật $\le$ 5 giây.
+- Giao diện dashboard trực quan, dễ sử dụng cho người quản lý và thông tin cho người dùng.
+- Cơ sở dữ liệu được lưu trữ an toàn và có khả năng truy xuất hiệu quả trên nền tảng cloud.
 
 ## Phạm vi và Giới hạn của Hệ thống
 

@@ -19,10 +19,11 @@ Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm
 Tầng này chịu trách nhiệm xử lý dữ liệu từ thiết bị đầu vào, thực hiện các tác vụ trí tuệ nhân tạo và điều phối hoạt động của hệ thống.
 
 Server Backend (FastAPI) chịu trách nhiệm:
-    - Lấy URL ảnh từ Firebase.
-    - Nhận diện khuôn mặt: mô hình FaceNet trích xuất embedding và so khớp với cơ sở dữ liệu.
-    - Nhận dạng biển số: Plate Recognizer API sẽ nhận request là hình ảnh chứa biển số và trả về chuỗi ký tự.
-    - Ghi kết quả nhận diện (biển số, trạng thái hợp lệ, thời gian) vào Firebase.
+
+- Lấy URL ảnh từ Firebase.
+- Nhận diện khuôn mặt: mô hình FaceNet trích xuất embedding và so khớp với cơ sở dữ liệu.
+- Nhận dạng biển số: Plate Recognizer API sẽ nhận request là hình ảnh chứa biển số và trả về chuỗi ký tự.
+- Ghi kết quả nhận diện (biển số, trạng thái hợp lệ, thời gian) vào Firebase.
 
 ### Thiết bị điều khiển - phản hồi (Output Layer)
 

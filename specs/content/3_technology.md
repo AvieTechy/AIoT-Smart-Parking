@@ -121,16 +121,15 @@ Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **100–
 
 **2. Upload ảnh & gửi URL**
 
-- ESP32-CAM upload ảnh lên Cloudinary qua REST API.
+- ESP32-CAM upload ảnh lên Cloudinary qua REST API (server).
 - Cloudinary trả về URL ảnh.
-- ESP32-CAM gửi URL ảnh + metadata (thời gian, loại ảnh, ID thiết bị…) cho ESP32 trung tâm qua giao thức (HTTP/MQTT).
+- ESP32-CAM gửi URL ảnh + metadata (`id` cam và `isFace`) cho ESP32 trung tâm qua giao thức (TCP/IP socket).
 
 **3. Gọi AI model**
-
-- ESP32 trung tâm nhận URL ảnh.
-- Gọi API AI model (đã deploy trên server) với URL ảnh để thực hiện:
-    - **Nhận diện khuôn mặt** (MobileFaceNet + DeepFace) → xác định danh tính.
-    - **Nhận dạng biển số** (Plate Recognizer API) → trích xuất ký tự.
+- ESP32 trung tâm nhận URL ảnh từ ESP32-CAM.
+- Gọi API AI (server) với URL để thực hiện:
+    - Nhận dạng biển số (luồng vào/ra) bằng Plate Recognizer API → trích xuất ký tự biển số.
+    - Nhận diện khuôn mặt (luồng ra) bằng FaceNet → xác định danh tính.
 
 **4. Nhận & xử lý kết quả**
 
@@ -139,7 +138,7 @@ Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **100–
 
 **5. Điều khiển thiết bị**
 
-- Dựa trên kết quả nhận diện, ESP32 trung tâm điều khiển Servo (Barrier), LCD, và còi cảnh báo.
+- Dựa trên kết quả nhận diện, ESP32 trung tâm điều khiển Servo (Barrier), LCD.
 
 **6. Hiển thị & giám sát**
 
