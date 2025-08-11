@@ -41,4 +41,4 @@ Cụ thể, xem timeline dạng Gantt Chart tại [đây](https://docs.google.co
 | Dây jumper                      | 40 sợi/loại   | 66,000         | 66,000 |
 | Đế Nạp ESP32-CAM                      | 1   | 30,000         | 30,000 |
 | Chi phí lắp đặt, khung mô hình | - | 200,000 | 200,000 |
-| **Tổng chi phí** | | | **1,002,000** |
+| **Tổng chi phí** | | | **1,022,000** |

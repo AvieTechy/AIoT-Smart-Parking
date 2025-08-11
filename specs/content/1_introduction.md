@@ -28,7 +28,7 @@ Công nghệ AIoT (Artificial Intelligence of Things) với sự kết hợp gi�
 
 ### Dữ liệu đầu vào
 
-- Hình ảnh chất lượng cao từ camera giám sát tại các lối vào và lối ra của bãi xe.
+Hình ảnh chất lượng cao từ camera giám sát tại các lối vào và lối ra của bãi xe.
 
 ### Kết quả đầu ra
 

@@ -41,6 +41,8 @@ Mỗi ESP32-CAM hoạt động độc lập, được nạp sẵn chương trìn
 
 ESP32 trung tâm sẽ kết nối chung mạng Wi-Fi với 2 ESP32-CAM, đóng vai trò nhận thông tin từ các module này. Sau khi nhận được kết quả nhận diện thông qua Wi-Fi, ESP32 trung tâm xử lý và điều khiển các thiết bị output liên quan như màn hình OLED và servo.
 
+\pagebreak
+
 **Nạp code**:
 
 ![Đế nạp ESP32-CAM](images/Programming_Adapter.jpg){ height=200px }
@@ -80,7 +82,7 @@ Trong hệ thống này, breadboard sẽ được cấp nguồn trực tiếp t�
 | **Male-Female** | Một đầu kim, một đầu lỗ | Dùng để nối **module/cảm biến (có chân đực)** với **breadboard hoặc board mạch** |
 | **Female-Female** | Hai đầu lỗ | Dùng để **nối giữa 2 thiết bị đều có chân đực**, ví dụ **ESP32-CAM và FTDI**, hoặc giữa **module logic với module khác** |
 
-**4. Màn hình LCD**
+4. **Màn hình LCD**
 
 Là màn hình **LCD 16x2** sử dụng giao tiếp **I2C (SDA, SCL)** với ESP32 trung tâm (thường là GPIO21 và GPIO22). Màn hình có module chuyển đổi I2C tích hợp giúp đơn giản hóa kết nối và tiết kiệm chân GPIO.
 
@@ -91,7 +93,7 @@ Trong hệ thống này, LCD có chức năng hiển thị:
 
 Điện áp hoạt động là **5V** (tương thích tốt với ESP32 thông qua module I2C).
 
-**5. Servo motor SG90**
+5. **Servo motor SG90**
 
 **SG90** là một loại **servo mini phổ biến** với cấu trúc bánh răng nhựa, trọng lượng nhẹ, phù hợp với các cơ cấu điều khiển như **thanh chắn xe** trong mô hình nhỏ.
 
@@ -126,6 +128,7 @@ Servo hoạt động ở **điện áp 5V**, tiêu thụ dòng khoảng **100–
 - ESP32-CAM gửi URL ảnh + metadata (`id` cam và `isFace`) cho ESP32 trung tâm qua giao thức (TCP/IP socket).
 
 **3. Gọi AI model**
+
 - ESP32 trung tâm nhận URL ảnh từ ESP32-CAM.
 - Gọi API AI (server) với URL để thực hiện:
     - Nhận dạng biển số (luồng vào/ra) bằng Plate Recognizer API → trích xuất ký tự biển số.

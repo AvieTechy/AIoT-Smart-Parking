@@ -4,6 +4,8 @@
 % Remove babel language option from documentclass to avoid missing vietnamese.ldf
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 
+\setlength{\parindent}{0pt} % Tắt indent đầu dòng
+
 % Font settings
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}

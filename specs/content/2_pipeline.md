@@ -16,9 +16,7 @@ Hệ thống được thiết kế dựa trên mô hình phân tầng, bao gồm
 
 ### Tầng xử lý trung tâm (Processing Layer)
 
-Tầng này chịu trách nhiệm xử lý dữ liệu từ thiết bị đầu vào, thực hiện các tác vụ trí tuệ nhân tạo và điều phối hoạt động của hệ thống.
-
-Server Backend (FastAPI) chịu trách nhiệm:
+Tầng này chịu trách nhiệm xử lý dữ liệu từ thiết bị đầu vào, thực hiện các tác vụ trí tuệ nhân tạo và điều phối hoạt động của hệ thống. Server Backend (FastAPI) chịu trách nhiệm:
 
 - Lấy URL ảnh từ Firebase.
 - Nhận diện khuôn mặt: mô hình FaceNet trích xuất embedding và so khớp với cơ sở dữ liệu.
@@ -27,11 +25,13 @@ Server Backend (FastAPI) chịu trách nhiệm:
 
 ### Thiết bị điều khiển - phản hồi (Output Layer)
 
-- **Thiết bị IoT** gồm:
-  - **Servo (Barrier):** mở/đóng rào chắn tự động.
-  - **LCD Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
+**Thiết bị IoT** gồm:
 
-- **Dashboard (giao diện quản trị cho Admin):**
-    - Kết nối Firebase để lấy dữ liệu thời gian thực.
-    - Hiển thị danh sách lượt vào/ra, trạng thái slot, thống kê lịch sử.
-    - Cho phép truy xuất dữ liệu và giám sát hệ thống từ xa.
+- **Servo (Barrier):** mở/đóng rào chắn tự động.
+- **LCD Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
+
+**Dashboard (giao diện quản trị cho Admin):**
+
+- Kết nối Firebase để lấy dữ liệu thời gian thực.
+- Hiển thị danh sách lượt vào/ra, trạng thái slot, thống kê lịch sử.
+- Cho phép truy xuất dữ liệu và giám sát hệ thống từ xa.

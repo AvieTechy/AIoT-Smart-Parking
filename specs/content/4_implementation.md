@@ -1,6 +1,6 @@
 # Triển khai và Công Nghệ Sử dụng
 
-![Prototype mô hình toàn bộ hệ thống](prototype){width=80%}
+![Prototype mô hình toàn bộ hệ thống](prototype.png){width=80%}
 
 ## Quy trình triển khai
 
