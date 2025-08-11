@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart
+numpy
+tensorflow
+keras
+tf-keras
+deepface
+cloudinary

@@ -1,0 +1,232 @@
+/* Stats Cards Styles */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.stats-icon {
+  padding: 0.75rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-info {
+  flex: 1;
+}
+
+.stats-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.stats-number {
+  margin: 0 0 0.25rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.stats-info small {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+/* Individual card colors */
+.current-vehicles .stats-icon {
+  background-color: #dbeafe;
+  color: #3b82f6;
+}
+
+.total-entries .stats-icon {
+  background-color: #d1fae5;
+  color: #10b981;
+}
+
+.available-slots .stats-icon {
+  background-color: #fef3c7;
+  color: #f59e0b;
+}
+
+.total-exits .stats-icon {
+  background-color: #fecaca;
+  color: #ef4444;
+}
+
+.occupancy-rate .stats-icon {
+  background-color: #ede9fe;
+  color: #8b5cf6;
+}
+
+/* Edit functionality styles */
+.stats-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.edit-button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.edit-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.edit-text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .edit-text {
+    display: inline;
+  }
+}
+
+.edit-slots-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.slots-input {
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  max-width: 150px;
+  transition: border-color 0.2s ease;
+}
+
+.slots-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.slots-input:disabled {
+  background-color: #f9fafb;
+  color: #6b7280;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.save-button, .cancel-button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  flex: 1;
+  justify-content: center;
+}
+
+.save-button {
+  background-color: #10b981;
+  color: white;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.cancel-button {
+  background-color: #ef4444;
+  color: white;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.save-button:disabled, .cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+.updating-text {
+  color: #3b82f6;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+.total-slots .stats-icon {
+  background-color: #f3e8ff;
+  color: #8b5cf6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .stats-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stats-card {
+    padding: 1rem;
+  }
+
+  .stats-number {
+    font-size: 1.5rem;
+  }
+}

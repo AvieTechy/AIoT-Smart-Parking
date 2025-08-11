@@ -20,14 +20,14 @@ Hệ thống sử dụng các mô hình AI chuyên biệt cho từng tác vụ, 
 
 | Tác vụ AI                               | Mô hình / API sử dụng                               | Mục đích                                                                 | Thiết bị triển khai                     |
 | :-------------------------------------- | :-------------------------------------------------- | :---------------------------------------------------------------------- | :-------------------------------------- |
-| Phát hiện khuôn mặt (có/không + bounding box) | face_detection – mô hình nhúng do ESP-WHO cung cấp | Xác định có khuôn mặt trong ảnh và trả về bounding box để chụp ảnh       | ESP32-CAM (chạy trực tiếp trên thiết bị) |
-| Nhận diện khuôn mặt (face matching)      | MobileFaceNet                                       | Trích xuất vector đặc trưng và so khớp với cơ sở dữ liệu người dùng      | Server (Django backend)                 |
-| Nhận dạng ký tự biển số (OCR)           | Plate Recognizer API (REST API)                     | Gửi ảnh biển số lên server API và nhận lại chuỗi ký tự đã nhận dạng | Server (Django backend)                 |
+| Phát hiện khuôn mặt (có/không + bounding box) | MTMN – mô hình nhúng do ESP-FACE cung cấp | Xác định có khuôn mặt trong ảnh và trả về bounding box để chụp ảnh       | ESP32-CAM (chạy trực tiếp trên thiết bị) |
+| Nhận diện khuôn mặt (face matching)      | Deepface                                       | Tự động trích xuất vector đặc trưng và so khớp với cơ sở dữ liệu người dùng      | Server                 |
+| Nhận dạng ký tự biển số (OCR)           | Plate Recognizer API (REST API)                     | Gửi ảnh biển số lên server API và nhận lại chuỗi ký tự đã nhận dạng | Server                 |
 
 Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị nhúng và backend, để thực hiện hai nhiệm vụ chính: nhận diện khuôn mặt và nhận dạng biển số xe. Cụ thể:
 
 -   **Phát hiện khuôn mặt:**
-    Mô hình `face_detection` từ thư viện ESP-WHO được chạy trực tiếp trên ESP32-CAM. Mô hình này có khả năng phát hiện nhanh khuôn mặt và trả về bounding box, giúp thiết bị xác định thời điểm chụp và gửi ảnh về server.
+    Mô hình MTMN từ ESP-FACE được chạy trực tiếp trên ESP32-CAM. Mô hình này có khả năng phát hiện nhanh khuôn mặt và trả về bounding box, giúp thiết bị xác định thời điểm chụp và gửi ảnh về server.
 -   **Nhận diện khuôn mặt:**
     Server sử dụng mô hình MobileFaceNet để trích xuất vector đặc trưng từ ảnh khuôn mặt và so sánh với cơ sở dữ liệu người dùng đã đăng ký.
 -   **Nhận dạng biển số xe:**
@@ -50,7 +50,7 @@ Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị n
     *   Theo dõi kết quả từ Firebase.
     *   Khi có kết quả tương ứng với ảnh mình đã gửi, ESP32:
         *   Truy xuất kết quả nhận diện.
-        *   Điều khiển thiết bị đầu ra (mở barrier, hiển thị OLED, còi, v.v.).
+        *   Điều khiển thiết bị đầu ra (mở barrier, hiển thị LCD, còi, v.v.).
         *   Ghi lại trạng thái hoạt động (đã xử lý xong) nếu cần.
 4.  **Dashboard quản trị (ReactJS):**
     *   Lấy dữ liệu trực tiếp từ Firebase để hiển thị:
@@ -62,7 +62,7 @@ Hệ thống áp dụng các mô hình AI nhẹ, phù hợp với thiết bị n
 
 - **Thiết bị IoT** gồm:
   - **Servo (Barrier):** mở/đóng rào chắn tự động.
-  - **OLED Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
+  - **LCD Display:** hiển thị thông tin trực quan (số ô trống, lỗi, trạng thái...).
 
 - **Dashboard (giao diện quản trị cho Admin):**
   - Sử dụng các công nghệ phổ biến HTML, CSS, JavaScript để xây dựng giao diện thân thiện, dễ sử dụng.

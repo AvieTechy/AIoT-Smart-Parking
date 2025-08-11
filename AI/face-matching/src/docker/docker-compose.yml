@@ -1,0 +1,29 @@
+services:
+  smart-parking-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: smart-parking-api
+    ports:
+      - "8000:8000"
+    environment:
+      - API_KEY=smart-parking-api-key-2024
+      - SIMILARITY_THRESHOLD=0.5
+      - FIREBASE_PROJECT_ID=vispark-25
+      - GOOGLE_APPLICATION_CREDENTIALS=config/firebase-key.json
+      - CLOUDINARY_CLOUD_NAME=djh5sopoy
+      - CLOUDINARY_API_KEY=639677788267898
+      - CLOUDINARY_API_SECRET=eHOkRmg9LLnO_xUunrAJHgP1WWE
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+    volumes:
+      - ../backend/config/firebase-key.json:/app/config/firebase-key.json:ro
+    networks:
+      - smart-parking-network
+    restart: unless-stopped
+
+networks:
+  smart-parking-network:
+    driver: bridge
