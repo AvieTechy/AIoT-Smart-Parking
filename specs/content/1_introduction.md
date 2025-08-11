@@ -2,13 +2,13 @@
 
 ## Bối cảnh
 
-Trong bối cảnh đô thị hóa diễn ra mạnh mẽ, việc quản lý hiệu quả các bãi đỗ xe tại các khu vực tập trung đông người như chung cư, trường học, và tòa nhà văn phòng ngày càng trở nên cấp thiết. Hiện nay, nhiều bãi đỗ xe đã ứng dụng công nghệ thẻ từ (RFID) và phần mềm quản lý cơ bản, tuy nhiên, các giải pháp này thường gặp phải những hạn chế đáng kể:
+Trong bối cảnh đô thị hóa nhanh chóng, việc quản lý bãi đỗ xe tại các khu vực đông dân cư như chung cư, trường học, tòa nhà văn phòng đang gặp nhiều thách thức. Các hệ thống hiện tại sử dụng thẻ từ (RFID) và phần mềm quản lý cơ bản vẫn còn nhiều hạn chế:
 
-- **Thiếu tự động hóa:** Quy trình vận hành vẫn phụ thuộc nhiều vào thao tác thủ công như quét thẻ, ghi nhận thông tin, dễ dẫn đến sai sót (mất thẻ, quên thẻ, ghi nhận sai) và tốn thời gian.
-- **Thiếu thông tin thời gian thực:** Hệ thống không giám sát được tình trạng thực tế của từng vị trí đỗ, khiến người dùng không biết trước bãi xe còn chỗ hay không, gây bất tiện và lãng phí thời gian tìm kiếm.
-- **Lưu trữ dữ liệu cục bộ:** Dữ liệu thường được lưu trữ nội bộ, thiếu khả năng đồng bộ lên các nền tảng trực tuyến, gây khó khăn trong việc truy xuất và phân tích khi cần thiết, đặc biệt khi có sự cố.
+- **Thiếu tự động hóa:** Phụ thuộc vào thao tác thủ công, dễ sai sót và tốn thời gian.
+- **Thiếu thông tin thời gian thực:** Không giám sát được tình trạng từng vị trí đỗ, gây bất tiện cho người dùng.
+- **Lưu trữ dữ liệu cục bộ:** Khó khăn trong truy xuất và phân tích dữ liệu khi cần thiết.
 
-Những hạn chế này không chỉ làm giảm hiệu quả quản lý mà còn ảnh hưởng tiêu cực đến trải nghiệm của người dùng. Do đó, nhu cầu về một giải pháp quản lý bãi đỗ xe thông minh, tự động hóa cao và cung cấp thông tin chính xác theo thời gian thực là vô cùng lớn. Công nghệ AIoT (Artificial Intelligence of Things), với sự kết hợp giữa Trí tuệ Nhân tạo (AI) và Internet Vạn vật (IoT), mở ra tiềm năng to lớn để giải quyết những thách thức này, hướng tới xây dựng một hệ thống hạ tầng đô thị hiện đại và hiệu quả hơn.
+Công nghệ AIoT (Artificial Intelligence of Things) với sự kết hợp giữa AI và IoT mở ra tiềm năng lớn để giải quyết những thách thức này, hướng tới xây dựng hệ thống quản lý bãi đỗ xe thông minh, tự động và hiệu quả.
 
 ## Mục đích
 
@@ -18,36 +18,11 @@ Những hạn chế này không chỉ làm giảm hiệu quả quản lý mà c�
 
 Để đạt được mục đích đã đề ra, hệ thống tập trung vào ba nhóm mục tiêu chính. Mỗi mục tiêu được cụ thể hóa bằng các tiêu chí định lượng nhằm đảm bảo khả năng kiểm chứng trong quá trình phát triển và đánh giá hệ thống.
 
-### Nhận diện tự động
-
-Xây dựng chức năng nhận diện gương mặt, biển số xe hoạt động ổn định trong điều kiện thực tế.
-
-**Các tiêu chí đánh giá:**
-
-- Tỷ lệ nhận diện chính xác gương mặt và biển số xe đạt trên 80% trong điều kiện ánh sáng ban ngày.
-- Tỷ lệ nhận diện chính xác đạt trên 70% trong điều kiện ánh sáng yếu (ví dụ: buổi tối có đèn chiếu sáng của bãi xe).
-- Hệ thống được kiểm thử trên một tập dữ liệu 6 lượt xe vào/ra khác nhau.
-
-### Đảm bảo hiệu suất và tính thời gian thực
-
-Đảm bảo hệ thống phản hồi nhanh và cập nhật kịp thời các thay đổi từ thực tế.
-
-**Các tiêu chí đánh giá:**
-
-- Thời gian xử lý trung bình cho một lượt xe (tính từ lúc xe dừng đúng vị trí đến khi hệ thống xử lý xong) không vượt quá 15 giây.
-- Trạng thái của các vị trí đỗ xe (trống hoặc có xe) được cập nhật lên giao diện quản lý trong vòng tối đa 5 giây kể từ khi có sự thay đổi thực tế từ cảm biến.
-
-### Hoàn thiện tính năng quản lý bãi xe quy mô nhỏ
-
-Xây dựng đầy đủ các chức năng cần thiết để vận hành một mô hình bãi xe nhỏ (5–10 vị trí đỗ xe).
-
-**Các tiêu chí đánh giá:**
-
-- Xây dựng và kiểm thử đầy đủ 100% các mô-đun chính của hệ thống.
-- Ghi nhận thông tin xe vào/ra (biển số, thời gian) một cách tự động.
-- Giám sát và hiển thị trực quan trạng thái của từng vị trí đỗ xe.
-- Lưu trữ lịch sử các lượt gửi xe trên nền tảng cloud.
-- Cung cấp giao diện dashboard cho phép người quản lý theo dõi hoạt động và truy xuất dữ liệu cơ bản.
+| ID   | Mục tiêu                     | Chỉ số đo                  | Điều kiện đạt           |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `O-01` | Xây dựng chức năng nhận diện gương mặt và biển số xe hoạt động ổn định trong điều kiện ban ngày và ảnh nhòe/không rõ nét | Accuracy $\ge$ 90% (ban ngày); Accuracy $\ge$ 70% (ảnh nhòe)                                            | Test trên $\ge$ 100 lượt xe vào/ra với dữ liệu đa dạng, gồm ảnh rõ và ảnh nhòe |
+| `O-02` | Đảm bảo hệ thống phản hồi nhanh và cập nhật thời gian thực                                                               | Thời gian xử lý 1 lượt $le$ 15 giây; Cập nhật trạng thái slot $\le$ 5 giây                             | Môi trường test chuẩn, kết nối mạng ổn định                                |
+| `O-03` | Hoàn thiện đầy đủ tính năng quản lý bãi xe quy mô nhỏ (5–10 vị trí)                                                      | 100% module hoạt động; tự động ghi nhận biển số & thời gian; lưu trữ cloud; dashboard trực quan | Đáp ứng đầy đủ yêu cầu vận hành thử nghiệm                                 |
 
 ## Phát biểu bài toán
 
@@ -57,11 +32,11 @@ Xây dựng đầy đủ các chức năng cần thiết để vận hành một
 
 ### Kết quả đầu ra
 
-- Thông tin nhận diện chính xác (biển số xe, khuôn mặt) tại thời điểm phương tiện vào – ra.
-- Bản ghi chi tiết về thời gian vào – ra của từng phương tiện.
-- Trạng thái cập nhật liên tục của từng vị trí đỗ (còn trống/đã chiếm chỗ).
-- Giao diện dashboard trực quan, dễ sử dụng cho người quản lý và thông tin cho người dùng.
-- Cơ sở dữ liệu được lưu trữ an toàn và có khả năng truy xuất hiệu quả trên nền tảng cloud.
+- Thông tin nhận diện với độ chính xác $\ge$ 90% (điều kiện ban ngày) và $\ge$ 70% (ảnh nhòe/không rõ nét) cho biển số xe và khuôn mặt tại thời điểm phương tiện vào – ra.
+- Bản ghi chi tiết về thời gian vào – ra của từng phương tiện với thời gian xử lý ≤ 15 giây/lượt.
+- Trạng thái cập nhật liên tục của từng vị trí đỗ (còn trống/đã chiếm chỗ) với thời gian cập nhật ≤ 5 giây.
+- Giao diện dashboard trực quan, dễ sử dụng cho người quản lý và thông tin cho người dùng với uptime ≥ 99%.
+- Cơ sở dữ liệu được lưu trữ an toàn và có khả năng truy xuất hiệu quả trên nền tảng cloud với tỷ lệ thành công ≥ 95%.
 
 ## Phạm vi và Giới hạn của Hệ thống
 

@@ -1,7 +1,8 @@
 % Minimalist Technical Cover Page Template for Pandoc
 % Compatible with Pandoc's LaTeX engine
 
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+% Remove babel language option from documentclass to avoid missing vietnamese.ldf
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 
 % Font settings
 $if(fontfamily)$
@@ -11,6 +12,11 @@ $endif$
 % Use unicode characters
 \usepackage{ifxetex,ifluatex}
 \usepackage{fontspec}
+
+% Prefer polyglossia for XeLaTeX multilingual support (Vietnamese)
+\usepackage{polyglossia}
+\setdefaultlanguage{vietnamese}
+% Set a common font with good Vietnamese coverage
 
 % Math packages for symbols (including checkboxes)
 \usepackage{amsmath}
@@ -102,14 +108,11 @@ $endif$
 \lhead{$if(document_name)$$document_name$$endif$}
 \cfoot{\thepage}
 
-% --- Thêm hỗ trợ tiếng Việt và đổi tên các cấu trúc ---
-\usepackage[vietnamese]{babel}
-\addto\captionsvietnamese{
-  \renewcommand{\chaptername}{Chương}
-  \renewcommand{\contentsname}{Mục lục}
-  \renewcommand{\listfigurename}{Danh sách hình}
-  \renewcommand{\listtablename}{Danh sách bảng}
-}
+% --- Việt hóa nhãn mục lục/chương (không phụ thuộc babel) ---
+\renewcommand{\chaptername}{Chương}
+\renewcommand{\contentsname}{Mục lục}
+\renewcommand{\listfigurename}{Danh sách hình}
+\renewcommand{\listtablename}{Danh sách bảng}
 
 % Set up hyperlinks
 \usepackage{hyperref}
@@ -149,9 +152,9 @@ $if(document_name)$
 $endif$
 
 % Title
-\rule{\linewidth}{0.5mm}\\[0.6cm]
+\rule{\linewidth}{0.2mm}\\[0.6cm] % Giảm độ dày line xuống 0.2mm
 $if(title)${\huge\bfseries\color{accent} $title$}\\[0.3cm]$endif$
-\rule{\linewidth}{0.5mm}\\[0.6cm]
+\rule{\linewidth}{0.2mm}\\[0.6cm]
 
 % Team members
 $if(team_members)$
@@ -159,8 +162,8 @@ $if(team_members)$
 \begin{center}
 \large\textbf{Thành viên}\\[0.3cm]
 
-\setlength{\arrayrulewidth}{0.8pt}
-\setlength{\doublerulesep}{2pt}
+\setlength{\arrayrulewidth}{0.3pt} % Độ dày line trong bảng (giảm từ 0.8pt xuống 0.3pt)
+\setlength{\doublerulesep}{1.5pt}  % Khoảng cách giữa 2 line kép
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{@{}p{4.5cm}@{}p{3cm}@{}p{5cm}@{}}
 \toprule
@@ -181,6 +184,7 @@ $if(supervisors)$
 \begin{center}
 \large\textbf{Giáo viên hướng dẫn}\\[0.3cm]
 
+\setlength{\arrayrulewidth}{0.3pt} % Đồng bộ line mảnh cho bảng
 \renewcommand{\arraystretch}{1.8}
 \begin{tabular}{@{}c@{}}
 \toprule
@@ -194,6 +198,7 @@ $endfor$
 \end{center}
 \end{minipage}\\[0.8cm]
 $endif$
+
 
 % Date
 $if(date)${\large $date$}$endif$

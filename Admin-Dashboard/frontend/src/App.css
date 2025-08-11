@@ -1,9 +1,0 @@
-/* Import all component styles */
-@import './styles/base.css';
-@import './styles/login.css';
-@import './styles/header.css';
-@import './styles/dashboard.css';
-@import './styles/stats-cards.css';
-@import './styles/search-filters.css';
-@import './styles/vehicle-history.css';
-@import './styles/statistics.css';
