@@ -1,0 +1,52 @@
+---
+# Thông tin tài liệu
+document_name: "TÀI LIỆU ĐỒ ÁN"
+title: Bảng Đánh Giá Tiến Độ
+author: "Nhóm 07"
+date: "25 tháng 7, 2025"
+
+# Thành viên nhóm
+team_members:
+  - name: "Cao Uyển Nhi"
+    id: "22127310"
+    email: "cunhi22@clc.fitus.edu.vn"
+    role: "Trưởng nhóm"
+  - name: "Lưu Thanh Thuý"
+    id: "22127410"
+    email: "ltthuy22@clc.fitus.edu.vn"
+    role: "Trưởng nhóm kỹ thuật"
+  - name: "Võ Lê Việt Tú"
+    id: "22127435"
+    email: "vlvtu22@clc.fitus.edu.vn"
+    role: "Trưởng nhóm QA"
+  - name: "Trần Thị Cát Tường"
+    id: "22127444"
+    email: "ttctuong22@clc.fitus.edu.vn"
+    role: "Tài liệu"
+
+# Người hướng dẫn
+supervisors:
+  - "Giáo viên: Võ Hoài Việt"
+  - "Giáo viên: Đỗ Thị Thanh Hà"
+
+# Cài đặt tài liệu
+lang: vi
+fontsize: 11pt
+linestretch: 1.5
+papersize: a4
+documentclass: report
+classoption:
+  - twoside
+
+# Metadata bổ sung
+keywords:
+  - hội thảo
+  - kế hoạch
+  - kỹ thuật
+  - dự án nhóm
+  - cộng tác
+subject: "Tài liệu kỹ thuật"
+description: "Tài liệu này trình bày quá trình lập kế hoạch cho một hội thảo kỹ thuật."
+classification: "Nội bộ"
+distribution: "Thành viên nhóm, Người hướng dẫn"
+---
