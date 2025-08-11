@@ -13,8 +13,8 @@ class Session(BaseModel):
     timestamp: str = Field(..., description="Timestamp as string")
     gate: str = Field(..., description="In hoặc Out")
     is_out: bool = Field(default=False, description="false khi mới tạo", alias="isOut")
-    face_index: str = Field(..., description="Face index", alias="faceIndex")
-    plate_number: str = Field(..., description="Plate number - now required", alias="plateNumber")
+    face_index: Optional[str] = Field(None, description="Face index", alias="faceIndex")
+    plate_number: Optional[str] = Field(None, description="Plate number", alias="plateNumber")
 
     class Config:
         populate_by_name = True
@@ -85,6 +85,9 @@ class SessionForOutRequest(BaseModel):
     face_url: str = Field(..., alias="faceUrl")
     face_index: str = Field(..., description="Face index from In session", alias="faceIndex")
     plate_number: str = Field(..., description="Plate number from In session", alias="plateNumber")
+
+    class Config:
+        populate_by_name = True
 
 class FaceMatchingRequest(BaseModel):
     exit_session_id: str

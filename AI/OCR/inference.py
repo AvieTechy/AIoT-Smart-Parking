@@ -55,9 +55,9 @@ def main():
     with open(JSON_OUTPUT, "w") as f:
         json.dump(all_results, f, indent=2)
 
-    print(f"\n✅ Inference completed.")
-    print(f"📄 Results saved to: {CSV_OUTPUT}")
-    print(f"📄 Raw JSON saved to: {JSON_OUTPUT}")
+    print(f"\nInference completed.")
+    print(f"Results saved to: {CSV_OUTPUT}")
+    print(f"Raw JSON saved to: {JSON_OUTPUT}")
 
 if __name__ == "__main__":
     main()

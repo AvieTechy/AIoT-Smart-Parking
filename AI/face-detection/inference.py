@@ -13,7 +13,7 @@ UART_PORT = "/dev/cu.usbserial-110"
 UART_BAUD = 115200
 CAPTURE_INTERVAL = 3  # giây
 OUTPUT_DIR = "captured"
-LABEL_FILE = "labels.csv"
+LABEL_FILE = "./artifacts/inference.csv"
 
 detect_queue = deque()
 bbox_queue = deque()

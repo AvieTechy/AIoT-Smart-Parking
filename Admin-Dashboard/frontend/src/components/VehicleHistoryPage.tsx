@@ -10,29 +10,44 @@ const VehicleHistoryPage: React.FC = () => {
   const [filteredSessions, setFilteredSessions] = useState<GroupedSession[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [isAutoRefreshing, setIsAutoRefreshing] = useState(true)
 
-  useEffect(() => {
-    const loadData = async () => {
+  // Centralized function to load vehicle history data
+    const loadVehicleData = async () => {
       try {
-        setLoading(true)
-        setError(null)
+        setLoading(true);
+        setError(null);
 
-        const grouped = await apiService.getGroupedSessions()
-        setGroupedSessions(grouped)
-        setFilteredSessions(grouped)
+        console.log('Loading vehicle data with enhanced API...');
+        const data = await apiService.getEnhancedGroupedSessions(); // Use enhanced API
+        console.log('Loaded', data.length, 'enhanced sessions');
+
+        setGroupedSessions(data);
+        setFilteredSessions(data);
 
       } catch (err) {
-        console.error('Error loading vehicle history:', err)
-        setError('Failed to load vehicle history. Please try again.')
-        setGroupedSessions([])
-        setFilteredSessions([])
+        console.error('Error loading vehicle data:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load vehicle data');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };  useEffect(() => {
+    // Initial load
+    loadVehicleData()
 
-    loadData()
-  }, [])
+    // Set up auto-refresh every 5 seconds for real-time updates
+    const refreshInterval = setInterval(() => {
+      if (isAutoRefreshing) {
+        console.log('⏰ Auto-refreshing vehicle history data...')
+        loadVehicleData()
+      }
+    }, 5000) // Refresh every 5 seconds
+
+    // Cleanup interval on unmount
+    return () => {
+      clearInterval(refreshInterval)
+    }
+  }, [isAutoRefreshing]) // Re-run if auto-refresh setting changes
 
   const handleSearch = async (searchParams: {
     licensePlate?: string
@@ -40,32 +55,55 @@ const VehicleHistoryPage: React.FC = () => {
     dateTo?: Date
   }) => {
     try {
-      let filtered = groupedSessions
+      console.log('VehicleHistoryPage - Search params:', searchParams);
+      let filtered = [...groupedSessions]; // Create a copy
 
-      if (searchParams.licensePlate) {
-        filtered = filtered.filter(session => 
-          session.licensePlate.toLowerCase().includes(searchParams.licensePlate!.toLowerCase())
-        )
+      // Filter by license plate (case-insensitive)
+      if (searchParams.licensePlate && searchParams.licensePlate.trim()) {
+        const searchPlate = searchParams.licensePlate.trim().toLowerCase();
+        filtered = filtered.filter(session => {
+          const sessionPlate = session.licensePlate?.toLowerCase() || '';
+          return sessionPlate.includes(searchPlate);
+        });
+        console.log(`Filtered by plate "${searchParams.licensePlate}": ${filtered.length} results`);
       }
 
+      // Filter by date range
       if (searchParams.dateFrom) {
+        const fromDate = new Date(searchParams.dateFrom);
+        fromDate.setHours(0, 0, 0, 0); // Start of day
+
         filtered = filtered.filter(session => {
-          const sessionDate = session.entryTime || session.exitTime
-          return sessionDate && sessionDate >= searchParams.dateFrom!
-        })
+          // Check both entry and exit times
+          const entryDate = session.entryTime ? new Date(session.entryTime) : null;
+          const exitDate = session.exitTime ? new Date(session.exitTime) : null;
+
+          return (entryDate && entryDate >= fromDate) ||
+                 (exitDate && exitDate >= fromDate);
+        });
+        console.log(`Filtered by dateFrom ${searchParams.dateFrom}: ${filtered.length} results`);
       }
 
       if (searchParams.dateTo) {
+        const toDate = new Date(searchParams.dateTo);
+        toDate.setHours(23, 59, 59, 999); // End of day
+
         filtered = filtered.filter(session => {
-          const sessionDate = session.entryTime || session.exitTime
-          return sessionDate && sessionDate <= searchParams.dateTo!
-        })
+          // Check both entry and exit times
+          const entryDate = session.entryTime ? new Date(session.entryTime) : null;
+          const exitDate = session.exitTime ? new Date(session.exitTime) : null;
+
+          return (entryDate && entryDate <= toDate) ||
+                 (exitDate && exitDate <= toDate);
+        });
+        console.log(`Filtered by dateTo ${searchParams.dateTo}: ${filtered.length} results`);
       }
 
-      setFilteredSessions(filtered)
+      console.log(`VehicleHistoryPage - Final search result: ${filtered.length} sessions`);
+      setFilteredSessions(filtered);
     } catch (err) {
-      console.error('Search error:', err)
-      setError('Failed to search. Please try again.')
+      console.error('Search error:', err);
+      setError('Failed to search. Please try again.');
     }
   }
 
@@ -103,9 +141,30 @@ const VehicleHistoryPage: React.FC = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-content">
-        <h1>Vehicle History</h1>
+        <div className="dashboard-header">
+          <h1>Vehicle History</h1>
+
+          {/* Real-time indicator */}
+          <div className="real-time-indicator">
+            <div className={`status-dot ${isAutoRefreshing ? 'active' : 'inactive'}`}></div>
+            <span className="status-text">
+              {isAutoRefreshing ? 'Live Updates' : 'Updates Paused'}
+            </span>
+            <span className="last-update">
+              Last update: {new Date().toLocaleTimeString()}
+            </span>
+            <button
+              className="toggle-refresh"
+              onClick={() => setIsAutoRefreshing(!isAutoRefreshing)}
+              title={isAutoRefreshing ? 'Pause auto-refresh' : 'Resume auto-refresh'}
+            >
+              {isAutoRefreshing ? '⏸️' : '▶️'}
+            </button>
+          </div>
+        </div>
+
         <SearchFilters onSearch={handleSearch} onClear={clearFilters} />
-        <VehicleHistory sessions={filteredSessions} />
+        <VehicleHistory sessions={filteredSessions} onRefresh={loadVehicleData} />
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Sidebar from './Sidebar'
-import Header from './Header'
 import '../styles/layout.css'
 
 interface LayoutProps {
@@ -17,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="app-layout">
       <Sidebar isCollapsed={sidebarCollapsed} onToggle={handleSidebarToggle} />
-      
+
       <div className={`main-content ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         {/* <Header /> */}
         <main className="content-area">

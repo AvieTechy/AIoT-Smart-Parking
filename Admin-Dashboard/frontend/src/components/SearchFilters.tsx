@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Search, Calendar, X } from 'lucide-react'
-import { format } from 'date-fns'
 import '../styles/search-filters.css'
 
 interface SearchFiltersProps {
@@ -18,6 +17,8 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onSearch, onClear }) => {
   const [dateTo, setDateTo] = useState('')
 
   const handleSearch = () => {
+    console.log('SearchFilters: Performing search with:', { licensePlate, dateFrom, dateTo });
+
     const filters: {
       licensePlate?: string
       dateFrom?: Date
@@ -36,14 +37,24 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onSearch, onClear }) => {
       filters.dateTo = new Date(dateTo + 'T23:59:59')
     }
 
+    console.log('SearchFilters: Calling onSearch with filters:', filters);
     onSearch(filters)
   }
 
   const handleClear = () => {
+    console.log('SearchFilters: Clearing all filters');
     setLicensePlate('')
     setDateFrom('')
     setDateTo('')
     onClear()
+  }
+
+  // Handle Enter key press
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearch();
+    }
   }
 
   return (
@@ -59,6 +70,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ onSearch, onClear }) => {
               placeholder="Enter license plate..."
               value={licensePlate}
               onChange={(e) => setLicensePlate(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
           </div>
         </div>

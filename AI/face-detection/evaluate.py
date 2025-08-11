@@ -30,8 +30,8 @@ def build_image_mapping(img_dir):
     return mapping
 
 def normalize_inference_csv(
-    csv_path="./inference.csv",
-    output_path="./inference_yolo.json",
+    csv_path="./artifacts/inference.csv",
+    output_path="./artifacts/inference_yolo.json",
     img_dir="./dataset/test/images"
 ):
     image_mapping = build_image_mapping(img_dir)
@@ -66,10 +66,10 @@ def normalize_inference_csv(
 
     with open(output_path, "w") as f:
         json.dump(result, f, indent=2)
-    print(f"✅ Đã chuẩn hóa bbox cho {len(result)} ảnh test và lưu vào: {output_path}")
+    print(f"Đã chuẩn hóa bbox cho {len(result)} ảnh test và lưu vào: {output_path}")
 
 def evaluate_detection(
-    csv_path="./inference.csv",
+    csv_path="./artifacts/inference.csv",
     label_dir="./dataset/test/labels",
     img_dir="./dataset/test/images"
 ):
@@ -108,8 +108,8 @@ def evaluate_detection(
     precision = TP / (TP + FP) if (TP + FP) else 0.0
     recall = TP / (TP + FN) if (TP + FN) else 0.0
 
-    print(f"🎯 Precision: {precision:.4f}")
-    print(f"🎯 Recall:    {recall:.4f}")
+    print(f"Precision: {precision:.4f}")
+    print(f"Recall:    {recall:.4f}")
     print(f"TP: {TP}, FP: {FP}, FN: {FN}, TN: {TN}")
     return precision, recall, TP, FP, FN, TN
 
@@ -143,10 +143,10 @@ def plot_confusion_matrix(tp, fp, fn, tn, labels=["Positive", "Negative"]):
 
 # === MAIN EXECUTION ===
 if __name__ == "__main__":
-    csv_path = "./inference.csv"
+    csv_path = "./artifacts/inference.csv"
     label_dir = "./dataset/test/labels"
     img_dir = "./dataset/test/images"
-    output_json = "./inference_yolo.json"
+    output_json = "./artifacts/inference_yolo.json"
 
     normalize_inference_csv(csv_path, output_json, img_dir)
     precision, recall, TP, FP, FN, TN = evaluate_detection(csv_path, label_dir, img_dir)

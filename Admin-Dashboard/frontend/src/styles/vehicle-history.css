@@ -105,6 +105,34 @@
   color: #166534;
 }
 
+.status-badge.failed {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+
+.status-badge.unverified {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.verification-badge {
+  margin-left: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
+  font-size: 0.625rem;
+  font-weight: bold;
+}
+
+.verification-badge.verified {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.verification-badge.not-verified {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+
 .duration {
   font-weight: 600;
   color: #3b82f6;

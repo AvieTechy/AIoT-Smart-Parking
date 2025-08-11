@@ -1,14 +1,28 @@
 import React from 'react'
 import { format } from 'date-fns'
-import { Car, Clock, CheckCircle, AlertCircle } from 'lucide-react'
+import { Car, Clock, CheckCircle, AlertCircle, RefreshCcw } from 'lucide-react'
 import type { GroupedSession } from '../types/types'
 import '../styles/vehicle-history.css'
+import apiService from '../services/apiService'
 
 interface VehicleHistoryProps {
   sessions: GroupedSession[]
+  onRefresh?: () => void | Promise<void>
 }
 
-const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions }) => {
+const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions, onRefresh }) => {
+  const handleFinalize = async (exitSessionId?: string) => {
+    if (!exitSessionId) return
+    try {
+      if (!confirm('Finalize this exit (requires successful verification)?')) return
+      const res = await apiService.finalizeExitSession(exitSessionId)
+      console.log('Finalize result:', res)
+      if (onRefresh) await onRefresh()
+    } catch (e:any) {
+      alert(e.message || 'Finalize failed')
+    }
+  }
+
   if (sessions.length === 0) {
     return (
       <div className="no-data">
@@ -23,8 +37,13 @@ const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions }) => {
       <div className="history-header">
         <h3>Parking Sessions</h3>
         <span className="record-count">{sessions.length} sessions</span>
+        {onRefresh && (
+          <button className="refresh-button" onClick={()=>onRefresh()} title="Refresh list">
+            <RefreshCcw size={16} />
+          </button>
+        )}
       </div>
-      
+
       <div className="history-table-container">
         <table className="history-table">
           <thead>
@@ -35,19 +54,22 @@ const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions }) => {
               <th>Exit Time</th>
               <th>Status</th>
               <th>Entry Images</th>
-              <th>Exit Images</th>
+              <th>Exit Images / Actions</th>
             </tr>
           </thead>
           <tbody>
             {sessions.map((session, index) => {
-              const isActive = session.status === 'active'
+              const hasEntry = !!session.entryTime
+              const hasExit = !!session.exitTime
+              const showFinalize = session.exitSessionId && session.status === 'unverified'
+
               return (
                 <tr key={`${session.faceId}-${index}`}>
                   <td>
                     <div className="face-id">
                       {session.faceUrl ? (
-                        <img 
-                          src={session.faceUrl} 
+                        <img
+                          src={session.faceUrl}
                           alt="Face"
                           className="face-thumbnail"
                           onError={(e) => {
@@ -67,33 +89,50 @@ const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions }) => {
                     )}
                   </td>
                   <td>
-                    {session.entryTime ? (
+                    {hasEntry ? (
                       <div className="time-info">
                         <Clock size={14} />
-                        <span>{format(session.entryTime, 'HH:mm:ss dd/MM/yyyy')}</span>
+                        <span>{format(session.entryTime!, 'HH:mm:ss dd/MM/yyyy')}</span>
                       </div>
                     ) : (
-                      <span className="no-time">-</span>
+                      <span className="no-time">No entry record</span>
                     )}
                   </td>
                   <td>
-                    {session.exitTime ? (
+                    {hasExit ? (
                       <div className="time-info">
                         <Clock size={14} />
-                        <span>{format(session.exitTime, 'HH:mm:ss dd/MM/yyyy')}</span>
+                        <span>{format(session.exitTime!, 'HH:mm:ss dd/MM/yyyy')}</span>
                       </div>
                     ) : (
-                      <span className="no-time">-</span>
+                      <span className="no-time">Still parking</span>
                     )}
                   </td>
                   <td>
-                    <div className={`status-badge ${isActive ? 'active' : 'completed'}`}>
-                      {isActive ? (
+                    <div className={`status-badge ${
+                      session.status === 'failed' ? 'failed' :
+                      session.status === 'active' ? 'active' :
+                      session.status === 'unverified' ? 'unverified' :
+                      'completed'
+                    }`}>
+                      {session.status === 'failed' ? (
+                        <AlertCircle size={14} />
+                      ) : session.status === 'active' ? (
                         <AlertCircle size={14} />
                       ) : (
                         <CheckCircle size={14} />
                       )}
-                      <span>{isActive ? 'Parked' : 'Completed'}</span>
+                      <span>
+                        {session.status === 'failed' ? 'Failed' :
+                         session.status === 'active' ? 'Parking' :
+                         session.status === 'unverified' ? 'Unverified' :
+                         'Completed'}
+                      </span>
+                      {session.faceMatchVerified && (
+                        <span className={`verification-badge ${session.faceMatchResult ? 'verified' : 'not-verified'}`}>
+                          {session.faceMatchResult ? '✓' : '✗'}
+                        </span>
+                      )}
                     </div>
                   </td>
                   <td>
@@ -125,7 +164,10 @@ const VehicleHistory: React.FC<VehicleHistoryProps> = ({ sessions }) => {
                           📋 Plate
                         </a>
                       )}
-                      {session.exitTime && session.exitSessionId && !(session.exitFaceUrl || session.exitPlateUrl) && (
+                      {showFinalize && (
+                        <button className="finalize-btn" onClick={() => handleFinalize(session.exitSessionId)}>Finalize</button>
+                      )}
+                      {session.exitTime && session.exitSessionId && !(session.exitFaceUrl || session.exitPlateUrl) && !showFinalize && (
                         <div className="placeholder-images">
                           <span className="image-link placeholder">👤 Face (Available)</span>
                           <span className="image-link placeholder">📋 Plate (Available)</span>

@@ -6,6 +6,7 @@ from app.models.session_model import (
 from app.services.session_service import (
     SessionService, PlateMapService
 )
+from app.services.session_pairing_service import SessionPairingService
 
 router = APIRouter(prefix="/api/sessions", tags=["sessions"])
 
@@ -18,10 +19,10 @@ async def create_session(session_data: SessionCreateRequest):
     """Create new session - now requires plate_number in request"""
     try:
         session_id = session_service.create_session(session_data)
-        
+
         # Get created session info
         session_response = session_service.get_session(session_id)
-        
+
         response = {
             "success": True,
             "session_id": session_id,
@@ -30,16 +31,16 @@ async def create_session(session_data: SessionCreateRequest):
             "plateNumber": session_data.plate_number,
             "faceIndex": session_data.face_index
         }
-        
+
         # Add current vehicle count
         current_count = session_service.get_current_vehicles_count()
         response["current_vehicle_count"] = current_count
-        
+
         if session_data.gate == "In":
             response["note"] = "Entry session created successfully"
         elif session_data.gate == "Out":
             response["note"] = "Exit session created, auto-checkout processed if matching In session found"
-            
+
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -66,7 +67,7 @@ async def get_sessions(
             in_sessions = session_service.get_sessions_by_gate("In", limit//2)
             out_sessions = session_service.get_sessions_by_gate("Out", limit//2)
             sessions = in_sessions + out_sessions
-        
+
         return sessions
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -77,7 +78,7 @@ async def update_session_fields(session_id: str, update_data: SessionUpdateReque
     try:
         if update_data.plate_number is not None:
             session_service.update_plate_number(session_id, update_data.plate_number)
-        
+
         return {
             "success": True,
             "session_id": session_id,
@@ -104,7 +105,7 @@ async def auto_checkout_session(face_index: str, plate_number: str):
     """Auto-checkout In sessions with matching face_index and plate_number"""
     try:
         result = session_service.check_and_update_matching_sessions(face_index, plate_number)
-        
+
         if result["success"]:
             return {
                 "success": True,
@@ -129,13 +130,13 @@ async def get_grouped_sessions():
         in_sessions = session_service.get_sessions_by_gate("In", 1000)
         out_sessions = session_service.get_sessions_by_gate("Out", 1000)
         all_sessions = in_sessions + out_sessions
-        
+
         # Group by faceIndex + plateNumber
         grouped = {}
         for session_response in all_sessions:
             session = session_response.session
             key = f"{session.faceIndex}_{session.plateNumber}"
-            
+
             if key not in grouped:
                 grouped[key] = {
                     "faceId": session.faceIndex,
@@ -150,7 +151,7 @@ async def get_grouped_sessions():
                     "exitFaceUrl": None,
                     "exitPlateUrl": None
                 }
-            
+
             group = grouped[key]
             if session.gate == "In":
                 group["entryTime"] = session.timestamp
@@ -163,11 +164,83 @@ async def get_grouped_sessions():
                 group["exitFaceUrl"] = session.faceUrl
                 group["exitPlateUrl"] = session.plateUrl
                 group["status"] = "completed"
-        
+
         # Convert to list and sort by entry time (newest first)
         result = list(grouped.values())
         result.sort(key=lambda x: x["entryTime"] or "0000", reverse=True)
-        
+
         return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/enhanced", response_model=List[dict])
+async def get_enhanced_grouped_sessions():
+    """Get enhanced grouped sessions using face matching verification"""
+    try:
+        pairing_service = SessionPairingService()
+        enhanced_sessions = pairing_service.get_enhanced_grouped_sessions()
+
+        # Convert to frontend format
+        formatted_sessions = []
+        for session in enhanced_sessions:
+            formatted_session = {
+                "faceId": session["face_id"],
+                "licensePlate": session["license_plate"],
+                "entryTime": session["entry_time"].isoformat() if session["entry_time"] else None,
+                "exitTime": session["exit_time"].isoformat() if session["exit_time"] else None,
+                "status": session["status"],
+                "duration": session["duration"],
+
+                # Entry data
+                "entrySessionId": session["entry_session_id"],
+                "faceUrl": session["face_url"],
+                "plateUrl": session["plate_url"],
+
+                # Exit data
+                "exitSessionId": session["exit_session_id"],
+                "exitFaceUrl": session["exit_face_url"],
+                "exitPlateUrl": session["exit_plate_url"],
+
+                # Verification data
+                "faceMatchVerified": session["face_match_verified"],
+                "faceMatchResult": session["face_match_result"]
+            }
+            formatted_sessions.append(formatted_session)
+
+        return formatted_sessions
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/debug/verification", response_model=dict)
+async def get_verification_debug():
+    """Debug endpoint to check verification status"""
+    try:
+        pairing_service = SessionPairingService()
+        verified_pairs = pairing_service.get_verified_session_pairs()
+        current_vehicles = pairing_service.get_current_vehicles_accurate()
+
+        return {
+            "verified_pairs_count": len(verified_pairs),
+            "verified_pairs": verified_pairs[:10],  # Show first 10
+            "current_vehicles": current_vehicles,
+            "success": True
+        }
+    except Exception as e:
+        return {
+            "error": str(e),
+            "success": False
+        }
+
+@router.post("/finalize-exit/{exit_session_id}", response_model=dict)
+async def finalize_exit(exit_session_id: str):
+    """Finalize an exit session AFTER successful face matching verification.
+    This pairs the exit with the correct entry and marks the entry as checked out."""
+    try:
+        result = session_service.finalize_exit_session(exit_session_id)
+        if not result.get("success"):
+            raise HTTPException(status_code=400, detail=result.get("message", "Finalize failed"))
+        return result
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

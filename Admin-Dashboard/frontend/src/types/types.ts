@@ -54,12 +54,10 @@ export interface ParkingSlotResponse {
 }
 
 export interface DashboardStats {
-  currentVehicles: number
-  totalEntries: number
-  totalExits: number
-  occupancyRate: number
-  totalParkedToday?: number
-  availableSlots?: number
+  current_vehicles: number;
+  total_entries: number;
+  available_slots: number;
+  total_slots?: number;
 }
 
 export interface StatsPeriod {
@@ -83,7 +81,7 @@ export interface GroupedSession {
   licensePlate: string
   entryTime: Date | null
   exitTime: Date | null
-  status: 'active' | 'completed'
+  status: 'active' | 'completed' | 'failed' | 'unverified'
   entrySessionId?: string
   exitSessionId?: string
   // Entry session images
@@ -94,4 +92,9 @@ export interface GroupedSession {
   exitPlateUrl?: string
   entryGate?: string
   exitGate?: string
+  // Parking duration in minutes
+  duration?: number
+  // Face matching verification (new fields)
+  faceMatchVerified?: boolean
+  faceMatchResult?: boolean
 }

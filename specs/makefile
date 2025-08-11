@@ -1,5 +1,5 @@
 # Output configuration
-OUTPUT_NAME = report
+OUTPUT_NAME = specs
 OUTPUT_DIR = ./release
 OUTPUT_PDF = $(OUTPUT_DIR)/$(OUTPUT_NAME).pdf
 

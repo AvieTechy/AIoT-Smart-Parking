@@ -66,10 +66,38 @@ admin-dashboard/
 
 ## Getting Started
 
+> **📋 For detailed setup instructions including Firebase configuration, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)**
+
+### Quick Start with Makefile
+
+The fastest way to get started is using the provided Makefile:
+
+```bash
+# Install all dependencies (backend + frontend)
+make install
+
+# Run both backend and frontend servers
+make dev
+
+# Or run them separately
+make dev-backend   # Backend only (port 8000)
+make dev-frontend  # Frontend only (port 5173)
+```
+
+**Note:** If you encounter issues with `vite` command conflicts (due to other tools with the same name), the Makefile uses direct paths to ensure the correct Vite build tool is used.
+
+**⚠️ Important:** You need to place `firebase_key.json` in the `backend/` directory before starting the servers. See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for detailed Firebase setup instructions.
+
+### Manual Setup
+
 ### Prerequisites
 - Node.js (v18 or higher)
 - Python (v3.8 or higher)
-- Firebase account and project
+- **Firebase account and project with Firestore enabled**
+- **Firebase service account key (`firebase_key.json`)**
+- Conda environment named `aiot` (recommended)
+
+> **🔥 Firebase Setup Required:** This dashboard requires Firebase/Firestore configuration. See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for detailed setup instructions.
 
 ### Backend Setup (FastAPI)
 
@@ -78,24 +106,29 @@ admin-dashboard/
 cd backend
 ```
 
-2. Create virtual environment:
+2. Install dependencies with conda (recommended):
+```bash
+conda run -n aiot pip install -r requirements.txt
+```
+
+Or with virtual environment:
 ```bash
 python -m venv .venv
 .venv\Scripts\activate         # On Windows
 # source .venv/bin/activate    # On Linux/Mac
-```
-
-3. Install dependencies:
-```bash
 pip install -r requirements.txt
 ```
 
-4. Configure Firebase:
+3. Configure Firebase:
    - Place your `firebase_key.json` in the backend directory
    - Update Firebase configuration in `app/core/config.py`
 
-5. Start the server:
+4. Start the server:
 ```bash
+# With conda (recommended)
+conda run -n aiot uvicorn app.main:app --reload
+
+# Or with virtual environment
 uvicorn app.main:app --reload
 ```
 
@@ -127,8 +160,14 @@ Frontend will run at: **http://localhost:5173**
 ### Backend
 - **FastAPI** - Modern, fast web framework for Python
 - **Firebase Firestore** - NoSQL cloud database
+- **Firebase Admin SDK** - Firebase backend integration
 - **Pydantic** - Data validation using Python type annotations
+- **Pydantic Settings** - Settings management with environment variables
 - **Uvicorn** - ASGI server implementation
+- **Python-JOSE** - JWT token handling and cryptography
+- **Passlib** - Password hashing with bcrypt
+- **Python-multipart** - File upload support
+- **Email-validator** - Email validation for user registration
 
 ### Frontend
 - **React 19** - JavaScript library for building user interfaces
@@ -173,6 +212,16 @@ Frontend will run at: **http://localhost:5173**
 
 ### Available Scripts
 
+#### Makefile Commands
+- `make install` - Install all dependencies (backend + frontend)
+- `make dev` - Run both backend and frontend in development mode
+- `make dev-backend` - Run only backend server (conda environment: aiot)
+- `make dev-frontend` - Run only frontend server
+- `make build-frontend` - Build frontend for production
+- `make clean` - Clean node_modules and Python cache
+- `make stop` - Stop all running servers
+- `make help` - Show all available commands
+
 #### Frontend
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -180,7 +229,8 @@ Frontend will run at: **http://localhost:5173**
 - `npm run lint` - Run ESLint
 
 #### Backend
-- `uvicorn app.main:app --reload` - Start development server
+- `conda run -n aiot uvicorn app.main:app --reload` - Start development server with conda
+- `uvicorn app.main:app --reload` - Start development server with virtual environment
 - `python -m pytest` - Run tests (if available)
 
 ### API Endpoints

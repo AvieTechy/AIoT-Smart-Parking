@@ -1,0 +1,5 @@
+=== OCR Evaluation Summary ===
+Dataset size      : 101
+Detected plates   : 101
+Accuracy (exact)  : 1.000 (100.0%)
+Detection rate    : 1.000 (100.0%)

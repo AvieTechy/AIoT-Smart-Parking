@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MdRefresh, MdDirectionsCar, MdCheckBoxOutlineBlank, MdInfo } from 'react-icons/md'
+import { MdRefresh } from 'react-icons/md'
 import { FaCar, FaSquare } from 'react-icons/fa'
 import apiService from '../services/apiService'
 import cacheService from '../services/cacheService'
@@ -13,31 +13,23 @@ interface ParkingSlot {
   updated_at: string
 }
 
-interface ParkingStats {
-  total_slots: number
-  occupied_slots: number
-  available_slots: number
-  occupancy_rate: number
-  current_vehicles: number
-}
-
 const ParkingMap: React.FC = () => {
   // Use global parking context instead of local state
-  const { 
-    state: { slots, stats, loading, error }, 
-    updateSlot, 
-    revertSlot, 
-    setSlots, 
-    setStats, 
-    setLoading, 
-    setError 
+  const {
+    state: { slots, stats, loading, error },
+    updateSlot,
+    revertSlot,
+    setSlots,
+    setStats,
+    setLoading,
+    setError
   } = useParking();
-  
+
   const [selectedSlot, setSelectedSlot] = useState<ParkingSlot | null>(null)
 
   useEffect(() => {
     loadParkingData()
-    
+
     // Auto-refresh every 60 seconds (reduced from 30)
     const interval = setInterval(loadParkingData, 60000)
     return () => clearInterval(interval)
@@ -45,17 +37,17 @@ const ParkingMap: React.FC = () => {
 
   const loadParkingData = async () => {
     const startTime = performance.now();
-    
+
     try {
       setError(null)
-      
+
       console.log('🔄 Starting to load parking data...');
-      
+
       // Load stats first as it's usually faster
       const statsStart = performance.now();
       const statsPromise = apiService.getParkingStats();
       const slotsPromise = apiService.getParkingSlots();
-      
+
       // Set stats immediately when available
       try {
         const statsData = await statsPromise;
@@ -66,7 +58,7 @@ const ParkingMap: React.FC = () => {
       } catch (err) {
         console.warn('Failed to load stats:', err);
       }
-      
+
       // Then load slots
       try {
         const slotsStart = performance.now();
@@ -78,7 +70,7 @@ const ParkingMap: React.FC = () => {
         console.error('Failed to load slots:', err);
         setError('Failed to load parking slots');
       }
-      
+
     } catch (err) {
       console.error('Error loading parking data:', err)
       setError('Failed to load parking data')
@@ -100,20 +92,20 @@ const ParkingMap: React.FC = () => {
     try {
       // Send API request
       await apiService.updateSlotOccupancy(slotId, newStatus);
-      
+
       // Clear cache to ensure fresh data on next request
       cacheService.delete('parking_slots');
       cacheService.delete('parking_stats');
       cacheService.delete('available_slots');
-      
+
       console.log(`✅ Slot ${slotId} updated successfully to ${newStatus ? 'occupied' : 'available'}`);
-      
+
     } catch (err) {
       console.error('Error updating slot:', err);
-      
+
       // Revert optimistic update on error
       revertSlot(slotId, newStatus);
-      
+
       alert('Failed to update slot status. Please try again.');
     } finally {
       setSelectedSlot(null);
@@ -122,7 +114,7 @@ const ParkingMap: React.FC = () => {
 
   const groupSlotsByRow = () => {
     const grouped: { [key: string]: ParkingSlot[] } = {}
-    
+
     slots.forEach(slot => {
       const row = slot.location_code.charAt(0)
       if (!grouped[row]) {
@@ -153,7 +145,7 @@ const ParkingMap: React.FC = () => {
           <div className="loading-spinner"></div>
           <p>Loading parking map...</p>
         </div>
-        
+
         {/* Show partial data if available */}
         {stats && (
           <div className="parking-overview">

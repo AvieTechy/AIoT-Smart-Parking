@@ -5,7 +5,7 @@ import type { GroupedSession } from '../types/types';
 import cacheService from './cacheService';
 import authService from './authService';
 
-// Session types matching backend models
+// Session / data models
 export interface Session {
   plateUrl: string;
   faceUrl: string;
@@ -15,349 +15,163 @@ export interface Session {
   faceIndex: string;
   plateNumber?: string;
 }
-
-export interface SessionResponse {
-  session_id: string;
-  session: Session;
-}
-
-export interface IsNewSession {
-  status: boolean;
-  sessionID: string;
-}
-
-export interface MatchingVerify {
-  sessionID: string;
-  isMatch: boolean;
-}
-
-export interface SessionMap {
-  entrySessionID: string;
-  exitSessionID: string;
-}
-
-export interface ParkingSlot {
-  slot_id: string;
-  location_code: string;
-  is_occupied: boolean;
-  updated_at: string;
-}
-
-export interface ParkingSlotResponse {
-  slot_id: string;
-  slot: ParkingSlot;
-}
-
-export interface DashboardStats {
-  currentVehicles: number;
-  totalEntries: number;
-  totalExits: number;
-  occupancyRate: number;
-  totalParkedToday: number;
-  availableSlots: number;
-}
+export interface SessionResponse { session_id: string; session: Session }
+export interface IsNewSession { status: boolean; sessionID: string }
+export interface MatchingVerify { sessionID: string; isMatch: boolean }
+export interface SessionMap { entrySessionID: string; exitSessionID: string }
+export interface ParkingSlot { slot_id: string; location_code: string; is_occupied: boolean; updated_at: string }
+export interface ParkingSlotResponse { slot_id: string; slot: ParkingSlot }
+export interface DashboardStats { current_vehicles: number; total_entries: number; available_slots: number; total_slots?: number }
 
 class ApiService {
   private baseURL: string;
+  constructor() { this.baseURL = API_BASE_URL }
 
-  constructor() {
-    this.baseURL = API_BASE_URL;
-  }
-
-  // Helper method for authenticated requests
   private async authenticatedFetch(url: string, options: RequestInit = {}): Promise<Response> {
     return authService.authenticatedRequest(url, options);
   }
 
-  // Session API methods with caching
+  // ---------------- Sessions ----------------
   async getSessions(gate?: 'In' | 'Out', limit: number = 100): Promise<SessionResponse[]> {
     const cacheKey = cacheService.createKey('sessions', { gate, limit });
     const cached = cacheService.get(cacheKey);
-    if (cached) {
-      return cached;
-    }
-
+    if (cached) return cached;
     const params = new URLSearchParams();
     if (gate) params.append('gate', gate);
     params.append('limit', limit.toString());
-
-    const response = await this.authenticatedFetch(`${this.baseURL}/api/sessions?${params}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch sessions');
-    }
-    
+    const response = await fetch(`${this.baseURL}/api/sessions/?${params}`);
+    if (!response.ok) throw new Error('Failed to fetch sessions');
     const data = await response.json();
-    cacheService.set(cacheKey, data, 15); // Cache for 15 seconds
+    cacheService.set(cacheKey, data, 15);
     return data;
   }
-
   async getSession(sessionId: string): Promise<SessionResponse> {
     const response = await this.authenticatedFetch(`${this.baseURL}/api/sessions/${sessionId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch session');
-    }
+    if (!response.ok) throw new Error('Failed to fetch session');
     return response.json();
   }
+  async getInSessions(limit: number = 100) { return this.getSessions('In', limit) }
+  async getOutSessions(limit: number = 100) { return this.getSessions('Out', limit) }
 
-  async getInSessions(limit: number = 100): Promise<SessionResponse[]> {
-    return this.getSessions('In', limit);
+  // Finalize exit AFTER verification (new API)
+  async finalizeExitSession(exitSessionId: string): Promise<{success: boolean; message: string}> {
+    const response = await fetch(`${this.baseURL}/api/sessions/finalize-exit/${exitSessionId}`, { method: 'POST' });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.detail || data.message || 'Failed to finalize exit');
+    // Bust caches because counts may change
+    cacheService.clear();
+    return data;
   }
 
-  async getOutSessions(limit: number = 100): Promise<SessionResponse[]> {
-    return this.getSessions('Out', limit);
-  }
-
-  // Parking slot API methods with caching
+  // ---------------- Parking Slots & Stats ----------------
   async getParkingSlots(): Promise<ParkingSlot[]> {
     const cacheKey = 'parking_slots';
-    const cached = cacheService.get(cacheKey);
-    if (cached) {
-      return cached;
-    }
-
+    const cached = cacheService.get(cacheKey); if (cached) return cached;
     const response = await this.authenticatedFetch(`${this.baseURL}/api/parking/slots`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch parking slots');
-    }
-    
-    const data = await response.json();
-    cacheService.set(cacheKey, data, 20); // Cache for 20 seconds
-    return data;
+    if (!response.ok) throw new Error('Failed to fetch parking slots');
+    const data = await response.json(); cacheService.set(cacheKey, data, 20); return data;
   }
-
   async getParkingStats(): Promise<any> {
     const cacheKey = 'parking_stats';
-    const cached = cacheService.get(cacheKey);
-    if (cached) {
-      return cached;
-    }
-
+    const cached = cacheService.get(cacheKey); if (cached) return cached;
     const response = await fetch(`${this.baseURL}/api/parking/stats`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch parking stats');
-    }
-    
-    const data = await response.json();
-    cacheService.set(cacheKey, data, 10); // Cache for 10 seconds
-    return data;
+    if (!response.ok) throw new Error('Failed to fetch parking stats');
+    const data = await response.json(); cacheService.set(cacheKey, data, 10); return data;
   }
-
   async getAvailableSlots(): Promise<ParkingSlot[]> {
     const cacheKey = 'available_slots';
-    const cached = cacheService.get(cacheKey);
-    if (cached) {
-      return cached;
-    }
-
+    const cached = cacheService.get(cacheKey); if (cached) return cached;
     const response = await fetch(`${this.baseURL}/api/parking/slots/available`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch available slots');
-    }
-    
-    const data = await response.json();
-    cacheService.set(cacheKey, data, 15); // Cache for 15 seconds
-    return data;
+    if (!response.ok) throw new Error('Failed to fetch available slots');
+    const data = await response.json(); cacheService.set(cacheKey, data, 15); return data;
   }
-
-  async updateSlotOccupancy(slotId: string, isOccupied: boolean): Promise<any> {
-    const response = await fetch(`${this.baseURL}/api/parking/slots/${slotId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        is_occupied: isOccupied
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to update slot occupancy');
-    }
-    return response.json();
+  async updateSlotOccupancy(slotId: string, isOccupied: boolean) {
+    const response = await fetch(`${this.baseURL}/api/parking/slots/${slotId}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ is_occupied: isOccupied }) });
+    if (!response.ok) throw new Error('Failed to update slot occupancy'); return response.json();
   }
-
-  // Statistics and dashboard data
   async getDashboardStats(): Promise<DashboardStats> {
     try {
-      // Get current sessions
-      const [inSessions, outSessions, allSlots, availableSlots] = await Promise.all([
-        this.getInSessions(),
-        this.getOutSessions(),
-        this.getParkingSlots(),
-        this.getAvailableSlots()
-      ]);
-
-      // Calculate current vehicles (In sessions where isOut = false)
-      const currentVehicles = inSessions.filter(session => !session.session.isOut).length;
-      
-      // Calculate today's entries and exits
-      const today = new Date().toISOString().split('T')[0];
-      const todayEntries = inSessions.filter(session => 
-        session.session.timestamp.startsWith(today)
-      ).length;
-
-      // Calculate occupancy rate
-      const totalSlots = allSlots.length;
-      const occupancyRate = totalSlots > 0 ? (currentVehicles / totalSlots) * 100 : 0;
-
-      return {
-        currentVehicles,
-        totalEntries: inSessions.length,
-        totalExits: outSessions.length,
-        occupancyRate,
-        totalParkedToday: todayEntries,
-        availableSlots: availableSlots.length
-      };
-    } catch (error) {
-      console.error('Error fetching dashboard stats:', error);
-      // Return default stats if API fails
-      return {
-        currentVehicles: 0,
-        totalEntries: 0,
-        totalExits: 0,
-        occupancyRate: 0,
-        totalParkedToday: 0,
-        availableSlots: 0
-      };
-    }
-  }
-
-  // Get new session status
-  async getNewSessionStatus(): Promise<IsNewSession | null> {
-    try {
-      const response = await fetch(`${this.baseURL}/api/sessions/new-session-status`);
-      if (!response.ok) {
-        return null;
-      }
+      const response = await fetch(`${this.baseURL}/api/dashboard/stats`);
+      if (!response.ok) throw new Error('Failed');
       return response.json();
-    } catch (error) {
-      console.error('Error fetching new session status:', error);
-      return null;
+    } catch { return { current_vehicles: 0, total_entries: 0, available_slots: 0, total_slots: 10 } }
+  }
+  async updateTotalSlots(totalSlots: number) {
+    const response = await fetch(`${this.baseURL}/api/dashboard/total-slots`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ total_slots: totalSlots }) });
+    if (!response.ok) throw new Error((await response.json()).detail || 'Failed to update total slots');
+    cacheService.clear(); return response.json();
+  }
+
+  // ---------------- Misc / Search ----------------
+  async getNewSessionStatus(): Promise<IsNewSession | null> {
+    try { const r = await fetch(`${this.baseURL}/api/sessions/new-session-status`); if (!r.ok) return null; return r.json(); } catch { return null }
+  }
+  async searchSessionsByPlate(plateNumber: string) {
+    const sessions = await this.getSessions();
+    return sessions.filter(s => s.session.plateNumber?.toLowerCase().includes(plateNumber.toLowerCase()));
+  }
+  async getSessionsByDateRange(dateFrom: Date, dateTo: Date) {
+    const sessions = await this.getSessions();
+    return sessions.filter(s => { const d = new Date(s.session.timestamp); return d >= dateFrom && d <= dateTo });
+  }
+
+  sessionToVehicle(sessionResponse: SessionResponse) {
+    const { session_id, session } = sessionResponse;
+    return { id: session_id, licensePlate: session.plateNumber || 'Detecting...', faceId: session.faceIndex, entryTime: new Date(session.timestamp), exitTime: session.isOut ? new Date(session.timestamp) : null, status: session.isOut ? 'exited' : 'parked', plateUrl: session.plateUrl, faceUrl: session.faceUrl, gate: session.gate };
+  }
+
+  // ---------------- Enhanced Grouping ----------------
+  async getEnhancedGroupedSessions(): Promise<GroupedSession[]> {
+    try {
+      const response = await fetch(`${this.baseURL}/api/sessions/enhanced`);
+      if (!response.ok) throw new Error('Failed to fetch enhanced sessions');
+      const data = await response.json();
+      return data.map((s: any): GroupedSession => ({
+        faceId: s.faceId,
+        licensePlate: s.licensePlate,
+        entryTime: s.entryTime ? new Date(s.entryTime) : null,
+        exitTime: s.exitTime ? new Date(s.exitTime) : null,
+        status: s.status, duration: s.duration,
+        entrySessionId: s.entrySessionId, entryGate: 'In', faceUrl: s.faceUrl, plateUrl: s.plateUrl,
+        exitSessionId: s.exitSessionId, exitGate: 'Out', exitFaceUrl: s.exitFaceUrl, exitPlateUrl: s.exitPlateUrl,
+        faceMatchVerified: s.faceMatchVerified, faceMatchResult: s.faceMatchResult
+      }));
+    } catch (e) {
+      console.error('Enhanced grouping failed, fallback to naive:', e);
+      return this.getGroupedSessions();
     }
   }
 
-  // Search and filter methods
-  async searchSessionsByPlate(plateNumber: string): Promise<SessionResponse[]> {
-    const sessions = await this.getSessions();
-    return sessions.filter(session => 
-      session.session.plateNumber?.toLowerCase().includes(plateNumber.toLowerCase())
-    );
-  }
-
-  async getSessionsByDateRange(dateFrom: Date, dateTo: Date): Promise<SessionResponse[]> {
-    const sessions = await this.getSessions();
-    return sessions.filter(session => {
-      const sessionDate = new Date(session.session.timestamp);
-      return sessionDate >= dateFrom && sessionDate <= dateTo;
-    });
-  }
-
-  // Convert session to vehicle format for compatibility with existing frontend
-  sessionToVehicle(sessionResponse: SessionResponse): {
-    id: string;
-    licensePlate: string;
-    faceId: string;
-    entryTime: Date;
-    exitTime: Date | null;
-    status: 'parked' | 'exited';
-    plateUrl: string;
-    faceUrl: string;
-    gate: string;
-  } {
-    const { session_id, session } = sessionResponse;
-    return {
-      id: session_id,
-      licensePlate: session.plateNumber || 'Detecting...',
-      faceId: session.faceIndex,
-      entryTime: new Date(session.timestamp),
-      exitTime: session.isOut ? new Date(session.timestamp) : null,
-      status: session.isOut ? 'exited' : 'parked',
-      plateUrl: session.plateUrl,
-      faceUrl: session.faceUrl,
-      gate: session.gate
-    };
-  }
-
-  // Group sessions by faceId and plateNumber
+  // Fallback naive grouping (no verification) - keep semantics aligned with new statuses
   async getGroupedSessions(): Promise<GroupedSession[]> {
     try {
-      const [inSessions, outSessions] = await Promise.all([
-        this.getInSessions(),
-        this.getOutSessions()
-      ]);
-
-      const allSessions = [...inSessions, ...outSessions];
-      const grouped = new Map<string, GroupedSession>();
-
-      allSessions.forEach(sessionResponse => {
-        const { session_id, session } = sessionResponse;
-        const faceId = session.faceIndex;
-        const plateNumber = session.plateNumber || 'Detecting...';
-        const key = `${faceId}-${plateNumber}`;
-
-        if (!grouped.has(key)) {
-          grouped.set(key, {
-            faceId,
-            licensePlate: plateNumber,
-            entryTime: null,
-            exitTime: null,
-            status: 'active',
-            faceUrl: session.faceUrl,
-            plateUrl: session.plateUrl
-          });
-        }
-
-        const groupedSession = grouped.get(key)!;
-
-        if (session.gate === 'In') {
-          groupedSession.entryTime = new Date(session.timestamp);
-          groupedSession.entrySessionId = session_id;
-          groupedSession.entryGate = session.gate;
-          // Store entry session images
-          groupedSession.faceUrl = session.faceUrl;
-          groupedSession.plateUrl = session.plateUrl;
-        } else if (session.gate === 'Out') {
-          groupedSession.exitTime = new Date(session.timestamp);
-          groupedSession.exitSessionId = session_id;
-          groupedSession.exitGate = session.gate;
-          groupedSession.status = 'completed';
-          // Store exit session images
-          groupedSession.exitFaceUrl = session.faceUrl;
-          groupedSession.exitPlateUrl = session.plateUrl;
+      const [inSessions, outSessions] = await Promise.all([this.getInSessions(), this.getOutSessions()]);
+      const valid = (s: SessionResponse) => { const p = s.session.plateNumber; return p && p.trim() && p !== 'Detecting...' && p !== 'N/A' };
+      const validIn = inSessions.filter(valid); const validOut = outSessions.filter(valid);
+      const matched: GroupedSession[] = []; const usedIn = new Set<string>(); const usedOut = new Set<string>();
+      const sortedOut = [...validOut].sort((a,b)=> new Date(b.session.timestamp).getTime()-new Date(a.session.timestamp).getTime());
+      sortedOut.forEach(outS => {
+        const outPlate = outS.session.plateNumber!.trim(); const outTime = new Date(outS.session.timestamp);
+        const candidates = validIn.filter(inS => !usedIn.has(inS.session_id) && inS.session.plateNumber!.trim() === outPlate && new Date(inS.session.timestamp) <= outTime)
+          .sort((a,b)=> new Date(b.session.timestamp).getTime()-new Date(a.session.timestamp).getTime());
+        if (candidates.length) {
+          const inS = candidates[0]; usedIn.add(inS.session_id); usedOut.add(outS.session_id);
+          const inTime = new Date(inS.session.timestamp); const durationMinutes = Math.round((outTime.getTime()-inTime.getTime())/60000);
+            matched.push({ faceId: inS.session.faceIndex || outS.session.faceIndex || '', licensePlate: outPlate, entryTime: inTime, exitTime: outTime, status: 'completed', entrySessionId: inS.session_id, entryGate: inS.session.gate, faceUrl: inS.session.faceUrl, plateUrl: inS.session.plateUrl, exitSessionId: outS.session_id, exitGate: outS.session.gate, exitFaceUrl: outS.session.faceUrl, exitPlateUrl: outS.session.plateUrl, duration: durationMinutes });
         }
       });
-
-      // Convert to array and sort by entry time (newest first)
-      return Array.from(grouped.values()).sort((a, b) => {
-        const timeA = a.entryTime || new Date(0);
-        const timeB = b.entryTime || new Date(0);
-        return timeB.getTime() - timeA.getTime();
-      });
-    } catch (error) {
-      console.error('Error grouping sessions:', error);
-      return [];
-    }
+      // Unpaired IN => active
+      validIn.filter(s=> !usedIn.has(s.session_id)).forEach(inS => matched.push({ faceId: inS.session.faceIndex || '', licensePlate: inS.session.plateNumber!.trim(), entryTime: new Date(inS.session.timestamp), exitTime: null, status: 'active', entrySessionId: inS.session_id, entryGate: inS.session.gate, faceUrl: inS.session.faceUrl, plateUrl: inS.session.plateUrl } as GroupedSession));
+      // Unpaired OUT => failed (cannot verify entry)
+      validOut.filter(s=> !usedOut.has(s.session_id)).forEach(outS => matched.push({ faceId: outS.session.faceIndex || '', licensePlate: outS.session.plateNumber!.trim(), entryTime: null, exitTime: new Date(outS.session.timestamp), status: 'failed', exitSessionId: outS.session_id, exitGate: outS.session.gate, exitFaceUrl: outS.session.faceUrl, exitPlateUrl: outS.session.plateUrl } as GroupedSession));
+      return matched.sort((a,b)=> Math.max(a.entryTime?.getTime()||0,a.exitTime?.getTime()||0) < Math.max(b.entryTime?.getTime()||0,b.exitTime?.getTime()||0) ? 1 : -1);
+    } catch (e) { console.error('Naive grouping error:', e); return [] }
   }
 
-  // Real-time polling for new sessions
+  // ---------------- Polling ----------------
   async pollForNewSessions(callback: (sessions: SessionResponse[]) => void, interval: number = 5000) {
-    const poll = async () => {
-      try {
-        const newSessionStatus = await this.getNewSessionStatus();
-        if (newSessionStatus?.status) {
-          const recentSessions = await this.getSessions(undefined, 10);
-          callback(recentSessions);
-        }
-      } catch (error) {
-        console.error('Polling error:', error);
-      }
-    };
-
-    // Initial poll
-    poll();
-    
-    // Set up interval
-    return setInterval(poll, interval);
+    const poll = async () => { try { const st = await this.getNewSessionStatus(); if (st?.status) { const recent = await this.getSessions(undefined, 10); callback(recent) } } catch(e){ console.error('Polling error:', e) } };
+    poll(); return setInterval(poll, interval);
   }
 }
 
