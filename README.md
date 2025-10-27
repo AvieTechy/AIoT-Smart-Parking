@@ -1,82 +1,50 @@
 # Smart Parking System – AIoT-based
 
-## Giới thiệu
-Smart Parking System là mô hình bãi đỗ xe thông minh ứng dụng AIoT để:
-- Tự động nhận diện biển số xe và khuôn mặt tài xế
-- Quản lý trạng thái chỗ đỗ theo thời gian thực
-- Giảm thao tác thủ công và tối ưu trải nghiệm
+![Project Banner](./assets/banner.png)
+*(Replace with your project image or architecture diagram)*
 
-Mô hình hướng tới quy mô nhỏ (5–10 chỗ) và có thể mở rộng triển khai thực tế.
+## Overview
+Smart Parking System is an AIoT-based solution that automates parking operations using face recognition, license plate detection, and real-time slot monitoring.  
+The project targets small-scale lots (5–10 slots) but can be scaled for real deployments.
 
----
+## Key Features
+- Face recognition (≥90% accuracy in daylight)  
+- License plate recognition via API  
+- Real-time slot status updates  
+- Automatic barrier control using servo motor  
+- LCD display for entry/exit information  
+- Web dashboard (ReactJS + Firebase) with history, images, and statistics
 
-## Tính năng chính
-- Nhận diện khuôn mặt (Face Recognition) độ chính xác ≥ 90% (ban ngày)
-- Nhận dạng biển số (License Plate Recognition) qua API
-- Cập nhật trạng thái slot gần thời gian thực
-- Điều khiển barrier tự động (servo) khi hợp lệ
-- Hiển thị thông tin qua LCD 16×2
-- Dashboard (ReactJS) kết nối Firebase:
-    - Lịch sử vào/ra
-    - Ảnh, biển số, timestamp
-    - Thống kê
+## System Architecture
+![Architecture](./assets/architecture.png)
+*(Replace with your system architecture diagram)*
 
----
+### Layers
+1. **Input Layer:** ESP32-CAM for image capture and face detection (MTMN).  
+2. **Processing Layer:** ESP32 DevKit with FastAPI backend; integrates FaceNet and Plate Recognizer APIs, stores data in Firebase.  
+3. **Output Layer:** Servo barrier, LCD 16×2 display, and ReactJS dashboard.
 
-## Kiến trúc hệ thống
-3 tầng chính:
+## Hardware & Software
+**Hardware:** ESP32-CAM, ESP32 DevKit, LCD 16×2 (I2C), Servo SG90, 5V–3A power supply.  
+**Software:** Arduino IDE, FastAPI, Firebase, Cloudinary, ReactJS, FaceNet, Plate Recognizer API.
 
-1. Input Layer
-     - ESP32-CAM chụp ảnh biển số & khuôn mặt
-     - MTMN (ESP-FACE) phát hiện khuôn mặt on-device
+## Testing & Evaluation
+- Face accuracy: ≥90% (daytime)  
+- Plate OCR: API-standard accuracy  
+- Entry/exit processing: ≤15s  
+- Slot update delay: ≤5s
 
-2. Processing Layer
-     - ESP32 trung tâm điều phối
-     - API: FaceNet (nhận diện), Plate Recognizer (biển số)
-     - Lưu dữ liệu Firebase
+## Team
+| Member | Role | Responsibility |
+|---------|------|----------------|
+| Cao Uyển Nhi | Team Lead, AI | AI model integration |
+| Trần Thị Cát Tường | Hardware | ESP32 control, servo, cloud |
+| Lưu Thanh Thuý | IoT Developer | ESP32-CAM, communication |
+| Võ Lê Việt Tú | Backend & Frontend | API, dashboard UI |
 
-3. Output Layer
-     - Servo SG90 (barrier)
-     - LCD 16×2
-     - Dashboard web
-
----
-
-## Công nghệ & Linh kiện
-
-Phần cứng:
-- 2× AI Thinker ESP32-CAM (OV2640)
-- 1× ESP32 DevKit V1
-- LCD 16×2 (I2C)
-- Servo SG90
-- Breadboard, dây jumper, nguồn 5V–3A, đế nạp ESP32-CAM
-
-Phần mềm:
-- Firmware: Arduino IDE + ESP-FACE (MTMN)
-- Backend: FastAPI (Python)
-- AI:
-    - Face Detection: MTMN
-    - Face Recognition: FaceNet
-    - Plate OCR: Plate Recognizer API
-- Cloud Storage: Cloudinary
-- Realtime Database: Firebase Realtime Database
-- Frontend: ReactJS
-- Giao tiếp: HTTP REST, MQTT
+## Future Work
+- Improve low-light recognition  
+- Add ultrasonic sensors for slot detection  
+- Mobile app for booking and payment  
 
 ---
-
-## Kiểm thử & Đánh giá
-- Độ chính xác khuôn mặt: ≥ 90% (ban ngày)
-- Độ chính xác biển số: theo tiêu chuẩn API
-- Thời gian xử lý lượt vào/ra: ≤ 15s
-- Cập nhật trạng thái slot: ≤ 5s
-
----
-
-## Nhóm phát triển
-| Thành viên        | Vai trò                | Nhiệm vụ                               |
-|-------------------|------------------------|----------------------------------------|
-| Cao Uyển Nhi      | Trưởng nhóm, AI        | Phát triển & tích hợp AI models        |
-| Trần Thị Cát Tường| Phần cứng trung tâm    | Mạch điều khiển, servo, cloud          |
-| Lưu Thanh Thuý    | ESP32-CAM              | Face detection, giao tiếp module       |
-| Võ Lê Việt Tú     | Backend & Dashboard    | Kết nối backend–hardware, UI/UX        |
