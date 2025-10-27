@@ -1,7 +1,6 @@
 # Smart Parking System – AIoT-based
 
 ![Project Banner](./assets/banner.png)
-*(Replace with your project image or architecture diagram)*
 
 ## Overview
 Smart Parking System is an AIoT-based solution that automates parking operations using face recognition, license plate detection, and real-time slot monitoring.  
@@ -16,8 +15,8 @@ The project targets small-scale lots (5–10 slots) but can be scaled for real d
 - Web dashboard (ReactJS + Firebase) with history, images, and statistics
 
 ## System Architecture
+
 ![Architecture](./assets/architecture.png)
-*(Replace with your system architecture diagram)*
 
 ### Layers
 1. **Input Layer:** ESP32-CAM for image capture and face detection (MTMN).  
@@ -46,5 +45,3 @@ The project targets small-scale lots (5–10 slots) but can be scaled for real d
 - Improve low-light recognition  
 - Add ultrasonic sensors for slot detection  
 - Mobile app for booking and payment  
-
----
